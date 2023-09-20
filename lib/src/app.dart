@@ -6,9 +6,15 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text("Hello World!"),
+        body: SingleChildScrollView(
+      child: Column(
+        children: [
+          // _top(),
+          // _banner(),
+          // _searchBar(),
+          // _items(),
+        ],
       ),
-    );
+    ));
   }
 }
