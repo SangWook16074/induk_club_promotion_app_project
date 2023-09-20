@@ -12,7 +12,7 @@ class App extends StatelessWidget {
           // _top(),
           // _banner(),
           // _searchBar(),
-          // _items(),
+          //_items(),
         ],
       ),
     ));
