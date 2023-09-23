@@ -8,23 +8,26 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  late ScrollController _scrollController;
+  late ScrollController _horizontalController;
+  late ScrollController _verticalController;
   late TextEditingController _searchController;
 
   moveToUp() {
-    _scrollController.jumpTo(0.0);
+    _verticalController.jumpTo(0.0);
   }
 
   @override
   void initState() {
-    _scrollController = ScrollController();
+    _verticalController = ScrollController();
+    _horizontalController = ScrollController();
     _searchController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _verticalController.dispose();
+    _horizontalController.dispose();
     _searchController.dispose();
     super.dispose();
   }
@@ -37,14 +40,21 @@ class _AppState extends State<App> {
           child: const Icon(Icons.arrow_upward),
         ),
         body: SingleChildScrollView(
-          controller: _scrollController,
-          child: Column(
-            children: [
-              _top(),
-              _banner(),
-              _searchBar(),
-              _items(),
-            ],
+          scrollDirection: Axis.horizontal,
+          controller: _horizontalController,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            controller: _verticalController,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _top(),
+                _banner(),
+                _searchBar(),
+                _items(),
+              ],
+            ),
           ),
         ));
   }
@@ -137,8 +147,15 @@ class _AppState extends State<App> {
     return Column(
       children: List.generate(
           30,
-          (index) => ListTile(
-                title: Text('$index'),
+          (index) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  width: 700,
+                  height: 100,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(width: 1.0, color: Colors.black)),
+                ),
               )),
     );
   }
