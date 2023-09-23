@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -149,12 +150,48 @@ class _AppState extends State<App> {
           30,
           (index) => Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  width: 700,
-                  height: 100,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(width: 1.0, color: Colors.black)),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => const PromotionView()));
+                  },
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 700,
+                        height: 100,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border:
+                                Border.all(width: 1.0, color: Colors.black)),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(8.0)),
+                              ),
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text('$index 번째 모집글'))
+                          ],
+                        ),
+                      ),
+                      const Positioned(
+                        bottom: 1.0,
+                        right: 1.0,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('2023.09.10'),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               )),
     );
