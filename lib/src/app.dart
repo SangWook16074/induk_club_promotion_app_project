@@ -9,6 +9,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   late ScrollController _scrollController;
+  late TextEditingController _searchController;
 
   moveToUp() {
     _scrollController.jumpTo(0.0);
@@ -17,12 +18,14 @@ class _AppState extends State<App> {
   @override
   void initState() {
     _scrollController = ScrollController();
+    _searchController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -113,6 +116,9 @@ class _AppState extends State<App> {
             height: 42,
             decoration: BoxDecoration(
                 border: Border.all(width: 1.0, color: Colors.black)),
+            child: TextField(
+              controller: _searchController,
+            ),
           ),
           Container(
             decoration: BoxDecoration(
