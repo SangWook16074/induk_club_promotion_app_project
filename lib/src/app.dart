@@ -11,7 +11,7 @@ class App extends StatelessWidget {
         children: [
           _top(),
           _banner(),
-          // _searchBar(),
+          _searchBar(),
           // _items(),
         ],
       ),
@@ -71,6 +71,31 @@ class App extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+
+  Widget _searchBar() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 40),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 600,
+            height: 42,
+            decoration: BoxDecoration(
+                border: Border.all(width: 1.0, color: Colors.black)),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                border: Border.all(width: 1.0, color: Colors.black)),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.search),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
