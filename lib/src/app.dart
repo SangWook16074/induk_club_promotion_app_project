@@ -1,21 +1,49 @@
 import 'package:flutter/material.dart';
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  late ScrollController _scrollController;
+
+  moveToUp() {
+    _scrollController.jumpTo(0.0);
+  }
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: moveToUp,
+          child: const Icon(Icons.arrow_upward),
+        ),
         body: SingleChildScrollView(
-      child: Column(
-        children: [
-          _top(),
-          _banner(),
-          _searchBar(),
-          // _items(),
-        ],
-      ),
-    ));
+          controller: _scrollController,
+          child: Column(
+            children: [
+              _top(),
+              _banner(),
+              _searchBar(),
+              _items(),
+            ],
+          ),
+        ));
   }
 
   Widget _top() {
@@ -96,6 +124,16 @@ class App extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _items() {
+    return Column(
+      children: List.generate(
+          30,
+          (index) => ListTile(
+                title: Text('$index'),
+              )),
     );
   }
 }
