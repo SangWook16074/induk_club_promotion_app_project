@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -41,21 +42,15 @@ class _AppState extends State<App> {
           child: const Icon(Icons.arrow_upward),
         ),
         body: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          controller: _horizontalController,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            controller: _verticalController,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _top(),
-                _banner(),
-                _searchBar(),
-                _items(),
-              ],
-            ),
+          scrollDirection: Axis.vertical,
+          controller: _verticalController,
+          child: Column(
+            children: [
+              _top(),
+              _banner(),
+              _searchBar(),
+              _items(),
+            ],
           ),
         ));
   }
@@ -92,54 +87,63 @@ class _AppState extends State<App> {
   }
 
   Widget _banner() {
-    return Stack(
-      children: [
-        Container(
-          width: 1000,
-          height: 500,
-          color: Colors.green,
-        ),
-        Positioned(
-          bottom: 1.0,
-          left: 1.0,
-          child: Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.grey,
-                  border: Border.all(width: 1.0, color: Colors.black)),
-              child: const Text('동아리 회원 가입'),
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.66,
+      child: AspectRatio(
+        aspectRatio: 2.0,
+        child: Stack(
+          children: [
+            Container(
+              color: Colors.green,
             ),
-          ),
-        )
-      ],
+            Positioned(
+              bottom: 1.0,
+              left: 1.0,
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey,
+                      border: Border.all(width: 1.0, color: Colors.black)),
+                  child: const Text('동아리 회원 가입'),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 
   Widget _searchBar() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 600,
-            height: 42,
-            decoration: BoxDecoration(
-                border: Border.all(width: 1.0, color: Colors.black)),
-            child: TextField(
-              controller: _searchController,
+      child: AspectRatio(
+        aspectRatio: 20.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width / 3,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25.0)),
+              alignment: Alignment.center,
+              child: TextField(
+                controller: _searchController,
+                cursorColor: Colors.black,
+                decoration: const InputDecoration(
+                    hintText: '동아리 정보를 입력하세요.',
+                    hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+                    prefixIcon: Icon(Icons.search),
+                    prefixIconColor: Colors.black,
+                    suffixIcon: Icon(Icons.close),
+                    suffixIconColor: Colors.black,
+                    border: InputBorder.none),
+              ),
             ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-                border: Border.all(width: 1.0, color: Colors.black)),
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(Icons.search),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -151,48 +155,11 @@ class _AppState extends State<App> {
           (index) => Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => const PromotionView()));
-                  },
-                  child: Stack(
-                    children: [
-                      Container(
-                        width: 700,
-                        height: 100,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(width: 1.0, color: Colors.black)),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius: BorderRadius.circular(8.0)),
-                              ),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text('$index 번째 모집글'))
-                          ],
-                        ),
-                      ),
-                      const Positioned(
-                        bottom: 1.0,
-                        right: 1.0,
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('2023.09.10'),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => const PromotionView()));
+                    },
+                    child: const PromotionItem(date: '2023-09-23')),
               )),
     );
   }

@@ -10,8 +10,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: App(),
+    return MaterialApp(
+      theme: ThemeData(
+          focusColor: Colors.black,
+          scaffoldBackgroundColor: const Color(0xffefcabe)),
+      home: const App(),
     );
   }
 }
