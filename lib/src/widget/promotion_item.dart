@@ -1,20 +1,39 @@
 import 'package:flutter/material.dart';
 
+enum ScreenType { MOBILE, DESKTOP }
+
 class PromotionItem extends StatelessWidget {
   final String? title;
   final String date;
-  const PromotionItem({super.key, this.title = '', required this.date});
+  final ScreenType type;
+  const PromotionItem(
+      {super.key, this.title = '', required this.date, required this.type});
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    switch (type) {
+      case ScreenType.MOBILE:
+        return _mobileItem();
+      case ScreenType.DESKTOP:
+        return _desktopItem();
+    }
+  }
 
+  Widget _mobileItem() {
+    return _basic(3);
+  }
+
+  Widget _desktopItem() {
+    return _basic(2);
+  }
+
+  Widget _basic(double ratio) {
     return Stack(
       children: [
-        SizedBox(
-          width: size.width / 2,
-          child: AspectRatio(
-            aspectRatio: 6.0,
+        AspectRatio(
+          aspectRatio: ratio,
+          child: SizedBox(
+            width: double.infinity,
             child: Card(
               elevation: 5.0,
               shape: RoundedRectangleBorder(
