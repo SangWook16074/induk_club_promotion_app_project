@@ -72,7 +72,7 @@ class _AppState extends State<App> {
                 border: Border.all(width: 1.0, color: Colors.black)),
             child: const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('ë¡œê·¸ì¸'),
+              child: Text('·Î±×ÀÎ'),
             ),
           ),
         ],
@@ -97,7 +97,7 @@ class _AppState extends State<App> {
               decoration: BoxDecoration(
                   color: Colors.grey,
                   border: Border.all(width: 1.0, color: Colors.black)),
-              child: const Text('ë™ì•„ë¦¬ íšŒì› ê°€ì…'),
+              child: const Text('µ¿¾Æ¸® È¸¿ø °¡ÀÔ'),
             ),
           ),
         )
