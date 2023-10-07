@@ -63,7 +63,10 @@ class PromotionItem extends StatelessWidget {
           right: 1.0,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(date),
+            child: Text(
+              date,
+              style: const TextStyle(fontSize: 30),
+            ),
           ),
         )
       ],

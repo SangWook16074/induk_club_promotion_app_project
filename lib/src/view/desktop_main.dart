@@ -37,23 +37,27 @@ class _DesktopMainState extends State<DesktopMain> {
     // final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: moveToUp,
-          child: const Icon(Icons.arrow_upward),
-        ),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          controller: _verticalController,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // _top(),
-              _banner(),
-              _searchBar(),
-              _items(),
-            ],
+        body: Row(
+      children: [
+        Expanded(flex: 2, child: _sideMenu()),
+        Expanded(
+          flex: 8,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            controller: _verticalController,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // _top(),
+                _banner(),
+                _searchBar(),
+                _items(),
+              ],
+            ),
           ),
-        ));
+        ),
+      ],
+    ));
   }
 
   Widget _top() {
@@ -94,14 +98,9 @@ class _DesktopMainState extends State<DesktopMain> {
         width: MediaQuery.of(context).size.width * 0.66,
         child: AspectRatio(
           aspectRatio: 2.0,
-          child: Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20.0)),
-              ),
-            ],
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(20.0)),
           ),
         ),
       ),
@@ -162,5 +161,13 @@ class _DesktopMainState extends State<DesktopMain> {
             autoPlay: true,
             enlargeCenterPage: true,
             enlargeStrategy: CenterPageEnlargeStrategy.zoom));
+  }
+
+  Widget _sideMenu() {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color(0xffefcabe),
+      ),
+    );
   }
 }

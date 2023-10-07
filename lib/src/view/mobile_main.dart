@@ -35,7 +35,16 @@ class _MobileMainState extends State<MobileMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const Drawer(
+        backgroundColor: Color(0xffefcabe),
+      ),
+      appBar: AppBar(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: moveToUp,
+        child: const Icon(Icons.arrow_upward),
+      ),
       body: SingleChildScrollView(
+        controller: _verticalController,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
