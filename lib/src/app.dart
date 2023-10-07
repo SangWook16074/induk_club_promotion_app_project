@@ -7,7 +7,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final currentWidth = MediaQuery.of(context).size.width;
+    final currentWidth = MediaQuery.of(context).size.width;
     return LayoutBuilder(builder: (context, constraints) {
       if (constraints.maxWidth < 600) {
         return const MobileMain();
