@@ -142,13 +142,14 @@ class _DesktopMainState extends State<DesktopMain> {
         itemBuilder: (context, index, realIndex) {
           return Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 70.0),
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 50.0),
             child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (_) => const PromotionView()));
                 },
                 child: const PromotionItem(
+                  title: '동아리 명',
                   date: '2023-09-23',
                   type: ScreenType.DESKTOP,
                 )),
