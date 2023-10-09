@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 
-enum ScreenType { MOBILE, DESKTOP }
+enum PromotionItemType { MOBILE, DESKTOP }
 
 class PromotionItem extends StatelessWidget {
   final String? title;
   final String date;
-  final ScreenType type;
+  final PromotionItemType type;
   const PromotionItem(
       {super.key, this.title = '', required this.date, required this.type});
 
   @override
   Widget build(BuildContext context) {
-    switch (type) {
-      case ScreenType.MOBILE:
-        return _mobileItem();
-      case ScreenType.DESKTOP:
-        return _desktopItem();
-    }
+    return switch (type) {
+      PromotionItemType.MOBILE => _mobileItem(),
+      PromotionItemType.DESKTOP => _desktopItem()
+    };
   }
 
   Widget _mobileItem() {

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
+import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 
 class DesktopMain extends StatefulWidget {
   const DesktopMain({super.key});
@@ -109,31 +110,9 @@ class _DesktopMainState extends State<DesktopMain> {
 
   Widget _searchBar() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width / 3,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(25.0)),
-            alignment: Alignment.center,
-            child: TextField(
-              controller: _searchController,
-              cursorColor: Colors.black,
-              decoration: const InputDecoration(
-                  hintText: '동아리 정보를 입력하세요.',
-                  hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
-                  prefixIcon: Icon(Icons.search),
-                  prefixIconColor: Colors.black,
-                  suffixIcon: Icon(Icons.close),
-                  suffixIconColor: Colors.black,
-                  border: InputBorder.none),
-            ),
-          ),
-        ],
-      ),
-    );
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
+        child: SearchTextField(
+            controller: _searchController, type: SearchBarType.DESKTOP));
   }
 
   Widget _items() {
@@ -151,7 +130,7 @@ class _DesktopMainState extends State<DesktopMain> {
                 child: const PromotionItem(
                   title: '동아리 명',
                   date: '2023-09-23',
-                  type: ScreenType.DESKTOP,
+                  type: PromotionItemType.DESKTOP,
                 )),
           );
         },
