@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/widget/move_to_up_fab.dart';
 
 import '../widget/promotion_item.dart';
 
@@ -39,9 +40,8 @@ class _MobileMainState extends State<MobileMain> {
         backgroundColor: Color(0xffefcabe),
       ),
       appBar: AppBar(),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: MoveToUpFab(
         onPressed: moveToUp,
-        child: const Icon(Icons.arrow_upward),
       ),
       body: SingleChildScrollView(
         controller: _verticalController,
@@ -57,6 +57,7 @@ class _MobileMainState extends State<MobileMain> {
     );
   }
 
+  // 최상단 CI 로고 용 배너위젯
   Widget _banner() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -73,6 +74,7 @@ class _MobileMainState extends State<MobileMain> {
     );
   }
 
+  // 동아리 프로모션 글 검색용 검색바
   Widget _searchBar() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -102,6 +104,7 @@ class _MobileMainState extends State<MobileMain> {
     );
   }
 
+  // 동아리 프로모션 글
   Widget _items() {
     return Column(
       children: List.generate(
