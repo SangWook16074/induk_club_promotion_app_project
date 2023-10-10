@@ -42,7 +42,7 @@ class _LoginState extends State<Login> {
   Widget _imagebox() {
     return Container(
       width: MediaQuery.of(context).size.width - 800,
-      color: Colors.white,
+      color: const Color(0xff2e2e2e),
     );
   }
 
@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
     return Container(
       width: 800,
       padding: const EdgeInsets.all(30.0),
-      color: const Color(0xffefcabe),
+      color: const Color(0xff4e4e4e),
       alignment: Alignment.center,
       child: LoginBox(
         lenght: 400,
