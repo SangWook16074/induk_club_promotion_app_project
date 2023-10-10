@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xffefcabe)),
           focusColor: Colors.black,
-          scaffoldBackgroundColor: const Color(0xfff1dcd5)),
+          scaffoldBackgroundColor: const Color(0xff404040)),
       home: const App(),
     );
   }

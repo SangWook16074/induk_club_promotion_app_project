@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:induk_club_promotion_app_project/src/view/login.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
+import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 
 class DesktopMain extends StatefulWidget {
   const DesktopMain({super.key});
@@ -40,7 +42,7 @@ class _DesktopMainState extends State<DesktopMain> {
     return Scaffold(
         body: Row(
       children: [
-        Expanded(flex: 2, child: _sideMenu()),
+        _sideMenu(),
         Expanded(
           flex: 8,
           child: SingleChildScrollView(
@@ -145,8 +147,39 @@ class _DesktopMainState extends State<DesktopMain> {
 
   Widget _sideMenu() {
     return Container(
+      width: 300,
       decoration: const BoxDecoration(
-        color: Color(0xffefcabe),
+        color: Color(0xff2e2e2e),
+      ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SignButton(
+                  label: 'Sign In',
+                  onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const Login())),
+                ),
+                const SignButton(label: 'Sign Up'),
+              ],
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
+            child: Container(
+              height: 0.7,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(60.0),
+                  gradient: const LinearGradient(
+                      colors: [Color(0xffd6f5ff), Color(0xffe5d6ff)])),
+            ),
+          ),
+        ],
       ),
     );
   }
