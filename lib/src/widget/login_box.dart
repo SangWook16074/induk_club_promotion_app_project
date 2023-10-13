@@ -25,39 +25,64 @@ class LoginBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Icon(
-            Icons.lock,
-            color: Colors.white,
-            size: 100,
-          ),
-          Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-              child: LoginTextField(
-                  hint: '계정', color: Colors.white, controller: id)),
-          Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-              child: LoginTextField(
-                hint: '패스워드',
-                color: Colors.white,
-                controller: password,
-                obscureText: true,
-              )),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(onPressed: () {}, child: const Text('아이디 찾기')),
-                TextButton(onPressed: () {}, child: const Text('비밀번호 찾기')),
-                TextButton(onPressed: () {}, child: const Text('회원가입')),
-              ],
-            ),
-          )
+          _logo(),
+          _body(),
+          _button(),
+          _others(),
         ],
       ),
+    );
+  }
+
+  Widget _logo() {
+    return const Icon(
+      Icons.lock,
+      color: Colors.white,
+      size: 100,
+    );
+  }
+
+  Widget _body() {
+    return Column(
+      children: [
+        Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+            child: LoginTextField(
+                hint: '계정', color: Colors.white, controller: id)),
+        Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+            child: LoginTextField(
+              hint: '패스워드',
+              color: Colors.white,
+              controller: password,
+              obscureText: true,
+            )),
+      ],
+    );
+  }
+
+  Widget _others() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          TextButton(onPressed: () {}, child: const Text('아이디 찾기')),
+          TextButton(onPressed: () {}, child: const Text('비밀번호 찾기')),
+          TextButton(onPressed: () {}, child: const Text('회원가입')),
+        ],
+      ),
+    );
+  }
+
+  Widget _button() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(onPressed: () {}, child: const Text('로그인'))),
     );
   }
 }
