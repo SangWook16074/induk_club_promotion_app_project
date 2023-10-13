@@ -1,10 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:induk_club_promotion_app_project/src/view/login.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
+
+import '../login.dart';
 
 class DesktopMain extends StatefulWidget {
   const DesktopMain({super.key});
@@ -131,6 +132,7 @@ class _DesktopMainState extends State<DesktopMain> {
                 },
                 child: const PromotionItem(
                   title: '동아리 명',
+                  discription: '동아리소개내용',
                   date: '2023-09-23',
                   type: PromotionItemType.DESKTOP,
                 )),

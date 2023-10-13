@@ -96,6 +96,8 @@ class _MobileMainState extends State<MobileMain> {
                           builder: (_) => const PromotionView()));
                     },
                     child: const PromotionItem(
+                      title: '동아리 명',
+                      discription: '동아리 소개글',
                       date: '2023-09-23',
                       type: PromotionItemType.MOBILE,
                     )),

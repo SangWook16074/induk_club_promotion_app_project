@@ -4,10 +4,15 @@ enum PromotionItemType { MOBILE, DESKTOP }
 
 class PromotionItem extends StatelessWidget {
   final String? title;
+  final String? discription;
   final String date;
   final PromotionItemType type;
   const PromotionItem(
-      {super.key, this.title = '', required this.date, required this.type});
+      {super.key,
+      this.title = '',
+      required this.date,
+      required this.type,
+      required this.discription});
 
   @override
   Widget build(BuildContext context) {
@@ -41,79 +46,14 @@ class PromotionItem extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Row(
                 children: [
-                  AspectRatio(
-                    aspectRatio: 1,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey,
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(24.0)),
-                    ),
-                  ),
+                  _thumnail(),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0, vertical: 4.0),
-                                child: Card(
-                                  elevation: 5.0,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(12.0)),
-                                  color: Colors.white,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      title!,
-                                      style: const TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                date,
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 4.0),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: Card(
-                                elevation: 5.0,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12.0)),
-                                color: Colors.white,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    title!,
-                                    style: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        _header(),
+                        _discription(),
                       ],
                     ),
                   )
@@ -123,6 +63,77 @@ class PromotionItem extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _thumnail() {
+    return AspectRatio(
+      aspectRatio: 1,
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.grey,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(24.0)),
+      ),
+    );
+  }
+
+  Widget _header() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            child: Card(
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0)),
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  title!,
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            date,
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _discription() {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        child: SizedBox(
+          width: double.infinity,
+          child: Card(
+            elevation: 5.0,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0)),
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                discription!,
+                style:
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

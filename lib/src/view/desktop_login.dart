@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:induk_club_promotion_app_project/src/widget/login_box.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class DesktopLogin extends StatefulWidget {
+  const DesktopLogin({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<DesktopLogin> createState() => _DesktopLoginState();
 }
 
-class _LoginState extends State<Login> {
+class _DesktopLoginState extends State<DesktopLogin> {
   late TextEditingController id;
   late TextEditingController password;
 
