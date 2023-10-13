@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   hidden_drawer_menu: ^3.0.1
+  rive: ^0.11.17
   side_navigation: ^1.0.4
 
 dev_dependencies:
@@ -20,3 +21,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/rives/

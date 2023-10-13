@@ -5,12 +5,14 @@ class LoginTextField extends StatelessWidget {
   final Color color;
   final TextEditingController controller;
   final bool? obscureText;
+  final Icon prefix;
   const LoginTextField(
       {super.key,
       required this.hint,
       required this.color,
       required this.controller,
-      this.obscureText = false});
+      this.obscureText = false,
+      required this.prefix});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,9 @@ class LoginTextField extends StatelessWidget {
       cursorColor: Colors.white,
       obscureText: obscureText!,
       decoration: InputDecoration(
+          hintText: hint,
+          prefixIcon: prefix,
+          hintStyle: const TextStyle(color: Colors.white),
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: color, width: 2.0)),
           enabledBorder:
