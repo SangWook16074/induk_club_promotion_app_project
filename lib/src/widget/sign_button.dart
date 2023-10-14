@@ -23,13 +23,13 @@ class SignButton extends StatelessWidget {
               begin: Alignment.bottomLeft,
               end: Alignment.topRight,
               transform: GradientRotation(3.14 * 0.3),
-              colors: [Color(0xff34c6eb), Color(0xffe5d6ff)],
+              colors: [Color(0xff6600cc), Color(0xff9933ff)],
             ),
           ),
           child: Text(
             label,
             style: const TextStyle(
-                color: Color(0xff4e4e4e), fontWeight: FontWeight.bold),
+                color: Color(0xffffffff), fontWeight: FontWeight.bold),
           ),
         ),
       ),

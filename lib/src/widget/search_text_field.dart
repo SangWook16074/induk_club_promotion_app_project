@@ -27,18 +27,19 @@ class SearchTextField extends StatelessWidget {
         Container(
           width: width,
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(25.0)),
+              color: const Color(0xff2e2e2e).withOpacity(0.5),
+              borderRadius: BorderRadius.circular(25.0)),
           alignment: Alignment.center,
           child: TextField(
             controller: controller,
-            cursorColor: Colors.black,
+            cursorColor: Colors.white,
             decoration: const InputDecoration(
                 hintText: '동아리 정보를 입력하세요.',
                 hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
                 prefixIcon: Icon(Icons.search),
-                prefixIconColor: Colors.black,
+                prefixIconColor: Color(0xff9933ff),
                 suffixIcon: Icon(Icons.close),
-                suffixIconColor: Colors.black,
+                suffixIconColor: Color(0xff9933ff),
                 border: InputBorder.none),
           ),
         ),

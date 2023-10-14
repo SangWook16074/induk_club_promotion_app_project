@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
@@ -46,17 +48,28 @@ class _DesktopMainState extends State<DesktopMain> {
         _sideMenu(),
         Expanded(
           flex: 8,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            controller: _verticalController,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // _top(),
-                _banner(),
-                _searchBar(),
-                _items(),
-              ],
+          child: Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage('assets/gifs/background.gif'))),
+            child: ClipRRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 100.0, sigmaY: 100.0),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  controller: _verticalController,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // _top(),
+                      _banner(),
+                      _searchBar(),
+                      _items(),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
         ),
@@ -104,7 +117,8 @@ class _DesktopMainState extends State<DesktopMain> {
           aspectRatio: 2.0,
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(20.0)),
+                color: const Color(0xff9933ff),
+                borderRadius: BorderRadius.circular(20.0)),
           ),
         ),
       ),
@@ -133,7 +147,7 @@ class _DesktopMainState extends State<DesktopMain> {
                 child: const PromotionItem(
                   title: '동아리 명',
                   discription: '동아리소개내용',
-                  date: '2023-09-23',
+                  date: 'D-9',
                   type: PromotionItemType.DESKTOP,
                 )),
           );
@@ -155,18 +169,32 @@ class _DesktopMainState extends State<DesktopMain> {
       ),
       child: Column(
         children: [
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.account_circle_rounded,
+                  size: 50,
+                  color: Colors.white,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  '로그인이 필요합니다.',
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SignButton(
-                  label: 'Sign In',
-                  onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const Login())),
-                ),
-                const SignButton(label: 'Sign Up'),
-              ],
+            child: SignButton(
+              label: 'Login',
+              onPressed: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => const Login())),
             ),
           ),
           Padding(

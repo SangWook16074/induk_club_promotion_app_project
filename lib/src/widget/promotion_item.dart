@@ -40,7 +40,7 @@ class PromotionItem extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24.0),
               border: Border.all(width: 1.5, color: Colors.white),
-              color: const Color(0xffd6f5ff).withOpacity(0.8),
+              color: const Color(0xffffffff).withOpacity(0.3),
             ),
             child: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -103,9 +103,19 @@ class PromotionItem extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            date,
-            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          child: Container(
+            padding: const EdgeInsets.all(6.0),
+            decoration: BoxDecoration(
+              border: Border.all(width: 2, color: Colors.grey),
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: Text(
+              date,
+              style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xffffffff)),
+            ),
           ),
         ),
       ],
