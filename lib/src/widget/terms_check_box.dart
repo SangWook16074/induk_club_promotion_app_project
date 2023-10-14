@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class TermsCheckBox extends StatefulWidget {
@@ -33,30 +35,36 @@ class _TermsCheckBoxState extends State<TermsCheckBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.lenght,
-      height: widget.lenght,
-      padding: const EdgeInsets.all(30.0),
-      decoration: BoxDecoration(
-          border: Border.all(width: 3.0, color: Colors.white),
-          borderRadius: BorderRadius.circular(24.0),
-          color: Colors.white.withOpacity(0.1)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 8,
-            child: Column(
-              children: [
-                _header(),
-                _terms(),
-                _check(),
-              ],
-            ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(24.0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+        child: Container(
+          width: widget.lenght,
+          height: widget.lenght,
+          padding: const EdgeInsets.all(30.0),
+          decoration: BoxDecoration(
+              border: Border.all(width: 3.0, color: Colors.white),
+              borderRadius: BorderRadius.circular(24.0),
+              color: Colors.white.withOpacity(0.025)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 8,
+                child: Column(
+                  children: [
+                    _header(),
+                    _terms(),
+                    _check(),
+                  ],
+                ),
+              ),
+              Expanded(flex: 2, child: _button()),
+            ],
           ),
-          Expanded(flex: 2, child: _button()),
-        ],
+        ),
       ),
     );
   }
@@ -86,10 +94,25 @@ class _TermsCheckBoxState extends State<TermsCheckBox> {
   Widget _check() {
     return Row(
       children: [
-        Checkbox(value: (isAgree) ? true : false, onChanged: agree),
-        const Text('동의'),
-        Checkbox(value: (isAgree) ? false : true, onChanged: disagree),
-        const Text('동의하지 않음')
+        Checkbox(
+          value: (isAgree) ? true : false,
+          onChanged: agree,
+          checkColor: Colors.white,
+          side: const BorderSide(color: Colors.white, width: 2.0),
+        ),
+        const Text(
+          '동의',
+          style: TextStyle(color: Colors.white),
+        ),
+        Checkbox(
+          value: (isAgree) ? false : true,
+          onChanged: disagree,
+          side: const BorderSide(color: Colors.white, width: 2.0),
+        ),
+        const Text(
+          '동의하지 않음',
+          style: TextStyle(color: Colors.white),
+        )
       ],
     );
   }

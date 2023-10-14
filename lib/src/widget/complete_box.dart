@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:induk_club_promotion_app_project/src/widget/rive_image.dart';
 
@@ -8,31 +10,37 @@ class CompleteBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: lenght,
-      height: lenght,
-      padding: const EdgeInsets.all(30.0),
-      decoration: BoxDecoration(
-          border: Border.all(width: 3.0, color: Colors.white),
-          borderRadius: BorderRadius.circular(24.0),
-          color: Colors.white.withOpacity(0.1)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 8,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Opacity(opacity: 0, child: _body()),
-                _logo(),
-                _body(),
-              ],
-            ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(24.0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+        child: Container(
+          width: lenght,
+          height: lenght,
+          padding: const EdgeInsets.all(30.0),
+          decoration: BoxDecoration(
+              border: Border.all(width: 3.0, color: Colors.white),
+              borderRadius: BorderRadius.circular(24.0),
+              color: Colors.white.withOpacity(0.025)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 8,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Opacity(opacity: 0, child: _body()),
+                    _logo(),
+                    _body(),
+                  ],
+                ),
+              ),
+              Expanded(flex: 2, child: _button()),
+            ],
           ),
-          Expanded(flex: 2, child: _button()),
-        ],
+        ),
       ),
     );
   }
@@ -47,7 +55,10 @@ class CompleteBox extends StatelessWidget {
   Widget _body() {
     return const Padding(
       padding: EdgeInsets.all(8.0),
-      child: Text('가입이 완료되었습니다 ! 이메일 인증 후 사용가능합니다.'),
+      child: Text(
+        '가입이 완료되었습니다 ! 이메일 인증 후 사용가능합니다.',
+        style: TextStyle(color: Colors.white),
+      ),
     );
   }
 

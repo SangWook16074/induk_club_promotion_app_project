@@ -27,7 +27,7 @@ class PromotionItem extends StatelessWidget {
   }
 
   Widget _desktopItem() {
-    return _basic(2.5);
+    return _basic(2);
   }
 
   Widget _basic(double ratio) {
@@ -40,7 +40,7 @@ class PromotionItem extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24.0),
               border: Border.all(width: 1.5, color: Colors.white),
-              color: const Color(0xffffffff).withOpacity(0.3),
+              color: const Color(0xffffffff).withOpacity(0.1),
             ),
             child: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -69,11 +69,14 @@ class PromotionItem extends StatelessWidget {
   Widget _thumnail() {
     return AspectRatio(
       aspectRatio: 1,
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.grey,
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(24.0)),
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(24.0)),
+        ),
       ),
     );
   }

@@ -12,9 +12,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          appBarTheme: const AppBarTheme(backgroundColor: Color(0xffefcabe)),
-          focusColor: Colors.black,
-          scaffoldBackgroundColor: const Color(0xff404040)),
+          primarySwatch: Colors.purple,
+          appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),
+          scaffoldBackgroundColor: const Color(0xff100014)),
       home: const App(),
     );
   }
