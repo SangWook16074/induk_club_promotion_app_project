@@ -6,20 +6,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
-import 'package:induk_club_promotion_app_project/src/widget/side_menu_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../login.dart';
 
-class DesktopMain extends StatefulWidget {
-  const DesktopMain({super.key});
+class TabletMain extends StatefulWidget {
+  const TabletMain({super.key});
 
   @override
-  State<DesktopMain> createState() => _DesktopMainState();
+  State<TabletMain> createState() => _TabletMainState();
 }
 
-class _DesktopMainState extends State<DesktopMain> {
+class _TabletMainState extends State<TabletMain> {
   late ScrollController _verticalController;
   late TextEditingController _searchController;
   int _currentIndex = 0;
@@ -61,7 +60,7 @@ class _DesktopMainState extends State<DesktopMain> {
                 child: Opacity(
                   opacity: 0.0,
                   child: Container(
-                    width: 300,
+                    width: 100,
                   ),
                 ),
               ),
@@ -179,7 +178,7 @@ class _DesktopMainState extends State<DesktopMain> {
 
   Widget _items() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 25.0),
+      padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 25.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24.0),
         child: BackdropFilter(
@@ -248,7 +247,7 @@ class _DesktopMainState extends State<DesktopMain> {
                       );
                     },
                     options: CarouselOptions(
-                      aspectRatio: 2.5,
+                      aspectRatio: 2,
                       viewportFraction: 1,
                       autoPlay: true,
                       onPageChanged: (index, reason) {
@@ -287,7 +286,7 @@ class _DesktopMainState extends State<DesktopMain> {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
           child: Container(
-            width: 300,
+            width: 100,
             decoration: BoxDecoration(
                 color: const Color(0xff1e1e1e).withOpacity(0.8),
                 border: Border.all(width: 1.0, color: Colors.black),
@@ -325,25 +324,13 @@ class _DesktopMainState extends State<DesktopMain> {
   Widget _menuHeader() {
     return const Padding(
       padding: EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.account_circle_rounded,
-              size: 50,
-              color: Colors.white,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              '로그인이 필요합니다.',
-              style: TextStyle(color: Colors.white),
-            ),
-          )
-        ],
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Icon(
+          Icons.account_circle_rounded,
+          size: 50,
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -353,34 +340,28 @@ class _DesktopMainState extends State<DesktopMain> {
       children: [
         Padding(
           padding: EdgeInsets.all(8.0),
-          child: SideMenuItem(
-              label: '메인화면',
-              icon: Icon(
-                Icons.home,
-                size: 40,
-                color: Colors.white,
-              )),
+          child: Icon(
+            Icons.home,
+            size: 40,
+            color: Colors.white,
+          ),
         ),
         Padding(
           padding: EdgeInsets.all(8.0),
-          child: SideMenuItem(
-              label: '동아리 홍보글',
-              icon: Icon(
-                Icons.menu_book,
-                size: 40,
-                color: Colors.white,
-              )),
+          child: Icon(
+            Icons.menu_book,
+            size: 40,
+            color: Colors.white,
+          ),
         ),
         Padding(
           padding: EdgeInsets.all(8.0),
-          child: SideMenuItem(
-              label: '마이페이지',
-              icon: Icon(
-                Icons.account_circle_outlined,
-                size: 40,
-                color: Colors.white,
-              )),
-        ),
+          child: Icon(
+            Icons.account_circle_outlined,
+            size: 40,
+            color: Colors.white,
+          ),
+        )
       ],
     );
   }

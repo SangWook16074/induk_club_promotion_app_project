@@ -38,7 +38,7 @@ class _MobileMainState extends State<MobileMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Drawer(
-        backgroundColor: Color(0xffefcabe),
+        backgroundColor: Color(0xff1e1e1e),
       ),
       appBar: AppBar(),
       floatingActionButton: MoveToUpFab(

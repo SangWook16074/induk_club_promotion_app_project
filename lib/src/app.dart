@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:induk_club_promotion_app_project/src/view/desktop_main.dart';
 import 'package:induk_club_promotion_app_project/src/view/mobile_main.dart';
+import 'package:induk_club_promotion_app_project/src/view/tablet_main.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -11,6 +12,8 @@ class App extends StatelessWidget {
     return LayoutBuilder(builder: (context, constraints) {
       if (constraints.maxWidth < 800) {
         return const MobileMain();
+      } else if (constraints.maxWidth < 1200) {
+        return const TabletMain();
       } else {
         return const DesktopMain();
       }

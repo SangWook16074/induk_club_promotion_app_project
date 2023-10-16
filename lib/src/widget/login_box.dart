@@ -83,10 +83,24 @@ class LoginBox extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TextButton(onPressed: moveToFindAccount, child: const Text('아이디 찾기')),
           TextButton(
-              onPressed: moveToFindPassword, child: const Text('비밀번호 찾기')),
-          TextButton(onPressed: moveToSignUp, child: const Text('회원가입')),
+              onPressed: moveToFindAccount,
+              child: const Text(
+                '아이디 찾기',
+                style: TextStyle(color: Colors.white),
+              )),
+          TextButton(
+              onPressed: moveToFindPassword,
+              child: const Text(
+                '비밀번호 찾기',
+                style: TextStyle(color: Colors.white),
+              )),
+          TextButton(
+              onPressed: moveToSignUp,
+              child: const Text(
+                '회원가입',
+                style: TextStyle(color: Colors.white),
+              )),
         ],
       ),
     );
