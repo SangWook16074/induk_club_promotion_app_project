@@ -67,25 +67,17 @@ class _DesktopLoginState extends State<DesktopLogin> {
     ];
 
     return Scaffold(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _imagebox(),
-          Container(
-              width: 800,
-              padding: const EdgeInsets.all(30.0),
-              color: const Color(0xff4e4e4e),
-              alignment: Alignment.center,
-              child: boxes[pageIndex])
-        ],
-      ),
-    );
-  }
-
-  Widget _imagebox() {
-    return Container(
-      width: MediaQuery.of(context).size.width - 800,
-      color: const Color(0xff2e2e2e),
+      backgroundColor: const Color(0xff191123),
+      body: Container(
+          padding: const EdgeInsets.all(30.0),
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(
+                    'assets/images/login_decoration.png',
+                  ))),
+          child: boxes[pageIndex]),
     );
   }
 }

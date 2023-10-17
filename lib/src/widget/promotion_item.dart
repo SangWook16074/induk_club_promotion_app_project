@@ -23,11 +23,11 @@ class PromotionItem extends StatelessWidget {
   }
 
   Widget _mobileItem() {
-    return _basic(3);
+    return _basic(1.5);
   }
 
   Widget _desktopItem() {
-    return _basic(2.5);
+    return _basic(2);
   }
 
   Widget _basic(double ratio) {
@@ -39,42 +39,23 @@ class PromotionItem extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24.0),
-              border: Border.all(width: 1.5, color: Colors.white),
-              color: const Color(0xffd6f5ff).withOpacity(0.8),
+              // border: Border.all(width: 1.0, color: Colors.black),
+              color: const Color(0x00000000).withOpacity(0.5),
             ),
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Row(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _thumnail(),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _header(),
-                        _discription(),
-                      ],
-                    ),
-                  )
+                  _header(),
+                  _discription(),
                 ],
               ),
             ),
           ),
         ),
       ],
-    );
-  }
-
-  Widget _thumnail() {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.grey,
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(24.0)),
-      ),
     );
   }
 
@@ -94,8 +75,7 @@ class PromotionItem extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   title!,
-                  style: const TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -103,9 +83,17 @@ class PromotionItem extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            date,
-            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          child: Container(
+            padding: const EdgeInsets.all(6.0),
+            decoration: BoxDecoration(
+              border: Border.all(width: 2, color: Colors.grey),
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: Text(
+              date,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Color(0xffffb938)),
+            ),
           ),
         ),
       ],
@@ -127,8 +115,7 @@ class PromotionItem extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 discription!,
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
           ),

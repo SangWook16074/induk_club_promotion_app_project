@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/widget/move_to_up_fab.dart';
@@ -38,9 +40,20 @@ class _MobileMainState extends State<MobileMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Drawer(
-        backgroundColor: Color(0xffefcabe),
+        backgroundColor: Color(0xff1e1e1e),
       ),
-      appBar: AppBar(),
+      extendBodyBehindAppBar: true,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+            child: AppBar(
+              backgroundColor: const Color(0xff1e1e1e).withOpacity(0.7),
+            ),
+          ),
+        ),
+      ),
       floatingActionButton: MoveToUpFab(
         onPressed: moveToUp,
       ),
@@ -49,28 +62,13 @@ class _MobileMainState extends State<MobileMain> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _banner(),
+            const SizedBox(
+              height: 70,
+            ),
             _searchBar(),
             _items(),
           ],
         ),
-      ),
-    );
-  }
-
-  // 최상단 CI 로고 용 배너위젯
-  Widget _banner() {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height / 3,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(20.0)),
-          ),
-        ],
       ),
     );
   }
@@ -98,7 +96,7 @@ class _MobileMainState extends State<MobileMain> {
                     child: const PromotionItem(
                       title: '동아리 명',
                       discription: '동아리 소개글',
-                      date: '2023-09-23',
+                      date: 'D-9',
                       type: PromotionItemType.MOBILE,
                     )),
               )),
