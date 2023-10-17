@@ -23,7 +23,7 @@ class PromotionItem extends StatelessWidget {
   }
 
   Widget _mobileItem() {
-    return _basic(3);
+    return _basic(1.5);
   }
 
   Widget _desktopItem() {
