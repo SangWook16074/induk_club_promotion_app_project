@@ -75,7 +75,7 @@ class _MobileLoginState extends State<MobileLogin> {
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(
-                    'assets/images/login_decoration.png',
+                    'assets/images/background.jpg',
                   ))),
           child: boxes[pageIndex]),
     );

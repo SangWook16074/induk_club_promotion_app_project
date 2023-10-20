@@ -75,7 +75,7 @@ class _DesktopLoginState extends State<DesktopLogin> {
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(
-                    'assets/images/login_decoration.png',
+                    'assets/images/purple_white.jpg',
                   ))),
           child: boxes[pageIndex]),
     );

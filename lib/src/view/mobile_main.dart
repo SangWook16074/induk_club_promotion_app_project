@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/widget/move_to_up_fab.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
@@ -57,18 +58,60 @@ class _MobileMainState extends State<MobileMain> {
       floatingActionButton: MoveToUpFab(
         onPressed: moveToUp,
       ),
-      body: SingleChildScrollView(
-        controller: _verticalController,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 70,
-            ),
-            _searchBar(),
-            _items(),
-          ],
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/images/red_white.jpg'))),
+        child: SingleChildScrollView(
+          controller: _verticalController,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 70,
+              ),
+              _banner(),
+              _searchBar(),
+              _items(),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget _banner() {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Induk',
+            style: GoogleFonts.playfairDisplay(
+              color: Colors.black,
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'University',
+            style: GoogleFonts.playfairDisplay(
+              color: Colors.black,
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'Club Promotions',
+            style: GoogleFonts.playfairDisplay(
+              color: Colors.black,
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }

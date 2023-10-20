@@ -29,7 +29,7 @@ class LoginBox extends StatelessWidget {
           width: lenght,
           height: lenght,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.025),
+            color: const Color(0xff1e1e1e).withOpacity(0.8),
             border: Border.all(width: 3.0, color: Colors.white),
             borderRadius: BorderRadius.circular(24.0),
           ),

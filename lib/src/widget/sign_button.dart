@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 class SignButton extends StatelessWidget {
   final String label;
   final void Function()? onPressed;
-  const SignButton({super.key, required this.label, this.onPressed});
+  final double? width;
+  final double? height;
+  const SignButton(
+      {super.key,
+      required this.label,
+      this.onPressed,
+      this.width,
+      this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +22,8 @@ class SignButton extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 4.0),
-          width: 100,
+          width: width,
+          height: height,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),

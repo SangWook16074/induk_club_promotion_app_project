@@ -44,6 +44,7 @@ class SideMenu extends StatelessWidget {
                   padding: const EdgeInsets.all(12.0),
                   child: SignButton(
                     label: 'Login',
+                    width: 100,
                     onPressed: () {
                       Get.to(() => const Login());
                     },
@@ -145,26 +146,40 @@ class SideMenu extends StatelessWidget {
   }
 
   Widget _menuHeader() {
-    return const Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.account_circle_rounded,
-              size: 50,
-              color: Colors.white,
-            ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.account_circle_rounded,
+                  size: 50,
+                  color: Colors.white,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  '로그인이 필요합니다.',
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+            ],
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              '로그인이 필요합니다.',
-              style: TextStyle(color: Colors.white),
+            padding: const EdgeInsets.all(12.0),
+            child: SignButton(
+              width: 100,
+              label: 'Login',
+              onPressed: () {
+                Get.to(() => const Login());
+              },
             ),
-          )
+          ),
         ],
       ),
     );
