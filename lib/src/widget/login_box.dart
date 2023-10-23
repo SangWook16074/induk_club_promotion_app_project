@@ -29,7 +29,7 @@ class LoginBox extends StatelessWidget {
           width: lenght,
           height: lenght,
           decoration: BoxDecoration(
-            color: const Color(0xff1e1e1e).withOpacity(0.8),
+            color: Colors.white.withOpacity(0.2),
             border: Border.all(width: 3.0, color: Colors.white),
             borderRadius: BorderRadius.circular(24.0),
           ),
@@ -51,7 +51,7 @@ class LoginBox extends StatelessWidget {
   Widget _logo() {
     return const Icon(
       Icons.lock,
-      color: Colors.white,
+      color: Color(0xff6600cc),
       size: 100,
     );
   }
@@ -63,12 +63,20 @@ class LoginBox extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
             child: LoginTextField(
-                prefix: const Icon(Icons.email), hint: '계정', controller: id)),
+                prefix: const Icon(
+                  Icons.email,
+                  color: Color(0xff1e1e1e),
+                ),
+                hint: '계정',
+                controller: id)),
         Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
             child: LoginTextField(
-              prefix: const Icon(Icons.lock),
+              prefix: const Icon(
+                Icons.lock,
+                color: Color(0xff1e1e1e),
+              ),
               hint: '패스워드',
               controller: password,
               obscureText: true,

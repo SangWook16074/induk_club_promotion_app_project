@@ -19,10 +19,24 @@ class BasicBox extends StatelessWidget {
             width: width,
             height: height,
             decoration: BoxDecoration(
-              color: const Color(0xff1e1e1e).withOpacity(0.8),
-              border: Border.all(width: 3.0, color: Colors.white),
+              gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xff3e3e3e),
+                    Color(0xff2e2e2e),
+                  ]),
               borderRadius: BorderRadius.circular(24.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.7),
+                  spreadRadius: 0,
+                  blurRadius: 5.0,
+                  offset: const Offset(0, 200), // changes position of shadow
+                ),
+              ],
             ),
+            alignment: Alignment.center,
             child: child),
       ),
     );

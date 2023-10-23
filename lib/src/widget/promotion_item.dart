@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 enum PromotionItemType { MOBILE, DESKTOP }
 
@@ -38,10 +39,9 @@ class PromotionItem extends StatelessWidget {
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24.0),
-              // border: Border.all(width: 1.0, color: Colors.black),
-              color: const Color(0x00000000).withOpacity(0.5),
-            ),
+                color: Colors.black.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(24.0),
+                border: Border.all(width: 1.0, color: Colors.white)),
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
@@ -66,34 +66,37 @@ class PromotionItem extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-            child: Card(
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0)),
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  title!,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        title!,
+                        style: Get.textTheme.headlineMedium,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+                const Divider(
+                  color: Colors.white,
+                  height: 10,
+                )
+              ],
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            padding: const EdgeInsets.all(6.0),
-            decoration: BoxDecoration(
-              border: Border.all(width: 2, color: Colors.grey),
-              borderRadius: BorderRadius.circular(12.0),
-            ),
-            child: Text(
-              date,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, color: Color(0xffffb938)),
-            ),
+        Container(
+          padding: const EdgeInsets.all(6.0),
+          decoration: BoxDecoration(
+            border: Border.all(width: 2, color: Colors.grey),
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          child: Text(
+            date,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: Color(0xffffb938)),
           ),
         ),
       ],
@@ -103,22 +106,10 @@ class PromotionItem extends StatelessWidget {
   Widget _discription() {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        child: SizedBox(
-          width: double.infinity,
-          child: Card(
-            elevation: 5.0,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0)),
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                discription!,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        child: Text(
+          discription!,
+          style: Get.textTheme.headlineMedium,
         ),
       ),
     );

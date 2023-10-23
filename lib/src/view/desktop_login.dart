@@ -72,11 +72,18 @@ class _DesktopLoginState extends State<DesktopLogin> {
           padding: const EdgeInsets.all(30.0),
           alignment: Alignment.center,
           decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(
-                    'assets/images/purple_white.jpg',
-                  ))),
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                Colors.white,
+                Color(0xffede1fa),
+                Color(0xffe1c7ff),
+                Color(0xffdebdff),
+                Color(0xffbd7efc),
+                Color(0xff8f00ff),
+                // Color(0xff1e1e1e),
+              ])),
           child: boxes[pageIndex]),
     );
   }

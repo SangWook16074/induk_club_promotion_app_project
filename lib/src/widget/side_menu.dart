@@ -1,11 +1,12 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
+import 'package:induk_club_promotion_app_project/src/widget/basic_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 
-class SideMenu extends StatelessWidget {
+class SideMenu extends GetView<AppController> {
   const SideMenu({
     super.key,
   });
@@ -14,7 +15,7 @@ class SideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return LayoutBuilder(builder: (context, constraints) {
-      if (screenWidth < 1000) {
+      if (screenWidth < 800) {
         return Container();
       } else if (screenWidth < 1200) {
         return _buildTabletSideMenu();
@@ -27,43 +28,27 @@ class SideMenu extends StatelessWidget {
   Widget _buildTabletSideMenu() {
     return Padding(
       padding: const EdgeInsets.all(24.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(30.0),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
-          child: Container(
-            width: 100,
-            decoration: BoxDecoration(
-                color: const Color(0xff1e1e1e).withOpacity(0.8),
-                border: Border.all(width: 1.0, color: Colors.black),
-                borderRadius: BorderRadius.circular(30.0)),
-            child: Column(
-              children: [
-                _tabletMenuHeader(),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: SignButton(
-                    label: 'Login',
-                    width: 100,
-                    onPressed: () {
-                      Get.to(() => const Login());
-                    },
-                  ),
-                ),
-
-                const Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
-                    child: Divider(
-                      color: Colors.white,
-                    )),
-                _tabletMenus(),
-                // const Padding(
-                //     padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
-                //     child: GradientDivider()),
-              ],
+      child: BasicBox(
+        width: 100,
+        child: Column(
+          children: [
+            _tabletMenuHeader(),
+            SignButton(
+              child: const Icon(
+                Icons.login,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Get.to(() => const Login(), binding: AuthBiding());
+              },
             ),
-          ),
+            const Padding(
+                padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
+                child: Divider(
+                  color: Colors.white,
+                )),
+            _tabletMenus(),
+          ],
         ),
       ),
     );
@@ -72,13 +57,10 @@ class SideMenu extends StatelessWidget {
   Widget _tabletMenuHeader() {
     return const Padding(
       padding: EdgeInsets.all(8.0),
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Icon(
-          Icons.account_circle_rounded,
-          size: 50,
-          color: Colors.white,
-        ),
+      child: Icon(
+        Icons.account_circle_rounded,
+        size: 50,
+        color: Colors.white,
       ),
     );
   }
@@ -87,7 +69,7 @@ class SideMenu extends StatelessWidget {
     return const Column(
       children: [
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
           child: Icon(
             Icons.home,
             size: 40,
@@ -95,7 +77,7 @@ class SideMenu extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
           child: Icon(
             Icons.menu_book,
             size: 40,
@@ -103,7 +85,7 @@ class SideMenu extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
           child: Icon(
             Icons.account_circle_outlined,
             size: 40,
@@ -117,29 +99,18 @@ class SideMenu extends StatelessWidget {
   Widget _buildDesktopSideMenu() {
     return Padding(
       padding: const EdgeInsets.all(24.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(30.0),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
-          child: Container(
-            width: 300,
-            decoration: BoxDecoration(
-                color: const Color(0xff1e1e1e).withOpacity(0.8),
-                border: Border.all(width: 1.0, color: Colors.black),
-                borderRadius: BorderRadius.circular(30.0)),
-            child: Column(
-              children: [
-                _menuHeader(),
-                const Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
-                    child: Divider(
-                      color: Colors.white,
-                    )),
-                _menus()
-              ],
-            ),
-          ),
+      child: BasicBox(
+        width: 300,
+        child: Column(
+          children: [
+            _menuHeader(),
+            const Padding(
+                padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
+                child: Divider(
+                  color: Colors.white,
+                )),
+            _menus()
+          ],
         ),
       ),
     );
@@ -171,12 +142,15 @@ class SideMenu extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(4.0),
             child: SignButton(
-              width: 100,
-              label: 'Login',
+              child: const Text(
+                'Login',
+                style: TextStyle(
+                    color: Color(0xffffffff), fontWeight: FontWeight.bold),
+              ),
               onPressed: () {
-                Get.to(() => const Login());
+                Get.to(() => const Login(), binding: AuthBiding());
               },
             ),
           ),
@@ -186,42 +160,36 @@ class SideMenu extends StatelessWidget {
   }
 
   Widget _menus() {
-    return const Column(
+    return Column(
       children: [
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: SideMenuItem(
+            index: 0,
             label: '메인화면',
-            icon: Icon(
-              Icons.home_outlined,
-              size: 30,
-              color: Colors.white,
-            ),
-            color: Color(0xff1e1e1e),
+            icon: Icons.home_outlined,
+            color: const Color(0xff1e1e1e),
+            onTap: controller.moveToMain,
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: SideMenuItem(
+            index: 1,
             label: '동아리홍보글',
-            icon: Icon(
-              Icons.menu_book_outlined,
-              size: 30,
-              color: Colors.white,
-            ),
-            color: Color(0xff1e1e1e),
+            icon: Icons.menu_book_outlined,
+            color: const Color(0xff1e1e1e),
+            onTap: controller.moveToPromotionPage,
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: SideMenuItem(
+            index: 2,
             label: '마이페이지',
-            icon: Icon(
-              Icons.account_circle_outlined,
-              size: 30,
-              color: Colors.white,
-            ),
-            color: Color(0xff1e1e1e),
+            icon: Icons.account_circle_outlined,
+            color: const Color(0xff1e1e1e),
+            onTap: controller.moveToMypage,
           ),
         ),
       ],
@@ -229,10 +197,11 @@ class SideMenu extends StatelessWidget {
   }
 }
 
-class SideMenuItem extends StatelessWidget {
+class SideMenuItem extends GetView<AppController> {
+  final int index;
   final String label;
   final void Function()? onTap;
-  final Widget icon;
+  final IconData icon;
   final Color color;
 
   const SideMenuItem({
@@ -241,25 +210,58 @@ class SideMenuItem extends StatelessWidget {
     this.onTap,
     required this.icon,
     required this.color,
+    required this.index,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8.0),
-          child: icon,
+    return Obx(
+      () => (controller.pageIndex == index)
+          ? _buildSelectItem()
+          : _buildUnselectItem(),
+    );
+  }
+
+  Widget _buildSelectItem() => _buildBasicItem(
+        foregroundColor: const Color(0xff1e1e1e),
+        backgroundColor: Colors.white,
+      );
+
+  Widget _buildUnselectItem() => _buildBasicItem(
+      foregroundColor: Colors.white,
+      backgroundColor: const Color(0xff1e1e1e).withOpacity(0.0));
+
+  Widget _buildBasicItem({
+    Color? foregroundColor,
+    Color? backgroundColor,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+            color: backgroundColor, borderRadius: BorderRadius.circular(12.0)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 30, vertical: 8.0),
+              child: Icon(
+                icon,
+                color: foregroundColor,
+                size: 30,
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Text(
+                label,
+                style: TextStyle(color: foregroundColor),
+              ),
+            )
+          ],
         ),
-        Expanded(
-          flex: 2,
-          child: Text(
-            label,
-            style: const TextStyle(color: Colors.white),
-          ),
-        )
-      ],
+      ),
     );
   }
 }

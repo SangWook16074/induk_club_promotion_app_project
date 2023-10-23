@@ -23,11 +23,11 @@ class LoginTextField extends StatelessWidget {
           hintText: hint,
           prefixIcon: prefix,
           prefixIconColor: Colors.white,
-          hintStyle: const TextStyle(color: Colors.white),
+          hintStyle: const TextStyle(color: Color(0xff1e1e1e)),
           focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 2.0)),
+              borderSide: BorderSide(color: Color(0xff1e1e1e), width: 2.0)),
           enabledBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white))),
+              borderSide: BorderSide(color: Color(0xff1e1e1e)))),
     );
   }
 }

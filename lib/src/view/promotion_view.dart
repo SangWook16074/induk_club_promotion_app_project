@@ -291,9 +291,13 @@ class _PromotionViewState extends State<PromotionView> {
               ],
             ),
             SignButton(
-              label: '지원하기',
               width: double.infinity,
               height: 45,
+              child: Text(
+                '지원하기',
+                style: const TextStyle(
+                    color: Color(0xffffffff), fontWeight: FontWeight.bold),
+              ),
             )
           ],
         ),
