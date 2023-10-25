@@ -1,47 +1,21 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
+import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/widget/basic_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/logo.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class DesktopMain extends StatefulWidget {
+class DesktopMain extends GetView<AppController> {
   const DesktopMain({super.key});
-
-  @override
-  State<DesktopMain> createState() => _DesktopMainState();
-}
-
-class _DesktopMainState extends State<DesktopMain> {
-  late ScrollController _verticalController;
-  late TextEditingController _searchController;
-  int _currentIndex = 0;
-
-  moveToUp() {
-    _verticalController.jumpTo(0.0);
-  }
-
-  @override
-  void initState() {
-    _verticalController = ScrollController();
-    _searchController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _verticalController.dispose();
-    _searchController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
-      controller: _verticalController,
+      controller: controller.verticalController,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -61,7 +35,8 @@ class _DesktopMainState extends State<DesktopMain> {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         child: SearchTextField(
-            controller: _searchController, type: SearchBarType.DESKTOP));
+            controller: controller.searchController,
+            type: SearchBarType.DESKTOP));
   }
 
   Widget _items() {
@@ -112,10 +87,7 @@ class _DesktopMainState extends State<DesktopMain> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 10.0),
                     child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => const PromotionView()));
-                        },
+                        onTap: controller.moveToPromotionView,
                         child: const PromotionItem(
                           title: '동아리 명',
                           discription: '동아리소개내용',
@@ -128,24 +100,22 @@ class _DesktopMainState extends State<DesktopMain> {
                   aspectRatio: 2.0,
                   viewportFraction: 1,
                   autoPlay: true,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  },
+                  onPageChanged: controller.changeIndex,
                 )),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: AnimatedSmoothIndicator(
-                activeIndex: _currentIndex,
-                count: 5,
-                effect: const ScrollingDotsEffect(
-                    dotColor: Colors.white,
-                    activeDotColor: Color(0xff9933ff),
-                    activeDotScale: 1.2,
-                    spacing: 10.0,
-                    dotWidth: 10.0,
-                    dotHeight: 10.0),
+              child: Obx(
+                () => AnimatedSmoothIndicator(
+                  activeIndex: controller.carouselIndex,
+                  count: 5,
+                  effect: const ScrollingDotsEffect(
+                      dotColor: Colors.white,
+                      activeDotColor: Color(0xff9933ff),
+                      activeDotScale: 1.2,
+                      spacing: 10.0,
+                      dotWidth: 10.0,
+                      dotHeight: 10.0),
+                ),
               ),
             )
           ],

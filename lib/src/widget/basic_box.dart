@@ -6,12 +6,14 @@ class BasicBox extends StatelessWidget {
   final Widget? child;
   final double? height;
   final double? width;
-  const BasicBox({super.key, this.child, this.height, this.width});
+  final double? radius;
+  const BasicBox(
+      {super.key, this.child, this.height, this.width, this.radius = 24.0});
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(24.0),
+      borderRadius: BorderRadius.circular(radius!),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
         child: Container(
@@ -26,7 +28,7 @@ class BasicBox extends StatelessWidget {
                     Color(0xff3e3e3e),
                     Color(0xff2e2e2e),
                   ]),
-              borderRadius: BorderRadius.circular(24.0),
+              borderRadius: BorderRadius.circular(radius!),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.7),

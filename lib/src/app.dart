@@ -33,11 +33,13 @@ class App extends GetView<AppController> {
                   children: const [
                     ResponsibleLayout(
                       mobile: MobileMain(),
+                      tablet: DesktopMain(),
                       desktop: DesktopMain(),
                     ),
                     PromotionPage(),
                     ResponsibleLayout(
                       mobile: MobileMyPage(),
+                      tablet: DesktopMyPage(),
                       desktop: DesktopMyPage(),
                     ),
                   ],

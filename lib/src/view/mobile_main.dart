@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
-import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/widget/logo.dart';
 import 'package:induk_club_promotion_app_project/src/widget/move_to_up_fab.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
@@ -80,9 +79,7 @@ class MobileMain extends GetView<AppController> {
           (index) => Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                    onTap: () {
-                      Get.to(() => const PromotionView());
-                    },
+                    onTap: controller.moveToPromotionView,
                     child: const PromotionItem(
                       title: '동아리 명',
                       discription: '동아리 소개글',

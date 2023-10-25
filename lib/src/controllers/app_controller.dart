@@ -1,8 +1,15 @@
+import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/promotion_binding.dart';
+import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:induk_club_promotion_app_project/src/view/desktop_promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/view/mobile_promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/view/tablet_promotion_view.dart';
 
 class AppController extends GetxController {
   final RxInt _pageIndex = 0.obs;
+  final RxInt _carouselIndex = 0.obs;
 
   final ScrollController _verticalController = ScrollController();
   final TextEditingController _searchController = TextEditingController();
@@ -11,6 +18,8 @@ class AppController extends GetxController {
   TextEditingController get searchController => _searchController;
 
   int get pageIndex => _pageIndex.value;
+
+  int get carouselIndex => _carouselIndex.value;
 
   void moveToUp() {
     _verticalController.jumpTo(0.0);
@@ -28,4 +37,22 @@ class AppController extends GetxController {
   void moveToPromotionPage() => chageIndex(1);
 
   void moveToMypage() => chageIndex(2);
+
+  changeIndex(int index, CarouselPageChangedReason reason) {
+    _carouselIndex(index);
+  }
+
+  void moveToLogin() {}
+
+  void moveToPromotionView() {
+    Get.to(
+        () => const ResponsibleLayout(
+              mobile: MobilePromotionView(),
+              tablet: TabletPromotionView(),
+              desktop: DesktopPromotionView(),
+              tabletToDesktop: 1000,
+              mobiletoTablet: 800,
+            ),
+        binding: PromotionBinding());
+  }
 }

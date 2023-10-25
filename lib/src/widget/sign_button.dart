@@ -23,8 +23,6 @@ class SignButton extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
         child: Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 4.0),
             width: 100,
             height: 40,
             alignment: Alignment.center,

@@ -33,15 +33,6 @@ class SideMenu extends GetView<AppController> {
         child: Column(
           children: [
             _tabletMenuHeader(),
-            SignButton(
-              child: const Icon(
-                Icons.login,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Get.to(() => const Login(), binding: AuthBiding());
-              },
-            ),
             const Padding(
                 padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
                 child: Divider(
@@ -55,12 +46,28 @@ class SideMenu extends GetView<AppController> {
   }
 
   Widget _tabletMenuHeader() {
-    return const Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Icon(
-        Icons.account_circle_rounded,
-        size: 50,
-        color: Colors.white,
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.account_circle_rounded,
+              size: 50,
+              color: Colors.white,
+            ),
+          ),
+          SignButton(
+            child: const Icon(
+              Icons.login,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Get.to(() => const Login(), binding: AuthBiding());
+            },
+          ),
+        ],
       ),
     );
   }
@@ -72,7 +79,7 @@ class SideMenu extends GetView<AppController> {
           padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
           child: Icon(
             Icons.home,
-            size: 40,
+            size: 30,
             color: Colors.white,
           ),
         ),
@@ -80,7 +87,7 @@ class SideMenu extends GetView<AppController> {
           padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
           child: Icon(
             Icons.menu_book,
-            size: 40,
+            size: 30,
             color: Colors.white,
           ),
         ),
@@ -88,7 +95,7 @@ class SideMenu extends GetView<AppController> {
           padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
           child: Icon(
             Icons.account_circle_outlined,
-            size: 40,
+            size: 30,
             color: Colors.white,
           ),
         )

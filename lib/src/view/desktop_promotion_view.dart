@@ -1,50 +1,51 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/widget/basic_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
-class PromotionView extends StatefulWidget {
-  const PromotionView({super.key});
-
-  @override
-  State<PromotionView> createState() => _PromotionViewState();
-}
-
-class _PromotionViewState extends State<PromotionView> {
-  String selectValue = '';
+class DesktopPromotionView extends GetView<PromotionController> {
+  const DesktopPromotionView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 100),
-        child: Row(
-          children: [
-            Expanded(
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      _img(),
-                      _title(),
-                      _deadline(),
-                      _object(),
-                      _target(),
-                      _period(),
-                      _info(),
-                    ],
+      body: Center(
+        child: SizedBox(
+          width: 1000,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: AspectRatio(
+                  aspectRatio: 0.5,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        _img(),
+                        _title(),
+                        _deadline(),
+                        _object(),
+                        _target(),
+                        _period(),
+                        _info(),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Column(
-              children: [
-                _infoBox(),
-              ],
-            ),
-          ],
+              Column(
+                children: [
+                  _infoBox(),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -60,9 +61,8 @@ class _PromotionViewState extends State<PromotionView> {
               children: [
                 Text(
                   '신규 동아리원(디자인) 추가모집',
-                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
                 ),
-                Icon(Icons.more_vert)
               ],
             ),
             Divider(
@@ -74,7 +74,9 @@ class _PromotionViewState extends State<PromotionView> {
 
   Widget _img() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 40,
+      ),
       child: SizedBox(
         child: CarouselSlider.builder(
             itemCount: 3,
@@ -149,7 +151,7 @@ class _PromotionViewState extends State<PromotionView> {
 
   Widget _info() {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 40),
       child: Column(
         children: [
           Row(
@@ -226,21 +228,27 @@ class _PromotionViewState extends State<PromotionView> {
 
   Widget _infoBox() {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: BasicBox(
         width: 400,
         height: 300,
+        radius: 8.0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'A&I',
                       style: TextStyle(fontSize: 25, color: Colors.white),
                     ),
+                    Icon(
+                      Icons.more_vert,
+                      color: Colors.white,
+                    )
                   ],
                 ),
                 Divider(
@@ -290,14 +298,21 @@ class _PromotionViewState extends State<PromotionView> {
                 ),
               ],
             ),
-            SignButton(
-              width: double.infinity,
-              height: 45,
-              child: Text(
-                '지원하기',
-                style: const TextStyle(
-                    color: Color(0xffffffff), fontWeight: FontWeight.bold),
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: SignButton(
+                    width: double.infinity,
+                    height: 45,
+                    child: Text(
+                      '지원하기',
+                      style: TextStyle(
+                          color: Color(0xffffffff),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
             )
           ],
         ),
