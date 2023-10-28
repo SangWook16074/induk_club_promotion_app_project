@@ -4,6 +4,7 @@ import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart'
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
+import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class DesktopMain extends GetView<AppController> {
   const DesktopMain({super.key});
@@ -18,6 +19,7 @@ class DesktopMain extends GetView<AppController> {
         children: [
           _top(),
           const Divider(color: Colors.black),
+          _iteams(),
         ],
       ),
     );
@@ -47,4 +49,24 @@ class DesktopMain extends GetView<AppController> {
       ],
     );
   }
+}
+
+Widget _iteams() {
+  return const Column(
+    children: [
+      SizedBox(
+        width: 300,
+        height: 100,
+        child: TitleBox(
+          label: '마감이 다되어 가요',
+          fontSize: 25,
+          type: TitleType.IMPORTANT,
+        ),
+      ),
+      SizedBox(
+          width: 300,
+          height: 100,
+          child: TitleBox(label: '동아리 더보기', fontSize: 25))
+    ],
+  );
 }
