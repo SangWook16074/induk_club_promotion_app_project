@@ -1,17 +1,13 @@
-import 'dart:ui';
-
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
-import 'package:induk_club_promotion_app_project/src/widget/logo.dart';
 import 'package:induk_club_promotion_app_project/src/widget/move_to_up_fab.dart';
-import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
-import 'package:induk_club_promotion_app_project/src/widget/side_menu.dart';
+import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
-
-import '../widget/promotion_item.dart';
+import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class MobileMain extends GetView<AppController> {
   const MobileMain({super.key});
@@ -19,74 +15,30 @@ class MobileMain extends GetView<AppController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: _drawer(),
-      extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
-        child: ClipRRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
-            child: AppBar(
-              backgroundColor: const Color(0xff1e1e1e).withOpacity(0.7),
-            ),
-          ),
-        ),
+      endDrawer: _drawer(),
+      appBar: AppBar(
+        title: const Text('LOGO'),
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xff1e1e1e),
+        elevation: 0,
+        centerTitle: false,
       ),
       floatingActionButton: MoveToUpFab(
         onPressed: controller.moveToUp,
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/red_white.jpg'))),
-        child: SingleChildScrollView(
-          controller: controller.verticalController,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 70,
-              ),
-              _banner(),
-              _searchBar(),
-              _items(),
-            ],
-          ),
+      body: SingleChildScrollView(
+        controller: controller.verticalController,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 40,
+            ),
+            _header(),
+            _moreItems(),
+          ],
         ),
       ),
-    );
-  }
-
-  Widget _banner() {
-    return const Padding(padding: EdgeInsets.all(20.0), child: Logo());
-  }
-
-  // 동아리 프로모션 글 검색용 검색바
-  Widget _searchBar() {
-    return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SearchTextField(
-            controller: controller.searchController,
-            type: SearchBarType.MOBILE));
-  }
-
-  // 동아리 프로모션 글
-  Widget _items() {
-    return Column(
-      children: List.generate(
-          30,
-          (index) => Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                    onTap: controller.moveToPromotionView,
-                    child: const PromotionItem(
-                      title: '동아리 명',
-                      discription: '동아리 소개글',
-                      date: 'D-9',
-                      type: PromotionItemType.MOBILE,
-                    )),
-              )),
     );
   }
 
@@ -96,7 +48,6 @@ class MobileMain extends GetView<AppController> {
       child: Column(
         children: [
           _drawerHeader(),
-          _menus(),
         ],
       ),
     );
@@ -145,40 +96,59 @@ class MobileMain extends GetView<AppController> {
     );
   }
 
-  Widget _menus() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SideMenuItem(
-            index: 0,
-            label: '메인화면',
-            icon: Icons.home_outlined,
-            color: const Color(0xff1e1e1e),
-            onTap: controller.moveToMain,
+  Widget _header() => Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 20),
+            child: Row(
+              children: [
+                TitleBox(
+                    type: TitleType.IMPORTANT,
+                    label: "마감이 다 되어가요",
+                    fontSize: 25)
+              ],
+            ),
+          ),
+          CarouselSlider.builder(
+              itemCount: 30,
+              itemBuilder: (context, index, realIndex) => Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: GestureDetector(
+                        onTap: controller.moveToPromotionView,
+                        child: const PromotionItem(
+                          title: '동아리 명',
+                          discription: '동아리 소개글',
+                          date: 'D-9',
+                        )),
+                  ),
+              options: CarouselOptions(
+                  autoPlay: false,
+                  enableInfiniteScroll: false,
+                  aspectRatio: 1)),
+        ],
+      );
+
+  Widget _moreItems() => Column(children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 20),
+          child: Row(
+            children: [
+              TitleBox(type: TitleType.NORMAL, label: "동아리 더보기", fontSize: 25)
+            ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SideMenuItem(
-            index: 1,
-            label: '동아리홍보글',
-            icon: Icons.menu_book_outlined,
-            color: const Color(0xff1e1e1e),
-            onTap: controller.moveToPromotionPage,
+        ...List.generate(
+          20,
+          (index) => Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: GestureDetector(
+                onTap: controller.moveToPromotionView,
+                child: const PromotionItem(
+                  title: '동아리 명',
+                  discription: '동아리 소개글',
+                  date: 'D-9',
+                )),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SideMenuItem(
-            index: 2,
-            label: '마이페이지',
-            icon: Icons.account_circle_outlined,
-            color: const Color(0xff1e1e1e),
-            onTap: controller.moveToMypage,
-          ),
-        ),
-      ],
-    );
-  }
+      ]);
 }

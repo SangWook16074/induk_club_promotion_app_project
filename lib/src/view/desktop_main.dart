@@ -51,6 +51,7 @@ class DesktopMain extends GetView<AppController> {
   }
 }
 
+
 Widget _iteams() {
   return const Column(
     children: [
@@ -63,10 +64,6 @@ Widget _iteams() {
           type: TitleType.IMPORTANT,
         ),
       ),
-      SizedBox(
-          width: 300,
-          height: 100,
-          child: TitleBox(label: '동아리 더보기', fontSize: 25))
     ],
-  );
+  );},
 }
