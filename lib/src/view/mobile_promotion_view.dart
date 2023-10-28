@@ -49,7 +49,7 @@ class MobilePromotionView extends StatelessWidget {
 
   Widget _title() {
     return const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Column(
           children: [
             Row(
@@ -72,7 +72,7 @@ class MobilePromotionView extends StatelessWidget {
 
   Widget _img() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: SizedBox(
         child: CarouselSlider.builder(
             itemCount: 3,
@@ -94,24 +94,27 @@ class MobilePromotionView extends StatelessWidget {
 
   Widget _deadline() {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Column(
         children: [
           Row(
             children: [
               TitleBox(
+                type: TitleType.IMPORTANT,
                 label: '모집기간',
                 fontSize: 20,
-              )
+              ),
             ],
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Row(
               children: [
-                Text(
-                  '2023.09.23 - 2023.09.30',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                Flexible(
+                  child: Text(
+                    '2023.09.23 - 2023.09.30',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
                 ),
               ],
             ),
@@ -123,7 +126,7 @@ class MobilePromotionView extends StatelessWidget {
 
   Widget _object() {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
       child: Column(
         children: [
           Row(
@@ -147,7 +150,7 @@ class MobilePromotionView extends StatelessWidget {
 
   Widget _info() {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Column(
         children: [
           Row(
@@ -176,7 +179,7 @@ class MobilePromotionView extends StatelessWidget {
 
   Widget _target() {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
       child: Column(
         children: [
           Row(
@@ -200,7 +203,7 @@ class MobilePromotionView extends StatelessWidget {
 
   Widget _period() {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
       child: Column(
         children: [
           Row(
