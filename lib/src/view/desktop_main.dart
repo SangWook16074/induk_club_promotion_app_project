@@ -2,6 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
+import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
+import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
+
+import '../login.dart';
 
 class DesktopMain extends StatefulWidget {
   const DesktopMain({super.key});
@@ -37,23 +41,27 @@ class _DesktopMainState extends State<DesktopMain> {
     // final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: moveToUp,
-          child: const Icon(Icons.arrow_upward),
-        ),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          controller: _verticalController,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // _top(),
-              _banner(),
-              _searchBar(),
-              _items(),
-            ],
+        body: Row(
+      children: [
+        _sideMenu(),
+        Expanded(
+          flex: 8,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            controller: _verticalController,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // _top(),
+                _banner(),
+                _searchBar(),
+                _items(),
+              ],
+            ),
           ),
-        ));
+        ),
+      ],
+    ));
   }
 
   Widget _top() {
@@ -94,14 +102,9 @@ class _DesktopMainState extends State<DesktopMain> {
         width: MediaQuery.of(context).size.width * 0.66,
         child: AspectRatio(
           aspectRatio: 2.0,
-          child: Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20.0)),
-              ),
-            ],
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(20.0)),
           ),
         ),
       ),
@@ -110,31 +113,9 @@ class _DesktopMainState extends State<DesktopMain> {
 
   Widget _searchBar() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width / 3,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(25.0)),
-            alignment: Alignment.center,
-            child: TextField(
-              controller: _searchController,
-              cursorColor: Colors.black,
-              decoration: const InputDecoration(
-                  hintText: '동아리 정보를 입력하세요.',
-                  hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
-                  prefixIcon: Icon(Icons.search),
-                  prefixIconColor: Colors.black,
-                  suffixIcon: Icon(Icons.close),
-                  suffixIconColor: Colors.black,
-                  border: InputBorder.none),
-            ),
-          ),
-        ],
-      ),
-    );
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
+        child: SearchTextField(
+            controller: _searchController, type: SearchBarType.DESKTOP));
   }
 
   Widget _items() {
@@ -143,15 +124,17 @@ class _DesktopMainState extends State<DesktopMain> {
         itemBuilder: (context, index, realIndex) {
           return Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 70.0),
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 50.0),
             child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (_) => const PromotionView()));
                 },
                 child: const PromotionItem(
+                  title: '동아리 명',
+                  discription: '동아리소개내용',
                   date: '2023-09-23',
-                  type: ScreenType.DESKTOP,
+                  type: PromotionItemType.DESKTOP,
                 )),
           );
         },
@@ -162,5 +145,44 @@ class _DesktopMainState extends State<DesktopMain> {
             autoPlay: true,
             enlargeCenterPage: true,
             enlargeStrategy: CenterPageEnlargeStrategy.zoom));
+  }
+
+  Widget _sideMenu() {
+    return Container(
+      width: 300,
+      decoration: const BoxDecoration(
+        color: Color(0xff2e2e2e),
+      ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SignButton(
+                  label: 'Sign In',
+                  onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const Login())),
+                ),
+                const SignButton(label: 'Sign Up'),
+              ],
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
+            child: Container(
+              height: 0.7,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(60.0),
+                  gradient: const LinearGradient(
+                      colors: [Color(0xffd6f5ff), Color(0xffe5d6ff)])),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

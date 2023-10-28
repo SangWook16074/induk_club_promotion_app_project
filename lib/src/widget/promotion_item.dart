@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 
-enum ScreenType { MOBILE, DESKTOP }
+enum PromotionItemType { MOBILE, DESKTOP }
 
 class PromotionItem extends StatelessWidget {
   final String? title;
+  final String? discription;
   final String date;
-  final ScreenType type;
+  final PromotionItemType type;
   const PromotionItem(
-      {super.key, this.title = '', required this.date, required this.type});
+      {super.key,
+      this.title = '',
+      required this.date,
+      required this.type,
+      required this.discription});
 
   @override
   Widget build(BuildContext context) {
-    switch (type) {
-      case ScreenType.MOBILE:
-        return _mobileItem();
-      case ScreenType.DESKTOP:
-        return _desktopItem();
-    }
+    return switch (type) {
+      PromotionItemType.MOBILE => _mobileItem(),
+      PromotionItemType.DESKTOP => _desktopItem()
+    };
   }
 
   Widget _mobileItem() {
@@ -24,7 +27,7 @@ class PromotionItem extends StatelessWidget {
   }
 
   Widget _desktopItem() {
-    return _basic(2);
+    return _basic(2.5);
   }
 
   Widget _basic(double ratio) {
@@ -32,41 +35,105 @@ class PromotionItem extends StatelessWidget {
       children: [
         AspectRatio(
           aspectRatio: ratio,
-          child: SizedBox(
+          child: Container(
             width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24.0),
+              border: Border.all(width: 1.5, color: Colors.white),
+              color: const Color(0xffd6f5ff).withOpacity(0.8),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  _thumnail(),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _header(),
+                        _discription(),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _thumnail() {
+    return AspectRatio(
+      aspectRatio: 1,
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.grey,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(24.0)),
+      ),
+    );
+  }
+
+  Widget _header() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             child: Card(
               elevation: 5.0,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0)),
+                  borderRadius: BorderRadius.circular(12.0)),
+              color: Colors.white,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    AspectRatio(
-                      aspectRatio: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.black,
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(8.0)),
-                      ),
-                    ),
-                    Text(title!)
-                  ],
+                child: Text(
+                  title!,
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
           ),
         ),
-        Positioned(
-          top: 1.0,
-          right: 1.0,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(date),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            date,
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
-        )
+        ),
       ],
+    );
+  }
+
+  Widget _discription() {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        child: SizedBox(
+          width: double.infinity,
+          child: Card(
+            elevation: 5.0,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0)),
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                discription!,
+                style:
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/widget/move_to_up_fab.dart';
+import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 
 import '../widget/promotion_item.dart';
 
@@ -35,7 +37,15 @@ class _MobileMainState extends State<MobileMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const Drawer(
+        backgroundColor: Color(0xffefcabe),
+      ),
+      appBar: AppBar(),
+      floatingActionButton: MoveToUpFab(
+        onPressed: moveToUp,
+      ),
       body: SingleChildScrollView(
+        controller: _verticalController,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -48,6 +58,7 @@ class _MobileMainState extends State<MobileMain> {
     );
   }
 
+  // 최상단 CI 로고 용 배너위젯
   Widget _banner() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -64,35 +75,15 @@ class _MobileMainState extends State<MobileMain> {
     );
   }
 
+  // 동아리 프로모션 글 검색용 검색바
   Widget _searchBar() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width - 30,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(25.0)),
-            alignment: Alignment.center,
-            child: TextField(
-              controller: _searchController,
-              cursorColor: Colors.black,
-              decoration: const InputDecoration(
-                  hintText: '동아리 정보를 입력하세요.',
-                  hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
-                  prefixIcon: Icon(Icons.search),
-                  prefixIconColor: Colors.black,
-                  suffixIcon: Icon(Icons.close),
-                  suffixIconColor: Colors.black,
-                  border: InputBorder.none),
-            ),
-          ),
-        ],
-      ),
-    );
+        padding: const EdgeInsets.all(8.0),
+        child: SearchTextField(
+            controller: _searchController, type: SearchBarType.MOBILE));
   }
 
+  // 동아리 프로모션 글
   Widget _items() {
     return Column(
       children: List.generate(
@@ -105,8 +96,10 @@ class _MobileMainState extends State<MobileMain> {
                           builder: (_) => const PromotionView()));
                     },
                     child: const PromotionItem(
+                      title: '동아리 명',
+                      discription: '동아리 소개글',
                       date: '2023-09-23',
-                      type: ScreenType.MOBILE,
+                      type: PromotionItemType.MOBILE,
                     )),
               )),
     );
