@@ -35,28 +35,12 @@ class MobileMain extends GetView<AppController> {
               height: 40,
             ),
             _header(),
-            _items(),
+            _moreItems(),
           ],
         ),
       ),
     );
   }
-
-  // 동아리 프로모션 글
-  Widget _items() => CarouselSlider.builder(
-      itemCount: 30,
-      itemBuilder: (context, index, realIndex) => Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: GestureDetector(
-                onTap: controller.moveToPromotionView,
-                child: const PromotionItem(
-                  title: '동아리 명',
-                  discription: '동아리 소개글',
-                  date: 'D-9',
-                )),
-          ),
-      options: CarouselOptions(
-          autoPlay: false, enableInfiniteScroll: false, aspectRatio: 1));
 
   Widget _drawer() {
     return Drawer(
@@ -112,9 +96,9 @@ class MobileMain extends GetView<AppController> {
     );
   }
 
-  Widget _header() => const Column(
+  Widget _header() => Column(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 20),
             child: Row(
               children: [
@@ -124,7 +108,47 @@ class MobileMain extends GetView<AppController> {
                     fontSize: 25)
               ],
             ),
-          )
+          ),
+          CarouselSlider.builder(
+              itemCount: 30,
+              itemBuilder: (context, index, realIndex) => Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: GestureDetector(
+                        onTap: controller.moveToPromotionView,
+                        child: const PromotionItem(
+                          title: '동아리 명',
+                          discription: '동아리 소개글',
+                          date: 'D-9',
+                        )),
+                  ),
+              options: CarouselOptions(
+                  autoPlay: false,
+                  enableInfiniteScroll: false,
+                  aspectRatio: 1)),
         ],
       );
+
+  Widget _moreItems() => Column(children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 20),
+          child: Row(
+            children: [
+              TitleBox(type: TitleType.NORMAL, label: "동아리 더보기", fontSize: 25)
+            ],
+          ),
+        ),
+        ...List.generate(
+          20,
+          (index) => Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: GestureDetector(
+                onTap: controller.moveToPromotionView,
+                child: const PromotionItem(
+                  title: '동아리 명',
+                  discription: '동아리 소개글',
+                  date: 'D-9',
+                )),
+          ),
+        ),
+      ]);
 }
