@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 
 class LoginTextField extends StatelessWidget {
   final String hint;
-  final Color color;
+
   final TextEditingController controller;
   final bool? obscureText;
   final Icon prefix;
   const LoginTextField(
       {super.key,
       required this.hint,
-      required this.color,
       required this.controller,
       this.obscureText = false,
       required this.prefix});
@@ -23,11 +22,12 @@ class LoginTextField extends StatelessWidget {
       decoration: InputDecoration(
           hintText: hint,
           prefixIcon: prefix,
-          hintStyle: const TextStyle(color: Colors.white),
-          focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: color, width: 2.0)),
-          enabledBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: color))),
+          prefixIconColor: Colors.white,
+          hintStyle: const TextStyle(color: Color(0xff1e1e1e)),
+          focusedBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: Color(0xff1e1e1e), width: 2.0)),
+          enabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: Color(0xff1e1e1e)))),
     );
   }
 }

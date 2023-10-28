@@ -1,187 +1,125 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:induk_club_promotion_app_project/src/view/promotion_view.dart';
+import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
+import 'package:induk_club_promotion_app_project/src/widget/basic_box.dart';
+import 'package:induk_club_promotion_app_project/src/widget/logo.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
-import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../login.dart';
-
-class DesktopMain extends StatefulWidget {
+class DesktopMain extends GetView<AppController> {
   const DesktopMain({super.key});
 
   @override
-  State<DesktopMain> createState() => _DesktopMainState();
-}
-
-class _DesktopMainState extends State<DesktopMain> {
-  late ScrollController _verticalController;
-  late TextEditingController _searchController;
-
-  moveToUp() {
-    _verticalController.jumpTo(0.0);
-  }
-
-  @override
-  void initState() {
-    _verticalController = ScrollController();
-    _searchController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _verticalController.dispose();
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // final screenWidth = MediaQuery.of(context).size.width;
-
-    return Scaffold(
-        body: Row(
-      children: [
-        _sideMenu(),
-        Expanded(
-          flex: 8,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            controller: _verticalController,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // _top(),
-                _banner(),
-                _searchBar(),
-                _items(),
-              ],
-            ),
-          ),
-        ),
-      ],
-    ));
-  }
-
-  Widget _top() {
-    return Padding(
-      padding: const EdgeInsets.all(30.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      controller: controller.verticalController,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            decoration: BoxDecoration(
-                border: Border.all(width: 1.0, color: Colors.black)),
-            child: Row(
-                children: List.generate(
-                    5,
-                    (index) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8.0, horizontal: 16.0),
-                          child: Text('Menu $index'),
-                        ))),
-          ),
-          Container(
-            decoration: BoxDecoration(
-                border: Border.all(width: 1.0, color: Colors.black)),
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text('로그인'),
-            ),
-          ),
+          _banner(),
+          _searchBar(),
+          _items(),
         ],
       ),
     );
   }
 
   Widget _banner() {
-    return Padding(
-      padding: const EdgeInsets.all(40.0),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.66,
-        child: AspectRatio(
-          aspectRatio: 2.0,
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(20.0)),
-          ),
-        ),
-      ),
-    );
+    return const Padding(padding: EdgeInsets.all(100.0), child: Logo());
   }
 
   Widget _searchBar() {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         child: SearchTextField(
-            controller: _searchController, type: SearchBarType.DESKTOP));
+            controller: controller.searchController,
+            type: SearchBarType.DESKTOP));
   }
 
   Widget _items() {
-    return CarouselSlider.builder(
-        itemCount: 30,
-        itemBuilder: (context, index, realIndex) {
-          return Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 50.0),
-            child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => const PromotionView()));
-                },
-                child: const PromotionItem(
-                  title: '동아리 명',
-                  discription: '동아리소개내용',
-                  date: '2023-09-23',
-                  type: PromotionItemType.DESKTOP,
-                )),
-          );
-        },
-        options: CarouselOptions(
-            aspectRatio: 2.5,
-            viewportFraction: 0.8,
-            enlargeFactor: 0.5,
-            autoPlay: true,
-            enlargeCenterPage: true,
-            enlargeStrategy: CenterPageEnlargeStrategy.zoom));
-  }
-
-  Widget _sideMenu() {
-    return Container(
-      width: 300,
-      decoration: const BoxDecoration(
-        color: Color(0xff2e2e2e),
-      ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25.0),
+      child: BasicBox(
+        child: Column(
+          children: [
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SignButton(
-                  label: 'Sign In',
-                  onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const Login())),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.lock_clock,
+                          color: Color(0xffff1122),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          '마감이 얼마 안남은글',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SignButton(label: 'Sign Up'),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white,
+                  ),
+                )
               ],
             ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
-            child: Container(
-              height: 0.7,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(60.0),
-                  gradient: const LinearGradient(
-                      colors: [Color(0xffd6f5ff), Color(0xffe5d6ff)])),
-            ),
-          ),
-        ],
+            CarouselSlider.builder(
+                itemCount: 5,
+                itemBuilder: (context, index, realIndex) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 10.0),
+                    child: GestureDetector(
+                        onTap: controller.moveToPromotionView,
+                        child: const PromotionItem(
+                          title: '동아리 명',
+                          discription: '동아리소개내용',
+                          date: 'D-9',
+                          type: PromotionItemType.DESKTOP,
+                        )),
+                  );
+                },
+                options: CarouselOptions(
+                  aspectRatio: 2.0,
+                  viewportFraction: 1,
+                  autoPlay: true,
+                  onPageChanged: controller.changeIndex,
+                )),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Obx(
+                () => AnimatedSmoothIndicator(
+                  activeIndex: controller.carouselIndex,
+                  count: 5,
+                  effect: const ScrollingDotsEffect(
+                      dotColor: Colors.white,
+                      activeDotColor: Color(0xff9933ff),
+                      activeDotScale: 1.2,
+                      spacing: 10.0,
+                      dotWidth: 10.0,
+                      dotHeight: 10.0),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

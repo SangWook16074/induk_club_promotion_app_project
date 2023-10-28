@@ -10,9 +10,12 @@ dependencies:
   carousel_slider: ^4.2.1
   flutter:
     sdk: flutter
+  get: ^4.6.5
+  google_fonts: ^6.1.0
   hidden_drawer_menu: ^3.0.1
   rive: ^0.11.17
   side_navigation: ^1.0.4
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -24,3 +27,5 @@ flutter:
 
   assets:
     - assets/rives/
+    - assets/gifs/
+    - assets/images/

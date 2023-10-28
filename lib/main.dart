@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:induk_club_promotion_app_project/src/login.dart';
+import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/app.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/init_binding.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,12 +12,27 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       theme: ThemeData(
-          appBarTheme: const AppBarTheme(backgroundColor: Color(0xffefcabe)),
-          focusColor: Colors.black,
-          scaffoldBackgroundColor: const Color(0xff404040)),
-      home: const Login(),
+          primarySwatch: Colors.purple,
+          textTheme: const TextTheme(
+              displayLarge: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w600),
+              displayMedium: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20),
+              displaySmall: TextStyle(color: Colors.white, fontSize: 18),
+              headlineMedium: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600)),
+          appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),
+          scaffoldBackgroundColor: const Color(0xffffffff)),
+      home: const App(),
+      initialBinding: InitBinding(),
     );
   }
 }
