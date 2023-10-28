@@ -24,7 +24,7 @@ class App extends GetView<AppController> {
           // child:
           Row(
         children: [
-          _sideMenu(),
+          // _sideMenu(),
           Expanded(
               flex: 8,
               child: Obx(
@@ -50,7 +50,7 @@ class App extends GetView<AppController> {
     );
   }
 
-  Widget _sideMenu() {
-    return const SideMenu();
-  }
+  // Widget _sideMenu() {
+  //   return const SideMenu();
+  // }
 }
