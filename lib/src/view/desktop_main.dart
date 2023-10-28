@@ -92,7 +92,6 @@ class DesktopMain extends GetView<AppController> {
                           title: '동아리 명',
                           discription: '동아리소개내용',
                           date: 'D-9',
-                          type: PromotionItemType.DESKTOP,
                         )),
                   );
                 },

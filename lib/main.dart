@@ -17,16 +17,16 @@ class MainApp extends StatelessWidget {
           primarySwatch: Colors.purple,
           textTheme: const TextTheme(
               displayLarge: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 30,
                   fontWeight: FontWeight.w600),
               displayMedium: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.w600,
                   fontSize: 20),
               displaySmall: TextStyle(color: Colors.white, fontSize: 18),
               headlineMedium: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 15,
                   fontWeight: FontWeight.w600)),
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),
