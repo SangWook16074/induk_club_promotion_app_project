@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/app.dart';
-import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/init_binding.dart';
-import 'package:induk_club_promotion_app_project/src/login.dart';
 
 void main() {
   runApp(const MainApp());

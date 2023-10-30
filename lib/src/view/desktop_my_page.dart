@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/widget/basic_box.dart';
 
 class DesktopMyPage extends StatelessWidget {
   const DesktopMyPage({super.key});

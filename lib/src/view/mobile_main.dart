@@ -23,7 +23,6 @@ class MobileMain extends GetView<AppController> {
         centerTitle: false,
       ),
       body: SingleChildScrollView(
-        controller: controller.verticalController,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
