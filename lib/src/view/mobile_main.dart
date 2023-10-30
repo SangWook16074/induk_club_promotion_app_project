@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
-import 'package:induk_club_promotion_app_project/src/widget/move_to_up_fab.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
@@ -22,9 +21,6 @@ class MobileMain extends GetView<AppController> {
         foregroundColor: const Color(0xff1e1e1e),
         elevation: 0,
         centerTitle: false,
-      ),
-      floatingActionButton: MoveToUpFab(
-        onPressed: controller.moveToUp,
       ),
       body: SingleChildScrollView(
         controller: controller.verticalController,
@@ -87,7 +83,7 @@ class MobileMain extends GetView<AppController> {
                     color: Color(0xffffffff), fontWeight: FontWeight.bold),
               ),
               onPressed: () {
-                Get.to(() => const Login(), binding: AuthBiding());
+                Get.to(() => const Login(), binding: LoginBinding());
               },
             ),
           ),

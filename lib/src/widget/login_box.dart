@@ -1,125 +1,98 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/widget/login_text_field.dart';
+import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 
-class LoginBox extends StatelessWidget {
-  final double lenght;
-  final TextEditingController id;
-  final TextEditingController password;
-  final void Function()? moveToFindAccount;
-  final void Function()? moveToFindPassword;
-  final void Function()? moveToSignUp;
-  const LoginBox(
-      {super.key,
-      required this.lenght,
-      required this.id,
-      required this.password,
-      this.moveToFindAccount,
-      this.moveToFindPassword,
-      this.moveToSignUp});
+class LoginBox extends GetView<LoginController> {
+  final TextEditingController? email;
+  final TextEditingController? password;
+  const LoginBox({super.key, required this.email, this.password});
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(24.0),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
-        child: Container(
-          width: lenght,
-          height: lenght,
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
-            border: Border.all(width: 3.0, color: Colors.white),
-            borderRadius: BorderRadius.circular(24.0),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _logo(),
-              _body(),
-              _button(),
-              _others(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _logo() {
-    return const Icon(
-      Icons.lock,
-      color: Color(0xff6600cc),
-      size: 100,
-    );
-  }
-
-  Widget _body() {
     return Column(
       children: [
-        Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-            child: LoginTextField(
-                prefix: const Icon(
-                  Icons.email,
-                  color: Color(0xff1e1e1e),
-                ),
-                hint: '계정',
-                controller: id)),
-        Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-            child: LoginTextField(
-              prefix: const Icon(
-                Icons.lock,
-                color: Color(0xff1e1e1e),
-              ),
-              hint: '패스워드',
-              controller: password,
-              obscureText: true,
-            )),
+        _textFields(),
+        _button(),
+        _options(),
       ],
     );
   }
 
-  Widget _others() {
+  Widget _textFields() => Padding(
+        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.1),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(4.0),
+              child: Text(
+                '이메일',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: LoginTextField(controller: email!),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(4.0),
+              child: Text(
+                '비밀번호',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: LoginTextField(
+                controller: password!,
+                obscureText: true,
+              ),
+            )
+          ],
+        ),
+      );
+
+  Widget _button() => Padding(
+        padding: EdgeInsets.symmetric(
+            vertical: 20, horizontal: Get.size.width * 0.1),
+        child: const SignButton(
+            width: double.infinity,
+            child: Text(
+              '로그인',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            )),
+      );
+
+  Widget _options() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+      padding: EdgeInsets.symmetric(
+          horizontal: Get.size.width * 0.1, vertical: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TextButton(
-              onPressed: moveToFindAccount,
+          GestureDetector(
+              onTap: controller.moveToFindAccount,
               child: const Text(
                 '아이디 찾기',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               )),
-          TextButton(
-              onPressed: moveToFindPassword,
+          GestureDetector(
+              onTap: controller.moveToFindPassword,
               child: const Text(
                 '비밀번호 찾기',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               )),
-          TextButton(
-              onPressed: moveToSignUp,
+          GestureDetector(
+              onTap: controller.moveToSignUp,
               child: const Text(
                 '회원가입',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               )),
         ],
       ),
-    );
-  }
-
-  Widget _button() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-      child: SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(onPressed: () {}, child: const Text('로그인'))),
     );
   }
 }

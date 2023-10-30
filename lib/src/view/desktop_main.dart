@@ -42,7 +42,7 @@ class DesktopMain extends GetView<AppController> {
             type: SearchBarType.DESKTOP),
         TextButton(
           onPressed: () {
-            Get.to(() => const Login(), binding: AuthBiding());
+            Get.to(() => const Login(), binding: LoginBinding());
           },
           child: const Text("로그인", style: TextStyle(color: Colors.black)),
         )
@@ -50,7 +50,6 @@ class DesktopMain extends GetView<AppController> {
     );
   }
 }
-
 
 Widget _iteams() {
   return const Column(
@@ -65,5 +64,5 @@ Widget _iteams() {
         ),
       ),
     ],
-  );},
+  );
 }

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
-import 'package:induk_club_promotion_app_project/src/widget/basic_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 
 class SideMenu extends GetView<AppController> {
@@ -15,35 +14,35 @@ class SideMenu extends GetView<AppController> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return LayoutBuilder(builder: (context, constraints) {
-      if (screenWidth < 800) {
-        return Container();
-      } else if (screenWidth < 1200) {
-        return _buildTabletSideMenu();
-      } else {
-        return _buildDesktopSideMenu();
-      }
+      // if (screenWidth < 800) {
+      return Container();
+      // } else if (screenWidth < 1200) {
+      //   return _buildTabletSideMenu();
+      // } else {
+      //   return _buildDesktopSideMenu();
+      // }
     });
   }
 
-  Widget _buildTabletSideMenu() {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: BasicBox(
-        width: 100,
-        child: Column(
-          children: [
-            _tabletMenuHeader(),
-            const Padding(
-                padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
-                child: Divider(
-                  color: Colors.white,
-                )),
-            _tabletMenus(),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _buildTabletSideMenu() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(24.0),
+  //     child: BasicBox(
+  //       width: 100,
+  //       child: Column(
+  //         children: [
+  //           _tabletMenuHeader(),
+  //           const Padding(
+  //               padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
+  //               child: Divider(
+  //                 color: Colors.white,
+  //               )),
+  //           _tabletMenus(),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _tabletMenuHeader() {
     return Padding(
@@ -64,7 +63,7 @@ class SideMenu extends GetView<AppController> {
               color: Colors.white,
             ),
             onPressed: () {
-              Get.to(() => const Login(), binding: AuthBiding());
+              Get.to(() => const Login(), binding: LoginBinding());
             },
           ),
         ],
@@ -103,26 +102,6 @@ class SideMenu extends GetView<AppController> {
     );
   }
 
-  Widget _buildDesktopSideMenu() {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: BasicBox(
-        width: 300,
-        child: Column(
-          children: [
-            _menuHeader(),
-            const Padding(
-                padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
-                child: Divider(
-                  color: Colors.white,
-                )),
-            _menus()
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _menuHeader() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -157,7 +136,7 @@ class SideMenu extends GetView<AppController> {
                     color: Color(0xffffffff), fontWeight: FontWeight.bold),
               ),
               onPressed: () {
-                Get.to(() => const Login(), binding: AuthBiding());
+                Get.to(() => const Login(), binding: LoginBinding());
               },
             ),
           ),

@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
-import 'package:induk_club_promotion_app_project/src/widget/basic_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
@@ -229,93 +228,87 @@ class DesktopPromotionView extends GetView<PromotionController> {
   Widget _infoBox() {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: BasicBox(
-        width: 400,
-        height: 300,
-        radius: 8.0,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'A&I',
-                      style: TextStyle(fontSize: 25, color: Colors.white),
-                    ),
-                    Icon(
-                      Icons.more_vert,
-                      color: Colors.white,
-                    )
-                  ],
-                ),
-                Divider(
-                  color: Colors.white,
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      '동아리 개설일',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w700),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      '2023년 1월 10일',
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      '동아리 분류',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w700),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      '교내동아리',
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: SignButton(
-                    width: double.infinity,
-                    height: 45,
-                    child: Text(
-                      '지원하기',
-                      style: TextStyle(
-                          color: Color(0xffffffff),
-                          fontWeight: FontWeight.bold),
-                    ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'A&I',
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                  Icon(
+                    Icons.more_vert,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+              Divider(
+                color: Colors.white,
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    '동아리 개설일',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w700),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    '2023년 1월 10일',
+                    style: TextStyle(color: Colors.white),
+                  )
+                ],
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    '동아리 분류',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w700),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    '교내동아리',
+                    style: TextStyle(color: Colors.white),
+                  )
+                ],
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: SignButton(
+                  width: double.infinity,
+                  height: 45,
+                  child: Text(
+                    '지원하기',
+                    style: TextStyle(
+                        color: Color(0xffffffff), fontWeight: FontWeight.bold),
                   ),
                 ),
-              ],
-            )
-          ],
-        ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
