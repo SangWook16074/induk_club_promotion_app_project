@@ -32,7 +32,7 @@ class SignButton extends StatelessWidget {
                 begin: Alignment.bottomLeft,
                 end: Alignment.topRight,
                 transform: GradientRotation(3.14 * 0.3),
-                colors: [Color(0xff6600cc), Color(0xff9933ff)],
+                colors: [Color(0xff713eff), Color(0xff713eff)],
               ),
             ),
             child: child),

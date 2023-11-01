@@ -12,6 +12,17 @@ class DesktopPromotionView extends GetView<PromotionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Text(
+          'LOGO',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        elevation: 0.0,
+      ),
       body: Center(
         child: SizedBox(
           width: 1000,
@@ -61,12 +72,12 @@ class DesktopPromotionView extends GetView<PromotionController> {
               children: [
                 Text(
                   '신규 동아리원(디자인) 추가모집',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
                 ),
               ],
             ),
             Divider(
-              color: Colors.grey,
+              color: Color(0xffE6E6E6),
             )
           ],
         ));
@@ -84,7 +95,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                   height: 400,
                   width: double.infinity,
                   alignment: Alignment.center,
-                  color: Colors.grey,
+                  color: Color(0xffE6E6E6),
                   child: Text('이미지 ${index + 1}'),
                 ),
             options: CarouselOptions(
@@ -98,31 +109,69 @@ class DesktopPromotionView extends GetView<PromotionController> {
 
   Widget _deadline() {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              TitleBox(
-                label: '모집기간',
-                fontSize: 20,
-              )
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: Row(
-              children: [
-                Text(
-                  '2023.09.23 - 2023.09.30',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+        child: Row(
+          children: [
+            Expanded(
+              child: SizedBox(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        TitleBox(
+                          label: '모집분야',
+                          fontSize: 20,
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      child: Row(
+                        children: [
+                          Text(
+                            '백엔드/디자인',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          )
-        ],
-      ),
-    );
+            Expanded(
+              child: SizedBox(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        TitleBox(
+                          label: '모집기간',
+                          fontSize: 20,
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      child: Row(
+                        children: [
+                          Text(
+                            '2023.09.23 - 2023.09.30',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 
   Widget _object() {
@@ -139,7 +188,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
               children: [
                 Text(
                   '00명',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                 ),
               ],
             ),
@@ -171,7 +220,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                 'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.'
                 '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
                 'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
               ))
         ],
       ),
@@ -192,7 +241,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
               children: [
                 Text(
                   '학과 무관',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                 ),
               ],
             ),
@@ -216,7 +265,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
               children: [
                 Text(
                   '2023년 3월 10일 - 2024년 1월 10일',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                 ),
               ],
             ),
@@ -228,10 +277,10 @@ class DesktopPromotionView extends GetView<PromotionController> {
 
   Widget _infoBox() {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
       child: BasicBox(
-        width: 400,
-        height: 300,
+        width: 300,
+        height: 400,
         radius: 8.0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -243,16 +292,16 @@ class DesktopPromotionView extends GetView<PromotionController> {
                   children: [
                     Text(
                       'A&I',
-                      style: TextStyle(fontSize: 25, color: Colors.white),
+                      style: TextStyle(fontSize: 25, color: Colors.black),
                     ),
                     Icon(
                       Icons.more_vert,
-                      color: Colors.white,
+                      color: Color(0xff713eff),
                     )
                   ],
                 ),
                 Divider(
-                  color: Colors.white,
+                  color: Color(0xff713eff),
                 ),
               ],
             ),
@@ -263,7 +312,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                     Text(
                       '동아리 개설일',
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w700),
+                          color: Colors.black, fontWeight: FontWeight.w700),
                     ),
                   ],
                 ),
@@ -271,7 +320,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                   children: [
                     Text(
                       '2023년 1월 10일',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black),
                     )
                   ],
                 ),
@@ -284,7 +333,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                     Text(
                       '동아리 분류',
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w700),
+                          color: Colors.black, fontWeight: FontWeight.w700),
                     ),
                   ],
                 ),
@@ -292,7 +341,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                   children: [
                     Text(
                       '교내동아리',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black),
                     )
                   ],
                 ),

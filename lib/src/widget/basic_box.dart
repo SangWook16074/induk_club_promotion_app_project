@@ -25,8 +25,8 @@ class BasicBox extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color(0xff3e3e3e),
-                    Color(0xff2e2e2e),
+                    Color(0xffE6E6E6),
+                    Color(0xffE6E6E6),
                   ]),
               borderRadius: BorderRadius.circular(radius!),
               boxShadow: [
