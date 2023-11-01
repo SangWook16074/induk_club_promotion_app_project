@@ -10,7 +10,7 @@ class PromotionItem extends StatelessWidget {
       {super.key,
       this.title = '',
       required this.date,
-      required this.discription,
+      this.discription,
       this.showDday = false});
 
   @override
@@ -27,7 +27,7 @@ class PromotionItem extends StatelessWidget {
                 children: [
                   _image(),
                   _header(),
-                  // _discription(),
+                  _discription(),
                 ],
               ),
             ),
@@ -49,15 +49,17 @@ class PromotionItem extends StatelessWidget {
       );
 
   Widget _discription() {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        child: Text(
-          discription!,
-          style: Get.textTheme.headlineMedium,
-        ),
-      ),
-    );
+    return (discription != null)
+        ? Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: Text(
+                discription!,
+                style: Get.textTheme.headlineMedium,
+              ),
+            ),
+          )
+        : Container();
   }
 
   Widget _image() => AspectRatio(
