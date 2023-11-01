@@ -18,25 +18,12 @@ class SignButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
-      child: Card(
-        elevation: 3.0,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-        child: Container(
-            width: 100,
-            height: 40,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.0),
-              gradient: const LinearGradient(
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
-                transform: GradientRotation(3.14 * 0.3),
-                colors: [Color(0xff713eff), Color(0xff713eff)],
-              ),
-            ),
-            child: child),
-      ),
+      child: Container(
+          width: width,
+          height: height,
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(color: Color(0xff713eff)),
+          child: child),
     );
   }
 }

@@ -1,8 +1,9 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
-import 'package:induk_club_promotion_app_project/src/widget/basic_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
@@ -276,96 +277,121 @@ class DesktopPromotionView extends GetView<PromotionController> {
   }
 
   Widget _infoBox() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-      child: BasicBox(
-        width: 300,
-        height: 400,
-        radius: 8.0,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                Row(
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(16.0),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+              child: Container(
+                padding: const EdgeInsets.all(20.0),
+                width: 400,
+                height: 300,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xffE6E6E6),
+                        Color(0xffE6E6E6),
+                      ]),
+                  borderRadius: BorderRadius.circular(8.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.7),
+                      spreadRadius: 0,
+                      blurRadius: 5.0,
+                      offset:
+                          const Offset(0, 200), // changes position of shadow
+                    ),
+                  ],
+                ),
+                alignment: Alignment.center,
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'A&I',
-                      style: TextStyle(fontSize: 25, color: Colors.black),
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'A&I',
+                              style:
+                                  TextStyle(fontSize: 25, color: Colors.black),
+                            ),
+                            Icon(
+                              Icons.more_vert,
+                              color: Color(0xff713eff),
+                            )
+                          ],
+                        ),
+                        Divider(
+                          color: Color(0xff713eff),
+                        ),
+                      ],
                     ),
-                    Icon(
-                      Icons.more_vert,
-                      color: Color(0xff713eff),
-                    )
-                  ],
-                ),
-                Divider(
-                  color: Color(0xff713eff),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      '동아리 개설일',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w700),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              '동아리 개설일',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              '2023년 1월 10일',
+                              style: TextStyle(color: Colors.black),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      '2023년 1월 10일',
-                      style: TextStyle(color: Colors.black),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      '동아리 분류',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w700),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              '동아리 분류',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              '교내동아리',
+                              style: TextStyle(color: Colors.black),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
+                    Row(children: [
+                      Expanded(
+                        child: SignButton(
+                          width: double.infinity,
+                          height: 45,
+                          child: Text(
+                            '지원하기',
+                            style: TextStyle(
+                                color: Color(0xffffffff),
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ]),
                   ],
                 ),
-                Row(
-                  children: [
-                    Text(
-                      '교내동아리',
-                      style: TextStyle(color: Colors.black),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: SignButton(
-                    width: double.infinity,
-                    height: 45,
-                    child: Text(
-                      '지원하기',
-                      style: TextStyle(
-                          color: Color(0xffffffff),
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
+              ),
+            )));
   }
 }

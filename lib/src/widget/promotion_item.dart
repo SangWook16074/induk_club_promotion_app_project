@@ -1,107 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-enum PromotionItemType { MOBILE, DESKTOP }
-
 class PromotionItem extends StatelessWidget {
   final String? title;
   final String? discription;
   final String date;
-  final PromotionItemType type;
+  final bool? showDday;
   const PromotionItem(
       {super.key,
       this.title = '',
       required this.date,
-      required this.type,
-      required this.discription});
+      required this.discription,
+      this.showDday = false});
 
   @override
-  Widget build(BuildContext context) {
-    return switch (type) {
-      PromotionItemType.MOBILE => _mobileItem(),
-      PromotionItemType.DESKTOP => _desktopItem()
-    };
-  }
-
-  Widget _mobileItem() {
-    return _basic(1.5);
-  }
-
-  Widget _desktopItem() {
-    return _basic(2);
-  }
-
-  Widget _basic(double ratio) {
-    return Stack(
-      children: [
-        AspectRatio(
-          aspectRatio: ratio,
-          child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(24.0),
-                border: Border.all(width: 1.0, color: Colors.white)),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
+  Widget build(BuildContext context) => AspectRatio(
+        aspectRatio: 0.8,
+        child: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  border:
+                      Border.all(width: 1.0, color: const Color(0xff1e1e1e))),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  _image(),
                   _header(),
-                  _discription(),
+                  // _discription(),
                 ],
               ),
             ),
-          ),
+            Positioned(top: 20, right: 0, child: _dday())
+          ],
         ),
-      ],
-    );
-  }
+      );
 
-  Widget _header() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        title!,
-                        style: Get.textTheme.headlineMedium,
-                      ),
-                    ],
-                  ),
-                ),
-                const Divider(
-                  color: Colors.white,
-                  height: 10,
-                )
-              ],
+  Widget _header() => Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              title!,
+              style: Get.textTheme.displayMedium,
             ),
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(6.0),
-          decoration: BoxDecoration(
-            border: Border.all(width: 2, color: Colors.grey),
-            borderRadius: BorderRadius.circular(12.0),
-          ),
-          child: Text(
-            date,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xffffb938)),
-          ),
-        ),
-      ],
-    );
-  }
+          )
+        ],
+      );
 
   Widget _discription() {
     return Expanded(
@@ -114,4 +59,22 @@ class PromotionItem extends StatelessWidget {
       ),
     );
   }
+
+  Widget _image() => AspectRatio(
+        aspectRatio: 1,
+        child: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+              shape: BoxShape.rectangle, color: Colors.grey),
+        ),
+      );
+
+  Widget _dday() => Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        decoration: const BoxDecoration(color: Color(0xff713eff)),
+        child: Text(
+          date,
+          style: const TextStyle(fontSize: 20, color: Colors.white),
+        ),
+      );
 }

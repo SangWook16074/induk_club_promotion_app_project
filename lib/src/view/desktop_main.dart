@@ -1,12 +1,10 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
-import 'package:induk_club_promotion_app_project/src/widget/basic_box.dart';
-import 'package:induk_club_promotion_app_project/src/widget/logo.dart';
-import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
+import 'package:induk_club_promotion_app_project/src/login.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class DesktopMain extends GetView<AppController> {
   const DesktopMain({super.key});
@@ -19,108 +17,52 @@ class DesktopMain extends GetView<AppController> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _banner(),
-          _searchBar(),
-          _items(),
+          _top(),
+          const Divider(color: Colors.black),
+          _iteams(),
         ],
       ),
     );
   }
 
-  Widget _banner() {
-    return const Padding(padding: EdgeInsets.all(100.0), child: Logo());
-  }
-
-  Widget _searchBar() {
-    return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20.0),
-        child: SearchTextField(
-            controller: controller.searchController,
-            type: SearchBarType.DESKTOP));
-  }
-
-  Widget _items() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25.0),
-      child: BasicBox(
-        child: Column(
-          children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.lock_clock,
-                          color: Color(0xffff1122),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          '마감이 얼마 안남은글',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                  ),
-                )
-              ],
-            ),
-            CarouselSlider.builder(
-                itemCount: 5,
-                itemBuilder: (context, index, realIndex) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 10.0),
-                    child: GestureDetector(
-                        onTap: controller.moveToPromotionView,
-                        child: const PromotionItem(
-                          title: '동아리 명',
-                          discription: '동아리소개내용',
-                          date: 'D-9',
-                          type: PromotionItemType.DESKTOP,
-                        )),
-                  );
-                },
-                options: CarouselOptions(
-                  aspectRatio: 2.0,
-                  viewportFraction: 1,
-                  autoPlay: true,
-                  onPageChanged: controller.changeIndex,
-                )),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Obx(
-                () => AnimatedSmoothIndicator(
-                  activeIndex: controller.carouselIndex,
-                  count: 5,
-                  effect: const ScrollingDotsEffect(
-                      dotColor: Colors.white,
-                      activeDotColor: Color(0xff9933ff),
-                      activeDotScale: 1.2,
-                      spacing: 10.0,
-                      dotWidth: 10.0,
-                      dotHeight: 10.0),
-                ),
-              ),
-            )
-          ],
+  Widget _top() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: 100,
+            height: 100,
+            color: Colors.red,
+          ),
         ),
-      ),
+        SearchTextField(
+            controller: controller.searchController,
+            type: SearchBarType.DESKTOP),
+        TextButton(
+          onPressed: () {
+            Get.to(() => const Login(), binding: LoginBinding());
+          },
+          child: const Text("로그인", style: TextStyle(color: Colors.black)),
+        )
+      ],
     );
   }
+}
+
+Widget _iteams() {
+  return const Column(
+    children: [
+      SizedBox(
+        width: 300,
+        height: 100,
+        child: TitleBox(
+          label: '마감이 다되어 가요',
+          fontSize: 25,
+          type: TitleType.IMPORTANT,
+        ),
+      ),
+    ],
+  );
 }
