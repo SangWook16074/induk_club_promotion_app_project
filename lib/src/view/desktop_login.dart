@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:induk_club_promotion_app_project/src/widget/complete_box.dart';
-import 'package:induk_club_promotion_app_project/src/widget/login_box.dart';
-import 'package:induk_club_promotion_app_project/src/widget/account_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/terms_check_box.dart';
 
 class DesktopLogin extends StatefulWidget {
@@ -42,24 +40,23 @@ class _DesktopLoginState extends State<DesktopLogin> {
   @override
   Widget build(BuildContext context) {
     List<Widget> boxes = [
-      LoginBox(
-        lenght: 400,
-        id: id,
-        password: password,
-        moveToFindAccount: () {},
-        moveToFindPassword: () {},
-        moveToSignUp: moveToSecond,
-      ),
+      // LoginBox(
+      //   lenght: 400,
+      //   id: id,
+      //   password: password,
+      //   moveToFindAccount: () {},
+      //   moveToFindPassword: () {},
+      //   moveToSignUp: moveToSecond,
+      // ),
       TermsCheckBox(
-        lenght: 400,
         moveToNext: moveToNext,
       ),
-      AccountBox(
-        lenght: 400,
-        id: id,
-        password: password,
-        moveToNext: moveToNext,
-      ),
+      // AccountBox(
+      //   lenght: 400,
+      //   id: id,
+      //   password: password,
+      //   moveToNext: moveToNext,
+      // ),
       CompleteBox(
         lenght: 400,
         moveToLogin: resetIndex,

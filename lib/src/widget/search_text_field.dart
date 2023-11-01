@@ -28,26 +28,20 @@ class SearchTextField extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(25.0),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
-            child: Container(
-              width: width,
-              decoration: BoxDecoration(
-                  color: const Color(0xff2e2e2e).withOpacity(0.7),
-                  borderRadius: BorderRadius.circular(25.0)),
-              alignment: Alignment.center,
-              child: TextField(
-                controller: controller,
-                cursorColor: Colors.white,
-                decoration: const InputDecoration(
-                    hintText: '동아리 정보를 입력하세요.',
-                    hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
-                    prefixIcon: Icon(Icons.search),
-                    prefixIconColor: Color(0xffffffff),
-                    suffixIcon: Icon(Icons.close),
-                    suffixIconColor: Color(0xffffffff),
-                    border: InputBorder.none),
-              ),
+          child: Container(
+            width: width,
+            decoration: BoxDecoration(
+              border: Border.all(color: const Color(0xff713eff), width: 2),
+              borderRadius: BorderRadius.circular(25.0),
+            ),
+            alignment: Alignment.center,
+            child: TextField(
+              controller: controller,
+              cursorColor: Colors.white,
+              decoration: const InputDecoration(
+                  suffixIcon: Icon(Icons.search),
+                  suffixIconColor: Color(0xff713eff),
+                  border: InputBorder.none),
             ),
           ),
         ),
