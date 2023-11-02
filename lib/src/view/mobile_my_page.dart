@@ -1,7 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class MobileMyPage extends StatelessWidget {
   const MobileMyPage({super.key});
@@ -9,156 +7,158 @@ class MobileMyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
-        child: ClipRRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
-            child: AppBar(
-              backgroundColor: const Color(0xff1e1e1e).withOpacity(0.7),
-            ),
-          ),
-        ),
+        body: SingleChildScrollView(
+      child: Column(
+        children: [
+          _clubInfo(),
+          _myPromotions(),
+        ],
       ),
-      body: SingleChildScrollView(
+    ));
+  }
+
+  Widget _clubInfo() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 30.0),
         child: Column(
           children: [
-            _clubInfo(),
-            _myPromotions(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _clubInfo() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '동아리 정보',
-                style: Get.textTheme.displayLarge,
-              ),
-              const Divider(
-                color: Colors.white,
-                height: 8.0,
-                thickness: 1.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text('동아리명', style: Get.textTheme.displayMedium),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text('A&I', style: Get.textTheme.displaySmall),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text('동아리 회장', style: Get.textTheme.displayMedium),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text(
-                        '정보통신공학과 한상욱',
-                        style: Get.textTheme.displaySmall,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child:
-                          Text('동아리 개설일', style: Get.textTheme.displayMedium),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text(
-                        '2023년 1월 10일',
-                        style: Get.textTheme.displaySmall,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child:
-                          Text('동아리 요약소개', style: Get.textTheme.displayMedium),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text(
-                        '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까지 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다. ',
-                        style: Get.textTheme.displaySmall,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _myPromotions() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                '내가 쓴 글',
-                style: Get.textTheme.displayLarge,
-              ),
-            ],
-          ),
-          const Expanded(
-            child: Center(
-              child: Text(
-                '작성한 글이 없습니다',
-                style: TextStyle(color: Colors.white),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TitleBox(label: '동아리 소개', fontSize: 20),
+                  Text(
+                    '수정',
+                    style: TextStyle(fontSize: 20, color: Colors.grey),
+                  )
+                ],
               ),
             ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                    color: const Color(0xffe0e0e0),
+                    border: Border.all(color: const Color(0xffb5b5b5)),
+                    borderRadius: BorderRadius.circular(8.0)),
+                child: const Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: Row(
+                              children: [
+                                Text('동아리명'),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 5,
+                            child: Row(
+                              children: [Text('A&I')],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: Row(
+                              children: [
+                                Text('동아리개설일'),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 5,
+                            child: Row(
+                              children: [Text('2023년 1월 10일')],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: Row(
+                              children: [
+                                Text('동아리분류'),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 5,
+                            child: Row(
+                              children: [Text('교내스터디')],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+
+  Widget _myPromotions() => Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TitleBox(label: '내가 쓴 글', fontSize: 20),
+                Icon(
+                  Icons.edit,
+                  color: Color(0xff713eff),
+                )
+              ],
+            ),
           ),
+          ...List.generate(
+            20,
+            (index) => _items(),
+          )
+          // _noItem(),
         ],
-      ),
-    );
-  }
+      );
+
+  Widget _items() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          width: double.infinity,
+          height: 100,
+          decoration: BoxDecoration(
+            color: const Color(0xffe0e0e0),
+            border: Border.all(color: const Color(0xffb5b5b5)),
+          ),
+          child: const Text("A&I 신규 동아리원 모집합니다."),
+        ),
+      );
+  Widget _noItem() => Container(
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: 100,
+        child: const Text("작성한 글이 없습니다"),
+      );
 }

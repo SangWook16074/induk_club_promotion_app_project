@@ -233,7 +233,12 @@ class MobilePromotionView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
       height: Get.size.height * 0.1,
-      color: Colors.white.withOpacity(0.7),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: List.generate(
+                  5, (index) => Colors.white.withOpacity(index * 0.2)))),
       child: SizedBox(
           width: double.infinity,
           height: double.infinity,

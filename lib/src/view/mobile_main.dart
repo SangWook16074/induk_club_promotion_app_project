@@ -1,11 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
-import 'package:induk_club_promotion_app_project/src/login.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
-import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class MobileMain extends GetView<AppController> {
@@ -14,14 +11,6 @@ class MobileMain extends GetView<AppController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: _drawer(),
-      appBar: AppBar(
-        title: const Text('LOGO'),
-        backgroundColor: Colors.white,
-        foregroundColor: const Color(0xff1e1e1e),
-        elevation: 0,
-        centerTitle: false,
-      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -33,60 +22,6 @@ class MobileMain extends GetView<AppController> {
             _moreItems(),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _drawer() {
-    return Drawer(
-      backgroundColor: const Color(0xff1e1e1e),
-      child: Column(
-        children: [
-          _drawerHeader(),
-        ],
-      ),
-    );
-  }
-
-  Widget _drawerHeader() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.account_circle_rounded,
-                  size: 50,
-                  color: Colors.white,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  '로그인이 필요합니다.',
-                  style: TextStyle(color: Colors.white),
-                ),
-              )
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: SignButton(
-              child: const Text(
-                'Login',
-                style: TextStyle(
-                    color: Color(0xffffffff), fontWeight: FontWeight.bold),
-              ),
-              onPressed: () {
-                Get.to(() => const Login(), binding: LoginBinding());
-              },
-            ),
-          ),
-        ],
       ),
     );
   }
