@@ -135,7 +135,7 @@ class MobileMain extends GetView<AppController> {
                     color: Color(0xffffffff), fontWeight: FontWeight.bold),
               ),
               onPressed: () {
-                Get.to(() => const Login(), binding: AuthBiding());
+                Get.to(() => const Login(), binding: LoginBinding());
               },
             ),
           ),
