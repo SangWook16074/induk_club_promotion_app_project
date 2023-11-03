@@ -11,6 +11,19 @@ class MobileMain extends GetView<AppController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 0.0,
+        title: const Text("Logo"),
+        centerTitle: false,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(Icons.search),
+          )
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
