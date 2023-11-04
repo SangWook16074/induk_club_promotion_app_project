@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class DesktopMyPage extends StatelessWidget {
@@ -13,6 +14,7 @@ class DesktopMyPage extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          _myInfo(),
           _clubInfo(),
           // _myPromotions(),
         ],
@@ -169,5 +171,11 @@ class DesktopMyPage extends StatelessWidget {
       backgroundColor: Color(0xff713eff),
       title: Text('LOGO', style: Get.textTheme.displayLarge),
     );
+  }
+
+  Widget _myInfo() {
+    return ProfileImage(
+        url:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU');
   }
 }
