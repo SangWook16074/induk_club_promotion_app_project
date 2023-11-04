@@ -16,18 +16,26 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(
           primarySwatch: Colors.purple,
+          primaryColor: const Color(0xff713eff),
           textTheme: const TextTheme(
+              titleMedium: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w600),
               displayLarge: TextStyle(
                   color: Colors.black,
                   fontSize: 30,
                   fontWeight: FontWeight.w600),
               displayMedium: TextStyle(
                   color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20),
-              displaySmall: TextStyle(color: Colors.white, fontSize: 18),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 18),
+              displaySmall: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600),
               headlineMedium: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 15,
                   fontWeight: FontWeight.w600)),
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),

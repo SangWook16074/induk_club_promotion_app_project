@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
+import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
@@ -12,7 +13,6 @@ class DesktopMain extends GetView<AppController> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
       controller: controller.verticalController,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -20,6 +20,7 @@ class DesktopMain extends GetView<AppController> {
           _top(),
           const Divider(color: Colors.black),
           _iteams(),
+          _more(),
         ],
       ),
     );
@@ -49,6 +50,27 @@ class DesktopMain extends GetView<AppController> {
       ],
     );
   }
+
+  Widget _more() => const Column(
+        children: [
+          Row(
+            children: [
+              TitleBox(label: "동아리 더보기", fontSize: 20),
+            ],
+          ),
+          // GridView.builder(
+          //     shrinkWrap: true,
+          //     physics: const NeverScrollableScrollPhysics(),
+          //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          //       crossAxisCount: 3,
+          //     ),
+          //     itemBuilder: (context, index) => const PromotionItem(
+          //           title: '동아리 명',
+          //           discription: '동아리 소개글',
+          //           date: 'D-9',
+          //         ))
+        ],
+      );
 }
 
 Widget _iteams() {
