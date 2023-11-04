@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class DesktopMyPage extends StatelessWidget {
   const DesktopMyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(
-      children: [
-        _clubInfo(),
-        // _myPromotions(),
-      ],
-    ));
+    return Scaffold(
+      appBar: _appBar(),
+      body: SingleChildScrollView(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _clubInfo(),
+          // _myPromotions(),
+        ],
+      )),
+    );
   }
 
   Widget _clubInfo() {
@@ -25,14 +30,23 @@ class DesktopMyPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                '동아리 정보',
-                style: Get.textTheme.displayLarge,
+              Row(
+                children: [
+                  const TitleBox(label: '동아리 정보', fontSize: 20),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      '수정',
+                      style: Get.textTheme.displayMedium,
+                    ),
+                  ),
+                ],
               ),
-              const Divider(
-                color: Colors.white,
-                height: 8.0,
-                thickness: 1.0,
+              Container(
+                width: double.infinity,
+                height: 100,
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.grey)),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
@@ -149,4 +163,11 @@ class DesktopMyPage extends StatelessWidget {
   //     ),
   //   );
   // }
+
+  PreferredSizeWidget _appBar() {
+    return AppBar(
+      backgroundColor: Color(0xff713eff),
+      title: Text('LOGO', style: Get.textTheme.displayLarge),
+    );
+  }
 }
