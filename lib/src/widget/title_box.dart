@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 enum TitleType { IMPORTANT, NORMAL }
 
@@ -6,15 +7,11 @@ class TitleBox extends StatelessWidget {
   final String label;
   final double fontSize;
   final TitleType? type;
-  final double? height;
-  final double? width;
   const TitleBox(
       {super.key,
       required this.label,
       required this.fontSize,
-      this.type = TitleType.NORMAL,
-      this.height = 80,
-      this.width = 300});
+      this.type = TitleType.NORMAL});
 
   @override
   Widget build(BuildContext context) {
@@ -60,16 +57,17 @@ class TitleBox extends StatelessWidget {
   Widget _buildNormal() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         child: Container(
-          width: width,
-          height: height,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           alignment: Alignment.center,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24.0),
-              color: const Color(0xff713eff).withOpacity(0.8)),
+              color: Get.theme.primaryColor.withOpacity(0.8)),
           child: Text(
             label,
-            style: TextStyle(color: Colors.white, fontSize: fontSize),
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: fontSize,
+                fontWeight: FontWeight.w600),
           ),
         ),
       );

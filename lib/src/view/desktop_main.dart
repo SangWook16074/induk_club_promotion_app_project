@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
-class DesktopMain extends GetView<AppController> {
+class DesktopMain extends GetView<PromotionController> {
   const DesktopMain({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        controller: controller.verticalController,
+        controller: Get.find<AppController>().verticalController,
         slivers: [
           // const Divider(color: Colors.black),
           _appBar(),
@@ -26,55 +26,33 @@ class DesktopMain extends GetView<AppController> {
     );
   }
 
-  // Widget _top() {
-  //   return SliverToBoxAdapter(
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //       children: [
-  //         const Padding(
-  //             padding: EdgeInsets.symmetric(vertical: 40),
-  //             child: Text(
-  //               'LOGO',
-  //               style: TextStyle(fontSize: 25),
-  //             )),
-  //         SearchTextField(
-  //             controller: controller.searchController,
-  //             type: SearchBarType.DESKTOP),
-  //         TextButton(
-  //           onPressed: () {
-  //             Get.to(() => const Login(), binding: LoginBinding());
-  //           },
-  //           child: const Text("로그인", style: TextStyle(color: Colors.black)),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Widget _iteams1() {
     return SliverToBoxAdapter(
-      child: Column(
-        children: [
-          const TitleBox(
-            label: '마감이 다되어 가요',
-            fontSize: 20,
-            type: TitleType.IMPORTANT,
-          ),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                3,
-                (index) => const SizedBox(
-                    height: 500,
-                    child: Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: PromotionItem(
-                          title: '동아리 명',
-                          discription: '동아리 소개',
-                          date: ' D - 9 '),
-                    )),
-              ))
-        ],
+      child: Obx(
+        () => Column(
+          children: [
+            const TitleBox(
+              label: '마감이 다되어 가요',
+              fontSize: 20,
+              type: TitleType.IMPORTANT,
+            ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  controller.promotions.length,
+                  (index) => Obx(() {
+                    final promotion = controller.promotions[index];
+                    return SizedBox(
+                        height: 500,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: PromotionItem(
+                              promotion: promotion, date: ' D - 9 '),
+                        ));
+                  }),
+                ))
+          ],
+        ),
       ),
     );
   }
@@ -90,23 +68,27 @@ class DesktopMain extends GetView<AppController> {
   Widget _more() {
     return SliverPadding(
       padding: EdgeInsets.symmetric(horizontal: Get.size.height * 0.35),
-      sliver: SliverGrid.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 1.0,
-            crossAxisSpacing: 1.0,
-            childAspectRatio: 0.8,
-          ),
-          itemCount: 30,
-          itemBuilder: (context, index) => const Padding(
-                padding: EdgeInsets.all(10.0),
-                child: PromotionItem(
-                  title: '동아리 명',
-                  discription: '동아리 소개',
-                  date: ' D - 9 ',
-                  showDday: false,
-                ),
-              )),
+      sliver: Obx(
+        () => SliverGrid.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              mainAxisSpacing: 1.0,
+              crossAxisSpacing: 1.0,
+              childAspectRatio: 0.8,
+            ),
+            itemCount: 30,
+            itemBuilder: (context, index) => Obx(() {
+                  final promotion = controller.promotions[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: PromotionItem(
+                      promotion: promotion,
+                      date: ' D - 9 ',
+                      showDday: false,
+                    ),
+                  );
+                })),
+      ),
     );
   }
 
@@ -122,7 +104,8 @@ class DesktopMain extends GetView<AppController> {
         style: TextStyle(fontSize: 25),
       ),
       title: SearchTextField(
-          controller: controller.searchController, type: SearchBarType.DESKTOP),
+          controller: Get.find<AppController>().searchController,
+          type: SearchBarType.DESKTOP),
       actions: [
         TextButton(
           onPressed: () {
