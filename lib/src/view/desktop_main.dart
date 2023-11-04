@@ -13,15 +13,21 @@ class DesktopMain extends GetView<PromotionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        controller: Get.find<AppController>().verticalController,
-        slivers: [
-          // const Divider(color: Colors.black),
-          _appBar(),
-          _iteams1(),
-          _iteams2(),
-          _more(),
-        ],
+      body: Obx(
+        () => (controller.promotions.isEmpty)
+            ? const Center(
+                child: CircularProgressIndicator.adaptive(),
+              )
+            : CustomScrollView(
+                controller: Get.find<AppController>().verticalController,
+                slivers: [
+                  // const Divider(color: Colors.black),
+                  _appBar(),
+                  _iteams1(),
+                  _iteams2(),
+                  _more(),
+                ],
+              ),
       ),
     );
   }
@@ -36,21 +42,24 @@ class DesktopMain extends GetView<PromotionController> {
               fontSize: 20,
               type: TitleType.IMPORTANT,
             ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  controller.promotions.length,
-                  (index) => Obx(() {
-                    final promotion = controller.promotions[index];
-                    return SizedBox(
-                        height: 500,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: PromotionItem(
-                              promotion: promotion, date: ' D - 9 '),
-                        ));
-                  }),
-                ))
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    controller.promotions.length,
+                    (index) => Obx(() {
+                      final promotion = controller.promotions[index];
+                      return SizedBox(
+                          height: 500,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: PromotionItem(
+                                promotion: promotion, date: ' D - 9 '),
+                          ));
+                    }),
+                  )),
+            )
           ],
         ),
       ),
@@ -66,30 +75,25 @@ class DesktopMain extends GetView<PromotionController> {
   }
 
   Widget _more() {
-    return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: Get.size.height * 0.35),
-      sliver: Obx(
-        () => SliverGrid.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 1.0,
-              crossAxisSpacing: 1.0,
-              childAspectRatio: 0.8,
-            ),
-            itemCount: 30,
-            itemBuilder: (context, index) => Obx(() {
-                  final promotion = controller.promotions[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: PromotionItem(
-                      promotion: promotion,
-                      date: ' D - 9 ',
-                      showDday: false,
-                    ),
-                  );
-                })),
-      ),
-    );
+    return SliverGrid.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisSpacing: 1.0,
+          crossAxisSpacing: 1.0,
+          childAspectRatio: 0.8,
+        ),
+        itemCount: controller.promotions.length,
+        itemBuilder: (context, index) => Obx(() {
+              final promotion = controller.promotions[index];
+              return Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: PromotionItem(
+                  promotion: promotion,
+                  date: ' D - 9 ',
+                  showDday: false,
+                ),
+              );
+            }));
   }
 
   Widget _appBar() {
