@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class MobileMyPage extends StatelessWidget {
@@ -43,27 +44,10 @@ class MobileMyPage extends StatelessWidget {
                   expandedHeight: MediaQuery.of(context).size.height * 0.25,
                   flexibleSpace: FlexibleSpaceBar(
                     expandedTitleScale: 4.0,
-                    title: Container(
-                        width: MediaQuery.of(context).size.height * 0.05,
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: SizedBox(
-                            width:
-                                MediaQuery.of(context).size.height * 0.05 - 2,
-                            height:
-                                MediaQuery.of(context).size.height * 0.05 - 2,
-                            child: Image.network(
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        )),
+                    title: ProfileImage(
+                        length: MediaQuery.of(context).size.height * 0.05,
+                        url:
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU"),
                     collapseMode: CollapseMode.parallax,
                     background: Stack(
                       children: [
