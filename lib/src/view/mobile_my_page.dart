@@ -45,6 +45,7 @@ class MobileMyPage extends StatelessWidget {
                   flexibleSpace: FlexibleSpaceBar(
                     expandedTitleScale: 4.0,
                     title: ProfileImage(
+                        type: ProfileType.MYPAGE,
                         length: MediaQuery.of(context).size.height * 0.05,
                         url:
                             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU"),
