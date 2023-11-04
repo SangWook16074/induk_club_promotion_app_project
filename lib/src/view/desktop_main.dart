@@ -1,5 +1,3 @@
-import 'dart:js_util';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
@@ -18,8 +16,8 @@ class DesktopMain extends GetView<AppController> {
       body: CustomScrollView(
         controller: controller.verticalController,
         slivers: [
-          _top(),
           // const Divider(color: Colors.black),
+          _appBar(),
           _iteams1(),
           _iteams2(),
           _more(),
@@ -28,30 +26,30 @@ class DesktopMain extends GetView<AppController> {
     );
   }
 
-  Widget _top() {
-    return SliverToBoxAdapter(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const Padding(
-              padding: EdgeInsets.symmetric(vertical: 40),
-              child: Text(
-                'LOGO',
-                style: TextStyle(fontSize: 25),
-              )),
-          SearchTextField(
-              controller: controller.searchController,
-              type: SearchBarType.DESKTOP),
-          TextButton(
-            onPressed: () {
-              Get.to(() => const Login(), binding: LoginBinding());
-            },
-            child: const Text("로그인", style: TextStyle(color: Colors.black)),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _top() {
+  //   return SliverToBoxAdapter(
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //       children: [
+  //         const Padding(
+  //             padding: EdgeInsets.symmetric(vertical: 40),
+  //             child: Text(
+  //               'LOGO',
+  //               style: TextStyle(fontSize: 25),
+  //             )),
+  //         SearchTextField(
+  //             controller: controller.searchController,
+  //             type: SearchBarType.DESKTOP),
+  //         TextButton(
+  //           onPressed: () {
+  //             Get.to(() => const Login(), binding: LoginBinding());
+  //           },
+  //           child: const Text("로그인", style: TextStyle(color: Colors.black)),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _iteams1() {
     return SliverToBoxAdapter(
@@ -109,6 +107,30 @@ class DesktopMain extends GetView<AppController> {
                   showDday: false,
                 ),
               )),
+    );
+  }
+
+  Widget _appBar() {
+    return SliverAppBar(
+      pinned: false,
+      floating: false,
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
+      elevation: 0,
+      leading: const Text(
+        'LOGO',
+        style: TextStyle(fontSize: 25),
+      ),
+      title: SearchTextField(
+          controller: controller.searchController, type: SearchBarType.DESKTOP),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Get.to(() => const Login(), binding: LoginBinding());
+          },
+          child: const Text("로그인", style: TextStyle(color: Colors.black)),
+        ),
+      ],
     );
   }
 }
