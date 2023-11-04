@@ -2,89 +2,118 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
-class DesktopMain extends GetView<AppController> {
+class DesktopMain extends GetView<PromotionController> {
   const DesktopMain({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      controller: controller.verticalController,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _top(),
-          const Divider(color: Colors.black),
-          _iteams(),
+    return Scaffold(
+      body: CustomScrollView(
+        controller: Get.find<AppController>().verticalController,
+        slivers: [
+          // const Divider(color: Colors.black),
+          _appBar(),
+          _iteams1(),
+          _iteams2(),
           _more(),
         ],
       ),
     );
   }
 
-  Widget _top() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            width: 100,
-            height: 100,
-            color: Colors.red,
-          ),
+  Widget _iteams1() {
+    return SliverToBoxAdapter(
+      child: Obx(
+        () => Column(
+          children: [
+            const TitleBox(
+              label: '마감이 다되어 가요',
+              fontSize: 20,
+              type: TitleType.IMPORTANT,
+            ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  controller.promotions.length,
+                  (index) => Obx(() {
+                    final promotion = controller.promotions[index];
+                    return SizedBox(
+                        height: 500,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: PromotionItem(
+                              promotion: promotion, date: ' D - 9 '),
+                        ));
+                  }),
+                ))
+          ],
         ),
-        SearchTextField(
-            controller: controller.searchController,
-            type: SearchBarType.DESKTOP),
+      ),
+    );
+  }
+
+  Widget _iteams2() {
+    return const SliverToBoxAdapter(
+      child: Column(children: [
+        TitleBox(label: '동아리 더보기', fontSize: 25),
+      ]),
+    );
+  }
+
+  Widget _more() {
+    return SliverPadding(
+      padding: EdgeInsets.symmetric(horizontal: Get.size.height * 0.35),
+      sliver: Obx(
+        () => SliverGrid.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              mainAxisSpacing: 1.0,
+              crossAxisSpacing: 1.0,
+              childAspectRatio: 0.8,
+            ),
+            itemCount: 30,
+            itemBuilder: (context, index) => Obx(() {
+                  final promotion = controller.promotions[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: PromotionItem(
+                      promotion: promotion,
+                      date: ' D - 9 ',
+                      showDday: false,
+                    ),
+                  );
+                })),
+      ),
+    );
+  }
+
+  Widget _appBar() {
+    return SliverAppBar(
+      pinned: false,
+      floating: false,
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
+      elevation: 0,
+      leading: const Text(
+        'LOGO',
+        style: TextStyle(fontSize: 25),
+      ),
+      title: SearchTextField(
+          controller: Get.find<AppController>().searchController,
+          type: SearchBarType.DESKTOP),
+      actions: [
         TextButton(
           onPressed: () {
             Get.to(() => const Login(), binding: LoginBinding());
           },
           child: const Text("로그인", style: TextStyle(color: Colors.black)),
-        )
+        ),
       ],
     );
   }
-
-  Widget _more() => const Column(
-        children: [
-          Row(
-            children: [
-              TitleBox(label: "동아리 더보기", fontSize: 20),
-            ],
-          ),
-          // GridView.builder(
-          //     shrinkWrap: true,
-          //     physics: const NeverScrollableScrollPhysics(),
-          //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          //       crossAxisCount: 3,
-          //     ),
-          //     itemBuilder: (context, index) => const PromotionItem(
-          //           title: '동아리 명',
-          //           discription: '동아리 소개글',
-          //           date: 'D-9',
-          //         ))
-        ],
-      );
-}
-
-Widget _iteams() {
-  return const Column(
-    children: [
-      SizedBox(
-        width: 300,
-        height: 100,
-        child: TitleBox(
-          label: '마감이 다되어 가요',
-          fontSize: 25,
-          type: TitleType.IMPORTANT,
-        ),
-      ),
-    ],
-  );
 }
