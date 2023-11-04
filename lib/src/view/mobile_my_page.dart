@@ -38,7 +38,7 @@ class MobileMyPage extends StatelessWidget {
                   foregroundColor: Colors.white,
                   elevation: 0.0,
                   pinned: false,
-                  floating: true,
+                  floating: false,
                   title: const Text("MY PAGE"),
                   expandedHeight: MediaQuery.of(context).size.height * 0.25,
                   flexibleSpace: FlexibleSpaceBar(

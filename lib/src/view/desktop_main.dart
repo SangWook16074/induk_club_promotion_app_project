@@ -51,24 +51,24 @@ class DesktopMain extends GetView<AppController> {
     );
   }
 
-  Widget _more() => Column(
+  Widget _more() => const Column(
         children: [
-          const Row(
+          Row(
             children: [
               TitleBox(label: "동아리 더보기", fontSize: 20),
             ],
           ),
-          GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-              ),
-              itemBuilder: (context, index) => const PromotionItem(
-                    title: '동아리 명',
-                    discription: '동아리 소개글',
-                    date: 'D-9',
-                  ))
+          // GridView.builder(
+          //     shrinkWrap: true,
+          //     physics: const NeverScrollableScrollPhysics(),
+          //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          //       crossAxisCount: 3,
+          //     ),
+          //     itemBuilder: (context, index) => const PromotionItem(
+          //           title: '동아리 명',
+          //           discription: '동아리 소개글',
+          //           date: 'D-9',
+          //         ))
         ],
       );
 }

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 
 class PromotionItem extends StatelessWidget {
-  final String? title;
-  final String? discription;
+  final Promotion promotion;
   final String date;
   final bool? showDday;
   const PromotionItem(
       {super.key,
-      this.title = '',
       required this.date,
-      required this.discription,
-      this.showDday = false});
+      this.showDday = false,
+      required this.promotion});
 
   @override
   Widget build(BuildContext context) => AspectRatio(
@@ -27,7 +26,7 @@ class PromotionItem extends StatelessWidget {
                 children: [
                   _image(),
                   _header(),
-                  // _discription(),
+                  _discription(),
                 ],
               ),
             ),
@@ -41,7 +40,7 @@ class PromotionItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              title!,
+              promotion.title,
               style: Get.textTheme.displayMedium,
             ),
           )
@@ -53,7 +52,7 @@ class PromotionItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: Text(
-          discription!,
+          promotion.content,
           style: Get.textTheme.headlineMedium,
         ),
       ),
