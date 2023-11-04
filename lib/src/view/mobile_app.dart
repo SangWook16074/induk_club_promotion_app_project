@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/bottom_nav_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
+import 'package:induk_club_promotion_app_project/src/view/mobile_history.dart';
 import 'package:induk_club_promotion_app_project/src/view/mobile_main.dart';
 import 'package:induk_club_promotion_app_project/src/view/mobile_my_page.dart';
 
@@ -16,13 +17,7 @@ class MobileApp extends GetView<AppController> {
       () => Scaffold(
         body: IndexedStack(
           index: bottomNavController.pageIndex,
-          children: [
-            const MobileMain(),
-            Container(
-              color: Colors.red,
-            ),
-            const MobileMyPage()
-          ],
+          children: const [MobileMain(), MobileHistory(), MobileMyPage()],
         ),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 0.0,
@@ -39,8 +34,8 @@ class MobileApp extends GetView<AppController> {
                 activeIcon: Icon(Icons.home),
                 label: ''),
             BottomNavigationBarItem(
-                icon: Icon(Icons.card_membership_outlined),
-                activeIcon: Icon(Icons.card_membership),
+                icon: Icon(Icons.history_toggle_off_outlined),
+                activeIcon: Icon(Icons.history_toggle_off),
                 label: ''),
             BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined),
