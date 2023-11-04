@@ -6,12 +6,13 @@ class PromotionItem extends StatelessWidget {
   final String? discription;
   final String date;
   final bool? showDday;
-  const PromotionItem(
-      {super.key,
-      this.title = '',
-      required this.date,
-      this.discription,
-      this.showDday = false});
+  const PromotionItem({
+    super.key,
+    this.title = '',
+    required this.date,
+    this.discription,
+    this.showDday = false,
+  });
 
   @override
   Widget build(BuildContext context) => AspectRatio(

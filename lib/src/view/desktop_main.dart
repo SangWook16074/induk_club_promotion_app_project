@@ -1,3 +1,5 @@
+import 'dart:js_util';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
@@ -20,7 +22,7 @@ class DesktopMain extends GetView<AppController> {
           // const Divider(color: Colors.black),
           _iteams1(),
           _iteams2(),
-          // _more(),
+          _more(),
         ],
       ),
     );
@@ -31,14 +33,12 @@ class DesktopMain extends GetView<AppController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 100,
-              height: 100,
-              color: Colors.red,
-            ),
-          ),
+          const Padding(
+              padding: EdgeInsets.symmetric(vertical: 40),
+              child: Text(
+                'LOGO',
+                style: TextStyle(fontSize: 25),
+              )),
           SearchTextField(
               controller: controller.searchController,
               type: SearchBarType.DESKTOP),
@@ -67,10 +67,13 @@ class DesktopMain extends GetView<AppController> {
               children: List.generate(
                 3,
                 (index) => const SizedBox(
-                    height: 300,
+                    height: 500,
                     child: Padding(
                       padding: EdgeInsets.all(10.0),
-                      child: PromotionItem(date: ' D - 9 '),
+                      child: PromotionItem(
+                          title: '동아리 명',
+                          discription: '동아리 소개',
+                          date: ' D - 9 '),
                     )),
               ))
         ],
@@ -81,25 +84,31 @@ class DesktopMain extends GetView<AppController> {
   Widget _iteams2() {
     return const SliverToBoxAdapter(
       child: Column(children: [
-        SizedBox(
-            width: 300,
-            height: 100,
-            child: TitleBox(label: '동아리 더보기', fontSize: 25)),
+        TitleBox(label: '동아리 더보기', fontSize: 25),
       ]),
     );
   }
 
   Widget _more() {
-    return SliverGrid.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          mainAxisSpacing: 1.0,
-          crossAxisSpacing: 1.0,
-        ),
-        itemCount: 10,
-        itemBuilder: (context, index) => const PromotionItem(
-              date: 'D-9',
-              showDday: false,
-            ));
+    return SliverPadding(
+      padding: EdgeInsets.symmetric(horizontal: Get.size.height * 0.35),
+      sliver: SliverGrid.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 1.0,
+            crossAxisSpacing: 1.0,
+            childAspectRatio: 0.8,
+          ),
+          itemCount: 30,
+          itemBuilder: (context, index) => const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: PromotionItem(
+                  title: '동아리 명',
+                  discription: '동아리 소개',
+                  date: ' D - 9 ',
+                  showDday: false,
+                ),
+              )),
+    );
   }
 }
