@@ -77,8 +77,6 @@ class MobileMain extends GetView<PromotionController> {
                                         mobile: MobilePromotionView(),
                                         tablet: TabletPromotionView(),
                                         desktop: DesktopPromotionView(),
-                                        tabletToDesktop: 1000,
-                                        mobiletoTablet: 800,
                                       ),
                                   binding: PromotionBinding());
                             },
@@ -119,8 +117,6 @@ class MobileMain extends GetView<PromotionController> {
                                 mobile: MobilePromotionView(),
                                 tablet: TabletPromotionView(),
                                 desktop: DesktopPromotionView(),
-                                tabletToDesktop: 1000,
-                                mobiletoTablet: 800,
                               ),
                           binding: PromotionBinding());
                     },
