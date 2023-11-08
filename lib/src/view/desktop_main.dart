@@ -4,8 +4,10 @@ import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart'
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
+import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
+
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class DesktopMain extends GetView<PromotionController> {
@@ -22,6 +24,7 @@ class DesktopMain extends GetView<PromotionController> {
                 controller: Get.find<AppController>().verticalController,
                 slivers: [
                   // const Divider(color: Colors.black),
+
                   _appBar(),
                   _iteams1(),
                   _iteams2(),

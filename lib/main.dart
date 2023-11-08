@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/app.dart';
+
 import 'package:induk_club_promotion_app_project/src/bindings/init_binding.dart';
-import 'package:induk_club_promotion_app_project/src/view/desktop_my_page.dart';
+
+import 'src/view/desktop_main.dart';
 
 void main() {
   runApp(const MainApp());
@@ -40,7 +41,7 @@ class MainApp extends StatelessWidget {
                   fontWeight: FontWeight.w600)),
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),
           scaffoldBackgroundColor: const Color(0xffffffff)),
-      home: const DesktopMyPage(),
+      home: const DesktopMain(),
       initialBinding: InitBinding(),
     );
   }
