@@ -15,22 +15,80 @@ class DesktopMain extends GetView<PromotionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(
-        () => (controller.promotions.isEmpty)
-            ? const Center(
-                child: CircularProgressIndicator.adaptive(),
-              )
-            : CustomScrollView(
-                controller: Get.find<AppController>().verticalController,
-                slivers: [
-                  // const Divider(color: Colors.black),
+      body: Row(
+        children: [
+          Container(
+            height: 400,
+            width: 300,
+            color: Color(0xff713eff),
+            child: Column(
+              children: [
+                Text(
+                  'LOGO',
+                  style: Get.textTheme.displaySmall,
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+                Row(
+                  children: [
+                    const ProfileImage(
+                        length: 100,
+                        url:
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU',
+                        type: ProfileType.MYPAGE),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        '로그아웃',
+                        style: Get.textTheme.displaySmall,
+                      ),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.home, color: Colors.white),
+                      title: Text(
+                        '마이페이지',
+                        style: Get.textTheme.displaySmall,
+                      ),
+                    ),
+                    ListTile(
+                      leading:
+                          Icon(Icons.collections_bookmark, color: Colors.white),
+                      title: Text(
+                        '내가 쓴 글',
+                        style: Get.textTheme.displaySmall,
+                      ),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.edit_square, color: Colors.white),
+                      title: Text(
+                        '동아리 홍보 글 작성하기',
+                        style: Get.textTheme.displaySmall,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Obx(
+            () => (controller.promotions.isEmpty)
+                ? const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  )
+                : CustomScrollView(
+                    controller: Get.find<AppController>().verticalController,
+                    slivers: [
+                      // const Divider(color: Colors.black),
 
-                  _appBar(),
-                  _iteams1(),
-                  _iteams2(),
-                  _more(),
-                ],
-              ),
+                      _appBar(),
+                      _iteams1(),
+                      _iteams2(),
+                      _more(),
+                    ],
+                  ),
+          ),
+        ],
       ),
     );
   }
@@ -121,6 +179,13 @@ class DesktopMain extends GetView<PromotionController> {
           child: const Text("로그인", style: TextStyle(color: Colors.black)),
         ),
       ],
+    );
+  }
+
+  Widget _side() {
+    return Container(
+      height: 400,
+      width: 300,
     );
   }
 }
