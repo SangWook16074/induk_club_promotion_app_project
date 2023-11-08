@@ -11,7 +11,8 @@ class PromotionItem extends StatelessWidget {
       this.title = '',
       required this.date,
       required this.discription,
-      this.showDday = false});
+      this.showDday = false,
+      required promotion});
 
   @override
   Widget build(BuildContext context) => AspectRatio(
