@@ -35,32 +35,35 @@ class DesktopMain extends GetView<PromotionController> {
   Widget _iteams1() {
     return SliverToBoxAdapter(
       child: Obx(
-        () => Column(
-          children: [
-            const TitleBox(
-              label: '마감이 다되어 가요',
-              fontSize: 20,
-              type: TitleType.IMPORTANT,
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    controller.promotions.length,
-                    (index) => Obx(() {
-                      final promotion = controller.promotions[index];
-                      return SizedBox(
-                          height: 500,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: PromotionItem(
-                                promotion: promotion, date: ' D - 9 '),
-                          ));
-                    }),
-                  )),
-            )
-          ],
+        () => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 300),
+          child: Column(
+            children: [
+              const TitleBox(
+                label: '마감이 다되어 가요',
+                fontSize: 20,
+                type: TitleType.IMPORTANT,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      controller.promotions.length,
+                      (index) => Obx(() {
+                        final promotion = controller.promotions[index];
+                        return SizedBox(
+                            height: 500,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: PromotionItem(
+                                  promotion: promotion, date: ' D - 9 '),
+                            ));
+                      }),
+                    )),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -75,25 +78,28 @@ class DesktopMain extends GetView<PromotionController> {
   }
 
   Widget _more() {
-    return SliverGrid.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          mainAxisSpacing: 1.0,
-          crossAxisSpacing: 1.0,
-          childAspectRatio: 0.8,
-        ),
-        itemCount: controller.promotions.length,
-        itemBuilder: (context, index) => Obx(() {
-              final promotion = controller.promotions[index];
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: PromotionItem(
-                  promotion: promotion,
-                  date: ' D - 9 ',
-                  showDday: false,
-                ),
-              );
-            }));
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 300),
+      sliver: SliverGrid.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 1.0,
+            crossAxisSpacing: 1.0,
+            childAspectRatio: 0.8,
+          ),
+          itemCount: controller.promotions.length,
+          itemBuilder: (context, index) => Obx(() {
+                final promotion = controller.promotions[index];
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: PromotionItem(
+                    promotion: promotion,
+                    date: ' D - 9 ',
+                    showDday: false,
+                  ),
+                );
+              })),
+    );
   }
 
   Widget _appBar() {
