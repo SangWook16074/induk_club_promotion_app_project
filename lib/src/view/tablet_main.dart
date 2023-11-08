@@ -8,8 +8,9 @@ import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart'
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
-class DesktopMain extends GetView<PromotionController> {
-  const DesktopMain({super.key});
+class TabletMain extends GetView<PromotionController> {
+  const TabletMain({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +26,7 @@ class DesktopMain extends GetView<PromotionController> {
                     _appBar(),
                     _header(),
                     _headerItem(),
-                    _iteams2(),
+                    _moreItems(),
                     _more(),
                   ],
                 ),
@@ -37,7 +38,7 @@ class DesktopMain extends GetView<PromotionController> {
   Widget _header() {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.15),
+        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.1),
         child: const Column(
           children: [
             Row(
@@ -55,10 +56,10 @@ class DesktopMain extends GetView<PromotionController> {
     );
   }
 
-  Widget _iteams2() {
+  Widget _more() {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.15),
+        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.1),
         child: const Column(children: [
           Row(
             children: [
@@ -70,13 +71,13 @@ class DesktopMain extends GetView<PromotionController> {
     );
   }
 
-  Widget _more() {
+  Widget _moreItems() {
     return Obx(
       () => SliverPadding(
-        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.15),
+        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.1),
         sliver: SliverGrid.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+              crossAxisCount: 2,
               mainAxisSpacing: 1.0,
               crossAxisSpacing: 1.0,
               childAspectRatio: 0.8,
@@ -105,11 +106,9 @@ class DesktopMain extends GetView<PromotionController> {
       foregroundColor: Colors.black,
       elevation: 0,
       leadingWidth: 200,
-      leading: const Center(
-        child: Text(
-          'LOGO',
-          style: TextStyle(fontSize: 25),
-        ),
+      leading: const Text(
+        'LOGO',
+        style: TextStyle(fontSize: 25),
       ),
       title: SearchTextField(
           controller: Get.find<AppController>().searchController,
@@ -128,10 +127,10 @@ class DesktopMain extends GetView<PromotionController> {
   Widget _headerItem() {
     return Obx(
       () => SliverPadding(
-        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.15),
+        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.1),
         sliver: SliverGrid.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+                crossAxisCount: 2,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
                 childAspectRatio: 0.8),

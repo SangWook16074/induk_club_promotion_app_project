@@ -4,6 +4,7 @@ import 'package:induk_club_promotion_app_project/src/controllers/app_controller.
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/desktop_main.dart';
 import 'package:induk_club_promotion_app_project/src/view/mobile_app.dart';
+import 'package:induk_club_promotion_app_project/src/view/tablet_main.dart';
 
 class App extends GetView<AppController> {
   const App({super.key});
@@ -13,13 +14,9 @@ class App extends GetView<AppController> {
     return const Scaffold(
       body: ResponsibleLayout(
         mobile: MobileApp(),
-        tablet: DesktopMain(),
+        tablet: TabletMain(),
         desktop: DesktopMain(),
       ),
     );
   }
-
-  // Widget _sideMenu() {
-  //   return const SideMenu();
-  // }
 }
