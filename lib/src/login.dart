@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
@@ -12,7 +10,7 @@ class Login extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      if (Platform.isAndroid || Platform.isIOS || constraints.maxWidth < 800) {
+      if (constraints.maxWidth < 800) {
         return const MobileLogin();
       } else {
         return const DesktopLogin();

@@ -49,8 +49,6 @@ class AppController extends GetxController {
         mobile: MobilePromotionView(),
         tablet: TabletPromotionView(),
         desktop: DesktopPromotionView(),
-        tabletToDesktop: 1000,
-        mobiletoTablet: 800,
       ),
     );
   }
