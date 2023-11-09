@@ -9,11 +9,11 @@ class Promotion with _$Promotion {
     required int id,
     required String title,
     required String content,
-    required String author,
+    required String userName,
     required String createAt,
     required String begin,
     required String end,
-    required int numPeople,
+    required int requiredPeople,
     required String contentOfActivity,
   }) = _Promotion;
 
