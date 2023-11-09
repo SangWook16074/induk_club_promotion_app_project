@@ -4,8 +4,6 @@ import 'package:induk_club_promotion_app_project/src/app.dart';
 
 import 'package:induk_club_promotion_app_project/src/bindings/init_binding.dart';
 
-import 'src/view/desktop_main.dart';
-
 void main() {
   runApp(const MainApp());
 }
