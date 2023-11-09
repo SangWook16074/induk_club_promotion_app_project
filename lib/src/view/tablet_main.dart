@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/promotion_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
+import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:induk_club_promotion_app_project/src/view/desktop_promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/view/mobile_promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/view/tablet_promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
@@ -87,10 +92,21 @@ class TabletMain extends GetView<PromotionController> {
                   final promotion = controller.promotions[index];
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: PromotionItem(
-                      promotion: promotion,
-                      date: ' D - 9 ',
-                      showDday: false,
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(
+                            () => const ResponsibleLayout(
+                                  mobile: MobilePromotionView(),
+                                  tablet: TabletPromotionView(),
+                                  desktop: DesktopPromotionView(),
+                                ),
+                            binding: PromotionBinding());
+                      },
+                      child: PromotionItem(
+                        promotion: promotion,
+                        date: ' D - 9 ',
+                        showDday: false,
+                      ),
                     ),
                   );
                 })),
@@ -137,7 +153,18 @@ class TabletMain extends GetView<PromotionController> {
             itemCount: controller.promotions.length,
             itemBuilder: (context, index) => Obx(() {
                   final promotion = controller.promotions[index];
-                  return PromotionItem(date: "D - 9", promotion: promotion);
+                  return GestureDetector(
+                      onTap: () {
+                        Get.to(
+                            () => const ResponsibleLayout(
+                                  mobile: MobilePromotionView(),
+                                  tablet: TabletPromotionView(),
+                                  desktop: DesktopPromotionView(),
+                                ),
+                            binding: PromotionBinding());
+                      },
+                      child:
+                          PromotionItem(date: "D - 9", promotion: promotion));
                 })),
       ),
     );
