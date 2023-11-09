@@ -11,11 +11,11 @@ _$PromotionImpl _$$PromotionImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       title: json['title'] as String,
       content: json['content'] as String,
-      author: json['author'] as String,
+      userName: json['userName'] as String,
       createAt: json['createAt'] as String,
       begin: json['begin'] as String,
       end: json['end'] as String,
-      numPeople: json['numPeople'] as int,
+      requiredPeople: json['requiredPeople'] as int,
       contentOfActivity: json['contentOfActivity'] as String,
     );
 
@@ -24,10 +24,10 @@ Map<String, dynamic> _$$PromotionImplToJson(_$PromotionImpl instance) =>
       'id': instance.id,
       'title': instance.title,
       'content': instance.content,
-      'author': instance.author,
+      'userName': instance.userName,
       'createAt': instance.createAt,
       'begin': instance.begin,
       'end': instance.end,
-      'numPeople': instance.numPeople,
+      'requiredPeople': instance.requiredPeople,
       'contentOfActivity': instance.contentOfActivity,
     };

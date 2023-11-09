@@ -23,11 +23,11 @@ mixin _$Promotion {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  String get author => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
   String get createAt => throw _privateConstructorUsedError;
   String get begin => throw _privateConstructorUsedError;
   String get end => throw _privateConstructorUsedError;
-  int get numPeople => throw _privateConstructorUsedError;
+  int get requiredPeople => throw _privateConstructorUsedError;
   String get contentOfActivity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,11 +45,11 @@ abstract class $PromotionCopyWith<$Res> {
       {int id,
       String title,
       String content,
-      String author,
+      String userName,
       String createAt,
       String begin,
       String end,
-      int numPeople,
+      int requiredPeople,
       String contentOfActivity});
 }
 
@@ -69,11 +69,11 @@ class _$PromotionCopyWithImpl<$Res, $Val extends Promotion>
     Object? id = null,
     Object? title = null,
     Object? content = null,
-    Object? author = null,
+    Object? userName = null,
     Object? createAt = null,
     Object? begin = null,
     Object? end = null,
-    Object? numPeople = null,
+    Object? requiredPeople = null,
     Object? contentOfActivity = null,
   }) {
     return _then(_value.copyWith(
@@ -89,9 +89,9 @@ class _$PromotionCopyWithImpl<$Res, $Val extends Promotion>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      author: null == author
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       createAt: null == createAt
           ? _value.createAt
@@ -105,9 +105,9 @@ class _$PromotionCopyWithImpl<$Res, $Val extends Promotion>
           ? _value.end
           : end // ignore: cast_nullable_to_non_nullable
               as String,
-      numPeople: null == numPeople
-          ? _value.numPeople
-          : numPeople // ignore: cast_nullable_to_non_nullable
+      requiredPeople: null == requiredPeople
+          ? _value.requiredPeople
+          : requiredPeople // ignore: cast_nullable_to_non_nullable
               as int,
       contentOfActivity: null == contentOfActivity
           ? _value.contentOfActivity
@@ -129,11 +129,11 @@ abstract class _$$PromotionImplCopyWith<$Res>
       {int id,
       String title,
       String content,
-      String author,
+      String userName,
       String createAt,
       String begin,
       String end,
-      int numPeople,
+      int requiredPeople,
       String contentOfActivity});
 }
 
@@ -151,11 +151,11 @@ class __$$PromotionImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? content = null,
-    Object? author = null,
+    Object? userName = null,
     Object? createAt = null,
     Object? begin = null,
     Object? end = null,
-    Object? numPeople = null,
+    Object? requiredPeople = null,
     Object? contentOfActivity = null,
   }) {
     return _then(_$PromotionImpl(
@@ -171,9 +171,9 @@ class __$$PromotionImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      author: null == author
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       createAt: null == createAt
           ? _value.createAt
@@ -187,9 +187,9 @@ class __$$PromotionImplCopyWithImpl<$Res>
           ? _value.end
           : end // ignore: cast_nullable_to_non_nullable
               as String,
-      numPeople: null == numPeople
-          ? _value.numPeople
-          : numPeople // ignore: cast_nullable_to_non_nullable
+      requiredPeople: null == requiredPeople
+          ? _value.requiredPeople
+          : requiredPeople // ignore: cast_nullable_to_non_nullable
               as int,
       contentOfActivity: null == contentOfActivity
           ? _value.contentOfActivity
@@ -206,11 +206,11 @@ class _$PromotionImpl implements _Promotion {
       {required this.id,
       required this.title,
       required this.content,
-      required this.author,
+      required this.userName,
       required this.createAt,
       required this.begin,
       required this.end,
-      required this.numPeople,
+      required this.requiredPeople,
       required this.contentOfActivity});
 
   factory _$PromotionImpl.fromJson(Map<String, dynamic> json) =>
@@ -223,7 +223,7 @@ class _$PromotionImpl implements _Promotion {
   @override
   final String content;
   @override
-  final String author;
+  final String userName;
   @override
   final String createAt;
   @override
@@ -231,13 +231,13 @@ class _$PromotionImpl implements _Promotion {
   @override
   final String end;
   @override
-  final int numPeople;
+  final int requiredPeople;
   @override
   final String contentOfActivity;
 
   @override
   String toString() {
-    return 'Promotion(id: $id, title: $title, content: $content, author: $author, createAt: $createAt, begin: $begin, end: $end, numPeople: $numPeople, contentOfActivity: $contentOfActivity)';
+    return 'Promotion(id: $id, title: $title, content: $content, userName: $userName, createAt: $createAt, begin: $begin, end: $end, requiredPeople: $requiredPeople, contentOfActivity: $contentOfActivity)';
   }
 
   @override
@@ -248,21 +248,22 @@ class _$PromotionImpl implements _Promotion {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
-            (identical(other.author, author) || other.author == author) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
             (identical(other.createAt, createAt) ||
                 other.createAt == createAt) &&
             (identical(other.begin, begin) || other.begin == begin) &&
             (identical(other.end, end) || other.end == end) &&
-            (identical(other.numPeople, numPeople) ||
-                other.numPeople == numPeople) &&
+            (identical(other.requiredPeople, requiredPeople) ||
+                other.requiredPeople == requiredPeople) &&
             (identical(other.contentOfActivity, contentOfActivity) ||
                 other.contentOfActivity == contentOfActivity));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, content, author,
-      createAt, begin, end, numPeople, contentOfActivity);
+  int get hashCode => Object.hash(runtimeType, id, title, content, userName,
+      createAt, begin, end, requiredPeople, contentOfActivity);
 
   @JsonKey(ignore: true)
   @override
@@ -283,11 +284,11 @@ abstract class _Promotion implements Promotion {
       {required final int id,
       required final String title,
       required final String content,
-      required final String author,
+      required final String userName,
       required final String createAt,
       required final String begin,
       required final String end,
-      required final int numPeople,
+      required final int requiredPeople,
       required final String contentOfActivity}) = _$PromotionImpl;
 
   factory _Promotion.fromJson(Map<String, dynamic> json) =
@@ -300,7 +301,7 @@ abstract class _Promotion implements Promotion {
   @override
   String get content;
   @override
-  String get author;
+  String get userName;
   @override
   String get createAt;
   @override
@@ -308,7 +309,7 @@ abstract class _Promotion implements Promotion {
   @override
   String get end;
   @override
-  int get numPeople;
+  int get requiredPeople;
   @override
   String get contentOfActivity;
   @override
