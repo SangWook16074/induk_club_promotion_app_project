@@ -5,10 +5,10 @@ import '../data/model/promotion.dart';
 
 class PromotionController extends GetxController {
   final Rx<List<Promotion>> _promotions = Rx<List<Promotion>>([]);
-  final PromotionRepository promotionRepository = PromotionRepository();
+  final PromotionRepository promotionRepository;
+  PromotionController({required this.promotionRepository});
 
   List<Promotion> get promotions => _promotions.value;
-
   @override
   void onReady() {
     super.onReady();
