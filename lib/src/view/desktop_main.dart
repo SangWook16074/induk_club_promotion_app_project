@@ -4,8 +4,11 @@ import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart'
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
+import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
+
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
+
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class DesktopMain extends GetView<PromotionController> {
@@ -13,23 +16,66 @@ class DesktopMain extends GetView<PromotionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(
-        () => (controller.promotions.isEmpty)
-            ? const Center(
-                child: CircularProgressIndicator.adaptive(),
-              )
-            : Center(
-                child: CustomScrollView(
-                  controller: Get.find<AppController>().verticalController,
-                  slivers: [
-                    _appBar(),
-                    _header(),
-                    _headerItem(),
-                    _iteams2(),
-                    _more(),
-                  ],
-                ),
+      backgroundColor: Colors.white,
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 200,
+            height: 500,
+            color: Color(0xff713eff),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text('LOGO', style: Get.textTheme.displayLarge),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Row(
+                    children: [
+                      const ProfileImage(
+                        length: 80,
+                        url:
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU',
+                        type: ProfileType.MYPAGE,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text('로그아웃', style: Get.textTheme.bodyMedium),
+                      ),
+                    ],
+                  ),
+                ],
               ),
+            ),
+          ),
+          Obx(
+            () => (controller.promotions.isEmpty)
+                ? const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  )
+                : Expanded(
+                    child: Center(
+                      child: CustomScrollView(
+                        controller:
+                            Get.find<AppController>().verticalController,
+                        slivers: [
+                          _appBar(),
+                          _header(),
+                          _headerItem(),
+                          _iteams2(),
+                          _more(),
+                        ],
+                      ),
+                    ),
+                  ),
+          ),
+        ],
       ),
     );
   }
