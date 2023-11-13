@@ -10,12 +10,12 @@ class PromotionRepository {
     final resp = [
       {
         "id": 1,
-        "author": "한상욱",
+        "userName": "한상욱",
         "createAt": "2023년 3월 10일",
         "title": "A&I 신규 동아리원 모집",
         "content":
             "2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.",
-        "numPeople": 10,
+        "requiredPeople": 10,
         "begin": "2023년 3월 10일",
         "end": "2024년 1월 10일",
         "contentOfActivity":
@@ -23,12 +23,12 @@ class PromotionRepository {
       },
       {
         "id": 2,
-        "author": "한상욱",
+        "userName": "한상욱",
         "createAt": "2023년 3월 10일",
         "title": "A&I 신규 동아리원 모집",
         "content":
             "2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.",
-        "numPeople": 10,
+        "requiredPeople": 10,
         "begin": "2023년 3월 10일",
         "end": "2024년 1월 10일",
         "contentOfActivity":
@@ -36,12 +36,12 @@ class PromotionRepository {
       },
       {
         "id": 3,
-        "author": "한상욱",
+        "userName": "한상욱",
         "createAt": "2023년 3월 10일",
         "title": "A&I 신규 동아리원 모집",
         "content":
             "2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.",
-        "numPeople": 10,
+        "requiredPeople": 10,
         "begin": "2023년 3월 10일",
         "end": "2024년 1월 10일",
         "contentOfActivity":
@@ -49,12 +49,12 @@ class PromotionRepository {
       },
       {
         "id": 4,
-        "author": "한상욱",
+        "userName": "한상욱",
         "createAt": "2023년 3월 10일",
         "title": "A&I 신규 동아리원 모집",
         "content":
             "2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.",
-        "numPeople": 10,
+        "requiredPeople": 10,
         "begin": "2023년 3월 10일",
         "end": "2024년 1월 10일",
         "contentOfActivity":
