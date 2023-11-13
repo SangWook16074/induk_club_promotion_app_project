@@ -5,10 +5,8 @@ import 'package:induk_club_promotion_app_project/src/controllers/app_controller.
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
-
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
-
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class DesktopMain extends GetView<PromotionController> {
@@ -16,44 +14,9 @@ class DesktopMain extends GetView<PromotionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 200,
-            height: 500,
-            color: Color(0xff713eff),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Text('LOGO', style: Get.textTheme.displayLarge),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    children: [
-                      const ProfileImage(
-                        length: 80,
-                        url:
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU',
-                        type: ProfileType.MYPAGE,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text('로그아웃', style: Get.textTheme.bodyMedium),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+          _sideBar(),
           Obx(
             () => (controller.promotions.isEmpty)
                 ? const Center(
@@ -186,6 +149,71 @@ class DesktopMain extends GetView<PromotionController> {
                   final promotion = controller.promotions[index];
                   return PromotionItem(date: "D - 9", promotion: promotion);
                 })),
+      ),
+    );
+  }
+
+  Widget _sideBar() {
+    return Container(
+      width: 200,
+      height: 500,
+      color: Color(0xff713eff),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(children: [
+          Row(
+            children: [
+              Text('LOGO', style: Get.textTheme.displayLarge),
+            ],
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          Row(children: [
+            const ProfileImage(
+                length: 80,
+                url:
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU',
+                type: ProfileType.MYPAGE),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                '로그아웃',
+                style: Get.textTheme.bodyMedium,
+              ),
+            ),
+          ]),
+          ListTile(
+            leading: const Icon(
+              Icons.home,
+              color: Colors.white,
+            ),
+            title: Text(
+              '마이페이지',
+              style: Get.textTheme.bodyMedium,
+            ),
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.collections_bookmark,
+              color: Colors.white,
+            ),
+            title: Text(
+              '내가 쓴 글',
+              style: Get.textTheme.bodyMedium,
+            ),
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.edit_square,
+              color: Colors.white,
+            ),
+            title: Text(
+              ' 글 작성하기',
+              style: Get.textTheme.bodyMedium,
+            ),
+          ),
+        ]),
       ),
     );
   }
