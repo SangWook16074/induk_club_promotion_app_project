@@ -4,6 +4,7 @@ import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart'
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
+import 'package:induk_club_promotion_app_project/src/view/desktop_my_page.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
@@ -156,7 +157,7 @@ class DesktopMain extends GetView<PromotionController> {
   Widget _sideBar() {
     return Container(
       width: 200,
-      height: 500,
+      height: 400,
       color: Color(0xff713eff),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -177,40 +178,34 @@ class DesktopMain extends GetView<PromotionController> {
                 type: ProfileType.MYPAGE),
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(
-                '로그아웃',
-                style: Get.textTheme.bodyMedium,
+              child: GestureDetector(
+                child: Text('로그아웃',
+                    style:
+                        Get.textTheme.bodyLarge?.copyWith(color: Colors.white)),
+                onTap: () {},
               ),
             ),
           ]),
-          ListTile(
-            leading: const Icon(
-              Icons.home,
-              color: Colors.white,
-            ),
-            title: Text(
-              '마이페이지',
-              style: Get.textTheme.bodyMedium,
-            ),
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.collections_bookmark,
-              color: Colors.white,
-            ),
-            title: Text(
-              '내가 쓴 글',
-              style: Get.textTheme.bodyMedium,
+          GestureDetector(
+            child: ListTile(
+              title: Text('마이페이지',
+                  style:
+                      Get.textTheme.bodyLarge?.copyWith(color: Colors.white)),
+              onTap: () {
+                Get.to(const DesktopMyPage());
+              },
             ),
           ),
           ListTile(
-            leading: const Icon(
-              Icons.edit_square,
-              color: Colors.white,
-            ),
             title: Text(
-              ' 글 작성하기',
-              style: Get.textTheme.bodyMedium,
+              '내가쓴글',
+              style: Get.textTheme.bodyLarge?.copyWith(color: Colors.white),
+            ),
+          ),
+          ListTile(
+            title: Text(
+              '글작성하기',
+              style: Get.textTheme.bodyLarge?.copyWith(color: Colors.white),
             ),
           ),
         ]),
