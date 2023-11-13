@@ -17,7 +17,7 @@ class DesktopMain extends GetView<PromotionController> {
     return Scaffold(
       body: Row(
         children: [
-          _sideBar(),
+          _sideMenu(),
           Obx(
             () => (controller.promotions.isEmpty)
                 ? const Center(
@@ -154,7 +154,7 @@ class DesktopMain extends GetView<PromotionController> {
     );
   }
 
-  Widget _sideBar() {
+  Widget _sideMenu() {
     return Container(
       width: 200,
       height: 400,
