@@ -4,10 +4,7 @@ import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart'
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
-import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
-import 'package:induk_club_promotion_app_project/src/view/desktop_promotion_view.dart';
-import 'package:induk_club_promotion_app_project/src/view/mobile_promotion_view.dart';
-import 'package:induk_club_promotion_app_project/src/view/tablet_promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/view/desktop_my_page.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
@@ -18,44 +15,9 @@ class DesktopMain extends GetView<PromotionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 200,
-            height: 500,
-            color: const Color(0xff713eff),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Text('LOGO', style: Get.textTheme.displayLarge),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    children: [
-                      const ProfileImage(
-                        length: 80,
-                        url:
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU',
-                        type: ProfileType.MYPAGE,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text('로그아웃', style: Get.textTheme.bodyMedium),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+          _sideMenu(),
           Obx(
             () => (controller.promotions.isEmpty)
                 ? const Center(
@@ -212,6 +174,65 @@ class DesktopMain extends GetView<PromotionController> {
                       child:
                           PromotionItem(date: "D - 9", promotion: promotion));
                 })),
+      ),
+    );
+  }
+
+  Widget _sideMenu() {
+    return Container(
+      width: 200,
+      height: 400,
+      color: Color(0xff713eff),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(children: [
+          Row(
+            children: [
+              Text('LOGO', style: Get.textTheme.displayLarge),
+            ],
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          Row(children: [
+            const ProfileImage(
+                length: 80,
+                url:
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU',
+                type: ProfileType.MYPAGE),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: GestureDetector(
+                child: Text('로그아웃',
+                    style:
+                        Get.textTheme.bodyLarge?.copyWith(color: Colors.white)),
+                onTap: () {},
+              ),
+            ),
+          ]),
+          GestureDetector(
+            child: ListTile(
+              title: Text('마이페이지',
+                  style:
+                      Get.textTheme.bodyLarge?.copyWith(color: Colors.white)),
+              onTap: () {
+                Get.to(const DesktopMyPage());
+              },
+            ),
+          ),
+          ListTile(
+            title: Text(
+              '내가쓴글',
+              style: Get.textTheme.bodyLarge?.copyWith(color: Colors.white),
+            ),
+          ),
+          ListTile(
+            title: Text(
+              '글작성하기',
+              style: Get.textTheme.bodyLarge?.copyWith(color: Colors.white),
+            ),
+          ),
+        ]),
       ),
     );
   }
