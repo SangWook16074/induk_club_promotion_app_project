@@ -4,7 +4,11 @@ import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart'
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
+import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/desktop_my_page.dart';
+import 'package:induk_club_promotion_app_project/src/view/desktop_promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/view/mobile_promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/view/tablet_promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
@@ -182,7 +186,7 @@ class DesktopMain extends GetView<PromotionController> {
     return Container(
       width: 200,
       height: 400,
-      color: Color(0xff713eff),
+      color: const Color(0xff713eff),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(children: [
