@@ -13,9 +13,11 @@ class DesktopLogin extends GetView<LoginController> {
     return Scaffold(
         body: Center(
       child: Container(
-        decoration: BoxDecoration(border: Border.all()),
-        width: Get.size.height * 0.8,
-        height: Get.size.height * 0.8,
+        decoration: BoxDecoration(
+          border: Border.all(color: const Color(0xffE6E6E6), width: 2.0),
+        ),
+        width: Get.size.height * 0.75,
+        height: Get.size.height * 0.75,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -27,12 +29,20 @@ class DesktopLogin extends GetView<LoginController> {
     ));
   }
 
-  Widget _logo() => const SizedBox(
-      height: 80,
-      child: Text(
-        "Logo",
-        style: TextStyle(fontSize: 40),
-      ));
+  Widget _logo() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 50),
+        child: Container(
+          color: Colors.grey,
+          height: 100,
+          width: 200,
+          child: const Center(
+            child: Text(
+              "Logo",
+              style: TextStyle(fontSize: 40),
+            ),
+          ),
+        ),
+      );
 
   Widget _body() => SizedBox(
         height: Get.size.height * 0.4,
