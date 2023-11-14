@@ -96,10 +96,21 @@ class DesktopMain extends GetView<PromotionController> {
                   final promotion = controller.promotions[index];
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: PromotionItem(
-                      promotion: promotion,
-                      date: ' D - 9 ',
-                      showDday: false,
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(
+                          () => const ResponsibleLayout(
+                            mobile: MobilePromotionView(),
+                            tablet: TabletPromotionView(),
+                            desktop: DesktopPromotionView(),
+                          ),
+                        );
+                      },
+                      child: PromotionItem(
+                        promotion: promotion,
+                        date: ' D - 9 ',
+                        showDday: false,
+                      ),
                     ),
                   );
                 })),
@@ -118,7 +129,9 @@ class DesktopMain extends GetView<PromotionController> {
       leading: const Center(
         child: Text(
           'LOGO',
-          style: TextStyle(fontSize: 25),
+          style: TextStyle(
+            fontSize: 25,
+          ),
         ),
       ),
       title: SearchTextField(
@@ -148,7 +161,18 @@ class DesktopMain extends GetView<PromotionController> {
             itemCount: controller.promotions.length,
             itemBuilder: (context, index) => Obx(() {
                   final promotion = controller.promotions[index];
-                  return PromotionItem(date: "D - 9", promotion: promotion);
+                  return GestureDetector(
+                      onTap: () {
+                        Get.to(
+                          () => const ResponsibleLayout(
+                            mobile: MobilePromotionView(),
+                            tablet: TabletPromotionView(),
+                            desktop: DesktopPromotionView(),
+                          ),
+                        );
+                      },
+                      child:
+                          PromotionItem(date: "D - 9", promotion: promotion));
                 })),
       ),
     );
