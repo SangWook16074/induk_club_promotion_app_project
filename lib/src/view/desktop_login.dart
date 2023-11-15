@@ -16,8 +16,11 @@ class DesktopLogin extends GetView<LoginController> {
         decoration: BoxDecoration(
           border: Border.all(color: const Color(0xffE6E6E6), width: 2.0),
         ),
-        width: Get.size.height * 0.75,
-        height: Get.size.height * 0.75,
+        margin: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height * 0.15,
+          horizontal: MediaQuery.of(context).size.width * 0.3,
+        ),
+        alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -29,23 +32,26 @@ class DesktopLogin extends GetView<LoginController> {
     ));
   }
 
-  Widget _logo() => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 50),
-        child: Container(
-          color: Colors.grey,
-          height: 100,
-          width: 200,
-          child: const Center(
-            child: Text(
-              "Logo",
-              style: TextStyle(fontSize: 40),
+  Widget _logo() => Expanded(
+        flex: 2,
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Container(
+            color: Colors.grey,
+            width: 200,
+            height: 200,
+            child: const Center(
+              child: Text(
+                "Logo",
+                style: TextStyle(fontSize: 40),
+              ),
             ),
           ),
         ),
       );
 
-  Widget _body() => SizedBox(
-        height: Get.size.height * 0.4,
+  Widget _body() => Expanded(
+        flex: 4,
         child: Obx(
           () => IndexedStack(index: controller.index, children: [
             LoginBox(
