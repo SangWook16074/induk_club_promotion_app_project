@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class ProfileImage extends StatelessWidget {
   final double? length;
   final String url;
-  const ProfileImage({super.key, this.length = 30, required this.url});
+  const ProfileImage(
+      {super.key, this.length = 30, required this.url, required type});
 
   @override
   Widget build(BuildContext context) {
