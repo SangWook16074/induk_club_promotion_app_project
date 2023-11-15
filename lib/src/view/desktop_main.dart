@@ -185,7 +185,7 @@ class DesktopMain extends GetView<PromotionController> {
   Widget _sideMenu() {
     return Container(
       width: 200,
-      height: 400,
+      height: double.infinity,
       color: const Color(0xff713eff),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
