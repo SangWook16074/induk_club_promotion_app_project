@@ -4,6 +4,7 @@ import 'package:induk_club_promotion_app_project/src/controllers/login_controlle
 import 'package:induk_club_promotion_app_project/src/widget/account_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/login_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/terms_check_box.dart';
+import 'package:induk_club_promotion_app_project/src/widget/verification_box.dart';
 
 class DesktopLogin extends GetView<LoginController> {
   const DesktopLogin({super.key});
@@ -59,7 +60,8 @@ class DesktopLogin extends GetView<LoginController> {
               password: controller.passwordController,
             ),
             const TermsCheckBox(),
-            const AccountBox()
+            const AccountBox(),
+            const VerificaionBox(),
           ]),
         ),
       );
