@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/bindings/promotion_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/desktop_promotion_view.dart';
@@ -73,14 +72,12 @@ class MobileMain extends GetView<PromotionController> {
                         child: GestureDetector(
                             onTap: () {
                               Get.to(
-                                  () => const ResponsibleLayout(
-                                        mobile: MobilePromotionView(),
-                                        tablet: TabletPromotionView(),
-                                        desktop: DesktopPromotionView(),
-                                        tabletToDesktop: 1000,
-                                        mobiletoTablet: 800,
-                                      ),
-                                  binding: PromotionBinding());
+                                () => const ResponsibleLayout(
+                                  mobile: MobilePromotionView(),
+                                  tablet: TabletPromotionView(),
+                                  desktop: DesktopPromotionView(),
+                                ),
+                              );
                             },
                             child: PromotionItem(
                               promotion: promotion,
@@ -115,14 +112,12 @@ class MobileMain extends GetView<PromotionController> {
                 child: GestureDetector(
                     onTap: () {
                       Get.to(
-                          () => const ResponsibleLayout(
-                                mobile: MobilePromotionView(),
-                                tablet: TabletPromotionView(),
-                                desktop: DesktopPromotionView(),
-                                tabletToDesktop: 1000,
-                                mobiletoTablet: 800,
-                              ),
-                          binding: PromotionBinding());
+                        () => const ResponsibleLayout(
+                          mobile: MobilePromotionView(),
+                          tablet: TabletPromotionView(),
+                          desktop: DesktopPromotionView(),
+                        ),
+                      );
                     },
                     child: PromotionItem(
                       promotion: promotion,

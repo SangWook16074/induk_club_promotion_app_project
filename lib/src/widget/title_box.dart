@@ -7,15 +7,11 @@ class TitleBox extends StatelessWidget {
   final String label;
   final double fontSize;
   final TitleType? type;
-  final double? height;
-
-  const TitleBox({
-    super.key,
-    required this.label,
-    required this.fontSize,
-    this.type = TitleType.NORMAL,
-    this.height = 50,
-  });
+  const TitleBox(
+      {super.key,
+      required this.label,
+      required this.fontSize,
+      this.type = TitleType.NORMAL});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +57,6 @@ class TitleBox extends StatelessWidget {
   Widget _buildNormal() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         child: Container(
-          height: height,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           alignment: Alignment.center,
           decoration: BoxDecoration(

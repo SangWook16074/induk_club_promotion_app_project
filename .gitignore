@@ -32,6 +32,10 @@ migrate_working_dir/
 .pub/
 /build/
 
+# Server Api Url 정보
+
+/lib/src/constants/url.dart
+
 # Symbolication related
 app.*.symbols
 
