@@ -90,60 +90,29 @@ class DesktopPromotionView extends GetView<PromotionController> {
   Widget _deadline() {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-        child: Row(
-          children: [
-            Expanded(
-              child: SizedBox(
-                child: Column(
+        child: SizedBox(
+          child: Column(
+            children: [
+              const Row(
+                children: [
+                  TitleBox(
+                    label: '모집기간',
+                    fontSize: 20,
+                  )
+                ],
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                child: Row(
                   children: [
-                    const Row(
-                      children: [
-                        TitleBox(
-                          label: '모집분야',
-                          fontSize: 20,
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 20),
-                      child: Row(
-                        children: [
-                          Text('백엔드/디자인', style: Get.textTheme.bodyLarge),
-                        ],
-                      ),
-                    ),
+                    Text('2023.09.23 - 2023.09.30',
+                        style: Get.textTheme.bodyMedium),
                   ],
                 ),
               ),
-            ),
-            Expanded(
-              child: SizedBox(
-                child: Column(
-                  children: [
-                    const Row(
-                      children: [
-                        TitleBox(
-                          label: '모집기간',
-                          fontSize: 20,
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 20),
-                      child: Row(
-                        children: [
-                          Text('2023.09.23 - 2023.09.30',
-                              style: Get.textTheme.bodyLarge),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 
@@ -159,7 +128,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Row(
               children: [
-                Text('00명', style: Get.textTheme.bodyLarge),
+                Text('00명', style: Get.textTheme.bodyMedium),
               ],
             ),
           )
@@ -190,7 +159,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                   'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.'
                   '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
                   'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.',
-                  style: Get.textTheme.bodyLarge))
+                  style: Get.textTheme.bodyMedium))
         ],
       ),
     );
@@ -208,7 +177,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Row(
               children: [
-                Text('학과 무관', style: Get.textTheme.bodyLarge),
+                Text('학과 무관', style: Get.textTheme.bodyMedium),
               ],
             ),
           )
@@ -230,7 +199,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
             child: Row(
               children: [
                 Text('2023년 3월 10일 - 2024년 1월 10일',
-                    style: Get.textTheme.bodyLarge),
+                    style: Get.textTheme.bodyMedium),
               ],
             ),
           )
@@ -296,7 +265,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                   children: [
                     Row(
                       children: [
-                        Text('동아리 개설일', style: Get.textTheme.displayMedium)
+                        Text('동아리 개설일', style: Get.textTheme.headlineMedium)
                       ],
                     ),
                     Row(
@@ -312,7 +281,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                       children: [
                         Text(
                           '동아리 분류',
-                          style: Get.textTheme.displayMedium,
+                          style: Get.textTheme.headlineMedium,
                         ),
                       ],
                     ),

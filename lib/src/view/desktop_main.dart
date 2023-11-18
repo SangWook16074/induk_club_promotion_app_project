@@ -207,18 +207,14 @@ class DesktopMain extends GetView<PromotionController> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
-                child: Text('로그아웃',
-                    style:
-                        Get.textTheme.bodyLarge?.copyWith(color: Colors.white)),
+                child: Text('로그아웃', style: Get.textTheme.labelMedium),
                 onTap: () {},
               ),
             ),
           ]),
           GestureDetector(
             child: ListTile(
-              title: Text('마이페이지',
-                  style:
-                      Get.textTheme.bodyLarge?.copyWith(color: Colors.white)),
+              title: Text('마이페이지', style: Get.textTheme.labelMedium),
               onTap: () {
                 Get.to(const DesktopMyPage());
               },
@@ -227,13 +223,13 @@ class DesktopMain extends GetView<PromotionController> {
           ListTile(
             title: Text(
               '내가쓴글',
-              style: Get.textTheme.bodyLarge?.copyWith(color: Colors.white),
+              style: Get.textTheme.labelMedium,
             ),
           ),
           ListTile(
             title: Text(
               '글작성하기',
-              style: Get.textTheme.bodyLarge?.copyWith(color: Colors.white),
+              style: Get.textTheme.labelMedium,
             ),
           ),
         ]),
