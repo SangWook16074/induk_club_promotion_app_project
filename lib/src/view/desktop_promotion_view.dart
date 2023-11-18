@@ -18,41 +18,29 @@ class DesktopPromotionView extends GetView<PromotionController> {
         title: Text('LOGO', style: Get.textTheme.displayLarge),
         elevation: 0.0,
       ),
-      body: Center(
-        child: SizedBox(
-          width: 1000,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: AspectRatio(
-                  aspectRatio: 0.5,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        _img(),
-                        _title(),
-                        _deadline(),
-                        _object(),
-                        _target(),
-                        _period(),
-                        _info(),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Column(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 200, right: 400),
+              child: Column(
                 children: [
-                  _infoBox(),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  _img(),
+                  _title(),
+                  _deadline(),
+                  _object(),
+                  _target(),
+                  _period(),
+                  _info(),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+          Positioned(right: 100, child: _infoBox()),
+        ],
       ),
     );
   }
@@ -87,7 +75,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                   height: 400,
                   width: double.infinity,
                   alignment: Alignment.center,
-                  color: Color(0xffE6E6E6),
+                  color: const Color(0xffE6E6E6),
                   child: Text('이미지 ${index + 1}'),
                 ),
             options: CarouselOptions(
