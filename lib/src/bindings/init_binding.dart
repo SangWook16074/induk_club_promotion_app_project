@@ -11,10 +11,7 @@ class InitBinding implements Bindings {
   void dependencies() {
     Get.put(AppController());
     Get.put(BottomNavController(), permanent: true);
-    Get.put(
-        PromotionController(
-            promotionRepository:
-                PromotionRepository(service: PromotionService(dio: Dio()))),
+    Get.put(PromotionController(promotionRepository: PromotionRepository()),
         permanent: true);
   }
 }

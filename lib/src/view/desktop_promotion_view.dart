@@ -146,7 +146,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
       child: Column(
         children: [
           const Row(
-            children: [TitleBox(label: '활동내용', fontSize: 20)],
+            children: [TitleBox(label: '동아리소개', fontSize: 20)],
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
