@@ -36,8 +36,8 @@ class DesktopMain extends GetView<PromotionController> {
                           _appBar(),
                           _header(),
                           _headerItem(),
-                          _iteams2(),
                           _more(),
+                          _moreItem(),
                         ],
                       ),
                     ),
@@ -69,7 +69,7 @@ class DesktopMain extends GetView<PromotionController> {
     );
   }
 
-  Widget _iteams2() {
+  Widget _more() {
     return SliverToBoxAdapter(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.15),
@@ -84,7 +84,7 @@ class DesktopMain extends GetView<PromotionController> {
     );
   }
 
-  Widget _more() {
+  Widget _moreItem() {
     return Obx(
       () => SliverPadding(
         padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.15),
@@ -189,50 +189,52 @@ class DesktopMain extends GetView<PromotionController> {
       color: const Color(0xff713eff),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(children: [
-          Row(
-            children: [
-              Text('LOGO', style: Get.textTheme.displayLarge),
-            ],
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          Row(children: [
-            const ProfileImage(
-                length: 80,
-                url:
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU',
-                type: ProfileType.MYPAGE),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: GestureDetector(
-                child: Text('로그아웃', style: Get.textTheme.labelMedium),
-                onTap: () {},
+        child: SingleChildScrollView(
+          child: Column(children: [
+            Row(
+              children: [
+                Text('LOGO', style: Get.textTheme.displayLarge),
+              ],
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Row(children: [
+              const ProfileImage(
+                  length: 80,
+                  url:
+                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU',
+                  type: ProfileType.MYPAGE),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: GestureDetector(
+                  child: Text('로그아웃', style: Get.textTheme.labelMedium),
+                  onTap: () {},
+                ),
+              ),
+            ]),
+            GestureDetector(
+              child: ListTile(
+                title: Text('마이페이지', style: Get.textTheme.labelMedium),
+                onTap: () {
+                  Get.to(const DesktopMyPage());
+                },
+              ),
+            ),
+            ListTile(
+              title: Text(
+                '내가쓴글',
+                style: Get.textTheme.labelMedium,
+              ),
+            ),
+            ListTile(
+              title: Text(
+                '글작성하기',
+                style: Get.textTheme.labelMedium,
               ),
             ),
           ]),
-          GestureDetector(
-            child: ListTile(
-              title: Text('마이페이지', style: Get.textTheme.labelMedium),
-              onTap: () {
-                Get.to(const DesktopMyPage());
-              },
-            ),
-          ),
-          ListTile(
-            title: Text(
-              '내가쓴글',
-              style: Get.textTheme.labelMedium,
-            ),
-          ),
-          ListTile(
-            title: Text(
-              '글작성하기',
-              style: Get.textTheme.labelMedium,
-            ),
-          ),
-        ]),
+        ),
       ),
     );
   }

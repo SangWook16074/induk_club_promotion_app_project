@@ -41,7 +41,10 @@ class PromotionItem extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               promotion.title,
-              style: Get.textTheme.displayMedium,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600),
             ),
           )
         ],
@@ -53,7 +56,10 @@ class PromotionItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: Text(
           promotion.content,
-          style: Get.textTheme.headlineMedium,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+          ),
         ),
       ),
     );
