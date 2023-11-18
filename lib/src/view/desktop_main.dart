@@ -20,26 +20,26 @@ class DesktopMain extends GetView<PromotionController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _sideMenu(),
           Obx(
             () => (controller.promotions.isEmpty)
-                ? const Center(
-                    child: CircularProgressIndicator.adaptive(),
+                ? const Expanded(
+                    child: Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    ),
                   )
                 : Expanded(
-                    child: Center(
-                      child: CustomScrollView(
-                        controller:
-                            Get.find<AppController>().verticalController,
-                        slivers: [
-                          _appBar(),
-                          _header(),
-                          _headerItem(),
-                          _more(),
-                          _moreItem(),
-                        ],
-                      ),
+                    child: CustomScrollView(
+                      controller: Get.find<AppController>().verticalController,
+                      slivers: [
+                        _appBar(),
+                        _header(),
+                        _headerItem(),
+                        _more(),
+                        _moreItem(),
+                      ],
                     ),
                   ),
           ),
@@ -49,58 +49,53 @@ class DesktopMain extends GetView<PromotionController> {
   }
 
   Widget _header() {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.15),
-        child: const Column(
-          children: [
-            Row(
-              children: [
-                TitleBox(
-                  label: '마감이 다되어 가요',
-                  fontSize: 20,
-                  type: TitleType.IMPORTANT,
-                ),
-              ],
-            ),
-          ],
-        ),
+    return const SliverToBoxAdapter(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              TitleBox(
+                label: '마감이 다되어 가요',
+                fontSize: 20,
+                type: TitleType.IMPORTANT,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
 
   Widget _more() {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.15),
-        child: const Column(children: [
-          Row(
-            children: [
-              TitleBox(label: '동아리 더보기', fontSize: 25),
-            ],
-          ),
-        ]),
-      ),
+    return const SliverToBoxAdapter(
+      child: Column(children: [
+        Row(
+          children: [
+            TitleBox(label: '동아리 더보기', fontSize: 25),
+          ],
+        ),
+      ]),
     );
   }
 
   Widget _moreItem() {
     return Obx(
-      () => SliverPadding(
-        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.15),
-        sliver: SliverGrid.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 1.0,
-              crossAxisSpacing: 1.0,
-              childAspectRatio: 0.8,
-            ),
-            itemCount: controller.promotions.length,
-            itemBuilder: (context, index) => Obx(() {
-                  final promotion = controller.promotions[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: GestureDetector(
+      () => SliverToBoxAdapter(
+        child: SizedBox(
+          width: 1000,
+          child: GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 0.8,
+              ),
+              itemCount: controller.promotions.length,
+              itemBuilder: (context, index) => Obx(() {
+                    final promotion = controller.promotions[index];
+                    return GestureDetector(
                       onTap: () {
                         Get.to(
                           () => const ResponsibleLayout(
@@ -115,9 +110,9 @@ class DesktopMain extends GetView<PromotionController> {
                         date: ' D - 9 ',
                         showDday: false,
                       ),
-                    ),
-                  );
-                })),
+                    );
+                  })),
+        ),
       ),
     );
   }
@@ -154,31 +149,27 @@ class DesktopMain extends GetView<PromotionController> {
 
   Widget _headerItem() {
     return Obx(
-      () => SliverPadding(
-        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.15),
-        sliver: SliverGrid.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 0.8),
-            itemCount: controller.promotions.length,
-            itemBuilder: (context, index) => Obx(() {
-                  final promotion = controller.promotions[index];
-                  return GestureDetector(
-                      onTap: () {
-                        Get.to(
-                          () => const ResponsibleLayout(
-                            mobile: MobilePromotionView(),
-                            tablet: TabletPromotionView(),
-                            desktop: DesktopPromotionView(),
-                          ),
-                        );
-                      },
-                      child:
-                          PromotionItem(date: "D - 9", promotion: promotion));
-                })),
-      ),
+      () => SliverGrid.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 0.8),
+          itemCount: controller.promotions.length,
+          itemBuilder: (context, index) => Obx(() {
+                final promotion = controller.promotions[index];
+                return GestureDetector(
+                    onTap: () {
+                      Get.to(
+                        () => const ResponsibleLayout(
+                          mobile: MobilePromotionView(),
+                          tablet: TabletPromotionView(),
+                          desktop: DesktopPromotionView(),
+                        ),
+                      );
+                    },
+                    child: PromotionItem(date: "D - 9", promotion: promotion));
+              })),
     );
   }
 
