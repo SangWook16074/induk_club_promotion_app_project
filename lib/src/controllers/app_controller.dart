@@ -42,14 +42,4 @@ class AppController extends GetxController {
   }
 
   void moveToLogin() {}
-
-  void moveToPromotionView() {
-    Get.to(
-      () => const ResponsibleLayout(
-        mobile: MobilePromotionView(),
-        tablet: TabletPromotionView(),
-        desktop: DesktopPromotionView(),
-      ),
-    );
-  }
 }

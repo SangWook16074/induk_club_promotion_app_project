@@ -95,10 +95,12 @@ class TabletMain extends GetView<PromotionController> {
                     child: GestureDetector(
                       onTap: () {
                         Get.to(
-                          () => const ResponsibleLayout(
-                            mobile: MobilePromotionView(),
-                            tablet: TabletPromotionView(),
-                            desktop: DesktopPromotionView(),
+                          () => ResponsibleLayout(
+                            mobile: const MobilePromotionView(),
+                            tablet: const TabletPromotionView(),
+                            desktop: DesktopPromotionView(
+                              promotion: promotion,
+                            ),
                           ),
                         );
                       },
@@ -156,10 +158,12 @@ class TabletMain extends GetView<PromotionController> {
                   return GestureDetector(
                       onTap: () {
                         Get.to(
-                          () => const ResponsibleLayout(
-                            mobile: MobilePromotionView(),
-                            tablet: TabletPromotionView(),
-                            desktop: DesktopPromotionView(),
+                          () => ResponsibleLayout(
+                            mobile: const MobilePromotionView(),
+                            tablet: const TabletPromotionView(),
+                            desktop: DesktopPromotionView(
+                              promotion: promotion,
+                            ),
                           ),
                         );
                       },

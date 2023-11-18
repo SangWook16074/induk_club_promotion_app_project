@@ -4,11 +4,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
+import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class DesktopPromotionView extends GetView<PromotionController> {
-  const DesktopPromotionView({super.key});
+  final Promotion promotion;
+  const DesktopPromotionView({super.key, required this.promotion});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +32,11 @@ class DesktopPromotionView extends GetView<PromotionController> {
                   ),
                   _img(),
                   _title(),
-                  _deadline(),
+                  _closeAt(),
+                  _beginToEnd(),
                   _object(),
-                  _target(),
-                  _period(),
-                  _info(),
+                  _content(),
+                  _contentOfAcivity(),
                 ],
               ),
             ),
@@ -87,7 +89,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
     );
   }
 
-  Widget _deadline() {
+  Widget _closeAt() {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
         child: SizedBox(
@@ -96,7 +98,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
               const Row(
                 children: [
                   TitleBox(
-                    label: '모집기간',
+                    label: '모집마감',
                     fontSize: 20,
                   )
                 ],
@@ -106,7 +108,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 child: Row(
                   children: [
-                    Text('2023.09.23 - 2023.09.30',
+                    Text(promotion.closeAt.toString(),
                         style: Get.textTheme.bodyMedium),
                   ],
                 ),
@@ -128,7 +130,8 @@ class DesktopPromotionView extends GetView<PromotionController> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Row(
               children: [
-                Text('00명', style: Get.textTheme.bodyMedium),
+                Text('${promotion.requiredPeople}명',
+                    style: Get.textTheme.bodyMedium),
               ],
             ),
           )
@@ -137,7 +140,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
     );
   }
 
-  Widget _info() {
+  Widget _content() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Column(
@@ -147,46 +150,30 @@ class DesktopPromotionView extends GetView<PromotionController> {
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: Text(
-                  '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
-                  '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
-                  '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
-                  'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.'
-                  'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.'
-                  '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
-                  'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.'
-                  '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
-                  'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.'
-                  '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
-                  'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.',
+              child: Text(promotion.content, style: Get.textTheme.bodyMedium))
+        ],
+      ),
+    );
+  }
+
+  Widget _contentOfAcivity() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      child: Column(
+        children: [
+          const Row(
+            children: [TitleBox(label: '활동내용', fontSize: 20)],
+          ),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              child: Text(promotion.contentOfActivity,
                   style: Get.textTheme.bodyMedium))
         ],
       ),
     );
   }
 
-  Widget _target() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-      child: Column(
-        children: [
-          const Row(
-            children: [TitleBox(label: '우대학과', fontSize: 20)],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: Row(
-              children: [
-                Text('학과 무관', style: Get.textTheme.bodyMedium),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _period() {
+  Widget _beginToEnd() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
       child: Column(
@@ -198,7 +185,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Row(
               children: [
-                Text('2023년 3월 10일 - 2024년 1월 10일',
+                Text('${promotion.begin} - ${promotion.end}',
                     style: Get.textTheme.bodyMedium),
               ],
             ),

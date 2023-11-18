@@ -10,9 +10,10 @@ class Promotion with _$Promotion {
     required String title,
     required String content,
     required String userName,
-    required String createAt,
-    required String begin,
-    required String end,
+    required DateTime createAt,
+    required DateTime closeAt,
+    required DateTime begin,
+    required DateTime end,
     required int requiredPeople,
     required String contentOfActivity,
   }) = _Promotion;
