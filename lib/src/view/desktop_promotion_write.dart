@@ -1,4 +1,9 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class DesktopPromotionWrite extends StatefulWidget {
   const DesktopPromotionWrite({super.key});
@@ -8,8 +13,54 @@ class DesktopPromotionWrite extends StatefulWidget {
 }
 
 class _DesktopPromotionWriteState extends State<DesktopPromotionWrite> {
-  DateTime _currentTime = DateTime.now();
+  final DateTime _currentTime = DateTime.now();
+  DateTime _beginTime = DateTime.now();
   DateTime _expirationTime = DateTime.now();
+  final List<XFile> _images = [];
+  final List<Uint8List> _webImages = [];
+
+  Future<void> _pickImages() async {
+    final picker = ImagePicker();
+    if (kIsWeb) {
+      picker.pickImage(source: ImageSource.gallery).then((XFile? image) {
+        if (image != null) {
+          image.readAsBytes().then((memory) => setState(() {
+                _webImages.add(memory);
+              }));
+        }
+      });
+    } else {
+      picker.pickImage(source: ImageSource.gallery).then((XFile? image) {
+        if (image != null) {
+          setState(() {
+            _images.add(image);
+          });
+        }
+      });
+    }
+  }
+
+  Future<void> _setBegin() async {
+    DateTime? dateTime = await showDatePicker(
+        context: context,
+        initialDate: _currentTime,
+        firstDate: DateTime(2000),
+        lastDate: DateTime(3000));
+    setState(() {
+      _beginTime = dateTime!;
+    });
+  }
+
+  Future<void> _setExpiration() async {
+    DateTime? dateTime = await showDatePicker(
+        context: context,
+        initialDate: _currentTime,
+        firstDate: DateTime(2000),
+        lastDate: DateTime(3000));
+    setState(() {
+      _expirationTime = dateTime!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +79,7 @@ class _DesktopPromotionWriteState extends State<DesktopPromotionWrite> {
               _info(),
               _addtional(),
               _addImage(),
+              _pickedImages(),
               _button(),
             ],
           ),
@@ -70,23 +122,24 @@ class _DesktopPromotionWriteState extends State<DesktopPromotionWrite> {
         ),
       );
 
-  Widget _title() => const Padding(
-        padding: EdgeInsets.all(20.0),
+  Widget _title() => Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            Row(
+            const Row(
               children: [
                 Text(
                   "글 제목",
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 25,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600),
                 ),
               ],
             ),
             TextField(
-              decoration: InputDecoration(
+              style: Theme.of(context).textTheme.displayMedium,
+              decoration: const InputDecoration(
                   focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.black)),
                   border: UnderlineInputBorder(
@@ -106,7 +159,7 @@ class _DesktopPromotionWriteState extends State<DesktopPromotionWrite> {
                   "모집 기간",
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 25,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600),
                 ),
               ],
@@ -120,7 +173,7 @@ class _DesktopPromotionWriteState extends State<DesktopPromotionWrite> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
-                          "${_currentTime.year}-${_currentTime.month}-${_currentTime.day}",
+                          "${_beginTime.year}-${_beginTime.month}-${_beginTime.day}",
                           style: const TextStyle(
                               color: Colors.black,
                               fontSize: 20,
@@ -130,16 +183,7 @@ class _DesktopPromotionWriteState extends State<DesktopPromotionWrite> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: GestureDetector(
-                            onTap: () async {
-                              DateTime? dateTime = await showDatePicker(
-                                  context: context,
-                                  initialDate: _currentTime,
-                                  firstDate: DateTime(2000),
-                                  lastDate: DateTime(3000));
-                              setState(() {
-                                _currentTime = dateTime!;
-                              });
-                            },
+                            onTap: _setBegin,
                             child: const Icon(Icons.calendar_today)),
                       ),
                     ],
@@ -160,16 +204,7 @@ class _DesktopPromotionWriteState extends State<DesktopPromotionWrite> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: GestureDetector(
-                            onTap: () async {
-                              DateTime? dateTime = await showDatePicker(
-                                  context: context,
-                                  initialDate: _currentTime,
-                                  firstDate: DateTime(2000),
-                                  lastDate: DateTime(3000));
-                              setState(() {
-                                _expirationTime = dateTime!;
-                              });
-                            },
+                            onTap: _setExpiration,
                             child: const Icon(Icons.calendar_today)),
                       ),
                     ],
@@ -181,23 +216,24 @@ class _DesktopPromotionWriteState extends State<DesktopPromotionWrite> {
         ),
       );
 
-  Widget _requiredPeople() => const Padding(
-        padding: EdgeInsets.all(20.0),
+  Widget _requiredPeople() => Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            Row(
+            const Row(
               children: [
                 Text(
                   "모집인원",
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 25,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600),
                 ),
               ],
             ),
             TextField(
-              decoration: InputDecoration(
+              style: Theme.of(context).textTheme.displayMedium,
+              decoration: const InputDecoration(
                   focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.black)),
                   border: UnderlineInputBorder(
@@ -207,24 +243,25 @@ class _DesktopPromotionWriteState extends State<DesktopPromotionWrite> {
         ),
       );
 
-  Widget _info() => const Padding(
-        padding: EdgeInsets.all(20.0),
+  Widget _info() => Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            Row(
+            const Row(
               children: [
                 Text(
                   "동아리 소개",
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 25,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600),
                 ),
               ],
             ),
             TextField(
               maxLines: 20,
-              decoration: InputDecoration(
+              style: Theme.of(context).textTheme.displayMedium,
+              decoration: const InputDecoration(
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black)),
                   border: OutlineInputBorder(
@@ -234,24 +271,25 @@ class _DesktopPromotionWriteState extends State<DesktopPromotionWrite> {
         ),
       );
 
-  Widget _addtional() => const Padding(
-        padding: EdgeInsets.all(20.0),
+  Widget _addtional() => Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            Row(
+            const Row(
               children: [
                 Text(
                   "추가 정보",
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 25,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600),
                 ),
               ],
             ),
             TextField(
               maxLines: 10,
-              decoration: InputDecoration(
+              style: Theme.of(context).textTheme.displayMedium,
+              decoration: const InputDecoration(
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black)),
                   border: OutlineInputBorder(
@@ -263,29 +301,30 @@ class _DesktopPromotionWriteState extends State<DesktopPromotionWrite> {
 
   Widget _addImage() => Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
+        child: Row(
           children: [
-            const Row(
-              children: [
-                Text(
-                  "사진 첨부",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600),
-                ),
-              ],
+            const Text(
+              "사진 첨부",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600),
             ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                height: 300,
-                color: const Color(0xff4e4e4e),
-                alignment: Alignment.center,
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 100,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: GestureDetector(
+                onTap: _pickImages,
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.blue,
+                  ),
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             )
@@ -309,4 +348,66 @@ class _DesktopPromotionWriteState extends State<DesktopPromotionWrite> {
           ),
         ),
       );
+
+  Widget _pickedImages() => (_webImages.isEmpty && _images.isEmpty)
+      ? Container(
+          height: 300,
+          color: const Color(0xffbdbdbd),
+          alignment: Alignment.center,
+          child: const Text(
+            "선택한 이미지가 없습니다.",
+            style: TextStyle(color: Colors.white),
+          ))
+      : SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: List.generate(
+                (kIsWeb) ? _webImages.length : _images.length, (index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 300,
+                      width: 300,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0)),
+                      child: (kIsWeb)
+                          ? Image.memory(_webImages[index])
+                          : Image.file(
+                              File(_images[index].path),
+                              fit: BoxFit.cover,
+                            ),
+                    ),
+                    Positioned(
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (kIsWeb) {
+                              _webImages.removeAt(index);
+                            } else {
+                              _images.removeAt(index);
+                            }
+                          });
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                          ),
+                          child: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }),
+          ),
+        );
 }

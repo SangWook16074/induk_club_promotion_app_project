@@ -15,6 +15,7 @@ dependencies:
   get: ^4.6.5
   google_fonts: ^6.1.0
   hidden_drawer_menu: ^3.0.1
+  image_picker: ^1.0.4
   rive: ^0.11.17
   side_navigation: ^1.0.4
   smooth_page_indicator: ^1.1.0
