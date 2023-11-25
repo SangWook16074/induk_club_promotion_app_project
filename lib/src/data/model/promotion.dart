@@ -10,6 +10,7 @@ class Promotion with _$Promotion {
     required String title,
     required String content,
     required String userName,
+    required String club,
     required DateTime createAt,
     required DateTime closeAt,
     required DateTime begin,

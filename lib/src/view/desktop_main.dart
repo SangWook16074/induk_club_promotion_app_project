@@ -20,7 +20,6 @@ class DesktopMain extends GetView<PromotionController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _sideMenu(),
           Obx(
@@ -50,18 +49,20 @@ class DesktopMain extends GetView<PromotionController> {
 
   Widget _header() {
     return const SliverToBoxAdapter(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              TitleBox(
-                label: '마감이 다되어 가요',
-                fontSize: 20,
-                type: TitleType.IMPORTANT,
-              ),
-            ],
-          ),
-        ],
+      child: Center(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                TitleBox(
+                  label: '마감이 다되어 가요',
+                  fontSize: 20,
+                  type: TitleType.IMPORTANT,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -79,17 +80,17 @@ class DesktopMain extends GetView<PromotionController> {
   }
 
   Widget _moreItem() {
-    return Obx(
-      () => SliverToBoxAdapter(
-        child: SizedBox(
-          width: 1000,
-          child: GridView.builder(
+    return SliverPadding(
+      padding: const EdgeInsets.all(20.0),
+      sliver: SliverToBoxAdapter(
+        child: Obx(
+          () => GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
                 childAspectRatio: 0.8,
               ),
               itemCount: controller.promotions.length,
@@ -150,30 +151,39 @@ class DesktopMain extends GetView<PromotionController> {
   }
 
   Widget _headerItem() {
-    return Obx(
-      () => SliverGrid.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: 0.8),
-          itemCount: controller.promotions.length,
-          itemBuilder: (context, index) => Obx(() {
-                final promotion = controller.promotions[index];
-                return GestureDetector(
-                    onTap: () {
-                      Get.to(
-                        () => ResponsibleLayout(
-                          mobile: const MobilePromotionView(),
-                          tablet: const TabletPromotionView(),
-                          desktop: DesktopPromotionView(
-                            promotion: promotion,
-                          ),
-                        ),
-                      );
-                    },
-                    child: PromotionItem(date: "D - 9", promotion: promotion));
-              })),
+    return SliverPadding(
+      padding: const EdgeInsets.all(20.0),
+      sliver: SliverToBoxAdapter(
+        child: Obx(
+          () => GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 0.8,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
+              ),
+              itemCount: controller.promotions.length,
+              itemBuilder: (context, index) => Obx(() {
+                    final promotion = controller.promotions[index];
+                    return GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            () => ResponsibleLayout(
+                              mobile: const MobilePromotionView(),
+                              tablet: const TabletPromotionView(),
+                              desktop: DesktopPromotionView(
+                                promotion: promotion,
+                              ),
+                            ),
+                          );
+                        },
+                        child:
+                            PromotionItem(date: "D - 9", promotion: promotion));
+                  })),
+        ),
+      ),
     );
   }
 

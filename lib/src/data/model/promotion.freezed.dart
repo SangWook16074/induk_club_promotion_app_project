@@ -24,6 +24,7 @@ mixin _$Promotion {
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
+  String get club => throw _privateConstructorUsedError;
   DateTime get createAt => throw _privateConstructorUsedError;
   DateTime get closeAt => throw _privateConstructorUsedError;
   DateTime get begin => throw _privateConstructorUsedError;
@@ -47,6 +48,7 @@ abstract class $PromotionCopyWith<$Res> {
       String title,
       String content,
       String userName,
+      String club,
       DateTime createAt,
       DateTime closeAt,
       DateTime begin,
@@ -72,6 +74,7 @@ class _$PromotionCopyWithImpl<$Res, $Val extends Promotion>
     Object? title = null,
     Object? content = null,
     Object? userName = null,
+    Object? club = null,
     Object? createAt = null,
     Object? closeAt = null,
     Object? begin = null,
@@ -95,6 +98,10 @@ class _$PromotionCopyWithImpl<$Res, $Val extends Promotion>
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      club: null == club
+          ? _value.club
+          : club // ignore: cast_nullable_to_non_nullable
               as String,
       createAt: null == createAt
           ? _value.createAt
@@ -137,6 +144,7 @@ abstract class _$$PromotionImplCopyWith<$Res>
       String title,
       String content,
       String userName,
+      String club,
       DateTime createAt,
       DateTime closeAt,
       DateTime begin,
@@ -160,6 +168,7 @@ class __$$PromotionImplCopyWithImpl<$Res>
     Object? title = null,
     Object? content = null,
     Object? userName = null,
+    Object? club = null,
     Object? createAt = null,
     Object? closeAt = null,
     Object? begin = null,
@@ -183,6 +192,10 @@ class __$$PromotionImplCopyWithImpl<$Res>
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      club: null == club
+          ? _value.club
+          : club // ignore: cast_nullable_to_non_nullable
               as String,
       createAt: null == createAt
           ? _value.createAt
@@ -220,6 +233,7 @@ class _$PromotionImpl implements _Promotion {
       required this.title,
       required this.content,
       required this.userName,
+      required this.club,
       required this.createAt,
       required this.closeAt,
       required this.begin,
@@ -239,6 +253,8 @@ class _$PromotionImpl implements _Promotion {
   @override
   final String userName;
   @override
+  final String club;
+  @override
   final DateTime createAt;
   @override
   final DateTime closeAt;
@@ -253,7 +269,7 @@ class _$PromotionImpl implements _Promotion {
 
   @override
   String toString() {
-    return 'Promotion(id: $id, title: $title, content: $content, userName: $userName, createAt: $createAt, closeAt: $closeAt, begin: $begin, end: $end, requiredPeople: $requiredPeople, contentOfActivity: $contentOfActivity)';
+    return 'Promotion(id: $id, title: $title, content: $content, userName: $userName, club: $club, createAt: $createAt, closeAt: $closeAt, begin: $begin, end: $end, requiredPeople: $requiredPeople, contentOfActivity: $contentOfActivity)';
   }
 
   @override
@@ -266,6 +282,7 @@ class _$PromotionImpl implements _Promotion {
             (identical(other.content, content) || other.content == content) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
+            (identical(other.club, club) || other.club == club) &&
             (identical(other.createAt, createAt) ||
                 other.createAt == createAt) &&
             (identical(other.closeAt, closeAt) || other.closeAt == closeAt) &&
@@ -280,7 +297,7 @@ class _$PromotionImpl implements _Promotion {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, content, userName,
-      createAt, closeAt, begin, end, requiredPeople, contentOfActivity);
+      club, createAt, closeAt, begin, end, requiredPeople, contentOfActivity);
 
   @JsonKey(ignore: true)
   @override
@@ -302,6 +319,7 @@ abstract class _Promotion implements Promotion {
       required final String title,
       required final String content,
       required final String userName,
+      required final String club,
       required final DateTime createAt,
       required final DateTime closeAt,
       required final DateTime begin,
@@ -320,6 +338,8 @@ abstract class _Promotion implements Promotion {
   String get content;
   @override
   String get userName;
+  @override
+  String get club;
   @override
   DateTime get createAt;
   @override

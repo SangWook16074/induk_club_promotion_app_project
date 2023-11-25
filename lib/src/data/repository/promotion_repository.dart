@@ -14,6 +14,7 @@ class PromotionRepository {
       {
         "id": 1,
         "userName": "한상욱",
+        "club": "A&I",
         "createAt": DateTime.now().toString(),
         "closeAt": DateTime.now().toString(),
         "title": "A&I 신규 동아리원 모집",
@@ -28,6 +29,7 @@ class PromotionRepository {
       {
         "id": 2,
         "userName": "한상욱",
+        "club": "A&I",
         "createAt": DateTime.now().toString(),
         "closeAt": DateTime.now().toString(),
         "title": "A&I 신규 동아리원 모집",
@@ -42,6 +44,7 @@ class PromotionRepository {
       {
         "id": 3,
         "userName": "한상욱",
+        "club": "A&I",
         "createAt": DateTime.now().toString(),
         "closeAt": DateTime.now().toString(),
         "title": "A&I 신규 동아리원 모집",
@@ -56,6 +59,7 @@ class PromotionRepository {
       {
         "id": 4,
         "userName": "한상욱",
+        "club": "A&I",
         "createAt": DateTime.now().toString(),
         "closeAt": DateTime.now().toString(),
         "title": "A&I 신규 동아리원 모집",
