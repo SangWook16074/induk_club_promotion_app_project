@@ -19,36 +19,6 @@ class DesktopMyPage extends StatelessWidget {
     ));
   }
 
-  // Widget _myPromotions() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(40.0),
-  //     child: BasicBox(
-  //       width: double.infinity,
-  //       height: 400,
-  //       child: Column(
-  //         children: [
-  //           Row(
-  //             children: [
-  //               Text(
-  //                 '내가 쓴 글',
-  //                 style: Get.textTheme.displayLarge,
-  //               ),
-  //             ],
-  //           ),
-  //           const Expanded(
-  //             child: Center(
-  //               child: Text(
-  //                 '작성한 글이 없습니다',
-  //                 style: TextStyle(color: Colors.white),
-  //               ),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
   Widget _appBar() {
     return SliverAppBar(
       backgroundColor: Color(0xff713eff),
@@ -103,7 +73,7 @@ class DesktopMyPage extends StatelessWidget {
         child: Column(
           children: [
             const Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 100.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

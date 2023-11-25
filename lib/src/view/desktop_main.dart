@@ -12,6 +12,7 @@ import 'package:induk_club_promotion_app_project/src/view/tablet_promotion_view.
 
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
+import 'package:induk_club_promotion_app_project/src/widget/side_menu.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class DesktopMain extends GetView<PromotionController> {
@@ -21,7 +22,7 @@ class DesktopMain extends GetView<PromotionController> {
     return Scaffold(
       body: Row(
         children: [
-          // _sideMenu(),
+          const SideMenu(),
           Obx(
             () => (controller.promotions.isEmpty)
                 ? const Expanded(
