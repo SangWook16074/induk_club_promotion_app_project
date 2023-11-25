@@ -99,14 +99,11 @@ class DesktopMyPage extends StatelessWidget {
     );
   }
 
-  Widget _clubInfo() {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 300),
+  Widget _clubInfo() => SliverToBoxAdapter(
         child: Column(
           children: [
             const Padding(
-              padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -226,7 +223,5 @@ class DesktopMyPage extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
+      );
 }
