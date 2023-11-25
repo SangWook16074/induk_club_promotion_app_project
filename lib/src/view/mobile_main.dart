@@ -1,92 +1,50 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
-import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
-import 'package:induk_club_promotion_app_project/src/login.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
+import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:induk_club_promotion_app_project/src/view/desktop_promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/view/mobile_promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/view/tablet_promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
-import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
-class MobileMain extends GetView<AppController> {
+class MobileMain extends GetView<PromotionController> {
   const MobileMain({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: _drawer(),
       appBar: AppBar(
-        title: const Text('LOGO'),
         backgroundColor: Colors.white,
-        foregroundColor: const Color(0xff1e1e1e),
-        elevation: 0,
+        foregroundColor: Colors.black,
+        elevation: 0.0,
+        title: const Text("Logo"),
         centerTitle: false,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 40,
-            ),
-            _header(),
-            _moreItems(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _drawer() {
-    return Drawer(
-      backgroundColor: const Color(0xff1e1e1e),
-      child: Column(
-        children: [
-          _drawerHeader(),
-        ],
-      ),
-    );
-  }
-
-  Widget _drawerHeader() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.account_circle_rounded,
-                  size: 50,
-                  color: Colors.white,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  '로그인이 필요합니다.',
-                  style: TextStyle(color: Colors.white),
-                ),
-              )
-            ],
-          ),
+        actions: const [
           Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: SignButton(
-              child: const Text(
-                'Login',
-                style: TextStyle(
-                    color: Color(0xffffffff), fontWeight: FontWeight.bold),
-              ),
-              onPressed: () {
-                Get.to(() => const Login(), binding: LoginBinding());
-              },
-            ),
-          ),
+            padding: EdgeInsets.all(8.0),
+            child: Icon(Icons.search),
+          )
         ],
+      ),
+      body: Obx(
+        () => (controller.promotions.isEmpty)
+            ? const Center(
+                child: CircularProgressIndicator.adaptive(),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    _header(),
+                    _moreItems(),
+                  ],
+                ),
+              ),
       ),
     );
   }
@@ -104,46 +62,74 @@ class MobileMain extends GetView<AppController> {
               ],
             ),
           ),
-          CarouselSlider.builder(
-              itemCount: 30,
-              itemBuilder: (context, index, realIndex) => Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: GestureDetector(
-                        onTap: controller.moveToPromotionView,
-                        child: const PromotionItem(
-                          title: '동아리 명',
-                          discription: '동아리 소개글',
-                          date: 'D-9',
-                        )),
-                  ),
-              options: CarouselOptions(
-                  autoPlay: false,
-                  enableInfiniteScroll: false,
-                  aspectRatio: 1)),
+          Obx(
+            () => CarouselSlider.builder(
+                itemCount: controller.promotions.length,
+                itemBuilder: (context, index, realIndex) => Obx(() {
+                      final promotion = controller.promotions[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: GestureDetector(
+                            onTap: () {
+                              Get.to(
+                                () => ResponsibleLayout(
+                                  mobile: const MobilePromotionView(),
+                                  tablet: const TabletPromotionView(),
+                                  desktop: DesktopPromotionView(
+                                    promotion: promotion,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: PromotionItem(
+                              promotion: promotion,
+                              date: 'D-9',
+                            )),
+                      );
+                    }),
+                options: CarouselOptions(
+                    autoPlay: false,
+                    enableInfiniteScroll: false,
+                    aspectRatio: 1)),
+          ),
         ],
       );
 
-  Widget _moreItems() => Column(children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 20),
-          child: Row(
-            children: [
-              TitleBox(type: TitleType.NORMAL, label: "동아리 더보기", fontSize: 25)
-            ],
+  Widget _moreItems() => Obx(
+        () => Column(children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 20),
+            child: Row(
+              children: [
+                TitleBox(type: TitleType.NORMAL, label: "동아리 더보기", fontSize: 25)
+              ],
+            ),
           ),
-        ),
-        ...List.generate(
-          20,
-          (index) => Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: GestureDetector(
-                onTap: controller.moveToPromotionView,
-                child: const PromotionItem(
-                  title: '동아리 명',
-                  discription: '동아리 소개글',
-                  date: 'D-9',
-                )),
+          ...List.generate(
+            controller.promotions.length,
+            (index) => Obx(() {
+              final promotion = controller.promotions[index];
+              return Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: GestureDetector(
+                    onTap: () {
+                      Get.to(
+                        () => ResponsibleLayout(
+                          mobile: const MobilePromotionView(),
+                          tablet: const TabletPromotionView(),
+                          desktop: DesktopPromotionView(
+                            promotion: promotion,
+                          ),
+                        ),
+                      );
+                    },
+                    child: PromotionItem(
+                      promotion: promotion,
+                      date: 'D-9',
+                    )),
+              );
+            }),
           ),
-        ),
-      ]);
+        ]),
+      );
 }

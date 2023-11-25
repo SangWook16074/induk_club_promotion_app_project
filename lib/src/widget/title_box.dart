@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 enum TitleType { IMPORTANT, NORMAL }
 
@@ -60,10 +61,13 @@ class TitleBox extends StatelessWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24.0),
-              color: const Color(0xff713eff).withOpacity(0.8)),
+              color: Get.theme.primaryColor.withOpacity(0.8)),
           child: Text(
             label,
-            style: TextStyle(color: Colors.white, fontSize: fontSize),
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: fontSize,
+                fontWeight: FontWeight.w600),
           ),
         ),
       );
