@@ -1,9 +1,9 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/image_picker_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 
 class PromotionWrite extends StatefulWidget {
@@ -17,33 +17,6 @@ class _PromotionWriteState extends State<PromotionWrite> {
   final DateTime _currentTime = DateTime.now();
   DateTime _beginTime = DateTime.now();
   DateTime _expirationTime = DateTime.now();
-  final List<XFile> _images = [];
-  final List<Uint8List> _webImages = [];
-
-  Future<void> _pickImages() async {
-    try {
-      final picker = ImagePicker();
-      if (kIsWeb) {
-        picker.pickImage(source: ImageSource.gallery).then((XFile? image) {
-          if (image != null) {
-            image.readAsBytes().then((memory) => setState(() {
-                  _webImages.add(memory);
-                }));
-          }
-        });
-      } else {
-        picker.pickImage(source: ImageSource.gallery).then((XFile? image) {
-          if (image != null) {
-            setState(() {
-              _images.add(image);
-            });
-          }
-        });
-      }
-    } catch (e) {
-      throw Exception("Load Image Failed...");
-    }
-  }
 
   Future<void> _setBegin() async {
     DateTime? dateTime = await showDatePicker(
@@ -332,7 +305,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: GestureDetector(
-                onTap: _pickImages,
+                onTap: () => Get.find<ImagePickerController>().pickImages(),
                 child: Container(
                   width: 30,
                   height: 30,
@@ -369,75 +342,75 @@ class _PromotionWriteState extends State<PromotionWrite> {
         ),
       );
 
-  Widget _pickedImages() => Padding(
-      padding: EdgeInsets.all(ResponsibleLayout.isMobile(context) ? 8.0 : 20.0),
-      child: (_webImages.isEmpty && _images.isEmpty)
-          ? Container(
-              height: 300,
-              color: const Color(0xffbdbdbd),
-              alignment: Alignment.center,
-              child: const Text(
-                "선택한 이미지가 없습니다.",
-                style: TextStyle(color: Colors.white),
-              ))
-          : SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.generate(
-                    (kIsWeb) ? _webImages.length : _images.length, (index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Stack(
-                      children: [
-                        Container(
-                            height: 300,
-                            width: 300,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0)),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: (kIsWeb)
-                                  ? Image.memory(
-                                      _webImages[index],
-                                      fit: BoxFit.fill,
-                                    )
-                                  : Image.file(
-                                      File(_images[index].path),
-                                      fit: BoxFit.fill,
+  Widget _pickedImages() => GetX<ImagePickerController>(builder: (controller) {
+        return Padding(
+            padding: EdgeInsets.all(
+                ResponsibleLayout.isMobile(context) ? 8.0 : 20.0),
+            child: (controller.webImages.isEmpty && controller.images.isEmpty)
+                ? Container(
+                    height: 300,
+                    color: const Color(0xffbdbdbd),
+                    alignment: Alignment.center,
+                    child: const Text(
+                      "선택한 이미지가 없습니다.",
+                      style: TextStyle(color: Colors.white),
+                    ))
+                : SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(
+                          (kIsWeb)
+                              ? controller.webImages.length
+                              : controller.images.length, (index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Stack(
+                            children: [
+                              Container(
+                                  height: 300,
+                                  width: 300,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0)),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: (kIsWeb)
+                                        ? Image.memory(
+                                            controller.webImages[index],
+                                            fit: BoxFit.fill,
+                                          )
+                                        : Image.file(
+                                            File(controller.images[index].path),
+                                            fit: BoxFit.fill,
+                                          ),
+                                  )),
+                              Positioned(
+                                left: 2,
+                                top: 2,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.find<ImagePickerController>()
+                                        .deleteImage(index);
+                                  },
+                                  child: Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                        color: Colors.red.withOpacity(0.7),
+                                        shape: BoxShape.circle),
+                                    child: const Icon(
+                                      Icons.close,
+                                      color: Colors.white,
+                                      size: 24,
                                     ),
-                            )),
-                        Positioned(
-                          left: 2,
-                          top: 2,
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                if (kIsWeb) {
-                                  _webImages.removeAt(index);
-                                } else {
-                                  _images.removeAt(index);
-                                }
-                              });
-                            },
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  color: Colors.red.withOpacity(0.7),
-                                  shape: BoxShape.circle),
-                              child: const Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 24,
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        ),
-                      ],
+                        );
+                      }),
                     ),
-                  );
-                }),
-              ),
-            ));
+                  ));
+      });
 }

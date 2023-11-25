@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/bindings/bottom_nav_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/bottom_nav_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/view/mobile_history.dart';
 import 'package:induk_club_promotion_app_project/src/view/mobile_main.dart';

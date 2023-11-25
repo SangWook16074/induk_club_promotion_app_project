@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/app.dart';
-
-import 'package:induk_club_promotion_app_project/src/bindings/init_binding.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/image_picker_binding.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
 
 void main() {
@@ -42,7 +40,7 @@ class MainApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),
           scaffoldBackgroundColor: const Color(0xffffffff)),
       home: const PromotionWrite(),
-      initialBinding: InitBinding(),
+      initialBinding: ImagePickerBinding(),
     );
   }
 }
