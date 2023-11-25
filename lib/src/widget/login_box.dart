@@ -12,6 +12,7 @@ class LoginBox extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _textFields(),
         _button(),

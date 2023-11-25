@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/app.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/image_picker_binding.dart';
+import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:induk_club_promotion_app_project/src/view/desktop_main.dart';
+import 'package:induk_club_promotion_app_project/src/view/mobile_main.dart';
+import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
+import 'package:induk_club_promotion_app_project/src/view/tablet_main.dart';
 
-import 'package:induk_club_promotion_app_project/src/bindings/init_binding.dart';
+import 'src/bindings/init_binding.dart';
 
 void main() {
   runApp(const MainApp());
@@ -18,10 +23,32 @@ class MainApp extends StatelessWidget {
           primarySwatch: Colors.purple,
           primaryColor: const Color(0xff713eff),
           textTheme: const TextTheme(
+              labelLarge: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600),
+              labelMedium: TextStyle(
+                color: Colors.white,
+              ),
               titleMedium: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
                   fontWeight: FontWeight.w600),
+              bodyLarge: TextStyle(
+                color: Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.w500,
+              ),
+              bodyMedium: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+              bodySmall: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
               displayLarge: TextStyle(
                   color: Colors.black,
                   fontSize: 30,
@@ -35,12 +62,16 @@ class MainApp extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.w600),
               headlineMedium: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
+                  color: Colors.black,
+                  fontSize: 20,
                   fontWeight: FontWeight.w600)),
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),
           scaffoldBackgroundColor: const Color(0xffffffff)),
-      home: const App(),
+      home: const ResponsibleLayout(
+        mobile: MobileMain(),
+        tablet: TabletMain(),
+        desktop: DesktopMain(),
+      ),
       initialBinding: InitBinding(),
     );
   }
