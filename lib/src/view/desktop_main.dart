@@ -5,11 +5,11 @@ import 'package:induk_club_promotion_app_project/src/controllers/app_controller.
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
-import 'package:induk_club_promotion_app_project/src/view/desktop_my_page.dart';
+
 import 'package:induk_club_promotion_app_project/src/view/desktop_promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/view/mobile_promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/view/tablet_promotion_view.dart';
-import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
+
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
@@ -21,7 +21,7 @@ class DesktopMain extends GetView<PromotionController> {
     return Scaffold(
       body: Row(
         children: [
-          _sideMenu(),
+          // _sideMenu(),
           Obx(
             () => (controller.promotions.isEmpty)
                 ? const Expanded(
@@ -182,63 +182,6 @@ class DesktopMain extends GetView<PromotionController> {
                         child:
                             PromotionItem(date: "D - 9", promotion: promotion));
                   })),
-        ),
-      ),
-    );
-  }
-
-  Widget _sideMenu() {
-    return Container(
-      width: 200,
-      height: double.infinity,
-      color: const Color(0xff713eff),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(children: [
-            Row(
-              children: [
-                Text('LOGO', style: Get.textTheme.displayLarge),
-              ],
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Row(children: [
-              const ProfileImage(
-                  length: 80,
-                  url:
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU',
-                  type: ProfileType.MYPAGE),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: GestureDetector(
-                  child: Text('로그아웃', style: Get.textTheme.labelMedium),
-                  onTap: () {},
-                ),
-              ),
-            ]),
-            GestureDetector(
-              child: ListTile(
-                title: Text('마이페이지', style: Get.textTheme.labelMedium),
-                onTap: () {
-                  Get.to(const DesktopMyPage());
-                },
-              ),
-            ),
-            ListTile(
-              title: Text(
-                '내가쓴글',
-                style: Get.textTheme.labelMedium,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                '글작성하기',
-                style: Get.textTheme.labelMedium,
-              ),
-            ),
-          ]),
         ),
       ),
     );
