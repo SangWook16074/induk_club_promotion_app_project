@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 
 class PromotionItem extends StatelessWidget {
@@ -20,7 +19,6 @@ class PromotionItem extends StatelessWidget {
             children: [
               _image(),
               _header(),
-              // _discription(),
             ],
           ),
           Positioned(top: 20, right: 0, child: _dday())
@@ -29,13 +27,30 @@ class PromotionItem extends StatelessWidget {
 
   Widget _header() => Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          child: Text(
-            promotion.title,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-                color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              child: Text(
+                promotion.club,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                    color: Colors.black87,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            SizedBox(
+              child: Text(
+                promotion.title,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.black87,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          ],
         ),
       );
 
@@ -44,7 +59,7 @@ class PromotionItem extends StatelessWidget {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-              borderRadius: BorderRadiusDirectional.circular(8.0),
+              borderRadius: BorderRadiusDirectional.circular(4.0),
               shape: BoxShape.rectangle,
               color: Colors.grey),
         ),
