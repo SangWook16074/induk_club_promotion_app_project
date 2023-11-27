@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/bindings/image_picker_binding.dart';
-import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
-import 'package:induk_club_promotion_app_project/src/view/desktop_main.dart';
+import 'package:induk_club_promotion_app_project/src/app.dart';
 import 'package:induk_club_promotion_app_project/src/view/home_screen.dart';
-import 'package:induk_club_promotion_app_project/src/view/mobile_main.dart';
-import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
-import 'package:induk_club_promotion_app_project/src/view/tablet_main.dart';
-
 import 'src/bindings/init_binding.dart';
 
 void main() {

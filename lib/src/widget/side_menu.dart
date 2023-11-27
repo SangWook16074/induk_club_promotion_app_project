@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/view/desktop_my_page.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 
-class SideMenu extends GetView<AppController> {
+class SideMenu extends GetView<PageController> {
   const SideMenu({
     super.key,
   });

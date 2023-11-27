@@ -12,16 +12,11 @@ class PromotionItem extends StatelessWidget {
       required this.promotion});
 
   @override
-  Widget build(BuildContext context) => Stack(
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _image(),
-              _header(),
-            ],
-          ),
-          Positioned(top: 20, right: 0, child: _dday())
+          _image(),
+          _header(),
         ],
       );
 
@@ -54,23 +49,31 @@ class PromotionItem extends StatelessWidget {
         ),
       );
 
-  Widget _image() => AspectRatio(
-        aspectRatio: 1,
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadiusDirectional.circular(4.0),
-              shape: BoxShape.rectangle,
-              color: Colors.grey),
-        ),
+  Widget _image() => Stack(
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadiusDirectional.circular(4.0),
+                  shape: BoxShape.rectangle,
+                  color: Colors.grey),
+            ),
+          ),
+          Positioned(top: 20, right: 0, child: _dday())
+        ],
       );
 
-  Widget _dday() => Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-        decoration: const BoxDecoration(color: Color(0xff713eff)),
-        child: Text(
-          date,
-          style: const TextStyle(fontSize: 18, color: Colors.white),
+  Widget _dday() => Opacity(
+        opacity: (showDday!) ? 1.0 : 0.0,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          decoration: const BoxDecoration(color: Color(0xff713eff)),
+          child: Text(
+            date,
+            style: const TextStyle(fontSize: 18, color: Colors.white),
+          ),
         ),
       );
 }
