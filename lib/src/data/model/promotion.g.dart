@@ -8,7 +8,6 @@ part of 'promotion.dart';
 
 _$PromotionImpl _$$PromotionImplFromJson(Map<String, dynamic> json) =>
     _$PromotionImpl(
-      id: json['id'] as int,
       title: json['title'] as String,
       content: json['content'] as String,
       userName: json['userName'] as String,
@@ -23,7 +22,6 @@ _$PromotionImpl _$$PromotionImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$PromotionImplToJson(_$PromotionImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'title': instance.title,
       'content': instance.content,
       'userName': instance.userName,

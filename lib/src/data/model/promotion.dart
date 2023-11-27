@@ -6,7 +6,6 @@ part 'promotion.g.dart';
 @freezed
 class Promotion with _$Promotion {
   factory Promotion({
-    required int id,
     required String title,
     required String content,
     required String userName,

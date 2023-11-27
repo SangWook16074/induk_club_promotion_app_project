@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/app.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/image_picker_binding.dart';
 import 'package:induk_club_promotion_app_project/src/view/home_screen.dart';
+import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
 import 'src/bindings/init_binding.dart';
 
 void main() {
@@ -62,8 +64,8 @@ class MainApp extends StatelessWidget {
                   fontWeight: FontWeight.w600)),
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),
           scaffoldBackgroundColor: const Color(0xffffffff)),
-      home: const HomeScreen(),
-      initialBinding: InitBinding(),
+      home: const PromotionWrite(),
+      initialBinding: ImagePickerBinding(),
     );
   }
 }
