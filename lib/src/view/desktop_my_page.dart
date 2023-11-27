@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
+
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class DesktopMyPage extends StatelessWidget {
@@ -14,156 +15,10 @@ class DesktopMyPage extends StatelessWidget {
         _appBar(),
         _myInfo(),
         _clubInfo(),
+        _myPromotions(),
       ],
     ));
   }
-
-  Widget _clubInfo() {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 300),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const TitleBox(label: '동아리 정보', fontSize: 20),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        '수정',
-                        style: Get.textTheme.displayMedium,
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 100,
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.grey)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text('동아리명', style: Get.textTheme.displayMedium),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text('A&I', style: Get.textTheme.displaySmall),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child:
-                            Text('동아리 회장', style: Get.textTheme.displayMedium),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          '정보통신공학과 한상욱',
-                          style: Get.textTheme.displaySmall,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child:
-                            Text('동아리 개설일', style: Get.textTheme.displayMedium),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          '2023년 1월 10일',
-                          style: Get.textTheme.displaySmall,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text('동아리 요약소개',
-                            style: Get.textTheme.displayMedium),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까지 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다. ',
-                          style: Get.textTheme.displaySmall,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Widget _myPromotions() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(40.0),
-  //     child: BasicBox(
-  //       width: double.infinity,
-  //       height: 400,
-  //       child: Column(
-  //         children: [
-  //           Row(
-  //             children: [
-  //               Text(
-  //                 '내가 쓴 글',
-  //                 style: Get.textTheme.displayLarge,
-  //               ),
-  //             ],
-  //           ),
-  //           const Expanded(
-  //             child: Center(
-  //               child: Text(
-  //                 '작성한 글이 없습니다',
-  //                 style: TextStyle(color: Colors.white),
-  //               ),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget _appBar() {
     return SliverAppBar(
@@ -198,7 +53,7 @@ class DesktopMyPage extends StatelessWidget {
                 ),
               ],
             ),
-            Positioned(
+            const Positioned(
               top: 10,
               bottom: 10,
               left: 300,
@@ -209,9 +64,189 @@ class DesktopMyPage extends StatelessWidget {
                 type: ProfileType.MYPAGE,
               ),
             ),
+            const Positioned(
+                top: 100,
+                left: 450,
+                bottom: 10,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                '마이페이지',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              '담딩자: 어쩌고',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ))
           ],
         ),
       ),
     );
   }
+
+  Widget _clubInfo() {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 300.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TitleBox(
+                  label: '동아리 소개',
+                  fontSize: 20,
+                ),
+                Text(
+                  '수정',
+                  style: TextStyle(fontSize: 20, color: Colors.grey),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 300.0),
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                  color: const Color(0xffe0e0e0),
+                  border: Border.all(color: const Color(0xffb5b5b5)),
+                  borderRadius: BorderRadius.circular(8.0)),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Row(
+                            children: [
+                              Text(
+                                '동아리명',
+                                style: Get.theme.textTheme.displayMedium,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child: Row(
+                            children: [
+                              Text(
+                                'A&I',
+                                style: Get.theme.textTheme.displayMedium,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Row(
+                            children: [
+                              Text(
+                                '동아리개설일',
+                                style: Get.theme.textTheme.displayMedium,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child: Row(
+                            children: [
+                              Text('2023년 1월 10일',
+                                  style: Get.theme.textTheme.displayMedium)
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Row(
+                            children: [
+                              Text(
+                                '동아리분류',
+                                style: Get.theme.textTheme.displayMedium,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child: Row(
+                            children: [
+                              Text(
+                                '교내스터디',
+                                style: Get.theme.textTheme.displayMedium,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+Widget _myPromotions() {
+  return const SliverToBoxAdapter(
+    child: Column(children: [
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 300.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TitleBox(label: '내가 쓴 글', fontSize: 20),
+          ],
+        ),
+      ),
+      Text('내가 쓴 글이 없습니다.')
+    ]),
+  );
 }

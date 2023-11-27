@@ -5,26 +5,32 @@ import 'package:induk_club_promotion_app_project/src/controllers/app_controller.
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/login.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
-
 import 'package:induk_club_promotion_app_project/src/view/desktop_promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/view/mobile_promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/view/tablet_promotion_view.dart';
-
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/side_menu.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
-class DesktopMain extends GetView<PromotionController> {
-  const DesktopMain({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
         children: [
-          const SideMenu(),
-          Obx(
-            () => (controller.promotions.isEmpty)
+          (!ResponsibleLayout.isMobile(context))
+              ? const SideMenu()
+              : Container(),
+          GetX<PromotionController>(
+            builder: (controller) => (controller.promotions.isEmpty)
                 ? const Expanded(
                     child: Center(
                       child: CircularProgressIndicator.adaptive(),
@@ -82,41 +88,41 @@ class DesktopMain extends GetView<PromotionController> {
 
   Widget _moreItem() {
     return SliverPadding(
-      padding: const EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(ResponsibleLayout.isMobile(context) ? 8 : 20),
       sliver: SliverToBoxAdapter(
-        child: Obx(
-          () => GridView.builder(
+        child: GetX<PromotionController>(builder: (controller) {
+          return GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: (ResponsibleLayout.isDesktop(context) ? 3 : 2),
+                mainAxisSpacing: ResponsibleLayout.isMobile(context) ? 8 : 20,
+                crossAxisSpacing: ResponsibleLayout.isMobile(context) ? 8 : 20,
                 childAspectRatio: 0.8,
               ),
               itemCount: controller.promotions.length,
-              itemBuilder: (context, index) => Obx(() {
-                    final promotion = controller.promotions[index];
-                    return GestureDetector(
-                      onTap: () {
-                        Get.to(
-                          () => ResponsibleLayout(
-                            mobile: const MobilePromotionView(),
-                            tablet: const TabletPromotionView(),
-                            desktop: DesktopPromotionView(
-                              promotion: promotion,
-                            ),
-                          ),
-                        );
-                      },
-                      child: PromotionItem(
-                        promotion: promotion,
-                        date: ' D - 9 ',
-                        showDday: false,
+              itemBuilder: (context, index) {
+                final promotion = controller.promotions[index];
+                return GestureDetector(
+                  onTap: () {
+                    Get.to(
+                      () => ResponsibleLayout(
+                        mobile: const MobilePromotionView(),
+                        tablet: const TabletPromotionView(),
+                        desktop: DesktopPromotionView(
+                          promotion: promotion,
+                        ),
                       ),
                     );
-                  })),
-        ),
+                  },
+                  child: PromotionItem(
+                    promotion: promotion,
+                    date: ' D - 9 ',
+                    showDday: false,
+                  ),
+                );
+              });
+        }),
       ),
     );
   }
@@ -153,37 +159,36 @@ class DesktopMain extends GetView<PromotionController> {
 
   Widget _headerItem() {
     return SliverPadding(
-      padding: const EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(ResponsibleLayout.isMobile(context) ? 8 : 20),
       sliver: SliverToBoxAdapter(
-        child: Obx(
-          () => GridView.builder(
+        child: GetX<PromotionController>(builder: (controller) {
+          return GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: (ResponsibleLayout.isDesktop(context)) ? 3 : 2,
                 childAspectRatio: 0.8,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
+                mainAxisSpacing: ResponsibleLayout.isMobile(context) ? 8 : 20,
+                crossAxisSpacing: ResponsibleLayout.isMobile(context) ? 8 : 20,
               ),
               itemCount: controller.promotions.length,
-              itemBuilder: (context, index) => Obx(() {
-                    final promotion = controller.promotions[index];
-                    return GestureDetector(
-                        onTap: () {
-                          Get.to(
-                            () => ResponsibleLayout(
-                              mobile: const MobilePromotionView(),
-                              tablet: const TabletPromotionView(),
-                              desktop: DesktopPromotionView(
-                                promotion: promotion,
-                              ),
-                            ),
-                          );
-                        },
-                        child:
-                            PromotionItem(date: "D - 9", promotion: promotion));
-                  })),
-        ),
+              itemBuilder: (context, index) {
+                final promotion = controller.promotions[index];
+                return GestureDetector(
+                    onTap: () {
+                      Get.to(
+                        () => ResponsibleLayout(
+                          mobile: const MobilePromotionView(),
+                          tablet: const TabletPromotionView(),
+                          desktop: DesktopPromotionView(
+                            promotion: promotion,
+                          ),
+                        ),
+                      );
+                    },
+                    child: PromotionItem(date: "D - 9", promotion: promotion));
+              });
+        }),
       ),
     );
   }
