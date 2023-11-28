@@ -18,23 +18,27 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            width: 500,
-            decoration: (ResponsibleLayout.isMobile(context))
-                ? null
-                : BoxDecoration(
-                    border: Border.all(width: 2.0, color: Colors.grey)),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _logo(),
-                  _body(),
-                ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                width: 500,
+                decoration: (ResponsibleLayout.isMobile(context))
+                    ? null
+                    : BoxDecoration(
+                        border: Border.all(width: 2.0, color: Colors.grey)),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _logo(),
+                      _body(),
+                    ],
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
