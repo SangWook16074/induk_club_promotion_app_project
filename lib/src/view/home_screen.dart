@@ -5,9 +5,9 @@ import 'package:induk_club_promotion_app_project/src/controllers/app_controller.
 import 'package:induk_club_promotion_app_project/src/controllers/page_view_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
-import 'package:induk_club_promotion_app_project/src/view/login.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/desktop_promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/view/login.dart';
 import 'package:induk_club_promotion_app_project/src/view/mobile_promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/view/tablet_promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
@@ -180,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
       actions: [
         TextButton(
           onPressed: () {
-            Get.to(() => const Login(), binding: LoginBinding());
+            Get.to(() => const LoginScreen(), binding: LoginBinding());
           },
           child: const Text("로그인", style: TextStyle(color: Colors.black)),
         ),

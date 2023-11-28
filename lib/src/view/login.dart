@@ -7,14 +7,14 @@ import 'package:induk_club_promotion_app_project/src/widget/login_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/terms_check_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/verification_box.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
