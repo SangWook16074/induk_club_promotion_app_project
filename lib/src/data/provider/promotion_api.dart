@@ -26,7 +26,6 @@ class PromotionApi {
     return dio.post(Url.postPromotionsUrl, data: data).then((resp) {
       if (resp.statusCode == 200) {
         final Promotion promotion = Promotion.fromJson(resp.data);
-        print(promotion);
         return promotion;
       } else {
         throw Exception("Fail to create promotion data...");
