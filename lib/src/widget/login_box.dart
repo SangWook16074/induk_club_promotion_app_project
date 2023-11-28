@@ -5,14 +5,13 @@ import 'package:induk_club_promotion_app_project/src/widget/login_text_field.dar
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 
 class LoginBox extends GetView<LoginController> {
-  final TextEditingController? email;
-  final TextEditingController? password;
-  const LoginBox({super.key, required this.email, this.password});
+  const LoginBox({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _textFields(),
         _button(),
@@ -22,33 +21,33 @@ class LoginBox extends GetView<LoginController> {
   }
 
   Widget _textFields() => Padding(
-        padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.1),
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(4.0),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
               child: Text(
                 '이메일',
-                style: TextStyle(fontSize: 20),
+                style: Get.theme.textTheme.bodySmall,
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4.0),
-              child: LoginTextField(controller: email!),
+              child: LoginTextField(controller: controller.emailController),
             ),
-            const Padding(
-              padding: EdgeInsets.all(4.0),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
               child: Text(
                 '비밀번호',
-                style: TextStyle(fontSize: 20),
+                style: Get.theme.textTheme.bodySmall,
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4.0),
               child: LoginTextField(
-                controller: password!,
+                controller: controller.passwordController,
                 obscureText: true,
               ),
             )
@@ -56,10 +55,9 @@ class LoginBox extends GetView<LoginController> {
         ),
       );
 
-  Widget _button() => Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: 20, horizontal: Get.size.width * 0.1),
-        child: const SignButton(
+  Widget _button() => const Padding(
+        padding: EdgeInsets.symmetric(vertical: 10.0),
+        child: SignButton(
             width: double.infinity,
             child: Text(
               '로그인',
@@ -68,32 +66,28 @@ class LoginBox extends GetView<LoginController> {
       );
 
   Widget _options() {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: Get.size.width * 0.1, vertical: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          GestureDetector(
-              onTap: controller.moveToFindAccount,
-              child: const Text(
-                '아이디 찾기',
-                style: TextStyle(color: Colors.black),
-              )),
-          GestureDetector(
-              onTap: controller.moveToFindPassword,
-              child: const Text(
-                '비밀번호 찾기',
-                style: TextStyle(color: Colors.black),
-              )),
-          GestureDetector(
-              onTap: controller.moveToSignUp,
-              child: const Text(
-                '회원가입',
-                style: TextStyle(color: Colors.black),
-              )),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GestureDetector(
+            onTap: controller.moveToFindAccount,
+            child: Text(
+              '아이디 찾기',
+              style: Get.theme.textTheme.bodySmall,
+            )),
+        GestureDetector(
+            onTap: controller.moveToFindPassword,
+            child: Text(
+              '비밀번호 찾기',
+              style: Get.theme.textTheme.bodySmall,
+            )),
+        GestureDetector(
+            onTap: controller.moveToTerm,
+            child: Text(
+              '회원가입',
+              style: Get.theme.textTheme.bodySmall,
+            )),
+      ],
     );
   }
 }

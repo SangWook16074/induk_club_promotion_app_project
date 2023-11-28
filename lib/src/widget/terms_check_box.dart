@@ -1,59 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
+import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 
 class TermsCheckBox extends GetView<LoginController> {
-  final void Function()? moveToNext;
-  const TermsCheckBox({super.key, this.moveToNext});
+  const TermsCheckBox({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Get.size.width * 0.1),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 7,
-            child: Column(
-              children: [
-                _header(),
-                _terms(),
-                _check(),
-              ],
-            ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 300,
+          child: Column(
+            children: [
+              _header(),
+              _terms(),
+              _check(),
+            ],
           ),
-          Expanded(flex: 1, child: _button()),
-        ],
-      ),
+        ),
+        _button(),
+      ],
     );
   }
 
   Widget _terms() {
-    return Flexible(
-      child: Container(
-        padding: const EdgeInsets.all(2.0),
+    return Container(
+        height: 200,
         decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8.0),
             border: Border.all(width: 1.0, color: const Color(0xff713eff))),
-        child: SingleChildScrollView(child: Text('약관내용' * 10000)),
-      ),
-    );
+        child: SingleChildScrollView(child: Text('약관내용' * 10000)));
   }
 
   Widget _header() {
-    return const Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          Text(
-            '약관동의',
-            style: TextStyle(color: Colors.black),
-          ),
-        ],
-      ),
+    return const Row(
+      children: [
+        Text(
+          '약관동의',
+          style: TextStyle(color: Colors.black),
+        ),
+      ],
     );
   }
 
@@ -86,15 +77,20 @@ class TermsCheckBox extends GetView<LoginController> {
   }
 
   Widget _button() {
-    return SizedBox(
-        width: double.infinity,
-        child: Obx(
-          () => ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xff713eff),
-              ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Obx(
+          () => SignButton(
+              width: 150,
+              height: 40,
               onPressed: (controller.isAgree) ? controller.moveToNext : null,
-              child: const Text('다음')),
-        ));
+              child: const Text(
+                '다음',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              )),
+        )
+      ],
+    );
   }
 }

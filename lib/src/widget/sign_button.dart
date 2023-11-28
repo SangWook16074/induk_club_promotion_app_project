@@ -17,12 +17,14 @@ class SignButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed,
+      onTap: (onPressed != null) ? onPressed : null,
       child: Container(
           width: width,
           height: height,
           alignment: Alignment.center,
-          decoration: const BoxDecoration(color: Color(0xff713eff)),
+          decoration: BoxDecoration(
+              color: (onPressed != null) ?  const Color(0xff713eff) : const Color(0xff4d4d4d),
+              borderRadius: BorderRadius.circular(8.0)),
           child: child),
     );
   }
