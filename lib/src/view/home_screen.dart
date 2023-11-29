@@ -27,49 +27,52 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-          body: (ResponsibleLayout.isMobile(context))
-              ? _buildBody()
-              : Row(
-                  children: [
-                    const SideMenu(),
-                    Expanded(child: _buildBody()),
-                  ],
-                ),
-          bottomNavigationBar: (ResponsibleLayout.isMobile(context))
-              ? GetX<PageViewController>(builder: (controller) {
-                  return BottomNavigationBar(
-                    elevation: 0.0,
-                    currentIndex: controller.pageIndex,
-                    selectedItemColor: const Color(0xff713eff),
-                    unselectedItemColor: Colors.black,
-                    showSelectedLabels: false,
-                    showUnselectedLabels: false,
-                    onTap: controller.changeIndex,
-                    type: BottomNavigationBarType.fixed,
-                    items: const [
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.home_outlined),
-                          activeIcon: Icon(Icons.home),
-                          label: ''),
-                      BottomNavigationBarItem(
-                          icon: Icon(Icons.history_toggle_off_outlined),
-                          activeIcon: Icon(Icons.history_toggle_off),
-                          label: ''),
-                      BottomNavigationBarItem(
-                          icon: ProfileImage(
-                              url:
-                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU",
-                              type: ProfileType.ICON),
-                          activeIcon: ProfileImage(
-                              url:
-                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU",
-                              type: ProfileType.ICONACTIVE),
-                          label: ''),
+      child: GestureDetector(
+        onTap: FocusScope.of(context).unfocus,
+        child: Scaffold(
+            body: (ResponsibleLayout.isMobile(context))
+                ? _buildBody()
+                : Row(
+                    children: [
+                      const SideMenu(),
+                      Expanded(child: _buildBody()),
                     ],
-                  );
-                })
-              : null),
+                  ),
+            bottomNavigationBar: (ResponsibleLayout.isMobile(context))
+                ? GetX<PageViewController>(builder: (controller) {
+                    return BottomNavigationBar(
+                      elevation: 0.0,
+                      currentIndex: controller.pageIndex,
+                      selectedItemColor: const Color(0xff713eff),
+                      unselectedItemColor: Colors.black,
+                      showSelectedLabels: false,
+                      showUnselectedLabels: false,
+                      onTap: controller.changeIndex,
+                      type: BottomNavigationBarType.fixed,
+                      items: const [
+                        BottomNavigationBarItem(
+                            icon: Icon(Icons.home_outlined),
+                            activeIcon: Icon(Icons.home),
+                            label: ''),
+                        BottomNavigationBarItem(
+                            icon: Icon(Icons.history_toggle_off_outlined),
+                            activeIcon: Icon(Icons.history_toggle_off),
+                            label: ''),
+                        BottomNavigationBarItem(
+                            icon: ProfileImage(
+                                url:
+                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU",
+                                type: ProfileType.ICON),
+                            activeIcon: ProfileImage(
+                                url:
+                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU",
+                                type: ProfileType.ICONACTIVE),
+                            label: ''),
+                      ],
+                    );
+                  })
+                : null),
+      ),
     );
   }
 
@@ -184,7 +187,8 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {
             Get.to(() => const LoginScreen(), binding: LoginBinding());
           },
-          child: const Text("로그인", style: TextStyle(color: Colors.black)),
+          child: const Text("로그인",
+              style: TextStyle(color: Colors.black, fontSize: 15)),
         ),
       ],
     );
