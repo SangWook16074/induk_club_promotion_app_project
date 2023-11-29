@@ -22,7 +22,7 @@ class DesktopMyPage extends StatelessWidget {
 
   Widget _appBar() {
     return SliverAppBar(
-      backgroundColor: Color(0xff713eff),
+      backgroundColor: const Color(0xff713eff),
       title: Text('한상욱님! 환영합니다.', style: Get.textTheme.titleMedium),
       elevation: 0.0,
     );
@@ -30,7 +30,7 @@ class DesktopMyPage extends StatelessWidget {
 
   Widget _myInfo() {
     return SliverToBoxAdapter(
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         height: Get.size.height * 0.5,
         child: Stack(
