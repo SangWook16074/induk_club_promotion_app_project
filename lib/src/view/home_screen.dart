@@ -26,49 +26,51 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: (ResponsibleLayout.isMobile(context))
-            ? _buildBody()
-            : Row(
-                children: [
-                  const SideMenu(),
-                  Expanded(child: _buildBody()),
-                ],
-              ),
-        bottomNavigationBar: (ResponsibleLayout.isMobile(context))
-            ? GetX<PageViewController>(builder: (controller) {
-                return BottomNavigationBar(
-                  elevation: 0.0,
-                  currentIndex: controller.pageIndex,
-                  selectedItemColor: const Color(0xff713eff),
-                  unselectedItemColor: Colors.black,
-                  showSelectedLabels: false,
-                  showUnselectedLabels: false,
-                  onTap: controller.changeIndex,
-                  type: BottomNavigationBarType.fixed,
-                  items: const [
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.home_outlined),
-                        activeIcon: Icon(Icons.home),
-                        label: ''),
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.history_toggle_off_outlined),
-                        activeIcon: Icon(Icons.history_toggle_off),
-                        label: ''),
-                    BottomNavigationBarItem(
-                        icon: ProfileImage(
-                            url:
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU",
-                            type: ProfileType.ICON),
-                        activeIcon: ProfileImage(
-                            url:
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU",
-                            type: ProfileType.ICONACTIVE),
-                        label: ''),
+    return SafeArea(
+      child: Scaffold(
+          body: (ResponsibleLayout.isMobile(context))
+              ? _buildBody()
+              : Row(
+                  children: [
+                    const SideMenu(),
+                    Expanded(child: _buildBody()),
                   ],
-                );
-              })
-            : null);
+                ),
+          bottomNavigationBar: (ResponsibleLayout.isMobile(context))
+              ? GetX<PageViewController>(builder: (controller) {
+                  return BottomNavigationBar(
+                    elevation: 0.0,
+                    currentIndex: controller.pageIndex,
+                    selectedItemColor: const Color(0xff713eff),
+                    unselectedItemColor: Colors.black,
+                    showSelectedLabels: false,
+                    showUnselectedLabels: false,
+                    onTap: controller.changeIndex,
+                    type: BottomNavigationBarType.fixed,
+                    items: const [
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.home_outlined),
+                          activeIcon: Icon(Icons.home),
+                          label: ''),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.history_toggle_off_outlined),
+                          activeIcon: Icon(Icons.history_toggle_off),
+                          label: ''),
+                      BottomNavigationBarItem(
+                          icon: ProfileImage(
+                              url:
+                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU",
+                              type: ProfileType.ICON),
+                          activeIcon: ProfileImage(
+                              url:
+                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU",
+                              type: ProfileType.ICONACTIVE),
+                          label: ''),
+                    ],
+                  );
+                })
+              : null),
+    );
   }
 
   Widget _buildBody() => GetX<PromotionController>(
@@ -131,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisCount: (ResponsibleLayout.isDesktop(context) ? 3 : 2),
                 mainAxisSpacing: ResponsibleLayout.isMobile(context) ? 8 : 20,
                 crossAxisSpacing: ResponsibleLayout.isMobile(context) ? 8 : 20,
-                childAspectRatio: 0.8,
+                childAspectRatio: 0.7,
               ),
               itemCount: controller.promotions.length,
               itemBuilder: (context, index) {
