@@ -17,28 +17,44 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Container(
-                width: 500,
-                decoration: (ResponsibleLayout.isMobile(context))
-                    ? null
-                    : BoxDecoration(
-                        border: Border.all(width: 2.0, color: Colors.grey)),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _logo(),
-                      _body(),
-                    ],
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Center(
+            child: SizedBox(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 50,
                   ),
-                ),
+                  Container(
+                    width: 500,
+                    decoration: (ResponsibleLayout.isMobile(context))
+                        ? null
+                        : BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black38,
+                                blurRadius: 5,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _logo(),
+                          _body(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
