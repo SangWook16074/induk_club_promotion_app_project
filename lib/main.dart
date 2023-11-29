@@ -64,8 +64,8 @@ class MainApp extends StatelessWidget {
                   fontWeight: FontWeight.w600)),
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),
           scaffoldBackgroundColor: const Color(0xffffffff)),
-      home: const LoginScreen(),
-      initialBinding: LoginBinding(),
+      home: const App(),
+      initialBinding: InitBinding(),
     );
   }
 }
