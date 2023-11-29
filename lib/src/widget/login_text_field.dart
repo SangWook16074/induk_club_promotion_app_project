@@ -15,6 +15,7 @@ class LoginTextField extends StatelessWidget {
       controller: controller,
       cursorColor: Colors.black,
       obscureText: obscureText!,
+      style: Theme.of(context).textTheme.bodySmall,
       decoration: const InputDecoration(
           isDense: true,
           hintStyle: TextStyle(color: Color(0xff1e1e1e)),

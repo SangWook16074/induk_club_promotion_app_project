@@ -4,11 +4,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
+import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class DesktopPromotionView extends GetView<PromotionController> {
-  const DesktopPromotionView({super.key});
+  final Promotion promotion;
+  const DesktopPromotionView({super.key, required this.promotion});
 
   @override
   Widget build(BuildContext context) {
@@ -18,41 +20,29 @@ class DesktopPromotionView extends GetView<PromotionController> {
         title: Text('LOGO', style: Get.textTheme.displayLarge),
         elevation: 0.0,
       ),
-      body: Center(
-        child: SizedBox(
-          width: 1000,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: AspectRatio(
-                  aspectRatio: 0.5,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        _img(),
-                        _title(),
-                        _deadline(),
-                        _object(),
-                        _target(),
-                        _period(),
-                        _info(),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Column(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 200, right: 400),
+              child: Column(
                 children: [
-                  _infoBox(),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  _img(),
+                  _title(),
+                  _closeAt(),
+                  _beginToEnd(),
+                  _object(),
+                  _content(),
+                  _contentOfAcivity(),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+          Positioned(right: 100, child: _infoBox()),
+        ],
       ),
     );
   }
@@ -87,7 +77,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                   height: 400,
                   width: double.infinity,
                   alignment: Alignment.center,
-                  color: Color(0xffE6E6E6),
+                  color: const Color(0xffE6E6E6),
                   child: Text('이미지 ${index + 1}'),
                 ),
             options: CarouselOptions(
@@ -99,63 +89,32 @@ class DesktopPromotionView extends GetView<PromotionController> {
     );
   }
 
-  Widget _deadline() {
+  Widget _closeAt() {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-        child: Row(
-          children: [
-            Expanded(
-              child: SizedBox(
-                child: Column(
+        child: SizedBox(
+          child: Column(
+            children: [
+              const Row(
+                children: [
+                  TitleBox(
+                    label: '모집마감',
+                    fontSize: 20,
+                  )
+                ],
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                child: Row(
                   children: [
-                    const Row(
-                      children: [
-                        TitleBox(
-                          label: '모집분야',
-                          fontSize: 20,
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 20),
-                      child: Row(
-                        children: [
-                          Text('백엔드/디자인', style: Get.textTheme.bodyLarge),
-                        ],
-                      ),
-                    ),
+                    Text(promotion.closeAt.toString(),
+                        style: Get.textTheme.bodyMedium),
                   ],
                 ),
               ),
-            ),
-            Expanded(
-              child: SizedBox(
-                child: Column(
-                  children: [
-                    const Row(
-                      children: [
-                        TitleBox(
-                          label: '모집기간',
-                          fontSize: 20,
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 20),
-                      child: Row(
-                        children: [
-                          Text('2023.09.23 - 2023.09.30',
-                              style: Get.textTheme.bodyLarge),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 
@@ -171,7 +130,8 @@ class DesktopPromotionView extends GetView<PromotionController> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Row(
               children: [
-                Text('00명', style: Get.textTheme.bodyLarge),
+                Text('${promotion.requiredPeople}명',
+                    style: Get.textTheme.bodyMedium),
               ],
             ),
           )
@@ -180,7 +140,23 @@ class DesktopPromotionView extends GetView<PromotionController> {
     );
   }
 
-  Widget _info() {
+  Widget _content() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      child: Column(
+        children: [
+          const Row(
+            children: [TitleBox(label: '동아리소개', fontSize: 20)],
+          ),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              child: Text(promotion.content, style: Get.textTheme.bodyMedium))
+        ],
+      ),
+    );
+  }
+
+  Widget _contentOfAcivity() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Column(
@@ -190,46 +166,14 @@ class DesktopPromotionView extends GetView<PromotionController> {
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: Text(
-                  '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
-                  '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
-                  '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
-                  'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.'
-                  'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.'
-                  '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
-                  'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.'
-                  '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
-                  'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.'
-                  '2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.'
-                  'UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.',
-                  style: Get.textTheme.bodyLarge))
+              child: Text(promotion.contentOfActivity,
+                  style: Get.textTheme.bodyMedium))
         ],
       ),
     );
   }
 
-  Widget _target() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-      child: Column(
-        children: [
-          const Row(
-            children: [TitleBox(label: '우대학과', fontSize: 20)],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: Row(
-              children: [
-                Text('학과 무관', style: Get.textTheme.bodyLarge),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _period() {
+  Widget _beginToEnd() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
       child: Column(
@@ -241,8 +185,8 @@ class DesktopPromotionView extends GetView<PromotionController> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Row(
               children: [
-                Text('2023년 3월 10일 - 2024년 1월 10일',
-                    style: Get.textTheme.bodyLarge),
+                Text('${promotion.begin} - ${promotion.end}',
+                    style: Get.textTheme.bodyMedium),
               ],
             ),
           )
@@ -308,7 +252,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                   children: [
                     Row(
                       children: [
-                        Text('동아리 개설일', style: Get.textTheme.displayMedium)
+                        Text('동아리 개설일', style: Get.textTheme.headlineMedium)
                       ],
                     ),
                     Row(
@@ -324,7 +268,7 @@ class DesktopPromotionView extends GetView<PromotionController> {
                       children: [
                         Text(
                           '동아리 분류',
-                          style: Get.textTheme.displayMedium,
+                          style: Get.textTheme.headlineMedium,
                         ),
                       ],
                     ),

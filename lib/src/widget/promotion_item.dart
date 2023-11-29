@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 
 class PromotionItem extends StatelessWidget {
@@ -13,67 +12,68 @@ class PromotionItem extends StatelessWidget {
       required this.promotion});
 
   @override
-  Widget build(BuildContext context) => AspectRatio(
-        aspectRatio: 0.8,
-        child: Stack(
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _image(),
+          _header(),
+        ],
+      );
+
+  Widget _header() => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  border:
-                      Border.all(width: 1.0, color: const Color(0xff1e1e1e))),
-              child: Column(
-                children: [
-                  _image(),
-                  _header(),
-                  _discription(),
-                ],
+            SizedBox(
+              child: Text(
+                promotion.club,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                    color: Colors.black87,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
               ),
             ),
-            Positioned(top: 20, right: 0, child: _dday())
+            SizedBox(
+              child: Text(
+                promotion.title,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.black87,
+                  fontSize: 15,
+                ),
+              ),
+            ),
           ],
         ),
       );
 
-  Widget _header() => Row(
+  Widget _image() => Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              promotion.title,
-              style: Get.textTheme.displayMedium,
+          AspectRatio(
+            aspectRatio: 1,
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadiusDirectional.circular(4.0),
+                  shape: BoxShape.rectangle,
+                  color: Colors.grey),
             ),
-          )
+          ),
+          Positioned(top: 20, right: 0, child: _dday())
         ],
       );
 
-  Widget _discription() {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        child: Text(
-          promotion.content,
-          style: Get.textTheme.headlineMedium,
-        ),
-      ),
-    );
-  }
-
-  Widget _image() => AspectRatio(
-        aspectRatio: 1,
+  Widget _dday() => Opacity(
+        opacity: (showDday!) ? 1.0 : 0.0,
         child: Container(
-          width: double.infinity,
-          decoration: const BoxDecoration(
-              shape: BoxShape.rectangle, color: Colors.grey),
-        ),
-      );
-
-  Widget _dday() => Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-        decoration: const BoxDecoration(color: Color(0xff713eff)),
-        child: Text(
-          date,
-          style: const TextStyle(fontSize: 20, color: Colors.white),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          decoration: const BoxDecoration(color: Color(0xff713eff)),
+          child: Text(
+            date,
+            style: const TextStyle(fontSize: 18, color: Colors.white),
+          ),
         ),
       );
 }
