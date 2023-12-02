@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/view/desktop_my_page.dart';
+import 'package:induk_club_promotion_app_project/src/view/my_page_screen.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 
 class SideMenu extends GetView<PageController> {
@@ -44,7 +44,7 @@ class SideMenu extends GetView<PageController> {
               child: ListTile(
                 title: Text('마이페이지', style: Get.textTheme.labelMedium),
                 onTap: () {
-                  Get.to(const DesktopMyPage());
+                  Get.to(const MyPage());
                 },
               ),
             ),

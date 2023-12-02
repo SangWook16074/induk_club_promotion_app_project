@@ -4,6 +4,7 @@ import 'package:induk_club_promotion_app_project/src/app.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
 import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/home_screen.dart';
+import 'package:induk_club_promotion_app_project/src/view/my_page_screen.dart';
 import 'src/bindings/init_binding.dart';
 
 void main() {
