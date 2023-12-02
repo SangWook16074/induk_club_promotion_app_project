@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
+import 'package:induk_club_promotion_app_project/src/widget/apple_login_button.dart';
+import 'package:induk_club_promotion_app_project/src/widget/google_login_button.dart';
+import 'package:induk_club_promotion_app_project/src/widget/social_image_icon.dart';
 import 'package:induk_club_promotion_app_project/src/widget/login_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 
@@ -16,6 +19,8 @@ class LoginBox extends GetView<LoginController> {
         _textFields(),
         _button(),
         _options(),
+        _divider(),
+        _socialSignUpBtn(),
       ],
     );
   }
@@ -90,4 +95,41 @@ class LoginBox extends GetView<LoginController> {
       ],
     );
   }
+
+  Widget _socialSignUpBtn() => const Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: GoogleLoginButton(),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: AppleLoginButton(),
+          ),
+        ],
+      );
+
+  Widget _divider() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              width: 100,
+              height: 1.0,
+              decoration: const BoxDecoration(color: Colors.black),
+            ),
+            const Text(
+              "Start with",
+              style: TextStyle(fontSize: 10),
+            ),
+            Container(
+              width: 100,
+              height: 1.0,
+              decoration: const BoxDecoration(color: Colors.black),
+            ),
+          ],
+        ),
+      );
 }
