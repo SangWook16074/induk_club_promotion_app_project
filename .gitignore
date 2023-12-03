@@ -37,7 +37,7 @@ migrate_working_dir/
 /lib/src/constants/url.dart
 
 # Kakao Api Key 정보
-/lib/src/constants/url.dart
+/lib/src/constants/kakao_api_key.dart
 
 # Symbolication related
 app.*.symbols
