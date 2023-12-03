@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
+import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/my_page_screen.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 
@@ -19,23 +20,28 @@ class SideMenu extends GetView<PageController> {
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(children: [
-            Row(
-              children: [
-                Text('LOGO', style: Get.textTheme.displayLarge),
-              ],
-            ),
+            Text('LOGO', style: Get.textTheme.displayLarge),
             const SizedBox(
               height: 50,
             ),
             Row(children: [
               const ProfileImage(length: 80, type: ProfileType.MYPAGE),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: GestureDetector(
-                  child: Text('로그아웃', style: Get.textTheme.labelMedium),
-                  onTap: () {},
-                ),
-              ),
+              GetX<LoginController>(builder: (controller) {
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: (controller.user == null)
+                      ? GestureDetector(
+                          onTap: () {
+                            Get.to(() => const LoginScreen());
+                          },
+                          child: Text('로그인', style: Get.textTheme.labelMedium),
+                        )
+                      : GestureDetector(
+                          onTap: controller.signOut,
+                          child: Text('로그아웃', style: Get.textTheme.labelMedium),
+                        ),
+                );
+              }),
             ]),
             GestureDetector(
               child: ListTile(
