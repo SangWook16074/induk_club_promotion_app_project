@@ -167,33 +167,18 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       foregroundColor: Colors.black,
       elevation: 0,
-      leading: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          color: Colors.black,
-        ),
-      ),
+      leading: (ResponsibleLayout.isMobile(context))
+          ? Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                color: Colors.black,
+              ),
+            )
+          : null,
       title: SearchTextField(
           controller: Get.find<AppController>().searchController,
           type: SearchBarType.DESKTOP),
       centerTitle: true,
-      actions: [
-        GetX<LoginController>(builder: (controller) {
-          return (controller.user != null)
-              ? TextButton(
-                  onPressed: controller.signOut,
-                  child: const Text("로그아웃",
-                      style: TextStyle(color: Colors.black, fontSize: 15)),
-                )
-              : TextButton(
-                  onPressed: () {
-                    Get.to(() => const LoginScreen());
-                  },
-                  child: const Text("로그인",
-                      style: TextStyle(color: Colors.black, fontSize: 15)),
-                );
-        }),
-      ],
     );
   }
 
