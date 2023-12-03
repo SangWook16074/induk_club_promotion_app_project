@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/app.dart';
-import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
-import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
-import 'package:induk_club_promotion_app_project/src/view/home_screen.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:url_strategy/url_strategy.dart';
 import 'src/bindings/init_binding.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  KakaoSdk.init(
+      nativeAppKey: '8f8595aabc646eb62b4833124e6ee302',
+      javaScriptAppKey: 'cc12dbae3830b9702a124bbbd2857b57');
+  setPathUrlStrategy();
   runApp(const MainApp());
 }
 
@@ -64,8 +68,8 @@ class MainApp extends StatelessWidget {
                   fontWeight: FontWeight.w600)),
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),
           scaffoldBackgroundColor: const Color(0xffffffff)),
-      home: const LoginScreen(),
-      initialBinding: LoginBinding(),
+      home: const App(),
+      initialBinding: InitBinding(),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/auth_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/page_view_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
@@ -26,9 +27,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: GestureDetector(
-        onTap: FocusScope.of(context).unfocus,
+    return GestureDetector(
+      onTap: FocusScope.of(context).unfocus,
+      child: SafeArea(
         child: Scaffold(
             body: (ResponsibleLayout.isMobile(context))
                 ? _buildBody()
@@ -59,14 +60,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             activeIcon: Icon(Icons.history_toggle_off),
                             label: ''),
                         BottomNavigationBarItem(
-                            icon: ProfileImage(
-                                url:
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU",
-                                type: ProfileType.ICON),
-                            activeIcon: ProfileImage(
-                                url:
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ebrwvgVW5Ks_oLfCbG8Httf3_9g-Ynl_Q&usqp=CAU",
-                                type: ProfileType.ICONACTIVE),
+                            icon: ProfileImage(type: ProfileType.ICON),
+                            activeIcon:
+                                ProfileImage(type: ProfileType.ICONACTIVE),
                             label: ''),
                       ],
                     );
@@ -183,13 +179,21 @@ class _HomeScreenState extends State<HomeScreen> {
           type: SearchBarType.DESKTOP),
       centerTitle: true,
       actions: [
-        TextButton(
-          onPressed: () {
-            Get.to(() => const LoginScreen(), binding: LoginBinding());
-          },
-          child: const Text("로그인",
-              style: TextStyle(color: Colors.black, fontSize: 15)),
-        ),
+        GetX<LoginController>(builder: (controller) {
+          return (controller.user != null)
+              ? TextButton(
+                  onPressed: controller.signOut,
+                  child: const Text("로그아웃",
+                      style: TextStyle(color: Colors.black, fontSize: 15)),
+                )
+              : TextButton(
+                  onPressed: () {
+                    Get.to(() => const LoginScreen());
+                  },
+                  child: const Text("로그인",
+                      style: TextStyle(color: Colors.black, fontSize: 15)),
+                );
+        }),
       ],
     );
   }
