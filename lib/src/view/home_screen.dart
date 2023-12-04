@@ -179,6 +179,41 @@ class _HomeScreenState extends State<HomeScreen> {
           controller: Get.find<AppController>().searchController,
           type: SearchBarType.DESKTOP),
       centerTitle: true,
+      actions: (ResponsibleLayout.isMobile(context))
+          ? [
+              GetX<LoginController>(builder: (controller) {
+                if (controller.user == null) {
+                  return GestureDetector(
+                    onTap: () {
+                      Get.to(() => const LoginScreen());
+                    },
+                    child: const Center(
+                      child: Text(
+                        "로그인",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return GestureDetector(
+                    onTap: controller.signOut,
+                    child: const Center(
+                      child: Text(
+                        "로그아웃",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  );
+                }
+              })
+            ]
+          : null,
     );
   }
 
