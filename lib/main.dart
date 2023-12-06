@@ -59,7 +59,7 @@ class MainApp extends StatelessWidget {
               displayMedium: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w400,
-                  fontSize: 18),
+                  fontSize: 15),
               displaySmall: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -70,7 +70,7 @@ class MainApp extends StatelessWidget {
                   fontWeight: FontWeight.w600)),
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),
           scaffoldBackgroundColor: const Color(0xffffffff)),
-      home: const LoginScreen(),
+      home: const App(),
       initialBinding: InitBinding(),
     );
   }
