@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/app.dart';
 import 'package:induk_club_promotion_app_project/src/constants/kakao_api_key.dart';
+import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'src/bindings/init_binding.dart';
@@ -47,8 +48,8 @@ class MainApp extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
               bodySmall: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
+                color: Color(0xff4e4e4e),
+                fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
               displayLarge: TextStyle(
@@ -69,7 +70,7 @@ class MainApp extends StatelessWidget {
                   fontWeight: FontWeight.w600)),
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),
           scaffoldBackgroundColor: const Color(0xffffffff)),
-      home: const App(),
+      home: const LoginScreen(),
       initialBinding: InitBinding(),
     );
   }
