@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/page_view_controller.dart';
 import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
-import 'package:induk_club_promotion_app_project/src/view/my_page_screen.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 
-class SideMenu extends GetView<PageController> {
+class SideMenu extends GetView<PageViewController> {
   const SideMenu({
     super.key,
   });
@@ -43,26 +43,17 @@ class SideMenu extends GetView<PageController> {
                 );
               }),
             ]),
-            GestureDetector(
-              child: ListTile(
-                title: Text('마이페이지', style: Get.textTheme.labelMedium),
-                onTap: () {
-                  Get.to(const MyPage());
-                },
-              ),
-            ),
-            ListTile(
-              title: Text(
-                '내가쓴글',
-                style: Get.textTheme.labelMedium,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                '글작성하기',
-                style: Get.textTheme.labelMedium,
-              ),
-            ),
+            ...List.generate(controller.length, (index) {
+              final title = controller.names[index];
+              return GestureDetector(
+                child: ListTile(
+                  title: Text(title, style: Get.textTheme.labelMedium),
+                  onTap: () {
+                    controller.moveToPage(index);
+                  },
+                ),
+              );
+            }),
           ]),
         ),
       ),

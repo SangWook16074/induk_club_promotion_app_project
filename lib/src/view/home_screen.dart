@@ -30,14 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: FocusScope.of(context).unfocus,
       child: SafeArea(
         child: Scaffold(
-            body: (ResponsibleLayout.isMobile(context))
-                ? _buildBody()
-                : Row(
-                    children: [
-                      const SideMenu(),
-                      Expanded(child: _buildBody()),
-                    ],
-                  ),
+            body: _buildBody(),
             bottomNavigationBar: (ResponsibleLayout.isMobile(context))
                 ? GetX<PageViewController>(builder: (controller) {
                     return BottomNavigationBar(
