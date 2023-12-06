@@ -28,7 +28,7 @@ class _MyPageState extends State<MyPage> {
 
   Widget _appBar() {
     return SliverAppBar(
-      backgroundColor: Color(0xff713eff),
+      backgroundColor: const Color(0xff713eff),
       title: Text('한상욱님! 환영합니다.', style: Get.textTheme.titleMedium),
       elevation: 0.0,
       actions: const [
@@ -46,7 +46,7 @@ class _MyPageState extends State<MyPage> {
 
   Widget _myInfo() {
     return SliverToBoxAdapter(
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         height: 300,
         child: Stack(children: [
@@ -75,8 +75,6 @@ class _MyPageState extends State<MyPage> {
               height: 500,
               child: ProfileImage(
                 length: 150,
-                url:
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU',
                 type: ProfileType.MYPAGE,
               ),
             ),

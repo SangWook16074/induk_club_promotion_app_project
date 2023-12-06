@@ -1,4 +1,4 @@
-package com.example.induk_club_promotion_app_project
+package com.ani.induk_club_promotion_app
 
 import io.flutter.embedding.android.FlutterActivity
 

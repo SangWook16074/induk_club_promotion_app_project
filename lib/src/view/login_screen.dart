@@ -17,43 +17,51 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Center(
-            child: SizedBox(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Container(
-                    width: 500,
-                    decoration: (ResponsibleLayout.isMobile(context))
-                        ? null
-                        : BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.black38,
-                                blurRadius: 5,
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          _logo(),
-                          _body(),
-                        ],
-                      ),
+    return Scaffold(
+      appBar: (ResponsibleLayout.isMobile(context))
+          ? AppBar(
+              backgroundColor: Colors.white,
+              foregroundColor: const Color(0xff713eff),
+              leading: const Icon(
+                Icons.arrow_back_ios_new,
+              ),
+              elevation: 0.0,
+            )
+          : null,
+      body: SingleChildScrollView(
+        child: Center(
+          child: SizedBox(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                Container(
+                  width: 500,
+                  decoration: (ResponsibleLayout.isMobile(context))
+                      ? null
+                      : BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black38,
+                              blurRadius: 5,
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _logo(),
+                        _body(),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:induk_club_promotion_app_project/src/constants/image_path.dart';
 import 'package:induk_club_promotion_app_project/src/widget/social_image_icon.dart';
 
-class GoogleLoginButton extends StatelessWidget {
+class KakaoLoginButton extends StatelessWidget {
   final void Function()? onTap;
-  const GoogleLoginButton({super.key, this.onTap});
+  const KakaoLoginButton({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,11 @@ class GoogleLoginButton extends StatelessWidget {
           height: 50,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(4.0)),
+              color: const Color(0xffffe812),
+              borderRadius: BorderRadius.circular(4.0)),
           child: ClipRRect(
               borderRadius: BorderRadius.circular(4.0),
-              child: SocialImageIcon(path: SocialImagePath.google)),
+              child: SocialImageIcon(path: SocialImagePath.kakao)),
         ),
       ),
     );

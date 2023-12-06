@@ -14,8 +14,3 @@ class SocialImageIcon extends StatelessWidget {
     );
   }
 }
-
-class SocialImagePath {
-  static String get apple => "assets/images/apple_icon.png";
-  static String get google => "assets/images/google_icon.png";
-}
