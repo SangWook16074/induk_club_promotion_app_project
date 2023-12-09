@@ -30,36 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: FocusScope.of(context).unfocus,
       child: SafeArea(
         child: Scaffold(
-            body: _buildBody(),
-            bottomNavigationBar: (ResponsibleLayout.isMobile(context))
-                ? GetX<PageViewController>(builder: (controller) {
-                    return BottomNavigationBar(
-                      elevation: 0.0,
-                      currentIndex: controller.pageIndex,
-                      selectedItemColor: const Color(0xff713eff),
-                      unselectedItemColor: Colors.black,
-                      showSelectedLabels: false,
-                      showUnselectedLabels: false,
-                      onTap: controller.changeIndex,
-                      type: BottomNavigationBarType.fixed,
-                      items: const [
-                        BottomNavigationBarItem(
-                            icon: Icon(Icons.home_outlined),
-                            activeIcon: Icon(Icons.home),
-                            label: ''),
-                        BottomNavigationBarItem(
-                            icon: Icon(Icons.history_toggle_off_outlined),
-                            activeIcon: Icon(Icons.history_toggle_off),
-                            label: ''),
-                        BottomNavigationBarItem(
-                            icon: ProfileImage(type: ProfileType.ICON),
-                            activeIcon:
-                                ProfileImage(type: ProfileType.ICONACTIVE),
-                            label: ''),
-                      ],
-                    );
-                  })
-                : null),
+          body: _buildBody(),
+        ),
       ),
     );
   }

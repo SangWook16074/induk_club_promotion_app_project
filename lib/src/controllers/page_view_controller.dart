@@ -2,15 +2,15 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/view/my_page_screen.dart';
 
-enum Page { HOME, MYPAGE, MYPROMOTIONS, POST }
+enum Page { HOME, MYPROMOTIONS, POST, MYPAGE }
 
 class PageViewController extends GetxController {
   final RxInt _pageIndex = 0.obs;
   final List<String> _pageNames = [
     "홈",
-    "마이페이지",
     "내가 쓴 글",
     "게시판",
+    "마이페이지",
   ];
   int get pageIndex => _pageIndex.value;
   int get length => _pageNames.length;
