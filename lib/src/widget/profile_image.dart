@@ -54,8 +54,8 @@ class _ProfileImageState extends State<ProfileImage> {
       ));
 
   Widget _image() => GetX<LoginController>(builder: (controller) {
-        final String url = controller.user?.properties?["profile_image"] ?? "";
-        if (url == "") {
+        final String? url = controller.user?.profile;
+        if (url == null) {
           return Image.asset(
             ImagePath.basic,
             fit: BoxFit.cover,

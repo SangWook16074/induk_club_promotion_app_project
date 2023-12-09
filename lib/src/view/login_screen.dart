@@ -59,8 +59,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                   child: Center(
                     child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 30, horizontal: 50),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 30, horizontal: 50),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -172,7 +172,9 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(child: const GoogleLoginButton()),
+            child: GestureDetector(
+                onTap: controller.signInWithGoogle,
+                child: const GoogleLoginButton()),
           ),
           const Padding(
             padding: EdgeInsets.all(8.0),
@@ -181,7 +183,8 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
-                onTap: controller.signIn, child: const KakaoLoginButton()),
+                onTap: controller.signInWithKakao,
+                child: const KakaoLoginButton()),
           ),
         ],
       );
