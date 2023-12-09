@@ -45,12 +45,21 @@ class SideMenu extends GetView<PageViewController> {
             ]),
             ...List.generate(controller.length, (index) {
               final title = controller.names[index];
-              return GestureDetector(
-                child: ListTile(
-                  title: Text(title, style: Get.textTheme.labelMedium),
-                  onTap: () {
-                    controller.moveToPage(index);
-                  },
+              return Obx(
+                () => GestureDetector(
+                  child: ListTile(
+                    title: Text(title,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: (controller.pageIndex == index)
+                              ? FontWeight.w600
+                              : FontWeight.w500,
+                        )),
+                    onTap: () {
+                      controller.moveToPage(index);
+                    },
+                  ),
                 ),
               );
             }),

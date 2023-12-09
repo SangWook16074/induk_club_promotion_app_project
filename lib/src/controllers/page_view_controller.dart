@@ -10,7 +10,7 @@ class PageViewController extends GetxController {
     "홈",
     "마이페이지",
     "내가 쓴 글",
-    "글쓰기",
+    "게시판",
   ];
   int get pageIndex => _pageIndex.value;
   int get length => _pageNames.length;
@@ -24,8 +24,8 @@ class PageViewController extends GetxController {
   }
 
   void moveToPage(int value) {
-    var _page = Page.values[value];
-    switch (_page) {
+    var page = Page.values[value];
+    switch (page) {
       case Page.HOME:
       case Page.MYPROMOTIONS:
       case Page.POST:
