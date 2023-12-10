@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
+import 'package:induk_club_promotion_app_project/src/data/provider/google_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/kakao_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/view/home_screen.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
@@ -17,9 +18,8 @@ class LoginController extends GetxController {
   final RxInt _index = 0.obs;
   LoginPlatform _loginPlatform = LoginPlatform.NONE;
   final KakaoLoginApi kakaoLoginApi;
-  LoginController({
-    required this.kakaoLoginApi,
-  });
+  final GoogleLoginApi googleLoginApi;
+  LoginController({required this.kakaoLoginApi, required this.googleLoginApi});
   Member? get user => _user.value;
   int get pageIndex => _index.value;
   bool get isAgree => _isAgree.value;
@@ -52,25 +52,26 @@ class LoginController extends GetxController {
     }
   }
 
-  void signInWithKakao() async {
+  void signInWithKakao() {
     if (_loginPlatform != LoginPlatform.NONE) return;
     kakaoLoginApi.kakaoSignIn().then((user) {
-      _user.value = Member.fromKakao(user);
+      _user.value = user;
+      print(_user.value);
     }).then((_) {
       Get.back();
       _loginPlatform = LoginPlatform.KAKAO;
-      print(_user.value);
     });
   }
 
   void signInWithGoogle() {
     if (_loginPlatform != LoginPlatform.NONE) return;
-    GoogleSignIn().signIn().then((user) {
+    googleLoginApi.googleSignIn().then((user) {
+      _user.value = user;
+      print(_user.value);
+    }).then((_) {
       Get.back();
 
-      _user.value = Member.fromGoogle(user!);
       _loginPlatform = LoginPlatform.GOOGLE;
-      print(_user.value);
     });
   }
 

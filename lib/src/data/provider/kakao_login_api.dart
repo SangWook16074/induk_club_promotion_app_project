@@ -1,8 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
-class KakaoLoginApi extends GetxService {
+class KakaoLoginApi {
   kakaoSignIn() async {
     final api = UserApi.instance;
     if (await isKakaoTalkInstalled()) {
@@ -38,7 +39,9 @@ class KakaoLoginApi extends GetxService {
 
   signOut() => UserApi.instance.unlink();
 
-  Future<User> _getUserInfo() {
-    return UserApi.instance.me();
+  Future<Member> _getUserInfo() {
+    return UserApi.instance.me().then((user) {
+      return Member.fromKakao(user);
+    });
   }
 }

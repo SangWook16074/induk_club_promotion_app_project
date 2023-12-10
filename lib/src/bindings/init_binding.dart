@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/page_view_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
+import 'package:induk_club_promotion_app_project/src/data/provider/google_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/kakao_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/repository/promotion_repository.dart';
 
@@ -13,6 +15,8 @@ class InitBinding implements Bindings {
     Get.put(PageViewController(), permanent: true);
     Get.put(PromotionController(promotionRepository: PromotionRepository()),
         permanent: true);
-    Get.put(LoginController(kakaoLoginApi: KakaoLoginApi()));
+    Get.put(LoginController(
+        kakaoLoginApi: KakaoLoginApi(),
+        googleLoginApi: GoogleLoginApi(api: GoogleSignIn())));
   }
 }
