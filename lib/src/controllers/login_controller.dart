@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/google_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/kakao_login_api.dart';
-import 'package:induk_club_promotion_app_project/src/view/home_screen.dart';
-import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 enum LoginPlatform { KAKAO, GOOGLE, APPLE, NONE }
 
@@ -66,12 +65,16 @@ class LoginController extends GetxController {
   void signInWithGoogle() {
     if (_loginPlatform != LoginPlatform.NONE) return;
     googleLoginApi.googleSignIn().then((user) {
-      _user.value = user;
-      print(_user.value);
-    }).then((_) {
-      Get.back();
-
-      _loginPlatform = LoginPlatform.GOOGLE;
+      if (user == null) {
+        return;
+      } else {
+        _user.value = user;
+        _loginPlatform = LoginPlatform.GOOGLE;
+        Get.back();
+      }
+    }).onError((error, stackTrace) {
+      if (error is PlatformException) return;
+      print(error);
     });
   }
 
@@ -84,7 +87,7 @@ class LoginController extends GetxController {
         });
 
       case LoginPlatform.GOOGLE:
-        GoogleSignIn().signOut().then((_) {
+        googleLoginApi.signOut().then((_) {
           _loginPlatform = LoginPlatform.NONE;
           _user.value = null;
         });

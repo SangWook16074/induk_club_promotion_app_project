@@ -5,13 +5,20 @@ class GoogleLoginApi {
   final GoogleSignIn api;
   GoogleLoginApi({required this.api});
 
-  googleSignIn() async {
+  Future<Member?> googleSignIn() async {
     try {
-      final user = await api.signIn();
-      print(user);
-      return Member.fromGoogle(user!);
+      return api.signIn().then((user) {
+        if (user == null) {
+          return null;
+        } else {
+          return Member.fromGoogle(user);
+        }
+      });
     } catch (error) {
       print(error);
+      return null;
     }
   }
+
+  Future<void> signOut() => api.signOut();
 }
