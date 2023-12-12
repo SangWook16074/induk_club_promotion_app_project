@@ -1,16 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
-import 'package:induk_club_promotion_app_project/src/widget/account_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/apple_login_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/google_login_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/kakao_login_button.dart';
-import 'package:induk_club_promotion_app_project/src/widget/login_box.dart';
 import 'package:induk_club_promotion_app_project/src/widget/login_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
-import 'package:induk_club_promotion_app_project/src/widget/terms_check_box.dart';
-import 'package:induk_club_promotion_app_project/src/widget/verification_box.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -176,10 +174,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 onTap: controller.signInWithGoogle,
                 child: const GoogleLoginButton()),
           ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: AppleLoginButton(),
-          ),
+          (Platform.isIOS)
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                      onTap: controller.signInWithApple,
+                      child: const AppleLoginButton()),
+                )
+              : Container(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(

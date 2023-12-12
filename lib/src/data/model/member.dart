@@ -1,5 +1,6 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class Member {
   final String? nickName;
@@ -18,5 +19,9 @@ class Member {
 
   factory Member.fromGoogle(GoogleSignInAccount user) {
     return Member(nickName: user.displayName, profile: user.photoUrl);
+  }
+
+  factory Member.fromApple(AuthorizationCredentialAppleID user) {
+    return Member(nickName: user.userIdentifier);
   }
 }
