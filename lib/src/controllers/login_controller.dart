@@ -85,12 +85,14 @@ class LoginController extends GetxController {
           _loginPlatform = LoginPlatform.NONE;
           _user.value = null;
         });
+        break;
 
       case LoginPlatform.GOOGLE:
         googleLoginApi.signOut().then((_) {
           _loginPlatform = LoginPlatform.NONE;
           _user.value = null;
         });
+        break;
       default:
     }
   }
