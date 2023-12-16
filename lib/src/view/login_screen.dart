@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
@@ -26,8 +27,11 @@ class _LoginScreenState extends State<LoginScreen> {
           ? AppBar(
               backgroundColor: Colors.white,
               foregroundColor: const Color(0xff713eff),
-              leading: const Icon(
-                Icons.arrow_back_ios_new,
+              leading: GestureDetector(
+                onTap: Get.back,
+                child: const Icon(
+                  Icons.arrow_back_ios_new,
+                ),
               ),
               elevation: 0.0,
             )
@@ -174,14 +178,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 onTap: controller.signInWithGoogle,
                 child: const GoogleLoginButton()),
           ),
-          (Platform.isIOS)
-              ? Padding(
+          (kIsWeb || Platform.isAndroid)
+              ? Container()
+              : Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
                       onTap: controller.signInWithApple,
                       child: const AppleLoginButton()),
-                )
-              : Container(),
+                ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
