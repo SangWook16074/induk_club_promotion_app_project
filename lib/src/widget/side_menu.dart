@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/view/desktop_my_page.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/page_view_controller.dart';
+import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 
-class SideMenu extends GetView<PageController> {
+class SideMenu extends GetView<PageViewController> {
   const SideMenu({
     super.key,
   });
@@ -18,48 +20,49 @@ class SideMenu extends GetView<PageController> {
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(children: [
-            Row(
-              children: [
-                Text('LOGO', style: Get.textTheme.displayLarge),
-              ],
-            ),
+            Text('LOGO', style: Get.textTheme.displayLarge),
             const SizedBox(
               height: 50,
             ),
             Row(children: [
-              const ProfileImage(
-                  length: 80,
-                  url:
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU',
-                  type: ProfileType.MYPAGE),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: GestureDetector(
-                  child: Text('로그아웃', style: Get.textTheme.labelMedium),
-                  onTap: () {},
-                ),
-              ),
+              const ProfileImage(length: 80, type: ProfileType.MYPAGE),
+              GetX<LoginController>(builder: (controller) {
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: (controller.user == null)
+                      ? GestureDetector(
+                          onTap: () {
+                            Get.to(() => const LoginScreen());
+                          },
+                          child: Text('로그인', style: Get.textTheme.labelMedium),
+                        )
+                      : GestureDetector(
+                          onTap: controller.signOut,
+                          child: Text('로그아웃', style: Get.textTheme.labelMedium),
+                        ),
+                );
+              }),
             ]),
-            GestureDetector(
-              child: ListTile(
-                title: Text('마이페이지', style: Get.textTheme.labelMedium),
-                onTap: () {
-                  Get.to(const DesktopMyPage());
-                },
-              ),
-            ),
-            ListTile(
-              title: Text(
-                '내가쓴글',
-                style: Get.textTheme.labelMedium,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                '글작성하기',
-                style: Get.textTheme.labelMedium,
-              ),
-            ),
+            ...List.generate(controller.length, (index) {
+              final title = controller.names[index];
+              return Obx(
+                () => GestureDetector(
+                  child: ListTile(
+                    title: Text(title,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: (controller.pageIndex == index)
+                              ? FontWeight.w600
+                              : FontWeight.w500,
+                        )),
+                    onTap: () {
+                      controller.moveToPage(index);
+                    },
+                  ),
+                ),
+              );
+            }),
           ]),
         ),
       ),

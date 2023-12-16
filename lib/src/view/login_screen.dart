@@ -1,11 +1,15 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
-import 'package:induk_club_promotion_app_project/src/widget/account_box.dart';
-import 'package:induk_club_promotion_app_project/src/widget/login_box.dart';
-import 'package:induk_club_promotion_app_project/src/widget/terms_check_box.dart';
-import 'package:induk_club_promotion_app_project/src/widget/verification_box.dart';
+import 'package:induk_club_promotion_app_project/src/widget/apple_login_button.dart';
+import 'package:induk_club_promotion_app_project/src/widget/google_login_button.dart';
+import 'package:induk_club_promotion_app_project/src/widget/kakao_login_button.dart';
+import 'package:induk_club_promotion_app_project/src/widget/login_text_field.dart';
+import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,45 +19,65 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final controller = Get.find<LoginController>();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Center(
-            child: SizedBox(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Container(
-                    width: 500,
-                    decoration: (ResponsibleLayout.isMobile(context))
-                        ? null
-                        : BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.black38,
-                                blurRadius: 5,
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                    child: Center(
+    return Scaffold(
+      appBar: (ResponsibleLayout.isMobile(context))
+          ? AppBar(
+              backgroundColor: Colors.white,
+              foregroundColor: const Color(0xff713eff),
+              leading: GestureDetector(
+                onTap: Get.back,
+                child: const Icon(
+                  Icons.arrow_back_ios_new,
+                ),
+              ),
+              elevation: 0.0,
+            )
+          : null,
+      body: SingleChildScrollView(
+        child: Center(
+          child: SizedBox(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width - 5,
+                  decoration: (ResponsibleLayout.isMobile(context))
+                      ? null
+                      : BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black38,
+                              blurRadius: 5,
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 30, horizontal: 50),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           _logo(),
-                          _body(),
+                          _textFields(),
+                          _button(),
+                          _options(),
+                          _divider(),
+                          _socialSignUpBtn(),
                         ],
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -62,10 +86,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _logo() => Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         child: Container(
-          width: 200,
-          height: 100,
+          width: 100,
+          height: 50,
           alignment: Alignment.center,
           decoration: BoxDecoration(
               border: Border.all(width: 2.0, color: Colors.black)),
@@ -73,20 +97,124 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
 
-  Widget _body() => Padding(
-        padding: (ResponsibleLayout.isMobile(context))
-            ? const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0)
-            : const EdgeInsets.symmetric(vertical: 20.0, horizontal: 100.0),
-        child: GetX<LoginController>(builder: (controller) {
-          return IndexedStack(
-            index: controller.pageIndex,
-            children: const [
-              LoginBox(),
-              TermsCheckBox(),
-              AccountBox(),
-              VerificaionBox()
-            ],
-          );
-        }),
+  Widget _textFields() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text(
+                '이메일',
+                style: Get.theme.textTheme.bodySmall,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: LoginTextField(controller: controller.emailController),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text(
+                '비밀번호',
+                style: Get.theme.textTheme.bodySmall,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: LoginTextField(
+                controller: controller.passwordController,
+                obscureText: true,
+              ),
+            )
+          ],
+        ),
+      );
+
+  Widget _button() => const Padding(
+        padding: EdgeInsets.symmetric(vertical: 10.0),
+        child: SignButton(
+            width: double.infinity,
+            height: 40,
+            child: Text(
+              '로그인',
+              style: TextStyle(color: Colors.white, fontSize: 15),
+            )),
+      );
+
+  Widget _options() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GestureDetector(
+            onTap: controller.moveToFindAccount,
+            child: Text(
+              '아이디 찾기',
+              style: Get.theme.textTheme.bodySmall,
+            )),
+        GestureDetector(
+            onTap: controller.moveToFindPassword,
+            child: Text(
+              '비밀번호 찾기',
+              style: Get.theme.textTheme.bodySmall,
+            )),
+        GestureDetector(
+            onTap: controller.moveToTerm,
+            child: Text(
+              '회원가입',
+              style: Get.theme.textTheme.bodySmall,
+            )),
+      ],
+    );
+  }
+
+  Widget _socialSignUpBtn() => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+                onTap: controller.signInWithGoogle,
+                child: const GoogleLoginButton()),
+          ),
+          (kIsWeb || Platform.isAndroid)
+              ? Container()
+              : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                      onTap: controller.signInWithApple,
+                      child: const AppleLoginButton()),
+                ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+                onTap: controller.signInWithKakao,
+                child: const KakaoLoginButton()),
+          ),
+        ],
+      );
+
+  Widget _divider() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              width: 100,
+              height: 1.0,
+              decoration: const BoxDecoration(color: Colors.black),
+            ),
+            const Text(
+              "Start with",
+              style: TextStyle(fontSize: 10),
+            ),
+            Container(
+              width: 100,
+              height: 1.0,
+              decoration: const BoxDecoration(color: Colors.black),
+            ),
+          ],
+        ),
       );
 }
