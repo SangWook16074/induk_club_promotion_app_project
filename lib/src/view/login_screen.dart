@@ -46,7 +46,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 50,
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width - 5,
+                  width: (ResponsibleLayout.isMobile(context))
+                      ? MediaQuery.of(context).size.width - 5
+                      : 500,
                   decoration: (ResponsibleLayout.isMobile(context))
                       ? null
                       : BoxDecoration(
