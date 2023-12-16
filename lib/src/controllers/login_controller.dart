@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/google_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/kakao_login_api.dart';
@@ -20,6 +19,7 @@ class LoginController extends GetxController {
   final KakaoLoginApi kakaoLoginApi;
   final GoogleLoginApi googleLoginApi;
   LoginController({required this.kakaoLoginApi, required this.googleLoginApi});
+
   Member? get user => _user.value;
   int get pageIndex => _index.value;
   bool get isAgree => _isAgree.value;
@@ -96,25 +96,16 @@ class LoginController extends GetxController {
   void signOut() {
     switch (_loginPlatform) {
       case LoginPlatform.KAKAO:
-        kakaoLoginApi.signOut().then((_) {
-          _loginPlatform = LoginPlatform.NONE;
-          _user.value = null;
-        });
+        kakaoLoginApi.signOut();
         break;
-
       case LoginPlatform.GOOGLE:
-        googleLoginApi.signOut().then((_) {
-          _loginPlatform = LoginPlatform.NONE;
-          _user.value = null;
-        });
+        googleLoginApi.signOut();
         break;
-
       case LoginPlatform.APPLE:
-        _loginPlatform = LoginPlatform.NONE;
-        _user.value = null;
-
-        break;
       default:
+        break;
     }
+    _loginPlatform = LoginPlatform.NONE;
+    _user.value = null;
   }
 }

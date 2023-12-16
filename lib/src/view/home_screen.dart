@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
-import 'package:induk_club_promotion_app_project/src/controllers/page_view_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
@@ -10,10 +9,8 @@ import 'package:induk_club_promotion_app_project/src/view/desktop_promotion_view
 import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/mobile_promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/view/tablet_promotion_view.dart';
-import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
-import 'package:induk_club_promotion_app_project/src/widget/side_menu.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class HomeScreen extends StatefulWidget {

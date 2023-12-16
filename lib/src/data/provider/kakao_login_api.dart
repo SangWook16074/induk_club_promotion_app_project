@@ -1,5 +1,4 @@
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 

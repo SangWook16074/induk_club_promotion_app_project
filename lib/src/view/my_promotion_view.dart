@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
