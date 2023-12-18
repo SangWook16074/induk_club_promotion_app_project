@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/image_picker_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 
 class PromotionWrite extends StatefulWidget {
@@ -327,17 +328,24 @@ class _PromotionWriteState extends State<PromotionWrite> {
   Widget _button() => Padding(
         padding:
             EdgeInsets.all(ResponsibleLayout.isMobile(context) ? 8.0 : 20.0),
-        child: Container(
-          width: 400,
-          height: 70,
-          decoration: BoxDecoration(
-              color: const Color(0xff713eff),
-              borderRadius: BorderRadius.circular(2.0)),
-          alignment: Alignment.center,
-          child: const Text(
-            "홍보 글 등록하기",
-            style: TextStyle(
-                color: Colors.white, fontSize: 25, fontWeight: FontWeight.w700),
+        child: InkWell(
+          onTap: () {
+            Get.find<PromotionController>().createPromotion();
+          },
+          child: Container(
+            width: 400,
+            height: 70,
+            decoration: BoxDecoration(
+                color: const Color(0xff713eff),
+                borderRadius: BorderRadius.circular(2.0)),
+            alignment: Alignment.center,
+            child: const Text(
+              "홍보 글 등록하기",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w700),
+            ),
           ),
         ),
       );
