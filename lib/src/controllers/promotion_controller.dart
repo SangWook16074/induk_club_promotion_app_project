@@ -41,8 +41,10 @@ class PromotionController extends GetxController {
     };
 
     promotionRepository.postPromotion(data).then((result) {
-      _promotions.value.add(result);
-      _promotions.refresh();
+      if (result != null) {
+        _promotions.value.add(result);
+        _promotions.refresh();
+      }
     });
   }
 }

@@ -22,13 +22,13 @@ class PromotionApi {
     });
   }
 
-  Future<Promotion> postPromotion(Map<String, dynamic> data) {
+  Future<Promotion?> postPromotion(Map<String, dynamic> data) {
     return dio.post(Url.postPromotionsUrl, data: data).then((resp) {
-      if (resp.statusCode == 200) {
+      if (resp.statusCode == 201) {
         final Promotion promotion = Promotion.fromJson(resp.data);
         return promotion;
       } else {
-        throw Exception("Fail to create promotion data...");
+        return null;
       }
     });
   }
