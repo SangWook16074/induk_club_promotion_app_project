@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/promotion_api.dart';
 
