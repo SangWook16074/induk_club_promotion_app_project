@@ -77,7 +77,7 @@ class _MyPromotionViewState extends State<MyPromotionView> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 16.0),
+                            padding: const EdgeInsets.only(top: 50.0),
                             child: Text(
                               promotion.closeAt.toString(),
                               style: const TextStyle(fontSize: 12),
