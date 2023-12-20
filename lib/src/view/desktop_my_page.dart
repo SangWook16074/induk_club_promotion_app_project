@@ -59,8 +59,6 @@ class DesktopMyPage extends StatelessWidget {
               left: 300,
               child: ProfileImage(
                 length: 150,
-                url:
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkWOsW52fToB1DAeOOFCC8MnOqV4djsYkYrw&usqp=CAU',
                 type: ProfileType.MYPAGE,
               ),
             ),

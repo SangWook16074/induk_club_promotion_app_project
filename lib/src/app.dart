@@ -5,7 +5,7 @@ import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/home_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/my_page_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/my_promotion_view.dart';
-import 'package:induk_club_promotion_app_project/src/view/promotion_page.dart';
+import 'package:induk_club_promotion_app_project/src/view/all_promotion.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/side_menu.dart';
 
@@ -69,7 +69,7 @@ class App extends GetView<PageViewController> {
         children: const [
           HomeScreen(),
           MyPromotionView(),
-          PromotionPage(),
+          AllPromotion(),
           MyPage(),
         ],
       );

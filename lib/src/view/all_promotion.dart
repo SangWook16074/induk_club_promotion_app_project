@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 
-class PromotionPage extends StatelessWidget {
-  const PromotionPage({super.key});
+class AllPromotion extends StatelessWidget {
+  const AllPromotion({super.key});
 
   @override
   Widget build(BuildContext context) {
