@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/app.dart';
 import 'package:induk_club_promotion_app_project/src/constants/kakao_api_key.dart';
+import 'package:induk_club_promotion_app_project/src/view/resister.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'src/bindings/init_binding.dart';
@@ -57,11 +58,11 @@ class MainApp extends StatelessWidget {
                   fontWeight: FontWeight.w600),
               displayMedium: TextStyle(
                   color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 15),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20),
               displaySmall: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
+                  color: Colors.black,
+                  fontSize: 15,
                   fontWeight: FontWeight.w600),
               headlineMedium: TextStyle(
                   color: Colors.black,

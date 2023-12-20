@@ -1,27 +1,44 @@
 import 'package:flutter/material.dart';
 
 class LoginTextField extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
+  final TextInputType? type;
   final bool? obscureText;
+  final Icon? prefixIcon;
+  final String? hintText;
   const LoginTextField({
     super.key,
-    required this.controller,
+    this.controller,
     this.obscureText = false,
+    this.prefixIcon,
+    this.hintText,
+    this.type,
   });
+
+  String? get hintLabel {
+    if (hintText != null) {
+      return hintText;
+    } else {
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: type,
       controller: controller,
       cursorColor: Colors.black,
       obscureText: obscureText!,
-      style: Theme.of(context).textTheme.bodySmall,
-      decoration: const InputDecoration(
+      style: Theme.of(context).textTheme.bodyMedium,
+      decoration: InputDecoration(
+          prefixIcon: prefixIcon,
+          hintText: hintText,
           isDense: true,
-          hintStyle: TextStyle(color: Color(0xff1e1e1e)),
-          focusedBorder: OutlineInputBorder(
+          hintStyle: const TextStyle(color: Color(0xffbdbdbd), fontSize: 16),
+          focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Color(0xff713eff), width: 2.0)),
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Color(0xff713eff)))),
     );
   }
