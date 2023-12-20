@@ -5,10 +5,8 @@ import 'package:induk_club_promotion_app_project/src/controllers/login_controlle
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
-import 'package:induk_club_promotion_app_project/src/view/desktop_promotion_view.dart';
 import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
-import 'package:induk_club_promotion_app_project/src/view/mobile_promotion_view.dart';
-import 'package:induk_club_promotion_app_project/src/view/tablet_promotion_view.dart';
+import 'package:induk_club_promotion_app_project/src/view/promotion_screen.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
@@ -100,15 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 final promotion = controller.promotions[index];
                 return GestureDetector(
                   onTap: () {
-                    Get.to(
-                      () => ResponsibleLayout(
-                        mobile: const MobilePromotionView(),
-                        tablet: const TabletPromotionView(),
-                        desktop: DesktopPromotionView(
-                          promotion: promotion,
-                        ),
-                      ),
-                    );
+                    Get.to(() => PromotionScreen(promotion: promotion));
                   },
                   child: PromotionItem(
                     promotion: promotion,
@@ -227,15 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }) =>
       GestureDetector(
           onTap: () {
-            Get.to(
-              () => ResponsibleLayout(
-                mobile: const MobilePromotionView(),
-                tablet: const TabletPromotionView(),
-                desktop: DesktopPromotionView(
-                  promotion: promotion,
-                ),
-              ),
-            );
+            Get.to(() => PromotionScreen(promotion: promotion));
           },
           child: PromotionItem(
             date: "D - 9",

@@ -20,7 +20,6 @@ Promotion _$PromotionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Promotion {
-  int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
@@ -44,8 +43,7 @@ abstract class $PromotionCopyWith<$Res> {
       _$PromotionCopyWithImpl<$Res, Promotion>;
   @useResult
   $Res call(
-      {int id,
-      String title,
+      {String title,
       String content,
       String userName,
       String club,
@@ -70,7 +68,6 @@ class _$PromotionCopyWithImpl<$Res, $Val extends Promotion>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? title = null,
     Object? content = null,
     Object? userName = null,
@@ -83,10 +80,6 @@ class _$PromotionCopyWithImpl<$Res, $Val extends Promotion>
     Object? contentOfActivity = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -140,8 +133,7 @@ abstract class _$$PromotionImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      String title,
+      {String title,
       String content,
       String userName,
       String club,
@@ -164,7 +156,6 @@ class __$$PromotionImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? title = null,
     Object? content = null,
     Object? userName = null,
@@ -177,10 +168,6 @@ class __$$PromotionImplCopyWithImpl<$Res>
     Object? contentOfActivity = null,
   }) {
     return _then(_$PromotionImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -229,8 +216,7 @@ class __$$PromotionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PromotionImpl implements _Promotion {
   _$PromotionImpl(
-      {required this.id,
-      required this.title,
+      {required this.title,
       required this.content,
       required this.userName,
       required this.club,
@@ -244,8 +230,6 @@ class _$PromotionImpl implements _Promotion {
   factory _$PromotionImpl.fromJson(Map<String, dynamic> json) =>
       _$$PromotionImplFromJson(json);
 
-  @override
-  final int id;
   @override
   final String title;
   @override
@@ -269,7 +253,7 @@ class _$PromotionImpl implements _Promotion {
 
   @override
   String toString() {
-    return 'Promotion(id: $id, title: $title, content: $content, userName: $userName, club: $club, createAt: $createAt, closeAt: $closeAt, begin: $begin, end: $end, requiredPeople: $requiredPeople, contentOfActivity: $contentOfActivity)';
+    return 'Promotion(title: $title, content: $content, userName: $userName, club: $club, createAt: $createAt, closeAt: $closeAt, begin: $begin, end: $end, requiredPeople: $requiredPeople, contentOfActivity: $contentOfActivity)';
   }
 
   @override
@@ -277,7 +261,6 @@ class _$PromotionImpl implements _Promotion {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PromotionImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.userName, userName) ||
@@ -296,8 +279,8 @@ class _$PromotionImpl implements _Promotion {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, content, userName,
-      club, createAt, closeAt, begin, end, requiredPeople, contentOfActivity);
+  int get hashCode => Object.hash(runtimeType, title, content, userName, club,
+      createAt, closeAt, begin, end, requiredPeople, contentOfActivity);
 
   @JsonKey(ignore: true)
   @override
@@ -315,8 +298,7 @@ class _$PromotionImpl implements _Promotion {
 
 abstract class _Promotion implements Promotion {
   factory _Promotion(
-      {required final int id,
-      required final String title,
+      {required final String title,
       required final String content,
       required final String userName,
       required final String club,
@@ -330,8 +312,6 @@ abstract class _Promotion implements Promotion {
   factory _Promotion.fromJson(Map<String, dynamic> json) =
       _$PromotionImpl.fromJson;
 
-  @override
-  int get id;
   @override
   String get title;
   @override
