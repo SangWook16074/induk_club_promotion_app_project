@@ -161,8 +161,8 @@ class _LoginScreenState extends State<LoginScreen> {
               '비밀번호 찾기',
               style: Get.theme.textTheme.bodySmall,
             )),
-        GestureDetector(
-            onTap: controller.moveToTerm,
+        InkWell(
+            onTap: controller.moveToResister,
             child: Text(
               '회원가입',
               style: Get.theme.textTheme.bodySmall,
