@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/resister_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/widget/login_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
@@ -12,22 +13,7 @@ class Resister extends StatefulWidget {
 }
 
 class _ResisterState extends State<Resister> {
-  late bool isAgree;
-
-  @override
-  void initState() {
-    super.initState();
-    isAgree = false;
-  }
-
-  void agree(bool? value) => setState(() {
-        isAgree = true;
-      });
-
-  void disagree(bool? value) => setState(() {
-        isAgree = false;
-      });
-
+  final controller = Get.find<ResisterController>();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -84,10 +70,10 @@ class _ResisterState extends State<Resister> {
     );
   }
 
-  Widget _eamil() => const Column(
+  Widget _eamil() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(4.0),
             child: Text(
               "이메일",
@@ -95,19 +81,20 @@ class _ResisterState extends State<Resister> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(4.0),
+            padding: const EdgeInsets.all(4.0),
             child: LoginTextField(
               type: TextInputType.emailAddress,
+              controller: controller.email,
               hintText: "ex)example@example.com",
             ),
           ),
         ],
       );
 
-  Widget _name() => const Column(
+  Widget _name() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(4.0),
             child: Text(
               "회원이름",
@@ -115,18 +102,19 @@ class _ResisterState extends State<Resister> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(4.0),
+            padding: const EdgeInsets.all(4.0),
             child: LoginTextField(
+              controller: controller.name,
               hintText: "ex)홍길동",
             ),
           ),
         ],
       );
 
-  Widget _password() => const Column(
+  Widget _password() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(4.0),
             child: Text(
               "비밀번호",
@@ -134,13 +122,14 @@ class _ResisterState extends State<Resister> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(4.0),
+            padding: const EdgeInsets.all(4.0),
             child: LoginTextField(
               obscureText: true,
+              controller: controller.password,
               hintText: "비밀번호를 입력해주세요.",
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(4.0),
             child: Text(
               "비밀번호 확인",
@@ -148,13 +137,14 @@ class _ResisterState extends State<Resister> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(4.0),
+            padding: const EdgeInsets.all(4.0),
             child: LoginTextField(
               obscureText: true,
+              controller: controller.passwordAgain,
               hintText: "비밀번호를 다시 입력해주세요.",
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
               "비밀번호는 영어대문자+영어소문자+특수문자를 포함한 10자리 이상이어야 합니다.",
@@ -190,29 +180,31 @@ class _ResisterState extends State<Resister> {
   }
 
   Widget _check() {
-    return Row(
-      children: [
-        Checkbox(
-          value: (isAgree) ? true : false,
-          onChanged: agree,
-          checkColor: Colors.white,
-          side: const BorderSide(color: Color(0xff713eff), width: 2.0),
-        ),
-        const Text(
-          '동의',
-          style: TextStyle(color: Colors.black),
-        ),
-        Checkbox(
-          value: (isAgree) ? false : true,
-          onChanged: disagree,
-          side: const BorderSide(color: Color(0xff713eff), width: 2.0),
-        ),
-        const Text(
-          '동의하지 않음',
-          style: TextStyle(color: Colors.black),
-        )
-      ],
-    );
+    return GetX<ResisterController>(builder: (controller) {
+      return Row(
+        children: [
+          Checkbox(
+            value: (controller.isAgree) ? true : false,
+            onChanged: controller.agree,
+            checkColor: Colors.white,
+            side: const BorderSide(color: Color(0xff713eff), width: 2.0),
+          ),
+          const Text(
+            '동의',
+            style: TextStyle(color: Colors.black),
+          ),
+          Checkbox(
+            value: (controller.isAgree) ? false : true,
+            onChanged: controller.disagree,
+            side: const BorderSide(color: Color(0xff713eff), width: 2.0),
+          ),
+          const Text(
+            '동의하지 않음',
+            style: TextStyle(color: Colors.black),
+          )
+        ],
+      );
+    });
   }
 
   Widget _button() => Padding(
@@ -220,7 +212,7 @@ class _ResisterState extends State<Resister> {
         child: SignButton(
             width: double.infinity,
             height: 60,
-            onPressed: () {},
+            onPressed: controller.signUp,
             child: const Text(
               "회원가입",
               style:
