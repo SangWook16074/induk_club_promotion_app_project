@@ -56,7 +56,6 @@ class _MyPromotionViewState extends State<MyPromotionView> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Container(
-                      // color: Colors.yellow,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
