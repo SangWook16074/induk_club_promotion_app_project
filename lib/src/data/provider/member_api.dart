@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:induk_club_promotion_app_project/src/constants/url.dart';
 
 class MemberApi {
   final Dio dio;
@@ -8,9 +9,7 @@ class MemberApi {
 
   Future<String> signUp(Map<String, dynamic> data) {
     try {
-      return dio
-          .post("http://localhost:8080/api/member/signup", data: data)
-          .then((resp) {
+      return dio.post(Url.signUpUrl, data: data).then((resp) {
         if (resp.statusCode == 200) {
           return resp.data;
         } else {
