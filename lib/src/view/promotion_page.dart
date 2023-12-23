@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
+import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 
 class PromotionPage extends StatelessWidget {
   const PromotionPage({super.key});

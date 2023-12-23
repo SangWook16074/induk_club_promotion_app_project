@@ -3,14 +3,9 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 
-class MyPromotionView extends StatefulWidget {
+class MyPromotionView extends StatelessWidget {
   const MyPromotionView({super.key});
 
-  @override
-  State<MyPromotionView> createState() => _MyPromotionViewState();
-}
-
-class _MyPromotionViewState extends State<MyPromotionView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
