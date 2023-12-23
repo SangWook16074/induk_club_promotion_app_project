@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/google_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/kakao_login_api.dart';
+import 'package:induk_club_promotion_app_project/src/view/resister.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 enum LoginPlatform { KAKAO, GOOGLE, APPLE, NONE }
@@ -107,5 +108,9 @@ class LoginController extends GetxController {
     }
     _loginPlatform = LoginPlatform.NONE;
     _user.value = null;
+  }
+
+  void moveToResister() {
+    Get.to(() => const Resister());
   }
 }
