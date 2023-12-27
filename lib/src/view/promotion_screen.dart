@@ -26,6 +26,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: const Color(0xff731eff),
         backgroundColor: Colors.white,
         title: Text('LOGO', style: Get.textTheme.displayLarge),
         elevation: 0.0,
