@@ -5,10 +5,14 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 class Member {
   final String? nickName;
   final String? profile;
+  final String? email;
+  final String? password;
 
   Member({
     required this.nickName,
     this.profile,
+    this.email,
+    this.password,
   });
 
   factory Member.fromKakao(User user) {
@@ -24,4 +28,10 @@ class Member {
   factory Member.fromApple(AuthorizationCredentialAppleID user) {
     return Member(nickName: user.userIdentifier);
   }
+
+  Map<String, dynamic> toJson(Member member) => {
+        "name": member.nickName,
+        "email": member.email,
+        "password": member.password,
+      };
 }
