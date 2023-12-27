@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 import 'package:induk_club_promotion_app_project/src/data/repository/member_repository.dart';
 
 class ResisterController extends GetxController {

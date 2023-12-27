@@ -26,7 +26,5 @@ class InitBinding implements Bindings {
     Get.put(LoginController(
         kakaoLoginApi: KakaoLoginApi(),
         googleLoginApi: GoogleLoginApi(api: GoogleSignIn())));
-    Get.put(ResisterController(
-        repository: MemberRepository(api: MemberApi(dio: Dio()))));
   }
 }
