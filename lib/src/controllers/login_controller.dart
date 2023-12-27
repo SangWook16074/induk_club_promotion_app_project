@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/resister_binding.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/resister_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/google_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/kakao_login_api.dart';
@@ -111,6 +113,6 @@ class LoginController extends GetxController {
   }
 
   void moveToResister() {
-    Get.to(() => const Resister());
+    Get.to(() => const Resister(), binding: ResisterBinding());
   }
 }
