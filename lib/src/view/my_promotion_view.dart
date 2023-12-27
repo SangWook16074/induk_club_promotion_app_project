@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
+import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 
 class MyPromotionView extends StatelessWidget {
   const MyPromotionView({super.key});
@@ -9,6 +10,24 @@ class MyPromotionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 0,
+        leading: (ResponsibleLayout.isMobile(context))
+            ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  color: Colors.black,
+                ),
+              )
+            : null,
+        centerTitle: true,
+        title: const Text(
+          '게시판',
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
+      ),
       body: _body(),
     );
   }

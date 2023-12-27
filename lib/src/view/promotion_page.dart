@@ -10,6 +10,24 @@ class PromotionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 0,
+        leading: (ResponsibleLayout.isMobile(context))
+            ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  color: Colors.black,
+                ),
+              )
+            : null,
+        centerTitle: true,
+        title: const Text(
+          '내가쓴글',
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
+      ),
       body: _body(),
     );
   }

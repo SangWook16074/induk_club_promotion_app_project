@@ -37,7 +37,7 @@ class _MyPageState extends State<MyPage> {
           child: Text(
             "로그아웃",
             style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w600, fontSize: 18),
+                color: Colors.white, fontWeight: FontWeight.w500, fontSize: 18),
           ),
         )
       ],
@@ -128,7 +128,7 @@ class _MyPageState extends State<MyPage> {
                               children: [
                                 Text(
                                   '동아리명',
-                                  style: Get.theme.textTheme.displayMedium,
+                                  style: Get.theme.textTheme.bodyMedium,
                                 ),
                               ],
                             ),
@@ -139,7 +139,7 @@ class _MyPageState extends State<MyPage> {
                               children: [
                                 Text(
                                   'A&I',
-                                  style: Get.theme.textTheme.displayMedium,
+                                  style: Get.theme.textTheme.bodyMedium,
                                 )
                               ],
                             ),
@@ -158,7 +158,7 @@ class _MyPageState extends State<MyPage> {
                               children: [
                                 Text(
                                   '동아리개설일',
-                                  style: Get.theme.textTheme.displayMedium,
+                                  style: Get.theme.textTheme.bodyMedium,
                                 ),
                               ],
                             ),
@@ -168,7 +168,7 @@ class _MyPageState extends State<MyPage> {
                             child: Row(
                               children: [
                                 Text('2023년 1월 10일',
-                                    style: Get.theme.textTheme.displayMedium)
+                                    style: Get.theme.textTheme.bodyMedium)
                               ],
                             ),
                           ),
@@ -186,7 +186,7 @@ class _MyPageState extends State<MyPage> {
                               children: [
                                 Text(
                                   '동아리분류',
-                                  style: Get.theme.textTheme.displayMedium,
+                                  style: Get.theme.textTheme.bodyMedium,
                                 ),
                               ],
                             ),
@@ -197,7 +197,7 @@ class _MyPageState extends State<MyPage> {
                               children: [
                                 Text(
                                   '교내스터디',
-                                  style: Get.theme.textTheme.displayMedium,
+                                  style: Get.theme.textTheme.bodyMedium,
                                 )
                               ],
                             ),
@@ -254,7 +254,7 @@ class _MyPageState extends State<MyPage> {
           ),
           child: Text(
             "A&I 신규 동아리원 모집합니다.",
-            style: Get.theme.textTheme.displayMedium,
+            style: Get.theme.textTheme.bodyMedium,
           ),
         ),
       );
