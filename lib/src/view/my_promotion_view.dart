@@ -2,18 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
+import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 
-class MyPromotionView extends StatefulWidget {
+class MyPromotionView extends StatelessWidget {
   const MyPromotionView({super.key});
 
   @override
-  State<MyPromotionView> createState() => _MyPromotionViewState();
-}
-
-class _MyPromotionViewState extends State<MyPromotionView> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 0,
+        leading: (ResponsibleLayout.isMobile(context))
+            ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  color: Colors.black,
+                ),
+              )
+            : null,
+        centerTitle: true,
+        title: const Text(
+          '게시판',
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
+      ),
       body: _body(),
     );
   }
@@ -56,7 +70,6 @@ class _MyPromotionViewState extends State<MyPromotionView> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Container(
-                      // color: Colors.yellow,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
