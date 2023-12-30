@@ -8,8 +8,8 @@ class PageViewController extends GetxController {
   final RxInt _pageIndex = 0.obs;
   final List<String> _pageNames = [
     "홈",
-    "내가 쓴 글",
     "게시판",
+    "내가쓴글",
     "마이페이지",
   ];
   int get pageIndex => _pageIndex.value;

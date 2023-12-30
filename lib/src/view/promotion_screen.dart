@@ -26,6 +26,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: const Color(0xff731eff),
         backgroundColor: Colors.white,
         title: Text('LOGO', style: Get.textTheme.displayLarge),
         elevation: 0.0,
@@ -49,6 +50,9 @@ class _PromotionScreenState extends State<PromotionScreen> {
                   _object(),
                   _content(),
                   _contentOfAcivity(),
+                  const SizedBox(
+                    height: 100,
+                  )
                 ],
               ),
             ),
@@ -71,7 +75,9 @@ class _PromotionScreenState extends State<PromotionScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('신규 동아리원(디자인) 추가모집', style: Get.textTheme.displayLarge),
+                Flexible(
+                    child: Text('신규 동아리원(디자인) 추가모집',
+                        style: Get.textTheme.displayLarge)),
               ],
             ),
             const Divider(

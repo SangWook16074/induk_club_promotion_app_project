@@ -45,7 +45,7 @@ class App extends GetView<PageViewController> {
                       BottomNavigationBarItem(
                           icon: Icon(Icons.my_library_books_outlined),
                           activeIcon: Icon(Icons.my_library_books),
-                          label: '홍보글'),
+                          label: '게시판'),
                       BottomNavigationBarItem(
                           icon: Icon(Icons.contact_page_outlined),
                           activeIcon: Icon(Icons.contact_page),

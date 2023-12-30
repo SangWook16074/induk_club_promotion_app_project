@@ -10,7 +10,9 @@ class MemberApi {
   Future<String> signUp(Map<String, dynamic> data) {
     try {
       return dio.post(Url.signUpUrl, data: data).then((resp) {
-        if (resp.statusCode == 200) {
+        if (resp.statusCode == 201) {
+          return resp.data;
+        } else if (resp.statusCode == 400) {
           return resp.data;
         } else {
           return "";
