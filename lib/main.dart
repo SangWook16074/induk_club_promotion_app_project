@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:induk_club_promotion_app_project/src/app.dart';
 import 'package:induk_club_promotion_app_project/src/constants/kakao_api_key.dart';
-import 'package:induk_club_promotion_app_project/src/view/resister.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'src/bindings/init_binding.dart';
@@ -54,8 +53,8 @@ class MainApp extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
               displayLarge: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
+                  color: Colors.white,
+                  fontSize: 25,
                   fontWeight: FontWeight.w600),
               displayMedium: TextStyle(
                   color: Colors.black,
