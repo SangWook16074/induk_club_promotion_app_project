@@ -82,7 +82,7 @@ class App extends GetView<PageViewController> {
                     unselectedFontSize: 12,
                     selectedItemColor: const Color(0xff713eff),
                     unselectedItemColor: Colors.black,
-                    onTap: controller.changeIndex,
+                    onTap: controller.moveToPage,
                     type: BottomNavigationBarType.fixed,
                     items: const [
                       BottomNavigationBarItem(

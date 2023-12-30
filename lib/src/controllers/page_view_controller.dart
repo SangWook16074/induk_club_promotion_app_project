@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
+import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/my_page_screen.dart';
+import 'package:induk_club_promotion_app_project/src/widget/custom_dialog.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 
 enum Page { HOME, MYPROMOTIONS, POST, MYPAGE }
@@ -58,27 +60,52 @@ class PageViewController extends GetxController {
     }
   }
 
-  void showLoginDialog() => Get.dialog(Dialog(
-        backgroundColor: Colors.white,
-        child: SizedBox(
-          width: 300,
-          height: 200,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+  void showLoginDialog() => Get.dialog(CustomDialog(
+        title: const Padding(
+          padding: EdgeInsets.all(4.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Expanded(child: Center(child: Text("로그인이 필요합니다 !"))),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TextButton(onPressed: () {}, child: const Text("확인")),
-                    TextButton(onPressed: () {}, child: const Text("취소")),
-                  ],
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.error_outline,
+                  color: Color(0xff713eff),
                 ),
-              )
+              ),
+              Text(
+                "로그인이 필요합니다 !",
+                style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.purple,
+                    fontWeight: FontWeight.w600),
+              ),
             ],
           ),
         ),
+        content: const Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "로그인 하시겠습니까?",
+                style: TextStyle(fontSize: 25),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "내 정보를 확인하기 위해서는 반드시 로그인을 해야합니다.",
+                style: TextStyle(fontSize: 12),
+              ),
+            )
+          ],
+        ),
+        confirm: () {
+          Get.off(() => const LoginScreen());
+        },
+        cancel: () {
+          Get.back();
+        },
       ));
 }
