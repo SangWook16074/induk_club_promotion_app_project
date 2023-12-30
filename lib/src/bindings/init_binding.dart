@@ -5,12 +5,9 @@ import 'package:induk_club_promotion_app_project/src/controllers/login_controlle
 import 'package:induk_club_promotion_app_project/src/controllers/page_view_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
-import 'package:induk_club_promotion_app_project/src/controllers/resister_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/google_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/kakao_login_api.dart';
-import 'package:induk_club_promotion_app_project/src/data/provider/member_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/promotion_api.dart';
-import 'package:induk_club_promotion_app_project/src/data/repository/member_repository.dart';
 import 'package:induk_club_promotion_app_project/src/data/repository/promotion_repository.dart';
 
 class InitBinding implements Bindings {
