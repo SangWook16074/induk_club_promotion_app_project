@@ -40,3 +40,10 @@ flutter:
     - assets/rives/
     - assets/gifs/
     - assets/images/
+
+  fonts:
+   - family: NotoSansKR
+     fonts:
+       - asset: assets/fonts/NotoSansKR-SemiBold.ttf
+       - asset: assets/fonts/NotoSansKR-Regular.ttf
+       - asset: assets/fonts/NotoSansKRLight.ttf
