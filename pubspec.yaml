@@ -41,11 +41,4 @@ flutter:
     - assets/gifs/
     - assets/images/
 
-  fonts:
-   - family: NotoSansKR
-     fonts:
-       - asset: assets/fonts/NotoSansKR-Bold.ttf
-       - asset: assets/fonts/NotoSansKR-SemiBold.ttf
-       - asset: assets/fonts/NotoSansKR-Medium.ttf
-       - asset: assets/fonts/NotoSansKR-Regular.ttf
-       - asset: assets/fonts/NotoSansKR-Light.ttf
+
