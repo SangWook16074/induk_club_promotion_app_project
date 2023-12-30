@@ -19,7 +19,7 @@ class CustomDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       backgroundColor: Colors.white,
       child: SizedBox(
-        width: 300,
+        width: 350,
         height: 200,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
