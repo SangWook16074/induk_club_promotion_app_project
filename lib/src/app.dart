@@ -22,7 +22,54 @@ class App extends GetView<PageViewController> {
               ? _buildBody()
               : Row(
                   children: [
-                    const SideMenu(),
+                    SideMenu(
+                      expandItems: List.generate(controller.length, (index) {
+                        final title = controller.names[index];
+                        final icon = controller.icon[index];
+                        final active = controller.activeIcon[index];
+                        return Obx(
+                          () => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 13),
+                            child: GestureDetector(
+                              child: ListTile(
+                                leading: (controller.pageIndex == index)
+                                    ? active
+                                    : icon,
+                                title: Text(title,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                      fontWeight:
+                                          (controller.pageIndex == index)
+                                              ? FontWeight.w600
+                                              : FontWeight.w500,
+                                    )),
+                                onTap: () {
+                                  controller.moveToPage(index);
+                                },
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                      items: List.generate(controller.length, (index) {
+                        final icon = controller.icon[index];
+                        final active = controller.activeIcon[index];
+                        return Obx(() {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 13),
+                            child: GestureDetector(
+                              onTap: () {
+                                controller.moveToPage(index);
+                              },
+                              child: (controller.pageIndex == index)
+                                  ? active
+                                  : icon,
+                            ),
+                          );
+                        });
+                      }),
+                    ),
                     Expanded(child: _buildBody()),
                   ],
                 ),
