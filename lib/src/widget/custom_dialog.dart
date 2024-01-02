@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CustomDialog extends StatelessWidget {
-  final Widget? title;
+  final String title;
+  final double? width;
   final Widget? content;
   final void Function()? confirm;
   final void Function()? cancel;
   const CustomDialog({
     super.key,
-    this.title,
+    required this.title,
     this.content,
     this.confirm,
     this.cancel,
+    this.width = 400,
   });
 
   @override
@@ -20,13 +22,32 @@ class CustomDialog extends StatelessWidget {
       backgroundColor: Colors.white,
       alignment: Alignment.center,
       child: SizedBox(
-        width: 400,
+        width: width,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              child: title,
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.error_outline,
+                      color: Color(0xff713eff),
+                    ),
+                  ),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.purple,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
             ),
             const Divider(),
             Container(

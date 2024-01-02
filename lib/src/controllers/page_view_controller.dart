@@ -61,28 +61,7 @@ class PageViewController extends GetxController {
   }
 
   void showLoginDialog() => Get.dialog(CustomDialog(
-        title: const Padding(
-          padding: EdgeInsets.all(4.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.error_outline,
-                  color: Color(0xff713eff),
-                ),
-              ),
-              Text(
-                "로그인이 필요합니다 !",
-                style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.purple,
-                    fontWeight: FontWeight.w600),
-              ),
-            ],
-          ),
-        ),
+        title: "로그인이 필요합니다 !",
         content: const Column(
           children: [
             Padding(

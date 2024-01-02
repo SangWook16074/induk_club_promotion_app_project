@@ -7,6 +7,7 @@ import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/google_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/kakao_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/view/resister.dart';
+import 'package:induk_club_promotion_app_project/src/widget/custom_dialog.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 enum LoginPlatform { KAKAO, GOOGLE, APPLE, NONE }
@@ -109,9 +110,21 @@ class LoginController extends GetxController {
     }
     _loginPlatform = LoginPlatform.NONE;
     _user.value = null;
+    Get.back();
   }
 
   void moveToResister() {
     Get.to(() => const Resister(), binding: ResisterBinding());
   }
+
+  void showSignOutDialog() => Get.dialog(CustomDialog(
+        width: 300,
+        title: "로그아웃 하시겠습니까?",
+        confirm: () {
+          signOut();
+        },
+        cancel: () {
+          Get.back();
+        },
+      ));
 }
