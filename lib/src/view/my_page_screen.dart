@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
@@ -16,14 +15,15 @@ class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color(0xff713eff),
         body: CustomScrollView(
-      slivers: [
-        _appBar(),
-        _myInfo(),
-        _clubInfo(),
-        _myPromotions(),
-      ],
-    ));
+          slivers: [
+            _appBar(),
+            _myInfo(),
+            _clubInfo(),
+            _myPromotions(),
+          ],
+        ));
   }
 
   Widget _appBar() {
@@ -85,158 +85,164 @@ class _MyPageState extends State<MyPage> {
   }
 
   Widget _clubInfo() => SliverToBoxAdapter(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: 4.0,
-                  horizontal: ResponsibleLayout.isMobile(context) ? 16 : 200),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TitleBox(
-                    label: '동아리 소개',
-                    fontSize: 20,
-                  ),
-                  Text(
-                    '수정',
-                    style: TextStyle(fontSize: 20, color: Colors.grey),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: ResponsibleLayout.isMobile(context) ? 16 : 200),
-              child: Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    color: const Color(0xffe0e0e0),
-                    border: Border.all(color: const Color(0xffb5b5b5)),
-                    borderRadius: BorderRadius.circular(8.0)),
-                child: Column(
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: 4.0,
+                    horizontal: ResponsibleLayout.isMobile(context) ? 16 : 200),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            flex: 5,
-                            child: Row(
-                              children: [
-                                Text(
-                                  '동아리명',
-                                  style: Get.theme.textTheme.bodyMedium,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            flex: 5,
-                            child: Row(
-                              children: [
-                                Text(
-                                  'A&I',
-                                  style: Get.theme.textTheme.bodyMedium,
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                    TitleBox(
+                      label: '동아리 소개',
+                      fontSize: 20,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            flex: 5,
-                            child: Row(
-                              children: [
-                                Text(
-                                  '동아리개설일',
-                                  style: Get.theme.textTheme.bodyMedium,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            flex: 5,
-                            child: Row(
-                              children: [
-                                Text('2023년 1월 10일',
-                                    style: Get.theme.textTheme.bodyMedium)
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            flex: 5,
-                            child: Row(
-                              children: [
-                                Text(
-                                  '동아리분류',
-                                  style: Get.theme.textTheme.bodyMedium,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            flex: 5,
-                            child: Row(
-                              children: [
-                                Text(
-                                  '교내스터디',
-                                  style: Get.theme.textTheme.bodyMedium,
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    Text(
+                      '수정',
+                      style: TextStyle(fontSize: 20, color: Colors.grey),
+                    )
                   ],
                 ),
               ),
-            )
-          ],
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: ResponsibleLayout.isMobile(context) ? 16 : 200),
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                      color: const Color(0xffe0e0e0),
+                      border: Border.all(color: const Color(0xffb5b5b5)),
+                      borderRadius: BorderRadius.circular(8.0)),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '동아리명',
+                                    style: Get.theme.textTheme.bodyMedium,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 5,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'A&I',
+                                    style: Get.theme.textTheme.bodyMedium,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '동아리개설일',
+                                    style: Get.theme.textTheme.bodyMedium,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 5,
+                              child: Row(
+                                children: [
+                                  Text('2023년 1월 10일',
+                                      style: Get.theme.textTheme.bodyMedium)
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '동아리분류',
+                                    style: Get.theme.textTheme.bodyMedium,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 5,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '교내스터디',
+                                    style: Get.theme.textTheme.bodyMedium,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       );
 
   Widget _myPromotions() => SliverToBoxAdapter(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: ResponsibleLayout.isMobile(context) ? 16 : 200),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const TitleBox(label: '내가 쓴 글', fontSize: 20),
-                  Icon(
-                    Icons.edit,
-                    color: Get.theme.primaryColor,
-                  )
-                ],
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: ResponsibleLayout.isMobile(context) ? 16 : 200),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const TitleBox(label: '내가 쓴 글', fontSize: 20),
+                    Icon(
+                      Icons.edit,
+                      color: Get.theme.primaryColor,
+                    )
+                  ],
+                ),
               ),
-            ),
-            ...List.generate(
-              20,
-              (index) => _items(),
-            )
-            // _noItem(),
-          ],
+              ...List.generate(
+                20,
+                (index) => _items(),
+              )
+              // _noItem(),
+            ],
+          ),
         ),
       );
 

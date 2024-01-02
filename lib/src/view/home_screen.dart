@@ -128,41 +128,51 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           : null,
       title: SearchTextField(
-          controller: Get.find<AppController>().searchController,
-          type: SearchBarType.DESKTOP),
+        controller: Get.find<AppController>().searchController,
+      ),
       centerTitle: true,
       actions: (ResponsibleLayout.isMobile(context))
           ? [
               GetX<LoginController>(builder: (controller) {
-                if (controller.user == null) {
-                  return GestureDetector(
-                    onTap: () {
-                      Get.to(() => const LoginScreen());
-                    },
-                    child: const Center(
-                      child: Text(
-                        "로그인",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
+                return (controller.user == null)
+                    ? GestureDetector(
+                        onTap: () {
+                          Get.to(() => const LoginScreen());
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.all(1.0),
+                          child: SizedBox(
+                            width: 60,
+                            child: Center(
+                              child: Text(
+                                "로그인",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  );
-                } else {
-                  return GestureDetector(
-                    onTap: controller.signOut,
-                    child: const Center(
-                      child: Text(
-                        "로그아웃",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
+                      )
+                    : GestureDetector(
+                        onTap: controller.showSignOutDialog,
+                        child: const Padding(
+                          padding: EdgeInsets.all(1.0),
+                          child: SizedBox(
+                            width: 60,
+                            child: Center(
+                              child: Text(
+                                "로그아웃",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  );
-                }
+                      );
               })
             ]
           : null,
