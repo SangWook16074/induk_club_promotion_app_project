@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:intl/intl.dart';
 
 class MyPromotionView extends StatelessWidget {
   const MyPromotionView({super.key});
@@ -92,7 +93,7 @@ class MyPromotionView extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(top: 50.0),
                             child: Text(
-                              promotion.closeAt.toString(),
+                              DateFormat.yMd().format(promotion.closeAt),
                               style: const TextStyle(fontSize: 12),
                             ),
                           ),
