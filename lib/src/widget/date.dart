@@ -37,4 +37,3 @@ class Dateymd extends StatelessWidget {
     );
   }
 }
-// style: Get.textTheme.bodyMedium,
