@@ -59,27 +59,26 @@ class LoginController extends GetxController {
   void signInWithKakao() {
     if (_loginPlatform != LoginPlatform.NONE) return;
     kakaoLoginApi.kakaoSignIn().then((user) {
+      if (user == null) return;
       _user.value = user;
-      print(_user.value);
-    }).then((_) {
-      Get.back();
       _loginPlatform = LoginPlatform.KAKAO;
+      Get.back();
+      print(_user.value);
+    }).onError((error, stackTrace) {
+      throw Exception("$error, $stackTrace");
     });
   }
 
   void signInWithGoogle() {
     if (_loginPlatform != LoginPlatform.NONE) return;
     googleLoginApi.googleSignIn().then((user) {
-      if (user == null) {
-        return;
-      } else {
-        _user.value = user;
-        _loginPlatform = LoginPlatform.GOOGLE;
-        Get.back();
-      }
+      if (user == null) return;
+      _user.value = user;
+      _loginPlatform = LoginPlatform.GOOGLE;
+      Get.back();
     }).onError((error, stackTrace) {
       if (error is PlatformException) return;
-      print(error);
+      throw Exception("$error, $stackTrace");
     });
   }
 
@@ -92,7 +91,7 @@ class LoginController extends GetxController {
       Get.back();
     }).onError((error, stackTrace) {
       if (error is PlatformException) return;
-      print(error);
+      throw Exception("$error, $stackTrace");
     });
   }
 
