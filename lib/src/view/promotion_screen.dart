@@ -137,7 +137,6 @@ class _PromotionScreenState extends State<PromotionScreen> {
                   children: [
                     DateFormatWidget(
                       promotion: widget.promotion,
-                      type: DateType.DateCloseAt,
                       fontSize: 20,
                     )
                   ],

@@ -94,7 +94,6 @@ class PromotionPage extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 50.0),
                             child: DateFormatWidget(
                               promotion: promotion,
-                              type: DateType.DateCloseAt,
                               fontSize: 12,
                             ),
                           ),
