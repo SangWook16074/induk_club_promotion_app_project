@@ -7,7 +7,6 @@ import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/widget/date.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
-import 'package:intl/intl.dart';
 import '../data/model/promotion.dart';
 
 class PromotionScreen extends StatefulWidget {
@@ -136,7 +135,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 child: Row(
                   children: [
-                    Dateymd(
+                    DateFormatWidget(
                       promotion: widget.promotion,
                       type: DateType.DateCloseAt,
                       fontSize: 20,
@@ -225,7 +224,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Row(
               children: [
-                Dateymd(
+                DateFormatWidget(
                   promotion: widget.promotion,
                   type: DateType.DateBeginEnd,
                   fontSize: 20,

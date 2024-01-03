@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:intl/intl.dart';
 
 enum DateType { DateCloseAt, DateBeginEnd }
 
-class Dateymd extends StatelessWidget {
+class DateFormatWidget extends StatelessWidget {
   final Promotion promotion;
   final double fontSize;
-  final DateType? type;
-  const Dateymd(
-      {super.key, required this.promotion, this.type, required this.fontSize});
+  final DateType type;
+  const DateFormatWidget(
+      {super.key,
+      required this.promotion,
+      this.type = DateType.DateCloseAt,
+      required this.fontSize});
 
   @override
   Widget build(BuildContext context) {
-    switch (type!) {
+    switch (type) {
       case DateType.DateCloseAt:
         return _buildDateCloseAt();
-
       case DateType.DateBeginEnd:
         return _buildDateBeginEnd();
     }

@@ -92,7 +92,7 @@ class MyPromotionView extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 50.0),
-                            child: Dateymd(
+                            child: DateFormatWidget(
                               promotion: promotion,
                               type: DateType.DateCloseAt,
                               fontSize: 12,
