@@ -3,8 +3,13 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+<<<<<<< HEAD
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/date.dart';
+=======
+import 'package:induk_club_promotion_app_project/src/widget/date.dart';
+import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
+>>>>>>> 7162dbbb1d1c1c605229e5ac7ba1b7ee8b33a675
 
 class PromotionPage extends StatelessWidget {
   const PromotionPage({super.key});

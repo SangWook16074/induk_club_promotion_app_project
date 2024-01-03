@@ -5,6 +5,10 @@ import 'package:induk_club_promotion_app_project/src/controllers/promotion_contr
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
+<<<<<<< HEAD
+=======
+import 'package:intl/intl.dart';
+>>>>>>> 7162dbbb1d1c1c605229e5ac7ba1b7ee8b33a675
 
 class MyPromotionView extends StatelessWidget {
   const MyPromotionView({super.key});
