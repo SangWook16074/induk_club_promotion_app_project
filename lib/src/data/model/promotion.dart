@@ -16,6 +16,7 @@ class Promotion with _$Promotion {
     required DateTime end,
     required int requiredPeople,
     required String contentOfActivity,
+    required List<String> images,
   }) = _Promotion;
 
   factory Promotion.fromJson(Map<String, dynamic> json) =>

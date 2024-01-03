@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,6 @@ import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/widget/date.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
-import 'package:intl/intl.dart';
 import '../data/model/promotion.dart';
 
 class PromotionScreen extends StatefulWidget {
@@ -98,13 +98,14 @@ class _PromotionScreenState extends State<PromotionScreen> {
           : const EdgeInsets.all(8.0),
       child: SizedBox(
         child: CarouselSlider.builder(
-            itemCount: 3,
-            itemBuilder: (context, index, realIndex) => Container(
+            itemCount: widget.promotion.images.length,
+            itemBuilder: (context, index, realIndex) => SizedBox(
                   height: 400,
                   width: double.infinity,
-                  alignment: Alignment.center,
-                  color: const Color(0xffE6E6E6),
-                  child: Text('이미지 ${index + 1}'),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.promotion.images[index],
+                    fit: BoxFit.cover,
+                  ),
                 ),
             options: CarouselOptions(
               viewportFraction: 1,
@@ -136,9 +137,8 @@ class _PromotionScreenState extends State<PromotionScreen> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 child: Row(
                   children: [
-                    Dateymd(
+                    DateFormatWidget(
                       promotion: widget.promotion,
-                      type: DateType.DateCloseAt,
                       fontSize: 20,
                     )
                   ],
@@ -225,7 +225,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Row(
               children: [
-                Dateymd(
+                DateFormatWidget(
                   promotion: widget.promotion,
                   type: DateType.DateBeginEnd,
                   fontSize: 20,
