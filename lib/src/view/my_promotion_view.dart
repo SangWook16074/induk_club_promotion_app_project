@@ -1,8 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+<<<<<<< HEAD
+=======
+import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
+>>>>>>> 18d1b652f926fa00415ff398009053cba0996ab4
 import 'package:intl/intl.dart';
 
 class MyPromotionView extends StatelessWidget {
@@ -25,7 +30,7 @@ class MyPromotionView extends StatelessWidget {
             : null,
         centerTitle: true,
         title: const Text(
-          '게시판',
+          '내가쓴글',
           style: TextStyle(fontWeight: FontWeight.w700),
         ),
       ),
@@ -47,6 +52,7 @@ class MyPromotionView extends StatelessWidget {
 
   Widget _buildItem({required Promotion promotion}) {
     return Padding(
+<<<<<<< HEAD
       padding: const EdgeInsets.all(4.0),
       child: SizedBox(
         width: 700,
@@ -115,5 +121,12 @@ class MyPromotionView extends StatelessWidget {
         ),
       ),
     );
+=======
+        padding: const EdgeInsets.all(4.0),
+        child: PromotionItem(
+          promotion: promotion,
+          type: PromotionItemtype.LISTITEM,
+        ));
+>>>>>>> 18d1b652f926fa00415ff398009053cba0996ab4
   }
 }

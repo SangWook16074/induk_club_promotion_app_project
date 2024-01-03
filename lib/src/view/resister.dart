@@ -28,7 +28,7 @@ class _ResisterState extends State<Resister> {
             ),
           ),
           title: Text(
-            "회원가입",
+            "회원정보",
             style: Theme.of(context).textTheme.displayMedium,
           ),
           titleTextStyle: const TextStyle(
