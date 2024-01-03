@@ -18,6 +18,8 @@ _$PromotionImpl _$$PromotionImplFromJson(Map<String, dynamic> json) =>
       end: DateTime.parse(json['end'] as String),
       requiredPeople: json['requiredPeople'] as int,
       contentOfActivity: json['contentOfActivity'] as String,
+      images:
+          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$$PromotionImplToJson(_$PromotionImpl instance) =>
@@ -32,4 +34,5 @@ Map<String, dynamic> _$$PromotionImplToJson(_$PromotionImpl instance) =>
       'end': instance.end.toIso8601String(),
       'requiredPeople': instance.requiredPeople,
       'contentOfActivity': instance.contentOfActivity,
+      'images': instance.images,
     };

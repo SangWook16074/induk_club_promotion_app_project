@@ -102,7 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   child: PromotionItem(
                     promotion: promotion,
-                    date: ' D - 9 ',
                     showDday: false,
                   ),
                 );
