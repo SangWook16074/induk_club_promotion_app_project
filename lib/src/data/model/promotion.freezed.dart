@@ -30,6 +30,7 @@ mixin _$Promotion {
   DateTime get end => throw _privateConstructorUsedError;
   int get requiredPeople => throw _privateConstructorUsedError;
   String get contentOfActivity => throw _privateConstructorUsedError;
+  List<String> get images => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +53,8 @@ abstract class $PromotionCopyWith<$Res> {
       DateTime begin,
       DateTime end,
       int requiredPeople,
-      String contentOfActivity});
+      String contentOfActivity,
+      List<String> images});
 }
 
 /// @nodoc
@@ -78,6 +80,7 @@ class _$PromotionCopyWithImpl<$Res, $Val extends Promotion>
     Object? end = null,
     Object? requiredPeople = null,
     Object? contentOfActivity = null,
+    Object? images = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -120,6 +123,10 @@ class _$PromotionCopyWithImpl<$Res, $Val extends Promotion>
           ? _value.contentOfActivity
           : contentOfActivity // ignore: cast_nullable_to_non_nullable
               as String,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -142,7 +149,8 @@ abstract class _$$PromotionImplCopyWith<$Res>
       DateTime begin,
       DateTime end,
       int requiredPeople,
-      String contentOfActivity});
+      String contentOfActivity,
+      List<String> images});
 }
 
 /// @nodoc
@@ -166,6 +174,7 @@ class __$$PromotionImplCopyWithImpl<$Res>
     Object? end = null,
     Object? requiredPeople = null,
     Object? contentOfActivity = null,
+    Object? images = null,
   }) {
     return _then(_$PromotionImpl(
       title: null == title
@@ -208,6 +217,10 @@ class __$$PromotionImplCopyWithImpl<$Res>
           ? _value.contentOfActivity
           : contentOfActivity // ignore: cast_nullable_to_non_nullable
               as String,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -225,7 +238,9 @@ class _$PromotionImpl implements _Promotion {
       required this.begin,
       required this.end,
       required this.requiredPeople,
-      required this.contentOfActivity});
+      required this.contentOfActivity,
+      required final List<String> images})
+      : _images = images;
 
   factory _$PromotionImpl.fromJson(Map<String, dynamic> json) =>
       _$$PromotionImplFromJson(json);
@@ -250,10 +265,17 @@ class _$PromotionImpl implements _Promotion {
   final int requiredPeople;
   @override
   final String contentOfActivity;
+  final List<String> _images;
+  @override
+  List<String> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
 
   @override
   String toString() {
-    return 'Promotion(title: $title, content: $content, userName: $userName, club: $club, createAt: $createAt, closeAt: $closeAt, begin: $begin, end: $end, requiredPeople: $requiredPeople, contentOfActivity: $contentOfActivity)';
+    return 'Promotion(title: $title, content: $content, userName: $userName, club: $club, createAt: $createAt, closeAt: $closeAt, begin: $begin, end: $end, requiredPeople: $requiredPeople, contentOfActivity: $contentOfActivity, images: $images)';
   }
 
   @override
@@ -274,13 +296,25 @@ class _$PromotionImpl implements _Promotion {
             (identical(other.requiredPeople, requiredPeople) ||
                 other.requiredPeople == requiredPeople) &&
             (identical(other.contentOfActivity, contentOfActivity) ||
-                other.contentOfActivity == contentOfActivity));
+                other.contentOfActivity == contentOfActivity) &&
+            const DeepCollectionEquality().equals(other._images, _images));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title, content, userName, club,
-      createAt, closeAt, begin, end, requiredPeople, contentOfActivity);
+  int get hashCode => Object.hash(
+      runtimeType,
+      title,
+      content,
+      userName,
+      club,
+      createAt,
+      closeAt,
+      begin,
+      end,
+      requiredPeople,
+      contentOfActivity,
+      const DeepCollectionEquality().hash(_images));
 
   @JsonKey(ignore: true)
   @override
@@ -307,7 +341,8 @@ abstract class _Promotion implements Promotion {
       required final DateTime begin,
       required final DateTime end,
       required final int requiredPeople,
-      required final String contentOfActivity}) = _$PromotionImpl;
+      required final String contentOfActivity,
+      required final List<String> images}) = _$PromotionImpl;
 
   factory _Promotion.fromJson(Map<String, dynamic> json) =
       _$PromotionImpl.fromJson;
@@ -332,6 +367,8 @@ abstract class _Promotion implements Promotion {
   int get requiredPeople;
   @override
   String get contentOfActivity;
+  @override
+  List<String> get images;
   @override
   @JsonKey(ignore: true)
   _$$PromotionImplCopyWith<_$PromotionImpl> get copyWith =>

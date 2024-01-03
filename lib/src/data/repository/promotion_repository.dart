@@ -21,6 +21,9 @@ class PromotionRepository {
         "requiredPeople": 10,
         "begin": DateTime.now().toString(),
         "end": DateTime.now().toString(),
+        "images": [
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3l9C58Dj31BhnXcMBMqLcL7T0foOUcsuEEg&usqp=CAU"
+        ],
         "contentOfActivity":
             "UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.",
       },
@@ -36,6 +39,9 @@ class PromotionRepository {
         "requiredPeople": 10,
         "begin": DateTime.now().toString(),
         "end": DateTime.now().toString(),
+        "images": [
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3l9C58Dj31BhnXcMBMqLcL7T0foOUcsuEEg&usqp=CAU"
+        ],
         "contentOfActivity":
             "UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.",
       },
@@ -51,6 +57,9 @@ class PromotionRepository {
         "requiredPeople": 10,
         "begin": DateTime.now().toString(),
         "end": DateTime.now().toString(),
+        "images": [
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3l9C58Dj31BhnXcMBMqLcL7T0foOUcsuEEg&usqp=CAU"
+        ],
         "contentOfActivity":
             "UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.",
       },
@@ -66,6 +75,9 @@ class PromotionRepository {
         "requiredPeople": 10,
         "begin": DateTime.now().toString(),
         "end": DateTime.now().toString(),
+        "images": [
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3l9C58Dj31BhnXcMBMqLcL7T0foOUcsuEEg&usqp=CAU"
+        ],
         "contentOfActivity":
             "UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.",
       },
