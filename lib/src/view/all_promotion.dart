@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:induk_club_promotion_app_project/src/widget/date.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 
 class AllPromotion extends StatelessWidget {
