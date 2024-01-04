@@ -6,8 +6,8 @@ import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/widget/date.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 
-class PromotionPage extends StatelessWidget {
-  const PromotionPage({super.key});
+class AllPromotion extends StatelessWidget {
+  const AllPromotion({super.key});
 
   @override
   Widget build(BuildContext context) {
