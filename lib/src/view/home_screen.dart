@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
@@ -7,6 +8,7 @@ import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_screen.dart';
+import 'package:induk_club_promotion_app_project/src/view/searchfocus.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
@@ -126,8 +128,36 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             )
           : null,
-      title: SearchTextField(
-        controller: Get.find<AppController>().searchController,
+      title: InkWell(
+        onTap: () {
+          Get.off(
+            () => SearchFocus(),
+            transition: Transition.fadeIn,
+          );
+        },
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25.0),
+            border: Border.all(
+              color: Color(0xff713eff),
+              width: 1.5,
+            ),
+            color: Colors.white,
+          ),
+          alignment: Alignment.centerRight,
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.search,
+              color: Color(0xff713eff),
+              size: 20,
+            ),
+          ),
+        ),
+        // SearchTextField(
+        //   controller: Get.find<AppController>().searchController,
+        // ),
       ),
       centerTitle: true,
       actions: (ResponsibleLayout.isMobile(context))
