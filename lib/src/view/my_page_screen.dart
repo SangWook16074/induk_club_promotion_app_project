@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/image_picker_binding.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
@@ -31,13 +34,20 @@ class _MyPageState extends State<MyPage> {
       backgroundColor: const Color(0xff713eff),
       title: Text('한상욱님! 환영합니다.', style: Get.textTheme.titleMedium),
       elevation: 0.0,
-      actions: const [
+      actions: [
         Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(
-            "로그아웃",
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w500, fontSize: 18),
+          padding: const EdgeInsets.all(16.0),
+          child: InkWell(
+            onTap: () {
+              Get.find<LoginController>().showSignOutDialog();
+            },
+            child: const Text(
+              "로그아웃",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15),
+            ),
           ),
         )
       ],
@@ -229,9 +239,15 @@ class _MyPageState extends State<MyPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const TitleBox(label: '내가 쓴 글', fontSize: 20),
-                    Icon(
-                      Icons.edit,
-                      color: Get.theme.primaryColor,
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => const PromotionWrite(),
+                            binding: ImagePickerBinding());
+                      },
+                      child: Icon(
+                        Icons.edit,
+                        color: Get.theme.primaryColor,
+                      ),
                     )
                   ],
                 ),
