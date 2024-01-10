@@ -7,7 +7,9 @@ import 'package:induk_club_promotion_app_project/src/controllers/app_controller.
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/google_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/kakao_login_api.dart';
+import 'package:induk_club_promotion_app_project/src/data/provider/member_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/promotion_api.dart';
+import 'package:induk_club_promotion_app_project/src/data/repository/member_repository.dart';
 import 'package:induk_club_promotion_app_project/src/data/repository/promotion_repository.dart';
 
 class InitBinding implements Bindings {
@@ -22,6 +24,7 @@ class InitBinding implements Bindings {
         permanent: true);
     Get.put(LoginController(
         kakaoLoginApi: KakaoLoginApi(),
-        googleLoginApi: GoogleLoginApi(api: GoogleSignIn())));
+        googleLoginApi: GoogleLoginApi(api: GoogleSignIn()),
+        memberRepository: MemberRepository(api: MemberApi(dio: Dio()))));
   }
 }

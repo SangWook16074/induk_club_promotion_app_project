@@ -137,12 +137,15 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
 
-  Widget _button() => const Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
+  Widget _button() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: SignButton(
+            onPressed: () {
+              controller.signIn();
+            },
             width: double.infinity,
             height: 40,
-            child: Text(
+            child: const Text(
               '로그인',
               style: TextStyle(color: Colors.white, fontSize: 15),
             )),

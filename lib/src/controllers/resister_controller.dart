@@ -56,8 +56,8 @@ class ResisterController extends GetxController {
     }
 
     final data = {
-      "name": _name.value.text.toString(),
       "email": _email.value.text.toString(),
+      "name": _name.value.text.toString(),
       "password": _password.value.text.toString(),
     };
 

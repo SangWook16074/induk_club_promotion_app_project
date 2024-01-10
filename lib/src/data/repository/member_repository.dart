@@ -5,4 +5,6 @@ class MemberRepository {
   MemberRepository({required this.api});
 
   Future<String> signUp(Map<String, dynamic> data) => api.signUp(data);
+
+  Future<String> signIn(Map<String, dynamic> data) => api.login(data);
 }

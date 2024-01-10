@@ -6,6 +6,7 @@ import 'package:induk_club_promotion_app_project/src/controllers/resister_contro
 import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/google_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/kakao_login_api.dart';
+import 'package:induk_club_promotion_app_project/src/data/repository/member_repository.dart';
 import 'package:induk_club_promotion_app_project/src/view/resister.dart';
 import 'package:induk_club_promotion_app_project/src/widget/custom_dialog.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -22,7 +23,11 @@ class LoginController extends GetxController {
   LoginPlatform _loginPlatform = LoginPlatform.NONE;
   final KakaoLoginApi kakaoLoginApi;
   final GoogleLoginApi googleLoginApi;
-  LoginController({required this.kakaoLoginApi, required this.googleLoginApi});
+  final MemberRepository memberRepository;
+  LoginController(
+      {required this.kakaoLoginApi,
+      required this.googleLoginApi,
+      required this.memberRepository});
 
   Member? get user => _user.value;
   int get pageIndex => _index.value;
@@ -55,6 +60,17 @@ class LoginController extends GetxController {
     if (_isAgree.value == true) {
       _isAgree(false);
     }
+  }
+
+  void signIn() {
+    final data = {
+      "email": _emailController.text.toString(),
+      "password": _passwordController.text.toString(),
+    };
+    if (_loginPlatform != LoginPlatform.NONE) return;
+    memberRepository.signIn(data).then((result) {
+      print(result);
+    });
   }
 
   void signInWithKakao() {
