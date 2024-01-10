@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:intl/intl.dart';

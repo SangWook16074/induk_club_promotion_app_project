@@ -23,7 +23,9 @@ class SignButton extends StatelessWidget {
           height: height,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-              color: (onPressed != null) ?  const Color(0xff713eff) : const Color(0xff4d4d4d),
+              color: (onPressed != null)
+                  ? const Color(0xff713eff)
+                  : const Color(0xff4d4d4d),
               borderRadius: BorderRadius.circular(8.0)),
           child: child),
     );
