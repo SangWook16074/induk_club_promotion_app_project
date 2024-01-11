@@ -13,10 +13,17 @@ class SearchFocus extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
+          foregroundColor: const Color(0xff713eff),
           elevation: 0,
           automaticallyImplyLeading: false,
           title: SearchTextField(
             controller: Get.find<AppController>().searchController,
+          ),
+          leading: GestureDetector(
+            onTap: Get.back,
+            child: const Icon(
+              Icons.arrow_back_ios_new,
+            ),
           ),
         ),
       ),

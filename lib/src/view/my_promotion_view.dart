@@ -5,7 +5,6 @@ import 'package:induk_club_promotion_app_project/src/controllers/promotion_contr
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
-import 'package:intl/intl.dart';
 
 class MyPromotionView extends StatelessWidget {
   const MyPromotionView({super.key});
@@ -21,8 +20,8 @@ class MyPromotionView extends StatelessWidget {
             ? Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  color: Colors.black,
-                  child: Image.asset('images/app_icon.jpg'),
+                  color: Colors.white,
+                  child: Image.asset('assets/images/app_icon.png'),
                 ),
               )
             : null,

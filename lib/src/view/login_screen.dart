@@ -212,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             const Text(
               "Start with",
-              style: TextStyle(fontSize: 10),
+              style: TextStyle(fontSize: 12),
             ),
             Container(
               width: 100,
