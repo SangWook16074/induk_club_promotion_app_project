@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/search_focus_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
@@ -128,11 +129,20 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             )
           : null,
+
       title: InkWell(
         onTap: () {
-          Get.off(
-            () => SearchFocus(),
+          Get.to(
+            () => const SearchFocus(),
             transition: Transition.fadeIn,
+            binding: SearchFocusBinding(),
+          );
+        },
+        onLongPress: () {
+          Get.to(
+            () => const SearchFocus(),
+            transition: Transition.fadeIn,
+            binding: SearchFocusBinding(),
           );
         },
         child: Container(
@@ -155,10 +165,20 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        // SearchTextField(
-        //   controller: Get.find<AppController>().searchController,
-        // ),
       ),
+
+      // title: InkWell(
+      //   onTap: () {
+      //     Get.off(
+      //       () => SearchFocus(),
+      //       transition: Transition.fadeIn,
+      //     );
+      //   },
+
+      // SearchTextField(
+      //   controller: Get.find<AppController>().searchController,
+      // ),
+      // ),
       centerTitle: true,
       actions: (ResponsibleLayout.isMobile(context))
           ? [
