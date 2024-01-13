@@ -4,10 +4,7 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
-<<<<<<< HEAD
-=======
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
->>>>>>> 18d1b652f926fa00415ff398009053cba0996ab4
 import 'package:intl/intl.dart';
 
 class MyPromotionView extends StatelessWidget {
@@ -52,81 +49,10 @@ class MyPromotionView extends StatelessWidget {
 
   Widget _buildItem({required Promotion promotion}) {
     return Padding(
-<<<<<<< HEAD
-      padding: const EdgeInsets.all(4.0),
-      child: SizedBox(
-        width: 700,
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  child: Container(
-                    width: 120,
-                    height: 120,
-                    decoration: BoxDecoration(
-                      color: const Color(0xffE6E6E6),
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 0.0),
-                            child: Text(
-                              promotion.club,
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 0),
-                            child: Text(
-                              promotion.title,
-                              style: const TextStyle(fontSize: 15),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 50.0),
-                            child: Text(
-                              DateFormat.yMd().format(promotion.closeAt),
-                              style: const TextStyle(fontSize: 12),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            const Divider(
-              height: 25,
-              thickness: 1,
-              indent: 2,
-              endIndent: 2,
-              color: Color.fromARGB(255, 237, 237, 237),
-            )
-          ],
-        ),
-      ),
-    );
-=======
         padding: const EdgeInsets.all(4.0),
         child: PromotionItem(
           promotion: promotion,
           type: PromotionItemtype.LISTITEM,
         ));
->>>>>>> 18d1b652f926fa00415ff398009053cba0996ab4
   }
 }
