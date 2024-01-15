@@ -21,6 +21,14 @@ class SearchResult extends GetView<SearchFocusController> {
   PreferredSizeWidget _appBar() {
     return AppBar(
       backgroundColor: Colors.white,
+      elevation: 0,
+      leading: GestureDetector(
+        onTap: Get.back,
+        child: const Icon(
+          Icons.arrow_back_ios_new,
+          color: Color(0xff713eff),
+        ),
+      ),
       centerTitle: true,
       title: SearchTextField(
         controller: controller.searchController,
