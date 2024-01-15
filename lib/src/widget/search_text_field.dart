@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/search_focus_controller.dart';
 
 enum SearchBarType { DESKTOP, MOBILE }
 
@@ -13,6 +15,7 @@ class SearchTextField extends StatelessWidget {
       child: TextField(
         cursorColor: Colors.black,
         style: const TextStyle(fontSize: 15, color: Colors.black),
+        onSubmitted: Get.find<SearchFocusController>().submitted,
         controller: controller,
         decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(

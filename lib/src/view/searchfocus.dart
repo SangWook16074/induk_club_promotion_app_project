@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/search_focus_controller.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 
 class SearchFocus extends StatelessWidget {
@@ -17,7 +18,7 @@ class SearchFocus extends StatelessWidget {
           elevation: 0,
           automaticallyImplyLeading: false,
           title: SearchTextField(
-            controller: Get.find<AppController>().searchController,
+            controller: Get.find<SearchFocusController>().searchController,
           ),
           leading: GestureDetector(
             onTap: Get.back,
