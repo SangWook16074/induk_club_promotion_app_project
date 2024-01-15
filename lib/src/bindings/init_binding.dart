@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
@@ -25,6 +26,8 @@ class InitBinding implements Bindings {
     Get.put(LoginController(
         kakaoLoginApi: KakaoLoginApi(),
         googleLoginApi: GoogleLoginApi(api: GoogleSignIn()),
-        memberRepository: MemberRepository(api: MemberApi(dio: Dio()))));
+        memberRepository: MemberRepository(
+            api:
+                MemberApi(dio: Dio(), storage: const FlutterSecureStorage()))));
   }
 }

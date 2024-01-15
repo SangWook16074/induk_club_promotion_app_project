@@ -1,10 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:induk_club_promotion_app_project/src/constants/url.dart';
 
 class MemberApi {
   final Dio dio;
+  final FlutterSecureStorage? storage;
   MemberApi({
     required this.dio,
+    this.storage,
   });
 
   Future<String> signUp(Map<String, dynamic> data) {
@@ -24,11 +27,11 @@ class MemberApi {
     }
   }
 
-  login(Map<String, dynamic> data) {
+  Future<void> login(Map<String, dynamic> data) {
     try {
       return dio.post(Url.loginUrl, data: data).then((resp) {
         if (resp.statusCode == 200) {
-          print(resp.data["data"]["accessToken"]);
+          storage?.write(key: "login", value: resp.data["data"]["accessToken"]);
         } else {
           throw Exception("Fail to login");
         }

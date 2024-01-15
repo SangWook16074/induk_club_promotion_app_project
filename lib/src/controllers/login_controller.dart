@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/resister_binding.dart';
-import 'package:induk_club_promotion_app_project/src/controllers/resister_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/google_login_api.dart';
 import 'package:induk_club_promotion_app_project/src/data/provider/kakao_login_api.dart';
@@ -18,6 +18,7 @@ class LoginController extends GetxController {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController passwordControllerAgain = TextEditingController();
   final Rxn<Member> _user = Rxn<Member>();
+  final Rxn<String> _token = Rxn<String>();
   final RxBool _isAgree = false.obs;
   final RxInt _index = 0.obs;
   LoginPlatform _loginPlatform = LoginPlatform.NONE;
@@ -32,9 +33,16 @@ class LoginController extends GetxController {
   Member? get user => _user.value;
   int get pageIndex => _index.value;
   bool get isAgree => _isAgree.value;
+  String? get token => _token.value;
   LoginPlatform get loginPlatform => _loginPlatform;
   TextEditingController get emailController => _emailController;
   TextEditingController get passwordController => _passwordController;
+
+  @override
+  void onReady() {
+    super.onReady();
+    fetchTokenInfo();
+  }
 
   void moveToNext() {
     if (_index.value == 3) {
@@ -62,15 +70,21 @@ class LoginController extends GetxController {
     }
   }
 
-  void signIn() {
+  void fetchTokenInfo() async {
+    final token = await const FlutterSecureStorage().read(key: "login");
+    print(token);
+    _token(token);
+  }
+
+  void signIn() async {
     final data = {
       "email": _emailController.text.toString(),
       "password": _passwordController.text.toString(),
     };
     if (_loginPlatform != LoginPlatform.NONE) return;
-    memberRepository.signIn(data).then((result) {
-      print(result);
-    });
+    await memberRepository.signIn(data);
+    fetchTokenInfo();
+    Get.back();
   }
 
   void signInWithKakao() {
@@ -126,6 +140,8 @@ class LoginController extends GetxController {
     }
     _loginPlatform = LoginPlatform.NONE;
     _user.value = null;
+    const FlutterSecureStorage().delete(key: "login");
+    _token.value = null;
     Get.back();
   }
 
