@@ -75,7 +75,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             _button(),
                             _options(),
                             _divider(),
-                            _socialSignUpBtn(),
                           ],
                         ),
                       ),
@@ -176,32 +175,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     );
   }
-
-  Widget _socialSignUpBtn() => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-                onTap: controller.signInWithGoogle,
-                child: const GoogleLoginButton()),
-          ),
-          (kIsWeb || Platform.isAndroid)
-              ? Container()
-              : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                      onTap: controller.signInWithApple,
-                      child: const AppleLoginButton()),
-                ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-                onTap: controller.signInWithKakao,
-                child: const KakaoLoginButton()),
-          ),
-        ],
-      );
 
   Widget _divider() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
