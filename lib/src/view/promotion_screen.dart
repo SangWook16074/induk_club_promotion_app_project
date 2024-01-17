@@ -72,17 +72,20 @@ class _PromotionScreenState extends State<PromotionScreen> {
         padding: (ResponsibleLayout.isDesktop(context))
             ? _desktopPadding
             : _mobilePadding,
-        child: Column(
+        child: const Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
                     child: Text('신규 동아리원(디자인) 추가모집',
-                        style: Get.textTheme.displayLarge)),
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600))),
               ],
             ),
-            const Divider(
+            Divider(
               color: Color(0xffE6E6E6),
             )
           ],

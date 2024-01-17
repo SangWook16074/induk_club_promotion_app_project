@@ -1,13 +1,7 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
-import 'package:induk_club_promotion_app_project/src/widget/apple_login_button.dart';
-import 'package:induk_club_promotion_app_project/src/widget/google_login_button.dart';
-import 'package:induk_club_promotion_app_project/src/widget/kakao_login_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/login_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 
@@ -74,7 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             _textFields(),
                             _button(),
                             _options(),
-                            _divider(),
                           ],
                         ),
                       ),
@@ -89,6 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  /// 앱 로고
   Widget _logo() => Padding(
         padding: const EdgeInsets.all(10.0),
         child: Container(
@@ -101,6 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
 
+  /// 로그인 정보 입력 필드
   Widget _textFields() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: Column(
@@ -136,6 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
 
+  /// 로그인 버튼
   Widget _button() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: SignButton(
@@ -175,27 +171,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     );
   }
-
-  Widget _divider() => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              width: 100,
-              height: 1.0,
-              decoration: const BoxDecoration(color: Colors.black),
-            ),
-            const Text(
-              "Start with",
-              style: TextStyle(fontSize: 12),
-            ),
-            Container(
-              width: 100,
-              height: 1.0,
-              decoration: const BoxDecoration(color: Colors.black),
-            ),
-          ],
-        ),
-      );
 }
