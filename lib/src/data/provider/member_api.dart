@@ -27,15 +27,16 @@ class MemberApi {
     }
   }
 
-  Future<void> login(Map<String, dynamic> data) {
+  Future<String?> login(Map<String, dynamic> data) async {
     try {
-      return dio.post(Url.loginUrl, data: data).then((resp) {
-        if (resp.statusCode == 200) {
-          storage?.write(key: "login", value: resp.data["data"]["accessToken"]);
-        } else {
-          throw Exception("Fail to login");
-        }
-      });
+      final response = await dio.post(Url.loginUrl, data: data);
+      if (response.statusCode == 200) {
+        final token = response.data["data"]["accessToken"];
+        return token;
+      } else {
+        final error = response.data["data"]["로그인 실패"];
+        return null;
+      }
     } catch (e) {
       throw Exception("Fail to access to server");
     }

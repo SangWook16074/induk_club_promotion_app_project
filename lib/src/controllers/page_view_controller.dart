@@ -49,13 +49,11 @@ class PageViewController extends GetxController {
       case Page.POST:
         changeIndex(value);
       case Page.MYPAGE:
-        final user = Get.find<LoginController>().user;
+        final user = Get.find<LoginController>().token;
         if (user != null) {
-          print("이동!");
           Get.to(() => const MyPage());
         } else {
           showLoginDialog();
-          print("로그인이 필요합니다");
         }
     }
   }
