@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/constants/image_path.dart';
-import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 
 enum ProfileType { MYPAGE, ICONACTIVE, ICON }
 
@@ -53,18 +51,8 @@ class _ProfileImageState extends State<ProfileImage> {
         child: SizedBox(width: 28, height: 28, child: _image()),
       ));
 
-  Widget _image() => GetX<LoginController>(builder: (controller) {
-        final String? url = controller.user?.profile;
-        if (url == null) {
-          return Image.asset(
-            ImagePath.basic,
-            fit: BoxFit.cover,
-          );
-        } else {
-          return Image.network(
-            url,
-            fit: BoxFit.cover,
-          );
-        }
-      });
+  Widget _image() => Image.asset(
+        ImagePath.basic,
+        fit: BoxFit.cover,
+      );
 }

@@ -6,5 +6,5 @@ class MemberRepository {
 
   Future<String> signUp(Map<String, dynamic> data) => api.signUp(data);
 
-  Future<void> signIn(Map<String, dynamic> data) => api.login(data);
+  Future<String?> signIn(Map<String, dynamic> data) => api.login(data);
 }
