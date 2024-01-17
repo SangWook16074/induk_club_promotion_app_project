@@ -75,7 +75,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             _button(),
                             _options(),
                             _divider(),
-                            _socialSignUpBtn(),
                           ],
                         ),
                       ),
@@ -138,12 +137,15 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
 
-  Widget _button() => const Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
+  Widget _button() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: SignButton(
+            onPressed: () {
+              controller.signIn();
+            },
             width: double.infinity,
             height: 40,
-            child: Text(
+            child: const Text(
               '로그인',
               style: TextStyle(color: Colors.white, fontSize: 15),
             )),
@@ -174,32 +176,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     );
   }
-
-  Widget _socialSignUpBtn() => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-                onTap: controller.signInWithGoogle,
-                child: const GoogleLoginButton()),
-          ),
-          (kIsWeb || Platform.isAndroid)
-              ? Container()
-              : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                      onTap: controller.signInWithApple,
-                      child: const AppleLoginButton()),
-                ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-                onTap: controller.signInWithKakao,
-                child: const KakaoLoginButton()),
-          ),
-        ],
-      );
 
   Widget _divider() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),

@@ -183,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
       actions: (ResponsibleLayout.isMobile(context))
           ? [
               GetX<LoginController>(builder: (controller) {
-                return (controller.user == null)
+                return (controller.token == null)
                     ? GestureDetector(
                         onTap: () {
                           Get.to(() => const LoginScreen());
