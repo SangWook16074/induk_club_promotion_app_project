@@ -21,9 +21,9 @@ class InitBinding implements Bindings {
                 PromotionRepository(api: PromotionApi(dio: Dio()))),
         permanent: true);
     Get.put(LoginController(
-        storage: const FlutterSecureStorage(),
-        memberRepository: MemberRepository(
-            api:
-                MemberApi(dio: Dio(), storage: const FlutterSecureStorage()))));
+      storage: const FlutterSecureStorage(),
+      memberRepository: MemberRepository(
+          api: MemberApi(dio: Dio(), storage: const FlutterSecureStorage())),
+    ));
   }
 }
