@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/page_view_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
@@ -21,9 +22,11 @@ class InitBinding implements Bindings {
                 PromotionRepository(api: PromotionApi(dio: Dio()))),
         permanent: true);
     Get.put(LoginController(
-      storage: const FlutterSecureStorage(),
-      memberRepository: MemberRepository(
-          api: MemberApi(dio: Dio(), storage: const FlutterSecureStorage())),
-    ));
+        memberRepository: MemberRepository(
+            api: MemberApi(
+      dio: Dio(),
+    ))));
+    Get.put(MemberController(
+        memberRepository: MemberRepository(api: MemberApi(dio: Dio()))));
   }
 }

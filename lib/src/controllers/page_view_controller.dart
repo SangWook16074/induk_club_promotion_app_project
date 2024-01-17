@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
 import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/my_page_screen.dart';
 import 'package:induk_club_promotion_app_project/src/widget/custom_dialog.dart';
@@ -52,6 +53,7 @@ class PageViewController extends GetxController {
         final user = Get.find<LoginController>().token;
         if (user != null) {
           Get.to(() => const MyPage());
+          Get.find<MemberController>().fetchMemberData();
         } else {
           showLoginDialog();
         }

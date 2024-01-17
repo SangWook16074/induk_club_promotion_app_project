@@ -16,11 +16,8 @@ class SearchFocus extends StatelessWidget {
           foregroundColor: const Color(0xff713eff),
           elevation: 0,
           automaticallyImplyLeading: false,
-          title: Padding(
-            padding: const EdgeInsets.only(right: 60, left: 2.5),
-            child: SearchTextField(
-              controller: Get.find<SearchFocusController>().searchController,
-            ),
+          title: SearchTextField(
+            controller: Get.find<SearchFocusController>().searchController,
           ),
           leading: GestureDetector(
             onTap: Get.back,

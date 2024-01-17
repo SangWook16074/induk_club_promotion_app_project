@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:induk_club_promotion_app_project/src/constants/url.dart';
+import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 
 class MemberApi {
   final Dio dio;
@@ -34,11 +35,20 @@ class MemberApi {
         final token = response.data["data"]["accessToken"];
         return token;
       } else {
-        final error = response.data["data"]["로그인 실패"];
         return null;
       }
     } catch (e) {
       throw Exception("Fail to access to server");
+    }
+  }
+
+  Future<Member?> searchMyInfo(String token) async {
+    final response = await dio.get("http://localhost:8080/api/member/info",
+        options: Options(headers: {"Authorization": "Bearer $token"}));
+    if (response.statusCode == 200) {
+      return Member.fromJson(response.data["data"]);
+    } else {
+      return null;
     }
   }
 }

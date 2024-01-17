@@ -29,11 +29,8 @@ class SearchResult extends GetView<SearchFocusController> {
         ),
       ),
       centerTitle: true,
-      title: Padding(
-        padding: const EdgeInsets.only(right: 60, left: 2.5),
-        child: SearchTextField(
-          controller: controller.searchController,
-        ),
+      title: SearchTextField(
+        controller: controller.searchController,
       ),
     );
   }
