@@ -92,12 +92,13 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _logo() => Padding(
         padding: const EdgeInsets.all(10.0),
         child: Container(
-          width: 100,
-          height: 50,
+          width: 150,
+          height: 150,
           alignment: Alignment.center,
-          decoration: BoxDecoration(
-              border: Border.all(width: 2.0, color: Colors.black)),
-          child: const Text("Logo"),
+          child: Image.asset(
+            'assets/images/app_icon.png',
+            fit: BoxFit.contain,
+          ),
         ),
       );
 
