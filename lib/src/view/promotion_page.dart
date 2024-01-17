@@ -20,7 +20,10 @@ class PromotionPage extends StatelessWidget {
             ? Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  color: Colors.black,
+                  color: Colors.white,
+                  child: Image.asset(
+                    'assets/images/app_icon.png',
+                  ),
                 ),
               )
             : null,
