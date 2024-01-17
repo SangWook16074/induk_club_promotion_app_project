@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/app.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/resister_binding.dart';
 import 'package:induk_club_promotion_app_project/src/data/repository/member_repository.dart';
 import 'package:induk_club_promotion_app_project/src/view/resister.dart';
@@ -14,8 +15,9 @@ class LoginController extends GetxController {
   final RxBool _isAgree = false.obs;
   final RxInt _index = 0.obs;
   final MemberRepository memberRepository;
-  final FlutterSecureStorage storage;
-  LoginController({required this.storage, required this.memberRepository});
+  final FlutterSecureStorage storage = const FlutterSecureStorage();
+
+  LoginController({required this.memberRepository});
 
   int get pageIndex => _index.value;
   bool get isAgree => _isAgree.value;
@@ -102,7 +104,7 @@ class LoginController extends GetxController {
   void signOut() {
     const FlutterSecureStorage().delete(key: "login");
     _token.value = null;
-    Get.back();
+    Get.offAll(() => const App());
   }
 
   ///회원가입 화면으로

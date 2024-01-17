@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/image_picker_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
@@ -19,20 +20,29 @@ class _MyPageState extends State<MyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xff713eff),
-        body: CustomScrollView(
-          slivers: [
-            _appBar(),
-            _myInfo(),
-            _clubInfo(),
-            _myPromotions(),
-          ],
-        ));
+        body: GetX<MemberController>(builder: (controller) {
+          if (controller.member == null) {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          } else {
+            return CustomScrollView(
+              slivers: [
+                _appBar(),
+                _myInfo(),
+                _clubInfo(),
+                _myPromotions(),
+              ],
+            );
+          }
+        }));
   }
 
   Widget _appBar() {
     return SliverAppBar(
       backgroundColor: const Color(0xff713eff),
-      title: Text('한상욱님! 환영합니다.', style: Get.textTheme.titleMedium),
+      title: Text('${Get.find<MemberController>().member?.name}님! 환영합니다.',
+          style: Get.textTheme.titleMedium),
       elevation: 0.0,
       actions: [
         Padding(
@@ -41,12 +51,17 @@ class _MyPageState extends State<MyPage> {
             onTap: () {
               Get.find<LoginController>().showSignOutDialog();
             },
-            child: const Text(
-              "로그아웃",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15),
+            child: GestureDetector(
+              onTap: () {
+                Get.find<LoginController>().showSignOutDialog();
+              },
+              child: const Text(
+                "로그아웃",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15),
+              ),
             ),
           ),
         )
