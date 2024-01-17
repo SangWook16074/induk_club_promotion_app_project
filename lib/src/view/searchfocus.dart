@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/search_focus_controller.dart';
 import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 
@@ -17,8 +16,11 @@ class SearchFocus extends StatelessWidget {
           foregroundColor: const Color(0xff713eff),
           elevation: 0,
           automaticallyImplyLeading: false,
-          title: SearchTextField(
-            controller: Get.find<SearchFocusController>().searchController,
+          title: Padding(
+            padding: const EdgeInsets.only(right: 60, left: 2.5),
+            child: SearchTextField(
+              controller: Get.find<SearchFocusController>().searchController,
+            ),
           ),
           leading: GestureDetector(
             onTap: Get.back,
