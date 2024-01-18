@@ -11,6 +11,7 @@ class SearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: 40,
       width: double.infinity,
       child: TextField(
         cursorColor: Colors.black,
