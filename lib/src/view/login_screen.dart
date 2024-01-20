@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/constants/image_path.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/widget/login_text_field.dart';
@@ -90,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
           height: 150,
           alignment: Alignment.center,
           child: Image.asset(
-            'assets/images/app_icon.png',
+            ImagePath.appiconpng,
             fit: BoxFit.contain,
           ),
         ),

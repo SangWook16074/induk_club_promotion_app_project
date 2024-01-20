@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/constants/image_path.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
@@ -20,9 +21,7 @@ class PromotionPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   color: Colors.white,
-                  child: Image.asset(
-                    'assets/images/app_icon.png',
-                  ),
+                  child: Image.asset(ImagePath.appiconpng),
                 ),
               )
             : null,
