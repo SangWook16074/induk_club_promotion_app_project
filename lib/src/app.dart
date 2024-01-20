@@ -115,8 +115,8 @@ class App extends GetView<PageViewController> {
         index: controller.pageIndex,
         children: const [
           HomeScreen(),
-          MyPromotionView(),
           PromotionPage(),
+          MyPromotionView(),
           MyPage(),
         ],
       );

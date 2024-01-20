@@ -6,11 +6,6 @@ class SearchFocusController extends GetxController
     with GetSingleTickerProviderStateMixin {
   final TextEditingController _controller = TextEditingController();
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   TextEditingController get searchController => _controller;
 
   void submitted(String value) {

@@ -26,13 +26,17 @@ class _MyPageState extends State<MyPage> {
               child: CircularProgressIndicator.adaptive(),
             );
           } else {
-            return CustomScrollView(
-              slivers: [
-                _appBar(),
-                _myInfo(),
-                _clubInfo(),
-                _myPromotions(),
-              ],
+            return SafeArea(
+              child: CustomScrollView(
+                slivers: [
+                  _appBar(),
+                  _myInfo(),
+                  (controller.member?.club == null)
+                      ? _noClubInfo()
+                      : _clubInfo(),
+                  _myPromotions(),
+                ],
+              ),
             );
           }
         }));
@@ -108,6 +112,59 @@ class _MyPageState extends State<MyPage> {
       ),
     );
   }
+
+  Widget _noClubInfo() => SliverToBoxAdapter(
+        child: GestureDetector(
+          onTap: () {
+            Get.find<MemberController>().showClubInfoDialog();
+          },
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: 4.0,
+                      horizontal:
+                          ResponsibleLayout.isMobile(context) ? 16 : 200),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TitleBox(
+                        label: '동아리 소개',
+                        fontSize: 20,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal:
+                            ResponsibleLayout.isMobile(context) ? 16 : 200),
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                          color: const Color(0xffe0e0e0),
+                          border: Border.all(color: const Color(0xffb5b5b5)),
+                          borderRadius: BorderRadius.circular(8.0)),
+                      child: const Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Icon(
+                            Icons.add,
+                            size: 100,
+                          ),
+                          Text("나만의 동아리를 개설해보세요!")
+                        ],
+                      ),
+                    ))
+              ],
+            ),
+          ),
+        ),
+      );
 
   Widget _clubInfo() => SliverToBoxAdapter(
         child: Container(
