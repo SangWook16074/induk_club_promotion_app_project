@@ -10,4 +10,7 @@ class MemberRepository {
   Future<String?> signIn(Map<String, dynamic> data) => api.login(data);
 
   Future<Member?> searchMyInfo(String token) => api.searchMyInfo(token);
+
+  Future<String?> saveClubInfo(Map<String, dynamic> data) =>
+      api.saveClubInfo(data);
 }

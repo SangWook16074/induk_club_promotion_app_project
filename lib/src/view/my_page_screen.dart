@@ -7,6 +7,7 @@ import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
+import 'package:intl/intl.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
@@ -221,10 +222,12 @@ class _MyPageState extends State<MyPage> {
                               flex: 5,
                               child: Row(
                                 children: [
-                                  Text(
-                                    'A&I',
-                                    style: Get.theme.textTheme.bodyMedium,
-                                  )
+                                  GetX<MemberController>(builder: (controller) {
+                                    return Text(
+                                      controller.member!.club!.clubName,
+                                      style: Get.theme.textTheme.bodyMedium,
+                                    );
+                                  })
                                 ],
                               ),
                             ),
@@ -251,8 +254,12 @@ class _MyPageState extends State<MyPage> {
                               flex: 5,
                               child: Row(
                                 children: [
-                                  Text('2023년 1월 10일',
-                                      style: Get.theme.textTheme.bodyMedium)
+                                  GetX<MemberController>(builder: (controller) {
+                                    return Text(
+                                        DateFormat.yMd().format(DateTime.parse(
+                                            controller.member!.club!.createAt)),
+                                        style: Get.theme.textTheme.bodyMedium);
+                                  })
                                 ],
                               ),
                             ),
@@ -279,10 +286,12 @@ class _MyPageState extends State<MyPage> {
                               flex: 5,
                               child: Row(
                                 children: [
-                                  Text(
-                                    '교내스터디',
-                                    style: Get.theme.textTheme.bodyMedium,
-                                  )
+                                  GetX<MemberController>(builder: (controller) {
+                                    return Text(
+                                      controller.member!.club!.classify,
+                                      style: Get.theme.textTheme.bodyMedium,
+                                    );
+                                  }),
                                 ],
                               ),
                             ),

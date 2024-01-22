@@ -5,10 +5,9 @@ import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 
 class MemberApi {
   final Dio dio;
-  final FlutterSecureStorage? storage;
+  final storage = const FlutterSecureStorage();
   MemberApi({
     required this.dio,
-    this.storage,
   });
 
   Future<String> signUp(Map<String, dynamic> data) {
@@ -47,6 +46,19 @@ class MemberApi {
         options: Options(headers: {"Authorization": "Bearer $token"}));
     if (response.statusCode == 200) {
       return Member.fromJson(response.data["data"]);
+    } else {
+      return null;
+    }
+  }
+
+  Future<String?> saveClubInfo(Map<String, dynamic> data) async {
+    final token = await storage.read(key: "login");
+    final response = await dio.put("http://localhost:8080/api/member/club",
+        data: data,
+        options: Options(headers: {"Authorization": "Bearer $token"}));
+
+    if (response.statusCode == 200) {
+      return response.data["data"].toString();
     } else {
       return null;
     }
