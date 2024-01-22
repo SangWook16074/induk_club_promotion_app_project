@@ -5,6 +5,7 @@ import 'package:induk_club_promotion_app_project/src/bindings/image_picker_bindi
 import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'src/bindings/init_binding.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,6 +69,12 @@ class MainApp extends StatelessWidget {
           scaffoldBackgroundColor: const Color(0xffffffff)),
       home: const App(),
       initialBinding: InitBinding(),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale("en", ""), Locale("ko", "")],
     );
   }
 }

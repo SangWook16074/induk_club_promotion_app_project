@@ -7,6 +7,7 @@ import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
+import 'package:intl/intl.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
@@ -26,13 +27,17 @@ class _MyPageState extends State<MyPage> {
               child: CircularProgressIndicator.adaptive(),
             );
           } else {
-            return CustomScrollView(
-              slivers: [
-                _appBar(),
-                _myInfo(),
-                _clubInfo(),
-                _myPromotions(),
-              ],
+            return SafeArea(
+              child: CustomScrollView(
+                slivers: [
+                  _appBar(),
+                  _myInfo(),
+                  (controller.member?.club == null)
+                      ? _noClubInfo()
+                      : _clubInfo(),
+                  _myPromotions(),
+                ],
+              ),
             );
           }
         }));
@@ -109,6 +114,59 @@ class _MyPageState extends State<MyPage> {
     );
   }
 
+  Widget _noClubInfo() => SliverToBoxAdapter(
+        child: GestureDetector(
+          onTap: () {
+            Get.find<MemberController>().showClubInfoDialog();
+          },
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: 4.0,
+                      horizontal:
+                          ResponsibleLayout.isMobile(context) ? 16 : 200),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TitleBox(
+                        label: '동아리 소개',
+                        fontSize: 20,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal:
+                            ResponsibleLayout.isMobile(context) ? 16 : 200),
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                          color: const Color(0xffe0e0e0),
+                          border: Border.all(color: const Color(0xffb5b5b5)),
+                          borderRadius: BorderRadius.circular(8.0)),
+                      child: const Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Icon(
+                            Icons.add,
+                            size: 100,
+                          ),
+                          Text("나만의 동아리를 개설해보세요!")
+                        ],
+                      ),
+                    ))
+              ],
+            ),
+          ),
+        ),
+      );
+
   Widget _clubInfo() => SliverToBoxAdapter(
         child: Container(
           color: Colors.white,
@@ -164,10 +222,12 @@ class _MyPageState extends State<MyPage> {
                               flex: 5,
                               child: Row(
                                 children: [
-                                  Text(
-                                    'A&I',
-                                    style: Get.theme.textTheme.bodyMedium,
-                                  )
+                                  GetX<MemberController>(builder: (controller) {
+                                    return Text(
+                                      controller.member!.club!.clubName,
+                                      style: Get.theme.textTheme.bodyMedium,
+                                    );
+                                  })
                                 ],
                               ),
                             ),
@@ -194,8 +254,12 @@ class _MyPageState extends State<MyPage> {
                               flex: 5,
                               child: Row(
                                 children: [
-                                  Text('2023년 1월 10일',
-                                      style: Get.theme.textTheme.bodyMedium)
+                                  GetX<MemberController>(builder: (controller) {
+                                    return Text(
+                                        DateFormat.yMd().format(DateTime.parse(
+                                            controller.member!.club!.createAt)),
+                                        style: Get.theme.textTheme.bodyMedium);
+                                  })
                                 ],
                               ),
                             ),
@@ -222,10 +286,12 @@ class _MyPageState extends State<MyPage> {
                               flex: 5,
                               child: Row(
                                 children: [
-                                  Text(
-                                    '교내스터디',
-                                    style: Get.theme.textTheme.bodyMedium,
-                                  )
+                                  GetX<MemberController>(builder: (controller) {
+                                    return Text(
+                                      controller.member!.club!.classify,
+                                      style: Get.theme.textTheme.bodyMedium,
+                                    );
+                                  }),
                                 ],
                               ),
                             ),
