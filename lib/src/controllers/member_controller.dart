@@ -29,12 +29,16 @@ class MemberController extends GetxController {
     if (token == null) return;
     final member = await memberRepository.searchMyInfo(token);
     if (member != null) {
+      print(member.id);
       print(member.name);
       print(member.club);
       _member(member);
     }
   }
 
+  /// 사용자가 동아리를 개설을 원하면
+  /// 아래의 바텀시트에서 동아리 정보를 추가한 후
+  /// 동아리를 개설할 수 있음.
   void showClubInfoDialog() => Get.bottomSheet(
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),

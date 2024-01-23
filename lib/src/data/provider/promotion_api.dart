@@ -11,7 +11,7 @@ class PromotionApi {
     return dio.request(Url.getPromotionsUrl).then((resp) {
       if (resp.statusCode == 200) {
         final List<Promotion> promotions = [];
-        for (Map<String, dynamic> data in resp.data) {
+        for (var data in resp.data["data"]) {
           final Promotion promotion = Promotion.fromJson(data);
           promotions.add(promotion);
         }

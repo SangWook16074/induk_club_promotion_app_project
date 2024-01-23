@@ -149,7 +149,8 @@ class PromotionItem extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 50.0),
                           child: Text(
-                            DateFormat.yMd().format(promotion.closeAt),
+                            DateFormat.yMd()
+                                .format(DateTime.parse(promotion.closeAt)),
                             style: const TextStyle(fontSize: 12),
                           ),
                         ),

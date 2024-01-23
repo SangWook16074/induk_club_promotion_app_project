@@ -50,13 +50,13 @@ class PageViewController extends GetxController {
       case Page.POST:
         changeIndex(value);
       case Page.MYPAGE:
-        final user = Get.find<LoginController>().token;
-        if (user != null) {
-          Get.to(() => const MyPage());
-          Get.find<MemberController>().fetchMemberData();
-        } else {
-          showLoginDialog();
-        }
+        // final user = Get.find<LoginController>().token;
+        // if (user != null) {
+        Get.to(() => const MyPage());
+      //   Get.find<MemberController>().fetchMemberData();
+      // } else {
+      //   showLoginDialog();
+      // }
     }
   }
 

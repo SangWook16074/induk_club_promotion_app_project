@@ -3,9 +3,12 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/image_picker_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
+import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
+import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 import 'package:intl/intl.dart';
 
@@ -45,6 +48,12 @@ class _MyPageState extends State<MyPage> {
 
   Widget _appBar() {
     return SliverAppBar(
+      leading: GestureDetector(
+          onTap: Get.back,
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          )),
       backgroundColor: const Color(0xff713eff),
       title: Text('${Get.find<MemberController>().member?.name}님! 환영합니다.',
           style: Get.textTheme.titleMedium),
@@ -307,42 +316,6 @@ class _MyPageState extends State<MyPage> {
         ),
       );
 
-  Widget _myPromotions() => SliverToBoxAdapter(
-        child: Container(
-          color: Colors.white,
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: ResponsibleLayout.isMobile(context) ? 16 : 200),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const TitleBox(label: '내가 쓴 글', fontSize: 20),
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(() => const PromotionWrite(),
-                            binding: ImagePickerBinding());
-                      },
-                      child: Icon(
-                        Icons.edit,
-                        color: Get.theme.primaryColor,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              ...List.generate(
-                20,
-                (index) => _items(),
-              )
-              // _noItem(),
-            ],
-          ),
-        ),
-      );
-
   Widget _items() => Padding(
         padding: EdgeInsets.symmetric(
             vertical: 8.0,
@@ -361,6 +334,60 @@ class _MyPageState extends State<MyPage> {
           ),
         ),
       );
+
+  Widget _myPromotions() => SliverToBoxAdapter(
+        child: GetX<PromotionController>(builder: (controller) {
+          final myPromotions = controller.promotions
+              .where(
+                (promotion) =>
+                    promotion.userId == Get.find<MemberController>().member!.id,
+              )
+              .toList();
+          return Center(
+            child: Container(
+              color: Colors.white,
+              child: Column(children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: 8.0,
+                      horizontal:
+                          ResponsibleLayout.isMobile(context) ? 16 : 200),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const TitleBox(label: '내가 쓴 글', fontSize: 20),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => const PromotionWrite(),
+                              binding: ImagePickerBinding());
+                        },
+                        child: Icon(
+                          Icons.edit,
+                          color: Get.theme.primaryColor,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                ...List.generate(myPromotions.length, (index) {
+                  final Promotion promotion = myPromotions[index];
+                  return _buildItem(promotion: promotion);
+                })
+              ]),
+            ),
+          );
+        }),
+      );
+
+  Widget _buildItem({required Promotion promotion}) {
+    return Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: PromotionItem(
+          promotion: promotion,
+          type: PromotionItemtype.LISTITEM,
+        ));
+  }
+
   Widget _noItem() => Container(
         alignment: Alignment.center,
         width: double.infinity,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/constants/image_path.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
@@ -35,12 +38,29 @@ class MyPromotionView extends StatelessWidget {
     );
   }
 
-  Widget _body() => SingleChildScrollView(
+  Widget _body() {
+    return GetX<LoginController>(builder: (controller) {
+      final token = controller.token;
+      if (token == null) {
+        return _noUser();
+      } else {
+        return _myPromotions();
+      }
+    });
+  }
+
+  Widget _myPromotions() => SingleChildScrollView(
         child: GetX<PromotionController>(builder: (controller) {
+          final myPromotions = controller.promotions
+              .where(
+                (promotion) =>
+                    promotion.userId == Get.find<MemberController>().member!.id,
+              )
+              .toList();
           return Center(
             child: Column(
-                children: List.generate(controller.promotions.length, (index) {
-              final Promotion promotion = controller.promotions[index];
+                children: List.generate(myPromotions.length, (index) {
+              final Promotion promotion = myPromotions[index];
               return _buildItem(promotion: promotion);
             })),
           );
@@ -54,5 +74,15 @@ class MyPromotionView extends StatelessWidget {
           promotion: promotion,
           type: PromotionItemtype.LISTITEM,
         ));
+  }
+
+  Widget _noUser() {
+    return const Center(
+      child: Text(
+        "로그인이 필요합니다 !",
+        style: TextStyle(
+            fontSize: 15, fontWeight: FontWeight.w600, color: Colors.grey),
+      ),
+    );
   }
 }

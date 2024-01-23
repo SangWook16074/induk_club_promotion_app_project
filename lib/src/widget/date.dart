@@ -27,14 +27,14 @@ class DateFormatWidget extends StatelessWidget {
 
   Widget _buildDateCloseAt() {
     return Text(
-      DateFormat.yMd().format(promotion.closeAt),
+      DateFormat.yMd().format(DateTime.parse(promotion.closeAt)),
       style: TextStyle(fontSize: fontSize),
     );
   }
 
   Widget _buildDateBeginEnd() {
     return Text(
-      '${DateFormat.yMd().format(promotion.begin)}\n${DateFormat.yMd().format(promotion.end)}',
+      '${DateFormat.yMd().format(DateTime.parse(promotion.begin))}\n${DateFormat.yMd().format(DateTime.parse(promotion.end))}',
       style: Get.textTheme.bodyMedium,
     );
   }

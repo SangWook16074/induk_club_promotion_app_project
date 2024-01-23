@@ -15,6 +15,23 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final controller = Get.find<LoginController>();
+  late TextEditingController _emailController;
+  late TextEditingController _passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -113,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4.0),
-              child: LoginTextField(controller: controller.emailController),
+              child: LoginTextField(controller: _emailController),
             ),
             Padding(
               padding: const EdgeInsets.all(4.0),
@@ -125,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4.0),
               child: LoginTextField(
-                controller: controller.passwordController,
+                controller: _passwordController,
                 obscureText: true,
               ),
             )
@@ -138,7 +155,25 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: SignButton(
             onPressed: () {
-              controller.signIn();
+              /// 로그인 정보
+              /// Validation
+              if (_emailController.value.text == '') {
+                Get.snackbar("로그인 정보 에러", "계정을 입력해주세요 !",
+                    snackPosition: SnackPosition.BOTTOM);
+                return;
+              }
+
+              /// 비밀번호 반드시 입력
+              if (_passwordController.value.text == '') {
+                Get.snackbar("로그인 정보 에러", "비밀번호를 입력하세요",
+                    snackPosition: SnackPosition.BOTTOM);
+              }
+
+              final data = {
+                "email": _emailController.text.toString(),
+                "password": _passwordController.text.toString(),
+              };
+              controller.signIn(data);
             },
             width: double.infinity,
             height: 40,

@@ -1,10 +1,12 @@
 class Member {
+  final String id;
   final String name;
   final ClubInfo? club;
-  Member({required this.name, required this.club});
+  Member({required this.id, required this.name, required this.club});
 
   factory Member.fromJson(Map<String, dynamic> json) {
     return Member(
+        id: json["id"].toString(),
         name: json["name"],
         club: (json["clubInfo"] != null)
             ? ClubInfo.fromJson(json["clubInfo"])
