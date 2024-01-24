@@ -61,6 +61,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
                 _requiredPeople(),
                 _info(),
                 _addtional(),
+                _url(),
                 _addImage(),
                 _pickedImages(),
                 _button(),
@@ -431,4 +432,37 @@ class _PromotionWriteState extends State<PromotionWrite> {
       centerTitle: true,
     );
   }
+
+  Widget _url() => Padding(
+        padding:
+            EdgeInsets.all(ResponsibleLayout.isMobile(context) ? 8.0 : 20.0),
+        child: Column(
+          children: [
+            const Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "지원양식 링크 첨부",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+            TextField(
+              maxLines: 1,
+              style: Theme.of(context).textTheme.displaySmall,
+              decoration: const InputDecoration(
+                  hintText: 'http://docs.google.com/forms/example',
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffA7A7A7))),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffA7A7A7)))),
+            ),
+          ],
+        ),
+      );
 }
