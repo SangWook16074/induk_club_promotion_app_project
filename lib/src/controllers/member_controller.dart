@@ -29,7 +29,7 @@ class MemberController extends GetxController {
     if (token == null) return;
     final member = await memberRepository.searchMyInfo(token);
     if (member != null) {
-      // print(member.id);
+      print(member.id);
       print(member.name);
       print(member.club);
       _member(member);
