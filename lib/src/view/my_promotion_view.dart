@@ -51,10 +51,15 @@ class MyPromotionView extends StatelessWidget {
 
   Widget _myPromotions() => SingleChildScrollView(
         child: GetX<PromotionController>(builder: (controller) {
+          final user = Get.find<MemberController>().member;
+          if (user == null) {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          }
           final myPromotions = controller.promotions
               .where(
-                (promotion) =>
-                    promotion.userId == Get.find<MemberController>().member!.id,
+                (promotion) => promotion.userId == user.id,
               )
               .toList();
           return Center(

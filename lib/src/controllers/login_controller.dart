@@ -16,6 +16,7 @@ class LoginController extends GetxController {
   final RxInt _index = 0.obs;
   final MemberRepository memberRepository;
   final FlutterSecureStorage storage = const FlutterSecureStorage();
+  late final _user;
 
   LoginController({required this.memberRepository});
 
@@ -26,6 +27,7 @@ class LoginController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    _user = Get.find<MemberController>();
     fetchTokenInfo();
   }
 
@@ -50,7 +52,11 @@ class LoginController extends GetxController {
   /// 메인화면으로 돌아감
   void storeTokenInfo(String token) async {
     await storage.write(key: "login", value: token);
+    print(token);
     _token(token);
+
+    /// 사용자 정보 가져오기
+    _user.fetchMemberData();
   }
 
   void fetchTokenInfo() {
@@ -58,9 +64,11 @@ class LoginController extends GetxController {
       if (token != null) {
         print(token);
         _token(token);
-        Get.find<MemberController>().fetchMemberData();
+        _user.fetchMemberData();
       }
     });
+
+    /// 사용자 정보 가져오기
   }
 
   ///로그인 요청 후

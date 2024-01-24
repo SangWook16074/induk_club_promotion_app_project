@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/image_picker_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:induk_club_promotion_app_project/src/view/zoom_image.dart';
 
 class PromotionWrite extends StatefulWidget {
   const PromotionWrite({super.key});
@@ -302,7 +303,8 @@ class _PromotionWriteState extends State<PromotionWrite> {
                   height: 30,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2.0),
-                      border: Border.all(color: Color(0xffA7A7A7), width: 1)),
+                      border:
+                          Border.all(color: const Color(0xffA7A7A7), width: 1)),
                   child: const Icon(
                     Icons.add,
                     color: Color(0xff707070),
@@ -367,20 +369,42 @@ class _PromotionWriteState extends State<PromotionWrite> {
                               Container(
                                   height: 300,
                                   width: 300,
-                                  alignment: Alignment.center,
                                   decoration: BoxDecoration(
+                                      color: Colors.blue,
                                       borderRadius: BorderRadius.circular(8.0)),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: (kIsWeb)
-                                        ? Image.memory(
-                                            controller.webImages[index],
-                                            fit: BoxFit.fill,
-                                          )
-                                        : Image.file(
-                                            File(controller.images[index].path),
-                                            fit: BoxFit.fill,
-                                          ),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      if (kIsWeb) {
+                                        Get.to(() => ZoomImage(
+                                              tag: index.toString(),
+                                              webImage:
+                                                  controller.webImages[index],
+                                            ));
+                                      } else {
+                                        Get.to(() => ZoomImage(
+                                            tag: index.toString(),
+                                            image: File(
+                                              controller.images[index].path,
+                                            )));
+                                      }
+                                    },
+                                    child: Hero(
+                                      tag: index.toString(),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: (kIsWeb)
+                                            ? Image.memory(
+                                                controller.webImages[index],
+                                                fit: BoxFit.cover,
+                                              )
+                                            : Image.file(
+                                                File(controller
+                                                    .images[index].path),
+                                                fit: BoxFit.cover,
+                                              ),
+                                      ),
+                                    ),
                                   )),
                               Positioned(
                                 left: 2,

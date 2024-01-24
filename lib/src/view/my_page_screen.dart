@@ -55,6 +55,7 @@ class _MyPageState extends State<MyPage> {
             color: Colors.white,
           )),
       backgroundColor: const Color(0xff713eff),
+      centerTitle: false,
       title: Text('${Get.find<MemberController>().member?.name}님! 환영합니다.',
           style: Get.textTheme.titleMedium),
       elevation: 0.0,
@@ -165,8 +166,15 @@ class _MyPageState extends State<MyPage> {
                           Icon(
                             Icons.add,
                             size: 100,
+                            color: Colors.grey,
                           ),
-                          Text("나만의 동아리를 개설해보세요!")
+                          Text(
+                            "나만의 동아리를 개설해보세요!",
+                            style: TextStyle(
+                                color: Color(0xff4d4d4d),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18),
+                          )
                         ],
                       ),
                     ))
@@ -185,16 +193,19 @@ class _MyPageState extends State<MyPage> {
                 padding: EdgeInsets.symmetric(
                     vertical: 4.0,
                     horizontal: ResponsibleLayout.isMobile(context) ? 16 : 200),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TitleBox(
+                    const TitleBox(
                       label: '동아리 소개',
                       fontSize: 20,
                     ),
-                    Text(
-                      '수정',
-                      style: TextStyle(fontSize: 20, color: Colors.grey),
+                    GestureDetector(
+                      onTap: Get.find<MemberController>().updateClubInfo,
+                      child: Icon(
+                        Icons.edit,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     )
                   ],
                 ),
@@ -362,7 +373,7 @@ class _MyPageState extends State<MyPage> {
                               binding: ImagePickerBinding());
                         },
                         child: Icon(
-                          Icons.edit,
+                          Icons.add,
                           color: Get.theme.primaryColor,
                         ),
                       )

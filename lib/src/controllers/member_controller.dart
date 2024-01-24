@@ -12,21 +12,34 @@ import 'package:intl/intl.dart';
 
 class MemberController extends GetxController {
   final Rxn<Member> _member = Rxn<Member>();
-  final Rx<DateTime> initDate =
-      Rx<DateTime>(DateFormat("yyyy-MM-dd").parse("2000-01-01"));
-  final RxString classify = "중앙동아리".obs;
+  late Rx<DateTime> initDate;
+  late RxString classify;
   final MemberRepository memberRepository;
   final FlutterSecureStorage storage = const FlutterSecureStorage();
-  final TextEditingController _name = TextEditingController();
+  late TextEditingController _name;
 
-  MemberController({required this.memberRepository});
+  MemberController({required this.memberRepository}) {
+    if (_member.value == null) {
+      initDate = Rx<DateTime>(DateFormat("yyyy-MM-dd").parse("2000-01-01"));
+      classify = "중앙동아리".obs;
+      _name = TextEditingController();
+    } else {
+      initDate = Rx<DateTime>(
+          DateFormat("yyyy-MM-dd").parse("${_member.value?.club?.createAt}"));
+      classify = "${_member.value?.club?.classify}".obs;
+      _name = TextEditingController(text: "${_member.value?.club?.clubName}");
+    }
+  }
 
   Member? get member => _member.value;
 
   /// 사용자 정보 조회
   void fetchMemberData() async {
     final token = Get.find<LoginController>().token;
-    if (token == null) return;
+    if (token == null) {
+      print("토큰 정보 X");
+      return;
+    }
     final member = await memberRepository.searchMyInfo(token);
     if (member != null) {
       print(member.id);
@@ -41,116 +54,161 @@ class MemberController extends GetxController {
   /// 동아리를 개설할 수 있음.
   void showClubInfoDialog() => Get.bottomSheet(
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          height: 600,
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(24.0),
                   topRight: Radius.circular(24.0))),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 30,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text("동아리 이름"),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: LoginTextField(
-                    controller: _name,
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text("개설일"),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GetX<MemberController>(builder: (controller) {
-                    return Text(DateFormat.yMd().format(initDate.value));
-                  }),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    height: 300,
-                    child: CupertinoDatePicker(
-                      minimumYear: 1900,
-                      maximumYear: DateTime.now().year,
-                      initialDateTime: initDate.value,
-                      maximumDate: DateTime.now(),
-                      onDateTimeChanged: onDateTimeChanged,
-                      mode: CupertinoDatePickerMode.date,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: Get.back,
+                    child: const Icon(
+                      Icons.close,
+                      color: Colors.black,
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("동아리분류"),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GetX<MemberController>(builder: (controller) {
-                        return DropdownButton(
-                            value: classify.value,
-                            items: const [
-                              DropdownMenuItem(
-                                value: "중앙동아리",
-                                child: Text(
-                                  "중앙동아리",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 15),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "사설동아리",
-                                child: Text(
-                                  "사설동아리",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 15),
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "연합동아리",
-                                child: Text(
-                                  "연합동아리",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 15),
-                                ),
-                              ),
+                  const Text(
+                    "동아리 개설하기",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  const Opacity(opacity: 0.0, child: Icon(Icons.close))
+                ],
+              ),
+              const Divider(),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              "동아리 이름",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: LoginTextField(
+                          controller: _name,
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text("개설일"),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GetX<MemberController>(builder: (controller) {
+                          return Row(
+                            children: [
+                              Text(DateFormat.yMd().format(initDate.value)),
                             ],
-                            onChanged: onChange);
-                      }),
-                    ),
-                  ],
+                          );
+                        }),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: 300,
+                          child: CupertinoDatePicker(
+                            minimumYear: 1900,
+                            maximumYear: DateTime.now().year,
+                            initialDateTime: initDate.value,
+                            maximumDate: DateTime.now(),
+                            onDateTimeChanged: onDateTimeChanged,
+                            mode: CupertinoDatePickerMode.date,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text("동아리분류"),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:
+                                GetX<MemberController>(builder: (controller) {
+                              return DropdownButton(
+                                  value: classify.value,
+                                  items: const [
+                                    DropdownMenuItem(
+                                      value: "중앙동아리",
+                                      child: Text(
+                                        "중앙동아리",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15),
+                                      ),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: "사설동아리",
+                                      child: Text(
+                                        "사설동아리",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15),
+                                      ),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: "연합동아리",
+                                      child: Text(
+                                        "연합동아리",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15),
+                                      ),
+                                    ),
+                                  ],
+                                  onChanged: onChange);
+                            }),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xff713eff)),
+                                onPressed: validateClubInfo,
+                                child: const Text(
+                                  "저장하기",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                ))),
+                      ),
+                    ],
+                  ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff713eff)),
-                          onPressed: validateClubInfo,
-                          child: const Text(
-                            "저장하기",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600),
-                          ))),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
+        isScrollControlled: true,
       );
 
   void onDateTimeChanged(DateTime value) {
@@ -232,7 +290,167 @@ class MemberController extends GetxController {
     if (response != null) {
       print(response);
       fetchMemberData();
-      Get.offAll(const MyPage());
+      Get.offAll(() => const MyPage());
+      _name.clear();
     }
   }
+
+  void updateClubInfo() => Get.bottomSheet(
+        Container(
+          height: 600,
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24.0),
+                  topRight: Radius.circular(24.0))),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: Get.back,
+                    child: const Icon(
+                      Icons.close,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const Text(
+                    "동아리 정보수정",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  const Opacity(opacity: 0.0, child: Icon(Icons.close))
+                ],
+              ),
+              const Divider(),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              "동아리 이름",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: LoginTextField(
+                          controller: _name,
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text("개설일"),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GetX<MemberController>(builder: (controller) {
+                          return Row(
+                            children: [
+                              Text(DateFormat.yMd().format(initDate.value)),
+                            ],
+                          );
+                        }),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: 300,
+                          child: CupertinoDatePicker(
+                            minimumYear: 1900,
+                            maximumYear: DateTime.now().year,
+                            initialDateTime: initDate.value,
+                            maximumDate: DateTime.now(),
+                            onDateTimeChanged: onDateTimeChanged,
+                            mode: CupertinoDatePickerMode.date,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text("동아리분류"),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:
+                                GetX<MemberController>(builder: (controller) {
+                              return DropdownButton(
+                                  value: classify.value,
+                                  items: const [
+                                    DropdownMenuItem(
+                                      value: "중앙동아리",
+                                      child: Text(
+                                        "중앙동아리",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15),
+                                      ),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: "사설동아리",
+                                      child: Text(
+                                        "사설동아리",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15),
+                                      ),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: "연합동아리",
+                                      child: Text(
+                                        "연합동아리",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15),
+                                      ),
+                                    ),
+                                  ],
+                                  onChanged: onChange);
+                            }),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xff713eff)),
+                                onPressed: validateClubInfo,
+                                child: const Text(
+                                  "저장하기",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                ))),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        isScrollControlled: true,
+      );
 }
