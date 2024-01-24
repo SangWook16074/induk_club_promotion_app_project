@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/data/repository/member_repository.dart';
 
@@ -31,27 +32,27 @@ class ResisterController extends GetxController {
 
   void signUp() {
     if (_email.value.text == "") {
-      print("이메일을 입력하세요 !");
+      showToast("이메일을 입력하세요 !");
       return;
     }
 
     if (_name.value.text == "") {
-      print("사용자 이름을 입력하세요 !");
+      showToast("사용자 이름을 입력하세요 !");
       return;
     }
 
     if (_password.value.text == "") {
-      print("비밀번호를 입력하세요 !");
+      showToast("비밀번호를 입력하세요 !");
       return;
     }
 
     if (_passwordAgain.value.text == "") {
-      print("비밀번호 확인을 입력하세요 !");
+      showToast("비밀번호 확인을 입력하세요 !");
       return;
     }
 
     if (_password.value != _passwordAgain.value) {
-      print("비밀번호 확인값이 다릅니다 !");
+      showToast("비밀번호 확인값이 다릅니다 !");
       return;
     }
 
@@ -81,5 +82,19 @@ class ResisterController extends GetxController {
     // 비밀번호 조합 validation
 
     // 회원가입
+  }
+
+  void showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      textColor: Colors.white,
+      backgroundColor: const Color(0xff8D63FF),
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 2,
+      fontSize: 16.0,
+      gravity: ToastGravity.BOTTOM,
+      webPosition: "center",
+      webBgColor: " #8D63FF",
+    );
   }
 }

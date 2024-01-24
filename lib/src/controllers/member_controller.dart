@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
@@ -170,7 +171,7 @@ class MemberController extends GetxController {
 
   void validateClubInfo() {
     if (_name.value.text == "") {
-      print("동아리 이름이 비었습니다.");
+      showToast("동아리 이름이 비었습니다.");
       return;
     }
     showConfirmAlertDialog();
@@ -234,5 +235,18 @@ class MemberController extends GetxController {
       fetchMemberData();
       Get.offAll(const MyPage());
     }
+  }
+
+  void showToast(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        textColor: Colors.white,
+        backgroundColor: const Color(0xff8D63FF),
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 2,
+        fontSize: 16.0,
+        gravity: ToastGravity.CENTER,
+        webPosition: "center",
+        webBgColor: " #8D63FF");
   }
 }
