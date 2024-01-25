@@ -84,17 +84,15 @@ class ResisterController extends GetxController {
     // 회원가입
   }
 
-  void showToast(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      textColor: Colors.white,
-      backgroundColor: const Color(0xff8D63FF),
-      toastLength: Toast.LENGTH_SHORT,
-      timeInSecForIosWeb: 2,
-      fontSize: 16.0,
-      gravity: ToastGravity.BOTTOM,
-      webPosition: "center",
-      webBgColor: " #8D63FF",
-    );
-  }
+  void showToast(String message) => Fluttertoast.showToast(
+        msg: message,
+        textColor: Colors.white,
+        backgroundColor: const Color(0xff8D63FF),
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 2,
+        fontSize: 16.0,
+        gravity: ToastGravity.TOP,
+        webPosition: "center",
+        webBgColor: " #8D63FF",
+      );
 }
