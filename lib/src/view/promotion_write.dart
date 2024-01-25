@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/image_picker_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:induk_club_promotion_app_project/src/view/zoom_image.dart';
 
 class PromotionWrite extends StatefulWidget {
   const PromotionWrite({super.key});
@@ -51,7 +52,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: (ResponsibleLayout.isMobile(context)) ? 10 : 300),
+                horizontal: (ResponsibleLayout.isMobile(context)) ? 0 : 300),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -302,7 +303,8 @@ class _PromotionWriteState extends State<PromotionWrite> {
                   height: 30,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2.0),
-                      border: Border.all(color: Color(0xffA7A7A7), width: 1)),
+                      border:
+                          Border.all(color: const Color(0xffA7A7A7), width: 1)),
                   child: const Icon(
                     Icons.add,
                     color: Color(0xff707070),
@@ -341,75 +343,91 @@ class _PromotionWriteState extends State<PromotionWrite> {
       );
 
   Widget _pickedImages() => GetX<ImagePickerController>(builder: (controller) {
-        return Padding(
-            padding: EdgeInsets.all(
-                ResponsibleLayout.isMobile(context) ? 8.0 : 20.0),
-            child: (controller.webImages.isEmpty && controller.images.isEmpty)
-                ? Container(
-                    height: 250,
-                    color: const Color(0xffbdbdbd),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      "선택한 이미지가 없습니다.",
-                      style: TextStyle(color: Colors.white),
-                    ))
-                : SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: List.generate(
-                          (kIsWeb)
-                              ? controller.webImages.length
-                              : controller.images.length, (index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Stack(
-                            children: [
-                              Container(
-                                  height: 300,
-                                  width: 300,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.0)),
+        return (controller.webImages.isEmpty && controller.images.isEmpty)
+            ? Container(
+                height: 250,
+                color: const Color(0xffbdbdbd),
+                alignment: Alignment.center,
+                child: const Text(
+                  "선택한 이미지가 없습니다.",
+                  style: TextStyle(color: Colors.white),
+                ))
+            : SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(
+                      (kIsWeb)
+                          ? controller.webImages.length
+                          : controller.images.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Stack(
+                        children: [
+                          Container(
+                              height: 300,
+                              width: 300,
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(8.0)),
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (kIsWeb) {
+                                    Get.to(() => ZoomImage(
+                                          tag: index.toString(),
+                                          webImage: controller.webImages[index],
+                                        ));
+                                  } else {
+                                    Get.to(() => ZoomImage(
+                                        tag: index.toString(),
+                                        image: File(
+                                          controller.images[index].path,
+                                        )));
+                                  }
+                                },
+                                child: Hero(
+                                  tag: index.toString(),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: (kIsWeb)
                                         ? Image.memory(
                                             controller.webImages[index],
-                                            fit: BoxFit.fill,
+                                            fit: BoxFit.cover,
                                           )
                                         : Image.file(
                                             File(controller.images[index].path),
-                                            fit: BoxFit.fill,
+                                            fit: BoxFit.cover,
                                           ),
-                                  )),
-                              Positioned(
-                                left: 2,
-                                top: 2,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Get.find<ImagePickerController>()
-                                        .deleteImage(index);
-                                  },
-                                  child: Container(
-                                    width: 30,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                        color: Colors.red.withOpacity(0.7),
-                                        shape: BoxShape.circle),
-                                    child: const Icon(
-                                      Icons.close,
-                                      color: Colors.white,
-                                      size: 24,
-                                    ),
                                   ),
                                 ),
+                              )),
+                          Positioned(
+                            left: 2,
+                            top: 2,
+                            child: GestureDetector(
+                              onTap: () {
+                                Get.find<ImagePickerController>()
+                                    .deleteImage(index);
+                              },
+                              child: Container(
+                                width: 30,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                    color: Colors.red.withOpacity(0.7),
+                                    shape: BoxShape.circle),
+                                child: const Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 24,
+                                ),
                               ),
-                            ],
+                            ),
                           ),
-                        );
-                      }),
-                    ),
-                  ));
+                        ],
+                      ),
+                    );
+                  }),
+                ),
+              );
       });
 
   PreferredSizeWidget _appBar() {
