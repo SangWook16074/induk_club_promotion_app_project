@@ -11,7 +11,7 @@ class PromotionRepository {
     final resp = [
       {
         "id": 1,
-        "userName": "한상욱",
+        "userId": 1,
         "club": "A&I",
         "createAt": DateTime.now().toString(),
         "closeAt": DateTime.now().toString(),
@@ -29,7 +29,7 @@ class PromotionRepository {
       },
       {
         "id": 2,
-        "userName": "한상욱",
+        "userId": 2,
         "club": "A&I",
         "createAt": DateTime.now().toString(),
         "closeAt": DateTime.now().toString(),
@@ -47,7 +47,7 @@ class PromotionRepository {
       },
       {
         "id": 3,
-        "userName": "한상욱",
+        "userId": 3,
         "club": "A&I",
         "createAt": DateTime.now().toString(),
         "closeAt": DateTime.now().toString(),
@@ -65,7 +65,7 @@ class PromotionRepository {
       },
       {
         "id": 4,
-        "userName": "한상욱",
+        "userId": 4,
         "club": "A&I",
         "createAt": DateTime.now().toString(),
         "closeAt": DateTime.now().toString(),
