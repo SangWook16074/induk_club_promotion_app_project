@@ -9,6 +9,7 @@ import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/searchfocus.dart';
+import 'package:induk_club_promotion_app_project/src/widget/club_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 

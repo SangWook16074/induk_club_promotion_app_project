@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:induk_club_promotion_app_project/src/app.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/image_picker_binding.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';

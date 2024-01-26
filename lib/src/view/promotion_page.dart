@@ -6,8 +6,8 @@ import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 
-class AllPromotion extends StatelessWidget {
-  const AllPromotion({super.key});
+class PromotionPage extends StatelessWidget {
+  const PromotionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
