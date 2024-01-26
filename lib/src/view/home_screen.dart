@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/controllers/app_controller.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/search_focus_binding.dart';
+import 'package:induk_club_promotion_app_project/src/constants/image_path.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_screen.dart';
-import 'package:induk_club_promotion_app_project/src/widget/club_item.dart';
+import 'package:induk_club_promotion_app_project/src/view/searchfocus.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
-import 'package:induk_club_promotion_app_project/src/widget/search_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -125,18 +125,52 @@ class _HomeScreenState extends State<HomeScreen> {
           ? Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                color: Colors.black,
+                color: Colors.white,
+                child: Image.asset(ImagePath.appiconpng),
               ),
             )
           : null,
-      title: SearchTextField(
-        controller: Get.find<AppController>().searchController,
+      title: InkWell(
+        onTap: () {
+          Get.to(
+            () => const SearchFocus(),
+            transition: Transition.fadeIn,
+            binding: SearchFocusBinding(),
+          );
+        },
+        onLongPress: () {
+          Get.to(
+            () => const SearchFocus(),
+            transition: Transition.fadeIn,
+            binding: SearchFocusBinding(),
+          );
+        },
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25.0),
+            border: Border.all(
+              color: const Color(0xff713eff),
+              width: 1.5,
+            ),
+            color: Colors.white,
+          ),
+          alignment: Alignment.centerRight,
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.search,
+              color: Color(0xff713eff),
+              size: 20,
+            ),
+          ),
+        ),
       ),
       centerTitle: true,
       actions: (ResponsibleLayout.isMobile(context))
           ? [
               GetX<LoginController>(builder: (controller) {
-                return (controller.user == null)
+                return (controller.token == null)
                     ? GestureDetector(
                         onTap: () {
                           Get.to(() => const LoginScreen());

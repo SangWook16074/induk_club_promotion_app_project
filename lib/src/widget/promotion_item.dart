@@ -127,35 +127,33 @@ class PromotionItem extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 0.0),
-                            child: Text(
-                              promotion.club,
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w600),
-                            ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 0.0),
+                          child: Text(
+                            promotion.club,
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w600),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 0),
-                            child: Text(
-                              promotion.title,
-                              style: const TextStyle(fontSize: 15),
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 0),
+                          child: Text(
+                            promotion.title,
+                            style: const TextStyle(fontSize: 15),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 50.0),
-                            child: Text(
-                              DateFormat.yMd().format(promotion.closeAt),
-                              style: const TextStyle(fontSize: 12),
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 50.0),
+                          child: Text(
+                            DateFormat.yMd().format(promotion.closeAt),
+                            style: const TextStyle(fontSize: 12),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 )

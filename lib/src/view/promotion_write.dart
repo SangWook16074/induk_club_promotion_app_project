@@ -46,6 +46,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _appBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -55,7 +56,6 @@ class _PromotionWriteState extends State<PromotionWrite> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _header(),
                 _title(),
                 _duration(),
                 _requiredPeople(),
@@ -72,44 +72,6 @@ class _PromotionWriteState extends State<PromotionWrite> {
     );
   }
 
-  Widget _header() => Padding(
-        padding:
-            EdgeInsets.all(ResponsibleLayout.isMobile(context) ? 8.0 : 20.0),
-        child: Row(
-          children: [
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: "동아리",
-                    style: TextStyle(
-                        fontSize:
-                            (ResponsibleLayout.isMobile(context)) ? 25 : 45,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
-                  ),
-                  TextSpan(
-                      text: "홍보글",
-                      style: TextStyle(
-                          fontSize:
-                              (ResponsibleLayout.isMobile(context)) ? 28 : 50,
-                          fontWeight: FontWeight.w700,
-                          color: const Color(0xff713eff))),
-                  TextSpan(
-                    text: "을 작성하세요.",
-                    style: TextStyle(
-                        fontSize:
-                            (ResponsibleLayout.isMobile(context)) ? 25 : 45,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
-
   Widget _title() => Padding(
         padding:
             EdgeInsets.all(ResponsibleLayout.isMobile(context) ? 8.0 : 20.0),
@@ -117,23 +79,28 @@ class _PromotionWriteState extends State<PromotionWrite> {
           children: [
             const Row(
               children: [
-                Text(
-                  "글 제목",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "제목",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
               ],
             ),
             TextField(
-              style: Theme.of(context).textTheme.displayMedium,
+              maxLines: 1,
+              style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
-                  focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black)),
-                  border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black))),
-            )
+                  hintText: '제목',
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffA7A7A7))),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffA7A7A7)))),
+            ),
           ],
         ),
       );
@@ -146,10 +113,10 @@ class _PromotionWriteState extends State<PromotionWrite> {
             const Row(
               children: [
                 Text(
-                  "모집 기간",
+                  "모집기간",
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 20,
+                      fontSize: 16,
                       fontWeight: FontWeight.w600),
                 ),
               ],
@@ -157,46 +124,57 @@ class _PromotionWriteState extends State<PromotionWrite> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          "${_beginTime.year}-${_beginTime.month}-${_beginTime.day}",
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: GestureDetector(
-                              onTap: _setBegin,
-                              child: const Icon(Icons.calendar_today)),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          "${_expirationTime.year}-${_expirationTime.month}-${_expirationTime.day}",
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: GestureDetector(
-                              onTap: _setExpiration,
-                              child: const Icon(Icons.calendar_today)),
-                        ),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "${_beginTime.year}-${_beginTime.month}-${_beginTime.day}",
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: GestureDetector(
+                                onTap: _setBegin,
+                                child: const Icon(
+                                  Icons.calendar_today,
+                                  color: Color(0xff707070),
+                                )),
+                          ),
+                        ],
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('~'),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "${_expirationTime.year}-${_expirationTime.month}-${_expirationTime.day}",
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: GestureDetector(
+                                onTap: _setExpiration,
+                                child: const Icon(
+                                  Icons.calendar_today,
+                                  color: Color(0xff707070),
+                                )),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -212,22 +190,27 @@ class _PromotionWriteState extends State<PromotionWrite> {
           children: [
             const Row(
               children: [
-                Text(
-                  "모집인원",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "모집인원",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
               ],
             ),
             TextField(
-              style: Theme.of(context).textTheme.displayMedium,
+              maxLines: 1,
+              style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
-                  focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black)),
-                  border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black))),
+                  hintText: 'X명',
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffA7A7A7))),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffA7A7A7)))),
             )
           ],
         ),
@@ -240,23 +223,27 @@ class _PromotionWriteState extends State<PromotionWrite> {
           children: [
             const Row(
               children: [
-                Text(
-                  "동아리 소개",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "동아리 소개",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
               ],
             ),
             TextField(
-              maxLines: 20,
-              style: Theme.of(context).textTheme.displayMedium,
+              maxLines: 10,
+              style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
+                  hintText: '내용을 입력하세요',
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black)),
+                      borderSide: BorderSide(color: Color(0xffA7A7A7))),
                   border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black))),
+                      borderSide: BorderSide(color: Color(0xffA7A7A7)))),
             )
           ],
         ),
@@ -269,23 +256,25 @@ class _PromotionWriteState extends State<PromotionWrite> {
           children: [
             const Row(
               children: [
-                Text(
-                  "추가 정보",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "추가 정보",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
               ],
             ),
             TextField(
-              maxLines: 10,
-              style: Theme.of(context).textTheme.displayMedium,
+              maxLines: 5,
+              style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide()),
                   border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black))),
+                      borderSide: BorderSide(color: Color(0xffA7A7A7)))),
             )
           ],
         ),
@@ -297,30 +286,30 @@ class _PromotionWriteState extends State<PromotionWrite> {
         child: Row(
           children: [
             const Text(
-              "사진 첨부",
+              '사진 첨부',
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: FontWeight.w600),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: GestureDetector(
                 onTap: () => Get.find<ImagePickerController>().pickImages(),
                 child: Container(
                   width: 30,
                   height: 30,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.blue,
-                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2.0),
+                      border: Border.all(color: Color(0xffA7A7A7), width: 1)),
                   child: const Icon(
                     Icons.add,
-                    color: Colors.white,
+                    color: Color(0xff707070),
+                    size: 20,
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       );
@@ -333,17 +322,17 @@ class _PromotionWriteState extends State<PromotionWrite> {
             Get.find<PromotionController>().createPromotion();
           },
           child: Container(
-            width: 400,
-            height: 70,
+            width: double.infinity,
+            height: 60,
             decoration: BoxDecoration(
                 color: const Color(0xff713eff),
-                borderRadius: BorderRadius.circular(2.0)),
+                borderRadius: BorderRadius.circular(8.0)),
             alignment: Alignment.center,
             child: const Text(
-              "홍보 글 등록하기",
+              "홍보 글 등록",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 25,
+                  fontSize: 18,
                   fontWeight: FontWeight.w700),
             ),
           ),
@@ -356,7 +345,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
                 ResponsibleLayout.isMobile(context) ? 8.0 : 20.0),
             child: (controller.webImages.isEmpty && controller.images.isEmpty)
                 ? Container(
-                    height: 300,
+                    height: 250,
                     color: const Color(0xffbdbdbd),
                     alignment: Alignment.center,
                     child: const Text(
@@ -421,4 +410,25 @@ class _PromotionWriteState extends State<PromotionWrite> {
                     ),
                   ));
       });
+
+  PreferredSizeWidget _appBar() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
+      elevation: 0.5,
+      leading: GestureDetector(
+        onTap: Get.back,
+        child: const Icon(
+          Icons.close,
+          color: Colors.black,
+        ),
+      ),
+      title: const Text(
+        '동아리 홍보 글쓰기',
+        style: TextStyle(
+            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+      ),
+      centerTitle: true,
+    );
+  }
 }

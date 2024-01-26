@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
 import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/my_page_screen.dart';
 import 'package:induk_club_promotion_app_project/src/widget/custom_dialog.dart';
@@ -49,13 +50,12 @@ class PageViewController extends GetxController {
       case Page.POST:
         changeIndex(value);
       case Page.MYPAGE:
-        final user = Get.find<LoginController>().user;
+        final user = Get.find<LoginController>().token;
         if (user != null) {
-          print("이동!");
           Get.to(() => const MyPage());
+          Get.find<MemberController>().fetchMemberData();
         } else {
           showLoginDialog();
-          print("로그인이 필요합니다");
         }
     }
   }

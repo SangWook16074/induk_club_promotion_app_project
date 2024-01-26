@@ -6,4 +6,6 @@ class SocialImagePath {
 
 class ImagePath {
   static String get basic => "assets/images/basic_account.png";
+  static String get appiconjpg => "assets/images/app_icon.jpg";
+  static String get appiconpng => "assets/images/app_icon.png";
 }

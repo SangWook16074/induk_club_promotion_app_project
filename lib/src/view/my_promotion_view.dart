@@ -1,11 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/constants/image_path.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
-import 'package:intl/intl.dart';
 
 class MyPromotionView extends StatelessWidget {
   const MyPromotionView({super.key});
@@ -21,7 +20,8 @@ class MyPromotionView extends StatelessWidget {
             ? Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  color: Colors.black,
+                  color: Colors.white,
+                  child: Image.asset(ImagePath.appiconpng),
                 ),
               )
             : null,
