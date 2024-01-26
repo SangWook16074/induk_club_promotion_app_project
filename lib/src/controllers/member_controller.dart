@@ -462,7 +462,5 @@ class MemberController extends GetxController {
         timeInSecForIosWeb: 2,
         fontSize: 16.0,
         gravity: ToastGravity.TOP,
-        webPosition: "center",
-        webBgColor: " #8D63FF",
       );
 }
