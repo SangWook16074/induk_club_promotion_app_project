@@ -64,12 +64,12 @@ class ResisterController extends GetxController {
 
     repository.signUp(data).then((result) {
       if (result == "") {
-        print("잠시 후 다시 시도해주세요.");
+        showToast("잠시 후 다시 시도해주세요.");
         return;
       }
 
       if (result == "이미 등록된 회원입니다.") {
-        print(result);
+        showToast(result);
         return;
       }
 
