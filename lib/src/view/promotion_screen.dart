@@ -72,20 +72,20 @@ class _PromotionScreenState extends State<PromotionScreen> {
         padding: (ResponsibleLayout.isDesktop(context))
             ? _desktopPadding
             : _mobilePadding,
-        child: const Column(
+        child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
-                    child: Text('신규 동아리원(디자인) 추가모집',
-                        style: TextStyle(
+                    child: Text(widget.promotion.title,
+                        style: const TextStyle(
                             fontSize: 25,
                             color: Colors.black,
                             fontWeight: FontWeight.w600))),
               ],
             ),
-            Divider(
+            const Divider(
               color: Color(0xffE6E6E6),
             )
           ],
@@ -188,8 +188,14 @@ class _PromotionScreenState extends State<PromotionScreen> {
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: Text(widget.promotion.content,
-                  style: Get.textTheme.bodyMedium))
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Text(widget.promotion.content,
+                        style: Get.textTheme.bodyMedium),
+                  ),
+                ],
+              ))
         ],
       ),
     );
@@ -207,8 +213,14 @@ class _PromotionScreenState extends State<PromotionScreen> {
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: Text(widget.promotion.contentOfActivity,
-                  style: Get.textTheme.bodyMedium))
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Text(widget.promotion.contentOfActivity,
+                        style: Get.textTheme.bodyMedium),
+                  ),
+                ],
+              ))
         ],
       ),
     );

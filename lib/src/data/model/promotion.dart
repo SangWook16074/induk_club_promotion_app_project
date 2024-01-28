@@ -9,7 +9,8 @@ class Promotion {
   final String end;
   final int requiredPeople;
   final String contentOfActivity;
-  final List<String> images;
+  final String url;
+  final List images;
 
   Promotion({
     required this.title,
@@ -22,6 +23,7 @@ class Promotion {
     required this.end,
     required this.requiredPeople,
     required this.contentOfActivity,
+    required this.url,
     required this.images,
   });
 
@@ -37,6 +39,7 @@ class Promotion {
         end: json["end"],
         requiredPeople: json["requiredPeople"],
         contentOfActivity: json["contentOfActivity"],
+        url: json["url"] ?? "",
         images: json["images"]);
   }
 }

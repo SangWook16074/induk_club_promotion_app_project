@@ -1,14 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/firebase_options.dart';
 import 'package:induk_club_promotion_app_project/src/app.dart';
-import 'package:induk_club_promotion_app_project/src/bindings/image_picker_binding.dart';
-import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'src/bindings/init_binding.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   setPathUrlStrategy();
   runApp(const MainApp());
 }

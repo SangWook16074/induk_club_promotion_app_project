@@ -7,6 +7,7 @@ import 'package:induk_club_promotion_app_project/src/controllers/member_controll
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:induk_club_promotion_app_project/src/view/promotion_screen.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 
 class MyPromotionView extends StatelessWidget {
@@ -75,9 +76,14 @@ class MyPromotionView extends StatelessWidget {
   Widget _buildItem({required Promotion promotion}) {
     return Padding(
         padding: const EdgeInsets.all(4.0),
-        child: PromotionItem(
-          promotion: promotion,
-          type: PromotionItemtype.LISTITEM,
+        child: GestureDetector(
+          onTap: () {
+            Get.to(() => PromotionScreen(promotion: promotion));
+          },
+          child: PromotionItem(
+            promotion: promotion,
+            type: PromotionItemtype.LISTITEM,
+          ),
         ));
   }
 
