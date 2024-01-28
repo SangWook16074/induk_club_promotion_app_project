@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/image_picker_controller.dart';
-import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/promotion_write_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/zoom_image.dart';
+
+import '../constants/status.dart';
 
 class PromotionWrite extends StatefulWidget {
   const PromotionWrite({super.key});
@@ -16,59 +18,80 @@ class PromotionWrite extends StatefulWidget {
 }
 
 class _PromotionWriteState extends State<PromotionWrite> {
-  final DateTime _currentTime = DateTime.now();
-  DateTime _beginTime = DateTime.now();
-  DateTime _expirationTime = DateTime.now();
+  final controller = Get.find<PromotionWriteController>();
 
   Future<void> _setBegin() async {
     DateTime? dateTime = await showDatePicker(
         context: context,
-        initialDate: _currentTime,
+        initialDate: DateTime.now(),
         firstDate: DateTime(2000),
         lastDate: DateTime(3000));
-    setState(() {
-      if (dateTime != null) {
-        setState(() => _beginTime = dateTime);
-      }
-    });
+    controller.setAcitivityBegin(dateTime);
   }
 
   Future<void> _setExpiration() async {
     DateTime? dateTime = await showDatePicker(
         context: context,
-        initialDate: _currentTime,
+        initialDate: DateTime.now(),
         firstDate: DateTime(2000),
         lastDate: DateTime(3000));
-    if (dateTime != null) {
-      setState(() => _expirationTime = dateTime);
-    }
+    controller.setAcitivityEnd(dateTime);
+  }
+
+  Future<void> _setRecruitmentBegin() async {
+    DateTime? dateTime = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(3000));
+    controller.setRecruitmentBegin(dateTime);
+  }
+
+  Future<void> _setRecruitmentEnd() async {
+    DateTime? dateTime = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(3000));
+    controller.setRecruitmentEnd(dateTime);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _appBar(),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: (ResponsibleLayout.isMobile(context)) ? 0 : 300),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _title(),
-                _duration(),
-                _requiredPeople(),
-                _info(),
-                _addtional(),
-                _url(),
-                _addImage(),
-                _pickedImages(),
-                _button(),
-              ],
-            ),
-          ),
+    return GestureDetector(
+      onTap: FocusScope.of(context).unfocus,
+      child: Scaffold(
+        appBar: _appBar(),
+        body: SafeArea(
+          child: GetX<PromotionWriteController>(builder: (controller) {
+            return (controller.status == Status.LOADED)
+                ? SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal:
+                              (ResponsibleLayout.isMobile(context)) ? 0 : 300),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          _title(),
+                          _activityPeriod(),
+                          _recruitmentPeriod(),
+                          _requiredPeople(),
+                          _info(),
+                          _addtional(),
+                          _url(),
+                          _addImage(),
+                          _pickedImages(),
+                          _button(),
+                        ],
+                      ),
+                    ),
+                  )
+                : const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  );
+          }),
         ),
       ),
     );
@@ -95,6 +118,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
             ),
             TextField(
               maxLines: 1,
+              controller: controller.title,
               style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
                   hintText: '제목',
@@ -107,19 +131,22 @@ class _PromotionWriteState extends State<PromotionWrite> {
         ),
       );
 
-  Widget _duration() => Padding(
+  Widget _activityPeriod() => Padding(
         padding:
             EdgeInsets.all(ResponsibleLayout.isMobile(context) ? 8.0 : 20.0),
         child: Column(
           children: [
             const Row(
               children: [
-                Text(
-                  "모집기간",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "활동기간",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
               ],
             ),
@@ -130,51 +157,55 @@ class _PromotionWriteState extends State<PromotionWrite> {
                 children: [
                   Row(
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            "${_beginTime.year}-${_beginTime.month}-${_beginTime.day}",
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: GestureDetector(
-                                onTap: _setBegin,
-                                child: const Icon(
-                                  Icons.calendar_today,
-                                  color: Color(0xff707070),
-                                )),
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              "${controller.activityBegin.year}-${controller.activityBegin.month}-${controller.activityBegin.day}",
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                  onTap: _setBegin,
+                                  child: const Icon(
+                                    Icons.calendar_today,
+                                    color: Color(0xff707070),
+                                  )),
+                            ),
+                          ],
+                        ),
                       ),
                       const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text('~'),
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            "${_expirationTime.year}-${_expirationTime.month}-${_expirationTime.day}",
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: GestureDetector(
-                                onTap: _setExpiration,
-                                child: const Icon(
-                                  Icons.calendar_today,
-                                  color: Color(0xff707070),
-                                )),
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              "${controller.activityEnd.year}-${controller.activityEnd.month}-${controller.activityEnd.day}",
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                  onTap: _setExpiration,
+                                  child: const Icon(
+                                    Icons.calendar_today,
+                                    color: Color(0xff707070),
+                                  )),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -206,6 +237,8 @@ class _PromotionWriteState extends State<PromotionWrite> {
             ),
             TextField(
               maxLines: 1,
+              controller: controller.requiredPeople,
+              keyboardType: TextInputType.number,
               style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
                   hintText: 'X명',
@@ -239,6 +272,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
             ),
             TextField(
               maxLines: 10,
+              controller: controller.content,
               style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
                   hintText: '내용을 입력하세요',
@@ -261,7 +295,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    "추가 정보",
+                    "동아리 활동내용",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -272,6 +306,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
             ),
             TextField(
               maxLines: 5,
+              controller: controller.additional,
               style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
                   focusedBorder: OutlineInputBorder(borderSide: BorderSide()),
@@ -322,7 +357,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
             EdgeInsets.all(ResponsibleLayout.isMobile(context) ? 8.0 : 20.0),
         child: InkWell(
           onTap: () {
-            Get.find<PromotionController>().createPromotion();
+            controller.showUploadDialog();
           },
           child: Container(
             width: double.infinity,
@@ -436,7 +471,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
       foregroundColor: Colors.black,
       elevation: 0.5,
       leading: GestureDetector(
-        onTap: Get.back,
+        onTap: controller.showCancelDialog,
         child: const Icon(
           Icons.close,
           color: Colors.black,
@@ -472,14 +507,101 @@ class _PromotionWriteState extends State<PromotionWrite> {
             ),
             TextField(
               maxLines: 1,
+              controller: controller.url,
               style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
-                  hintText: 'http://docs.google.com/forms/example',
+                  hintText: 'http://example.com',
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xffA7A7A7))),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xffA7A7A7)))),
             ),
+          ],
+        ),
+      );
+
+  Widget _recruitmentPeriod() => Padding(
+        padding:
+            EdgeInsets.all(ResponsibleLayout.isMobile(context) ? 8.0 : 20.0),
+        child: Column(
+          children: [
+            const Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "모집기간",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              "${controller.recruitmentBegin.year}-${controller.recruitmentBegin.month}-${controller.recruitmentBegin.day}",
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                  onTap: _setRecruitmentBegin,
+                                  child: const Icon(
+                                    Icons.calendar_today,
+                                    color: Color(0xff707070),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('~'),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              "${controller.recruitmentEnd.year}-${controller.recruitmentEnd.month}-${controller.recruitmentEnd.day}",
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: GestureDetector(
+                                  onTap: _setRecruitmentEnd,
+                                  child: const Icon(
+                                    Icons.calendar_today,
+                                    color: Color(0xff707070),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       );

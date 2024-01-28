@@ -33,8 +33,8 @@ class FindPassword extends StatelessWidget {
                   elevation: 0.0,
                 )
               : null,
-          body: SingleChildScrollView(
-            child: Center(
+          body: Center(
+            child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -51,21 +51,16 @@ class FindPassword extends StatelessWidget {
   Widget _header() => const Padding(
         padding: EdgeInsets.symmetric(vertical: 60.0),
         child: Text(
-          "IDC에 가입했던 이메일을 입력해주세요. \n 비밀번호 재설정 이메일을 보내드립니다.",
+          "가입에 사용한 이메일이 필요합니다!",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
         ),
       );
 
-  Widget _email() => const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: LoginTextField(
-              hintText: "example@example.com",
-            ),
-          ),
-        ],
+  Widget _email() => const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: LoginTextField(
+          hintText: "example@example.com",
+        ),
       );
 
   Widget _button() => Padding(

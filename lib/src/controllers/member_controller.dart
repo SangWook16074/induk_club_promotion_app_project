@@ -286,7 +286,6 @@ class MemberController extends GetxController {
       "createAt": initDate.value.toString(),
       "classify": classify.value,
     };
-
     final response = await memberRepository.saveClubInfo(data);
     if (response != null) {
       print(response);
