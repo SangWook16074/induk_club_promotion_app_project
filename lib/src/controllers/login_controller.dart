@@ -6,6 +6,7 @@ import 'package:induk_club_promotion_app_project/src/app.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/resister_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/repository/member_repository.dart';
+import 'package:induk_club_promotion_app_project/src/view/find_password.dart';
 import 'package:induk_club_promotion_app_project/src/view/resister.dart';
 import 'package:induk_club_promotion_app_project/src/widget/custom_dialog.dart';
 
@@ -32,7 +33,9 @@ class LoginController extends GetxController {
   }
 
   void moveToFindAccount() {}
-  void moveToFindPassword() {}
+  void moveToFindPassword() {
+    Get.to(() => FindPassword());
+  }
 
   /// 이용약관 동의 여부
   void agree(bool? value) {
