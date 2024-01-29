@@ -38,16 +38,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ? const Center(
                 child: CircularProgressIndicator.adaptive(),
               )
-            : CustomScrollView(
-                slivers: [
-                  _appBar(),
-                  _header(),
-                  _headerItem(),
-                  _more(),
-                  _moreItem(),
-                  _club(),
-                  _clubItem(),
-                ],
+            : RefreshIndicator.adaptive(
+                onRefresh: controller.fetchData,
+                child: CustomScrollView(
+                  slivers: [
+                    _appBar(),
+                    _header(),
+                    _headerItem(),
+                    _more(),
+                    _moreItem(),
+                  ],
+                ),
               ),
       );
 

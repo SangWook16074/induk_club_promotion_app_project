@@ -4,6 +4,7 @@ import 'package:induk_club_promotion_app_project/src/constants/image_path.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:induk_club_promotion_app_project/src/view/promotion_screen.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 
 class PromotionPage extends StatelessWidget {
@@ -35,24 +36,33 @@ class PromotionPage extends StatelessWidget {
     );
   }
 
-  Widget _body() => SingleChildScrollView(
-        child: GetX<PromotionController>(builder: (controller) {
-          return Center(
-            child: Column(
-                children: List.generate(controller.promotions.length, (index) {
-              final Promotion promotion = controller.promotions[index];
-              return _buildItem(promotion: promotion);
-            })),
-          );
-        }),
+  Widget _body() => RefreshIndicator.adaptive(
+        onRefresh: Get.find<PromotionController>().fetchData,
+        child: SingleChildScrollView(
+          child: GetX<PromotionController>(builder: (controller) {
+            return Center(
+              child: Column(
+                  children:
+                      List.generate(controller.promotions.length, (index) {
+                final Promotion promotion = controller.promotions[index];
+                return _buildItem(promotion: promotion);
+              })),
+            );
+          }),
+        ),
       );
 
   Widget _buildItem({required Promotion promotion}) {
     return Padding(
         padding: const EdgeInsets.all(4.0),
-        child: PromotionItem(
-          promotion: promotion,
-          type: PromotionItemtype.LISTITEM,
+        child: GestureDetector(
+          onTap: () {
+            Get.to(() => PromotionScreen(promotion: promotion));
+          },
+          child: PromotionItem(
+            promotion: promotion,
+            type: PromotionItemtype.LISTITEM,
+          ),
         ));
   }
 }

@@ -10,6 +10,8 @@ dependencies:
   cached_network_image: ^3.3.1
   carousel_slider: ^4.2.1
   dio: ^5.3.3
+  firebase_core: ^2.24.2
+  firebase_storage: ^11.6.0
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -25,6 +27,7 @@ dependencies:
   rive: ^0.11.17
   side_navigation: ^1.0.4
   url_strategy: ^0.2.0
+  uuid: ^4.2.2
 
 dev_dependencies:
   flutter_test:

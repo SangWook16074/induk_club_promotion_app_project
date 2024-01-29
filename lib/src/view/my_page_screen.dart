@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/bindings/image_picker_binding.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/promotion_write_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:induk_club_promotion_app_project/src/view/promotion_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
@@ -370,7 +371,7 @@ class _MyPageState extends State<MyPage> {
                       GestureDetector(
                         onTap: () {
                           Get.to(() => const PromotionWrite(),
-                              binding: ImagePickerBinding());
+                              binding: PromotionWriteBinding());
                         },
                         child: Icon(
                           Icons.add,
@@ -393,9 +394,14 @@ class _MyPageState extends State<MyPage> {
   Widget _buildItem({required Promotion promotion}) {
     return Padding(
         padding: const EdgeInsets.all(4.0),
-        child: PromotionItem(
-          promotion: promotion,
-          type: PromotionItemtype.LISTITEM,
+        child: GestureDetector(
+          onTap: () {
+            Get.to(() => PromotionScreen(promotion: promotion));
+          },
+          child: PromotionItem(
+            promotion: promotion,
+            type: PromotionItemtype.LISTITEM,
+          ),
         ));
   }
 

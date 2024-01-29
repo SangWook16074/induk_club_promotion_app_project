@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:induk_club_promotion_app_project/src/constants/url.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/member.dart';
 
+/// 회원정보 API 엔드포인트
 class MemberApi {
   final Dio dio;
   final storage = const FlutterSecureStorage();
@@ -10,6 +11,7 @@ class MemberApi {
     required this.dio,
   });
 
+  /// 회원가입 메소드
   Future<String> signUp(Map<String, dynamic> data) {
     try {
       return dio.post(Url.signUpUrl, data: data).then((resp) {
@@ -27,6 +29,7 @@ class MemberApi {
     }
   }
 
+  /// 로그인 메소드
   Future<String?> login(Map<String, dynamic> data) async {
     try {
       final response = await dio.post(Url.loginUrl, data: data);
@@ -41,6 +44,7 @@ class MemberApi {
     }
   }
 
+  /// 내 정보 가져오기 메소드
   Future<Member?> searchMyInfo(String token) async {
     final response = await dio.get("http://localhost:8080/api/member/info",
         options: Options(headers: {"Authorization": "Bearer $token"}));
