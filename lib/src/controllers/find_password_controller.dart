@@ -10,6 +10,8 @@ class FindPasswordController extends GetxController {
   void resetPassword() async {
     final data = email.value.text.toString();
     final result = await MemberController.to.resetPassword(data);
+
+    /// 사용자에게 결과를 토스트로 보여줌
     print(result);
     Get.back();
   }
