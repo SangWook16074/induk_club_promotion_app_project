@@ -230,21 +230,21 @@ class DesktopMyPage extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget _myPromotions() {
-  return const SliverToBoxAdapter(
-    child: Column(children: [
-      Padding(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 300.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TitleBox(label: '내가 쓴 글', fontSize: 20),
-          ],
+  Widget _myPromotions() {
+    return const SliverToBoxAdapter(
+      child: Column(children: [
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 300.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TitleBox(label: '내가 쓴 글', fontSize: 20),
+            ],
+          ),
         ),
-      ),
-      Text('내가 쓴 글이 없습니다.')
-    ]),
-  );
+        Text('내가 쓴 글이 없습니다.')
+      ]),
+    );
+  }
 }
