@@ -84,6 +84,7 @@ class App extends GetView<PageViewController> {
                     unselectedItemColor: Colors.black,
                     onTap: controller.moveToPage,
                     type: BottomNavigationBarType.fixed,
+                    backgroundColor: Colors.white,
                     items: const [
                       BottomNavigationBarItem(
                           icon: Icon(Icons.home_outlined),

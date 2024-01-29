@@ -10,7 +10,6 @@ import 'package:induk_club_promotion_app_project/src/controllers/image_picker_co
 import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/repository/promotion_repository.dart';
-import 'package:induk_club_promotion_app_project/src/view/my_page_screen.dart';
 import 'package:induk_club_promotion_app_project/src/widget/custom_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
@@ -184,8 +183,7 @@ class PromotionWriteController extends GetxController {
       width: 300,
       title: "작성을 취소할까요?",
       confirm: () {
-        Get.back();
-        Get.back();
+        Get.until((route) => Get.currentRoute == "/MyPage");
       },
       cancel: () {
         Get.back();

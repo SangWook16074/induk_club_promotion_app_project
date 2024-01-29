@@ -4,10 +4,12 @@ import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 
 import '../../constants/url.dart';
 
+/// 홍보글 API 엔드포인트
 class PromotionApi {
   final Dio dio;
   PromotionApi({required this.dio});
 
+  ///홍보글을 가져오기 GET 메소드
   Future<List<Promotion>> getPromotions() {
     return dio.request(Url.getPromotionsUrl).then((resp) {
       if (resp.statusCode == 200) {
@@ -24,6 +26,9 @@ class PromotionApi {
     });
   }
 
+  /// 홍보글 작성하기 POST 메소드
+  /// 토큰이 없는 사용자는 사용 불가능함
+  /// 에러 발생시 NULL 반환
   Future<Promotion?> postPromotion(Map<String, dynamic> data) async {
     final token = await const FlutterSecureStorage().read(key: "login");
     return dio

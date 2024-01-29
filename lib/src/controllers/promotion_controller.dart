@@ -1,8 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/app.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/status_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/repository/promotion_repository.dart';
-import 'package:induk_club_promotion_app_project/src/view/home_screen.dart';
 
 import '../data/model/promotion.dart';
 
@@ -19,18 +19,15 @@ class PromotionController extends GetxController {
     fetchData();
   }
 
+  /// 홍보글 새로고침 메소드
   Future<void> fetchData() async {
-    promotionRepository
-        .getPromotions()
-        .then((data) => _promotions.value = data)
-        .then((_) {
-      print(_promotions.value);
-    });
+    final promotions = await promotionRepository.getPromotions();
+    _promotions(promotions);
   }
 
+  // 홍보글 생성 메소드
   void createPromotion(Map<String, dynamic> data) async {
     final response = await promotionRepository.postPromotion(data);
-    print(response);
     if (response != null) {
       _promotions.value.add((response));
       _promotions.refresh();
