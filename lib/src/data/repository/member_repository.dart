@@ -13,4 +13,7 @@ class MemberRepository {
 
   Future<String?> saveClubInfo(Map<String, dynamic> data) =>
       api.saveClubInfo(data);
+
+  Future<String> resetPassword(Map<String, dynamic> data) =>
+      api.resetPassword(data);
 }

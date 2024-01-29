@@ -67,4 +67,17 @@ class MemberApi {
       return null;
     }
   }
+
+  Future<String> resetPassword(Map<String, dynamic> data) async {
+    final token = await storage.read(key: "login");
+    final response = await dio.post(
+        "http://localhost:8080/api/member/reset-password",
+        data: data,
+        options: Options(headers: {"Authorization": "Bearer $token"}));
+    if (response.statusCode == 200) {
+      return response.data["message"];
+    } else {
+      return response.data["message"];
+    }
+  }
 }

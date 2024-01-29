@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/app.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/find_password_binding.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/resister_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/repository/member_repository.dart';
@@ -34,7 +35,7 @@ class LoginController extends GetxController {
 
   void moveToFindAccount() {}
   void moveToFindPassword() {
-    Get.to(() => FindPassword());
+    Get.to(() => const FindPassword(), binding: FindPasswordBinding());
   }
 
   /// 이용약관 동의 여부

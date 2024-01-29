@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/find_password_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/widget/login_text_field.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
@@ -56,10 +57,12 @@ class FindPassword extends StatelessWidget {
         ),
       );
 
-  Widget _email() => const Padding(
-        padding: EdgeInsets.all(16.0),
+  Widget _email() => Padding(
+        padding: const EdgeInsets.all(16.0),
         child: LoginTextField(
           hintText: "example@example.com",
+          controller: FindPasswordController.to.email,
+          type: TextInputType.emailAddress,
         ),
       );
 
@@ -68,7 +71,7 @@ class FindPassword extends StatelessWidget {
         child: SignButton(
             width: double.infinity,
             height: 55,
-            onPressed: () {},
+            onPressed: FindPasswordController.to.resetPassword,
             child: const Text(
               "비밀번호 찾기",
               style:

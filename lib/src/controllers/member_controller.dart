@@ -19,6 +19,8 @@ class MemberController extends GetxController {
   final FlutterSecureStorage storage = const FlutterSecureStorage();
   late TextEditingController _name;
 
+  static MemberController get to => Get.find();
+
   MemberController({required this.memberRepository}) {
     if (_member.value == null) {
       initDate = Rx<DateTime>(DateFormat("yyyy-MM-dd").parse("2000-01-01"));
@@ -48,6 +50,16 @@ class MemberController extends GetxController {
       print(member.club);
       _member(member);
     }
+  }
+
+  /// 사용자 비밀번호 초기화
+  /// 메소드
+  /// 이메일을 입력하면 임의 비밀번호를 설정하고
+  /// 사용자에게 전송함
+  Future<String> resetPassword(String email) async {
+    final data = {"email": email};
+    final result = await memberRepository.resetPassword(data);
+    return result;
   }
 
   /// 사용자가 동아리를 개설을 원하면
