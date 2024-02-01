@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:induk_club_promotion_app_project/src/constants/status.dart';
@@ -64,7 +66,7 @@ class PromotionWriteController extends GetxController {
         final url = await uploadRef.getDownloadURL();
         urls.add(url);
       } catch (e) {
-        print(e.toString());
+        showToast(e.toString());
         _status(Status.ERROR);
         throw Exception("Fail to send data to server");
       }
@@ -90,7 +92,7 @@ class PromotionWriteController extends GetxController {
         final url = await uploadRef.getDownloadURL();
         urls.add(url);
       } catch (e) {
-        print(e.toString());
+        showToast(e.toString());
         _status(Status.ERROR);
         throw Exception("Fail to send data to server");
       }
@@ -146,22 +148,22 @@ class PromotionWriteController extends GetxController {
   void showUploadDialog() {
     /// 빈칸은 허용 안됨
     if (title.value.text == "") {
-      print("제목이 비었습니다 !");
+      showToast("제목이 비었습니다 !");
       return;
     }
 
     if (requiredPeople.value.text == "") {
-      print("모집인원이 비었습니다 !");
+      showToast("모집인원이 비었습니다 !");
       return;
     }
 
     if (content.value.text == "") {
-      print("동아리소개가 비었습니다 !");
+      showToast("동아리소개가 비었습니다 !");
       return;
     }
 
     if (additional.value.text == "") {
-      print("활동내용이 비었습니다 !");
+      showToast("활동내용이 비었습니다 !");
       return;
     }
 
@@ -190,4 +192,14 @@ class PromotionWriteController extends GetxController {
       },
     ));
   }
+
+  void showToast(String message) => Fluttertoast.showToast(
+        msg: message,
+        textColor: Colors.white,
+        backgroundColor: const Color(0xff8D63FF),
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 2,
+        fontSize: 16.0,
+        gravity: ToastGravity.TOP,
+      );
 }
