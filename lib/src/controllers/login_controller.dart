@@ -3,37 +3,40 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/app.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/find_password_binding.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/resister_binding.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/repository/member_repository.dart';
+import 'package:induk_club_promotion_app_project/src/view/find_password.dart';
 import 'package:induk_club_promotion_app_project/src/view/resister.dart';
 import 'package:induk_club_promotion_app_project/src/widget/custom_dialog.dart';
 
 class LoginController extends GetxController {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
   final TextEditingController passwordControllerAgain = TextEditingController();
   final Rxn<String> _token = Rxn<String>();
   final RxBool _isAgree = false.obs;
   final RxInt _index = 0.obs;
   final MemberRepository memberRepository;
   final FlutterSecureStorage storage = const FlutterSecureStorage();
+  late final _user;
 
   LoginController({required this.memberRepository});
 
   int get pageIndex => _index.value;
   bool get isAgree => _isAgree.value;
   String? get token => _token.value;
-  TextEditingController get emailController => _emailController;
-  TextEditingController get passwordController => _passwordController;
 
   @override
   void onReady() {
     super.onReady();
+    _user = Get.find<MemberController>();
     fetchTokenInfo();
   }
 
   void moveToFindAccount() {}
-  void moveToFindPassword() {}
+  void moveToFindPassword() {
+    Get.to(() => const FindPassword(), binding: FindPasswordBinding());
+  }
 
   /// 이용약관 동의 여부
   void agree(bool? value) {
@@ -53,7 +56,11 @@ class LoginController extends GetxController {
   /// 메인화면으로 돌아감
   void storeTokenInfo(String token) async {
     await storage.write(key: "login", value: token);
+    print(token);
     _token(token);
+
+    /// 사용자 정보 가져오기
+    _user.fetchMemberData();
   }
 
   void fetchTokenInfo() {
@@ -61,8 +68,11 @@ class LoginController extends GetxController {
       if (token != null) {
         print(token);
         _token(token);
+        _user.fetchMemberData();
       }
     });
+
+    /// 사용자 정보 가져오기
   }
 
   ///로그인 요청 후
@@ -70,29 +80,12 @@ class LoginController extends GetxController {
   ///토큰이 없다면 로그인 실패
   ///토큰이 있다면 토큰 정보 저장
 
-  void signIn() async {
+  void signIn(Map<String, dynamic> data) async {
     /// 이메일 반드시 입력
-    if (emailController.value.text == '') {
-      Get.snackbar("로그인 정보 에러", "계정을 입력해주세요 !",
-          snackPosition: SnackPosition.BOTTOM);
-      return;
-    }
 
-    /// 비밀번호 반드시 입력
-    if (passwordController.value.text == '') {
-      Get.snackbar("로그인 정보 에러", "비밀번호를 입력하세요",
-          snackPosition: SnackPosition.BOTTOM);
-    }
-
-    final data = {
-      "email": _emailController.text.toString(),
-      "password": _passwordController.text.toString(),
-    };
     final token = await memberRepository.signIn(data);
     if (token != null) {
       storeTokenInfo(token);
-      emailController.clear();
-      passwordController.clear();
       Get.back();
     } else {
       showLoginErrorDialog();

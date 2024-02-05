@@ -37,14 +37,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ? const Center(
                 child: CircularProgressIndicator.adaptive(),
               )
-            : CustomScrollView(
-                slivers: [
-                  _appBar(),
-                  _header(),
-                  _headerItem(),
-                  _more(),
-                  _moreItem(),
-                ],
+            : RefreshIndicator.adaptive(
+                onRefresh: controller.fetchData,
+                child: CustomScrollView(
+                  slivers: [
+                    _appBar(),
+                    _header(),
+                    _headerItem(),
+                    _more(),
+                    _moreItem(),
+                  ],
+                ),
               ),
       );
 
@@ -148,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25.0),
             border: Border.all(
-              color: Color(0xff713eff),
+              color: const Color(0xff713eff),
               width: 1.5,
             ),
             color: Colors.white,

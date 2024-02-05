@@ -84,6 +84,7 @@ class App extends GetView<PageViewController> {
                     unselectedItemColor: Colors.black,
                     onTap: controller.moveToPage,
                     type: BottomNavigationBarType.fixed,
+                    backgroundColor: Colors.white,
                     items: const [
                       BottomNavigationBarItem(
                           icon: Icon(Icons.home_outlined),
@@ -115,8 +116,8 @@ class App extends GetView<PageViewController> {
         index: controller.pageIndex,
         children: const [
           HomeScreen(),
-          MyPromotionView(),
           PromotionPage(),
+          MyPromotionView(),
           MyPage(),
         ],
       );

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1075088512102",
+    "project_id": "idcp-app",
+    "storage_bucket": "idcp-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075088512102:android:e4f19b41340273161c49a7",
+        "android_client_info": {
+          "package_name": "com.ani.induk_club_promotion_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqtd3f31ZTQrfIwKbrp9DueRkJnvcaESA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
