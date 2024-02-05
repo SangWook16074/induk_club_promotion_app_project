@@ -9,6 +9,7 @@ import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/searchfocus.dart';
+import 'package:induk_club_promotion_app_project/src/widget/club_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/promotion_item.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
 
@@ -271,4 +272,60 @@ class _HomeScreenState extends State<HomeScreen> {
             promotion: promotion,
             showDday: showDday,
           ));
+
+  Widget _clubItem() {
+    return SliverPadding(
+        padding: EdgeInsets.all(ResponsibleLayout.isMobile(context) ? 8 : 20),
+        sliver: SliverToBoxAdapter(
+            child: GetX<PromotionController>(builder: (controller) {
+          final promotionLength = controller.promotions.length;
+          return (ResponsibleLayout.isMobile(context))
+              ? SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(promotionLength, (index) {
+                      final promotion = controller.promotions[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                            width: 300,
+                            height: 150,
+                            child: ClubItem(promotion: promotion)),
+                      );
+                    }),
+                  ),
+                )
+              : GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount:
+                        (ResponsibleLayout.isDesktop(context) ? 3 : 2),
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 20,
+                    childAspectRatio: 2.0,
+                  ),
+                  itemCount: controller.promotions.length,
+                  itemBuilder: (context, index) {
+                    final promotion = controller.promotions[index];
+                    return GestureDetector(
+                        onTap: () {
+                          Get.to(() => PromotionScreen(promotion: promotion));
+                        },
+                        child: ClubItem(promotion: promotion));
+                  });
+        })));
+  }
+
+  Widget _club() {
+    return const SliverToBoxAdapter(
+      child: Column(children: [
+        Row(
+          children: [
+            TitleBox(label: '함께하는 동아리', fontSize: 25),
+          ],
+        ),
+      ]),
+    );
+  }
 }
