@@ -185,20 +185,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _options() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        GestureDetector(
-            onTap: controller.moveToFindAccount,
-            child: Text(
-              '아이디 찾기',
-              style: Get.theme.textTheme.bodySmall,
-            )),
         GestureDetector(
             onTap: controller.moveToFindPassword,
             child: Text(
               '비밀번호 찾기',
               style: Get.theme.textTheme.bodySmall,
             )),
+        Container(
+          width: 2,
+          height: 12,
+          color: Colors.grey,
+        ),
         InkWell(
             onTap: controller.moveToResister,
             child: Text(
