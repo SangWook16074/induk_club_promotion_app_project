@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/search_focus_binding.dart';
 import 'package:induk_club_promotion_app_project/src/constants/image_path.dart';
+import 'package:induk_club_promotion_app_project/src/constants/status.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
@@ -33,24 +34,40 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildBody() => GetX<PromotionController>(
-        builder: (controller) => (controller.promotions.isEmpty)
-            ? const Center(
-                child: CircularProgressIndicator.adaptive(),
-              )
-            : RefreshIndicator.adaptive(
-                onRefresh: controller.fetchData,
-                child: CustomScrollView(
-                  slivers: [
-                    _appBar(),
-                    _header(),
-                    _headerItem(),
-                    _more(),
-                    _moreItem(),
-                  ],
-                ),
-              ),
-      );
+  Widget _buildBody() => GetX<PromotionController>(builder: (controller) {
+        if (controller.status == Status.LOADING) {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        } else if (controller.status == Status.ERROR) {
+          return const Center(
+            child: Text(
+              "서버와 연결이 원할하지 않습니다 !",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xff4e4e4e)),
+            ),
+          );
+        } else if (controller.promotions.isEmpty) {
+          return const Center(
+            child: Text("작성된 동아리 홍보가 없습니다 !"),
+          );
+        }
+
+        return RefreshIndicator.adaptive(
+          onRefresh: controller.fetchData,
+          child: CustomScrollView(
+            slivers: [
+              _appBar(),
+              _header(),
+              _headerItem(),
+              _more(),
+              _moreItem(),
+            ],
+          ),
+        );
+      });
 
   Widget _header() {
     return const SliverToBoxAdapter(
