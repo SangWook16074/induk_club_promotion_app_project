@@ -83,11 +83,15 @@ class LoginController extends GetxController {
   void signIn(Map<String, dynamic> data) async {
     /// 이메일 반드시 입력
 
-    final token = await memberRepository.signIn(data);
-    if (token != null) {
-      storeTokenInfo(token);
-      Get.back();
-    } else {
+    try {
+      final token = await memberRepository.signIn(data);
+      if (token != null) {
+        storeTokenInfo(token);
+        Get.back();
+      } else {
+        showLoginErrorDialog();
+      }
+    } on Exception {
       showLoginErrorDialog();
     }
   }
