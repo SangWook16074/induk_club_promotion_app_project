@@ -34,8 +34,8 @@ class FindPassword extends StatelessWidget {
                   elevation: 0.0,
                 )
               : null,
-          body: SingleChildScrollView(
-            child: Center(
+          body: Center(
+            child: SingleChildScrollView(
               child: SizedBox(
                 width: (!ResponsibleLayout.isMobile(context) ? 500 : null),
                 child: Column(
