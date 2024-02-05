@@ -6,6 +6,7 @@ import 'package:induk_club_promotion_app_project/src/app.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/resister_binding.dart';
 import 'package:induk_club_promotion_app_project/src/view/find_ID_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/home_screen.dart';
+import 'package:induk_club_promotion_app_project/src/view/login_screen.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'src/bindings/init_binding.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -71,7 +72,7 @@ class MainApp extends StatelessWidget {
                   fontWeight: FontWeight.w600)),
           appBarTheme: const AppBarTheme(backgroundColor: Color(0xff9933ff)),
           scaffoldBackgroundColor: const Color(0xffffffff)),
-      home: const App(),
+      home: const LoginScreen(),
       initialBinding: InitBinding(),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

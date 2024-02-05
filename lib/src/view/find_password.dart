@@ -36,13 +36,16 @@ class FindPassword extends StatelessWidget {
               : null,
           body: SingleChildScrollView(
             child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _header(),
-                  _email(),
-                  _button(),
-                ],
+              child: SizedBox(
+                width: (!ResponsibleLayout.isMobile(context) ? 500 : null),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _header(),
+                    _email(),
+                    _button(),
+                  ],
+                ),
               ),
             ),
           )),
