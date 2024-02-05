@@ -188,12 +188,6 @@ class _LoginScreenState extends State<LoginScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         GestureDetector(
-            onTap: controller.moveToFindAccount,
-            child: Text(
-              '아이디 찾기',
-              style: Get.theme.textTheme.bodySmall,
-            )),
-        GestureDetector(
             onTap: controller.moveToFindPassword,
             child: Text(
               '비밀번호 찾기',
