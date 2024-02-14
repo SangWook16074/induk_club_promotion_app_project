@@ -46,7 +46,7 @@ class MemberApi {
 
   /// 내 정보 가져오기 메소드
   Future<Member?> searchMyInfo(String token) async {
-    final response = await dio.get("http://localhost:8080/api/member/info",
+    final response = await dio.get(Url.searchMyInfoUrl,
         options: Options(headers: {"Authorization": "Bearer $token"}));
     if (response.statusCode == 200) {
       return Member.fromJson(response.data["data"]);
@@ -57,7 +57,7 @@ class MemberApi {
 
   Future<String?> saveClubInfo(Map<String, dynamic> data) async {
     final token = await storage.read(key: "login");
-    final response = await dio.put("http://localhost:8080/api/member/club",
+    final response = await dio.put(Url.saveClubInfoUrl,
         data: data,
         options: Options(headers: {"Authorization": "Bearer $token"}));
 
@@ -70,8 +70,7 @@ class MemberApi {
 
   Future<String> resetPassword(Map<String, dynamic> data) async {
     final token = await storage.read(key: "login");
-    final response = await dio.post(
-        "http://localhost:8080/api/member/reset-password",
+    final response = await dio.post(Url.resetPasswordUrl,
         data: data,
         options: Options(headers: {"Authorization": "Bearer $token"}));
     if (response.statusCode == 200) {
