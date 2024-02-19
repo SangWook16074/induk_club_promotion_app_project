@@ -378,17 +378,28 @@ class _PromotionScreenState extends State<PromotionScreen> {
             ...List.generate(10, (index) => Colors.white)
           ])),
       child: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff713eff)),
-              onPressed: () {},
-              child: const Text(
-                "지원하기",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-              ))),
+        width: double.infinity,
+        height: double.infinity,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xff713eff)),
+          onPressed: () async {
+            final url = Uri.parse(
+              'https://pub.dev/packages/url_launcher',
+            );
+            if (await canLaunchUrl(url)) {
+              launchUrl(url, mode: LaunchMode.externalApplication);
+            } else {
+              // ignore: avoid_print
+              print("Can't launch $url");
+            }
+          },
+          child: const Text(
+            "지원하기",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
     );
   }
 }
