@@ -51,7 +51,13 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         } else if (controller.promotions.isEmpty) {
           return const Center(
-            child: Text("작성된 동아리 홍보가 없습니다 !"),
+            child: Text(
+              "작성된 동아리 홍보가 없습니다 !",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xff4e4e4e)),
+            ),
           );
         }
 
@@ -94,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(children: [
         Row(
           children: [
-            TitleBox(label: '동아리 더보기', fontSize: 25),
+            TitleBox(label: '동아리 더보기', fontSize: 20),
           ],
         ),
       ]),
@@ -339,7 +345,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(children: [
         Row(
           children: [
-            TitleBox(label: '함께하는 동아리', fontSize: 25),
+            TitleBox(label: '함께하는 동아리', fontSize: 20),
           ],
         ),
       ]),

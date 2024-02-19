@@ -27,10 +27,7 @@ class PromotionPage extends StatelessWidget {
               )
             : null,
         centerTitle: true,
-        title: const Text(
-          '게시판',
-          style: TextStyle(fontWeight: FontWeight.w700),
-        ),
+        title: Text('게시판', style: Get.textTheme.displayLarge),
       ),
       body: _body(),
     );

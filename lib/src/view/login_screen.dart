@@ -154,33 +154,36 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _button() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: SignButton(
-            onPressed: () {
-              /// 로그인 정보
-              /// Validation
-              if (_emailController.value.text == '') {
-                Get.snackbar("로그인 정보 에러", "계정을 입력해주세요 !",
-                    snackPosition: SnackPosition.BOTTOM);
-                return;
-              }
+          onPressed: () {
+            /// 로그인 정보
+            /// Validation
+            if (_emailController.value.text == '') {
+              Get.snackbar("로그인 정보 에러", "계정을 입력해주세요 !",
+                  snackPosition: SnackPosition.BOTTOM);
+              return;
+            }
 
-              /// 비밀번호 반드시 입력
-              if (_passwordController.value.text == '') {
-                Get.snackbar("로그인 정보 에러", "비밀번호를 입력하세요",
-                    snackPosition: SnackPosition.BOTTOM);
-              }
+            /// 비밀번호 반드시 입력
+            if (_passwordController.value.text == '') {
+              Get.snackbar("로그인 정보 에러", "비밀번호를 입력하세요",
+                  snackPosition: SnackPosition.BOTTOM);
+            }
 
-              final data = {
-                "email": _emailController.text.toString(),
-                "password": _passwordController.text.toString(),
-              };
-              controller.signIn(data);
-            },
-            width: double.infinity,
-            height: 40,
-            child: const Text(
-              '로그인',
-              style: TextStyle(color: Colors.white, fontSize: 15),
-            )),
+            final data = {
+              "email": _emailController.text.toString(),
+              "password": _passwordController.text.toString(),
+            };
+            controller.signIn(data);
+          },
+          width: double.infinity,
+          height: 55,
+          child: const Text('로그인',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              )),
+        ),
       );
 
   Widget _options() {

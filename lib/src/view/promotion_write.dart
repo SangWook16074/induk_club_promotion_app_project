@@ -110,7 +110,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
                     "제목",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -144,7 +144,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
                     "활동기간",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -229,7 +229,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
                     "모집인원",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -264,7 +264,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
                     "동아리 소개",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -298,7 +298,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
                     "동아리 활동내용",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -326,7 +326,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
               '사진 첨부',
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 16,
+                  fontSize: 15,
                   fontWeight: FontWeight.w600),
             ),
             Padding(
@@ -480,7 +480,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
       title: const Text(
         '동아리 홍보 글쓰기',
         style: TextStyle(
-            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+            fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black),
       ),
       centerTitle: true,
     );
@@ -499,7 +499,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
                     "지원양식 링크 첨부",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -533,7 +533,7 @@ class _PromotionWriteState extends State<PromotionWrite> {
                     "모집기간",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600),
                   ),
                 ),

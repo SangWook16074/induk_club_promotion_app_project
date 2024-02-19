@@ -123,7 +123,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     "새 비밀번호 확인",
                     style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 16,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
