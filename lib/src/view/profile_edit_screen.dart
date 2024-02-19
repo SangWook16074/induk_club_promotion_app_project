@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:induk_club_promotion_app_project/src/constants/status.dart';
-import 'package:induk_club_promotion_app_project/src/controllers/find_password_controller.dart';
+import 'package:induk_club_promotion_app_project/src/controllers/password_change_controller.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
-import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 
 class ProfileEditScreen extends StatefulWidget {
@@ -91,6 +88,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             ),
             TextField(
               maxLines: 1,
+              controller: PasswordChangeController.to.password,
               style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
                   isDense: true,
@@ -136,6 +134,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               ],
             ),
             TextField(
+              controller: PasswordChangeController.to.passwordAgain,
               maxLines: 1,
               style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
