@@ -385,13 +385,13 @@ class _PromotionScreenState extends State<PromotionScreen> {
               backgroundColor: const Color(0xff713eff)),
           onPressed: () async {
             final url = Uri.parse(
-              'https://pub.dev/packages/url_launcher',
+              'https://pub.dev/',
             );
             if (await canLaunchUrl(url)) {
               launchUrl(url, mode: LaunchMode.externalApplication);
             } else {
               // ignore: avoid_print
-              print("Can't launch $url");
+              print("Could not launch $url");
             }
           },
           child: const Text(
