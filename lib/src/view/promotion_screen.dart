@@ -385,7 +385,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
               backgroundColor: const Color(0xff713eff)),
           onPressed: () async {
             final url = Uri.parse(
-              'https://www.naver.com/',
+              widget.promotion.url,
             );
             if (await canLaunchUrl(url)) {
               launchUrl(url, mode: LaunchMode.externalApplication);
