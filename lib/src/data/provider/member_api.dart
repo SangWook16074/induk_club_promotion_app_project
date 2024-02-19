@@ -46,7 +46,7 @@ class MemberApi {
 
   /// 내 정보 가져오기 메소드
   Future<Member?> searchMyInfo(String token) async {
-    final response = await dio.get("http://localhost:8080/api/member/info",
+    final response = await dio.get(Url.searchMyInfoUrl,
         options: Options(headers: {"Authorization": "Bearer $token"}));
     if (response.statusCode == 200) {
       return Member.fromJson(response.data["data"]);
@@ -55,9 +55,10 @@ class MemberApi {
     }
   }
 
+  // 동아리 정보 기입 메소드
   Future<String?> saveClubInfo(Map<String, dynamic> data) async {
     final token = await storage.read(key: "login");
-    final response = await dio.put("http://localhost:8080/api/member/club",
+    final response = await dio.put(Url.saveClubInfoUrl,
         data: data,
         options: Options(headers: {"Authorization": "Bearer $token"}));
 
@@ -68,12 +69,36 @@ class MemberApi {
     }
   }
 
+  // 비밀번호 초기화 메소드
   Future<String> resetPassword(Map<String, dynamic> data) async {
     final token = await storage.read(key: "login");
-    final response = await dio.post(
-        "http://localhost:8080/api/member/reset-password",
+    final response = await dio.post(Url.resetPasswordUrl,
         data: data,
         options: Options(headers: {"Authorization": "Bearer $token"}));
+    if (response.statusCode == 200) {
+      return response.data["message"];
+    } else {
+      return response.data["message"];
+    }
+  }
+
+  /// 이메일 중복 확인 메소드
+  /// 에러가 발생한 경우 null 을 반환함.
+  Future<bool?> checkEmailAvailable(Map<String, dynamic> data) async {
+    final response = await dio.get(Url.checkDuplicateUrl);
+    if (response.statusCode == 200) {
+      return response.data["data"];
+    } else {
+      return null;
+    }
+  }
+
+  ///사용자가 비밀번호를 변경하는 메소드
+  ///사용자는 비밀번호를 잃어버린 경우
+  ///이메일을 통해서 발급받은 임시 비밀번호를
+  ///후에 변경해줘야됨.
+  Future<String> changePassword(Map<String, dynamic> data) async {
+    final response = await dio.post(Url.changePasswordUrl);
     if (response.statusCode == 200) {
       return response.data["message"];
     } else {

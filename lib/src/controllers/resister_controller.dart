@@ -5,6 +5,8 @@ import 'package:induk_club_promotion_app_project/src/data/repository/member_repo
 
 class ResisterController extends GetxController {
   final RxBool _isAgree = false.obs;
+  final Rxn<bool> _duplicate = Rxn<bool>();
+  String code = "";
   final MemberRepository repository;
   ResisterController({required this.repository});
 
@@ -19,6 +21,7 @@ class ResisterController extends GetxController {
   TextEditingController get passwordAgain => _passwordAgain;
 
   bool get isAgree => _isAgree.value;
+  bool? get duplicate => _duplicate.value;
 
   void agree(bool? value) {
     _isAgree(true);
@@ -28,7 +31,26 @@ class ResisterController extends GetxController {
     _isAgree(false);
   }
 
-  // String signUp() {}
+  /// 이메일이 중복되었는지 검사하는 로직
+  /// 이메일을 서버에 전달하면
+  /// 가입되어 있는지 판별해줌
+  void checkEmailAvailable() async {
+    /// 이메일은 빈칸이 허용 안됨
+    if (_email.value.text == "") {
+      showToast("이메일을 입력하세요 !");
+      return;
+    }
+
+    final data = {"email": _email.value.text.toString()};
+
+    final result = await repository.checkEmailAvailable(data);
+    if (result == null) {
+      showToast("에러가 발생했습니다. 잠시후에 다시 시도해주세요 !");
+      return;
+    } else {
+      _duplicate(result);
+    }
+  }
 
   void signUp() {
     if (_email.value.text == "") {

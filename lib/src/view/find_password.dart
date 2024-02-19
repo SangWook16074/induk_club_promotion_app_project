@@ -24,25 +24,24 @@ class FindPassword extends StatelessWidget {
                   ),
                   title: Text(
                     "비밀번호 찾기",
-                    style: Theme.of(context).textTheme.displayMedium,
+                    style: Theme.of(context).textTheme.displayLarge,
                   ),
-                  titleTextStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
                   backgroundColor: Colors.white,
                   elevation: 0.0,
                 )
               : null,
           body: Center(
             child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _header(),
-                  _email(),
-                  _button(),
-                ],
+              child: SizedBox(
+                width: (!ResponsibleLayout.isMobile(context) ? 500 : null),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _header(),
+                    _email(),
+                    _button(),
+                  ],
+                ),
               ),
             ),
           )),
@@ -74,8 +73,10 @@ class FindPassword extends StatelessWidget {
             onPressed: FindPasswordController.to.resetPassword,
             child: const Text(
               "비밀번호 찾기",
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600),
             )),
       );
 }

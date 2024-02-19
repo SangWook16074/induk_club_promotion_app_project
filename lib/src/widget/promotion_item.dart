@@ -143,7 +143,7 @@ class PromotionItem extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 0),
                           child: Text(
                             promotion.title,
-                            style: const TextStyle(fontSize: 15),
+                            style: const TextStyle(fontSize: 18),
                           ),
                         ),
                         Padding(
@@ -151,7 +151,7 @@ class PromotionItem extends StatelessWidget {
                           child: Text(
                             DateFormat.yMd()
                                 .format(DateTime.parse(promotion.closeAt)),
-                            style: const TextStyle(fontSize: 12),
+                            style: const TextStyle(fontSize: 15),
                           ),
                         ),
                       ],

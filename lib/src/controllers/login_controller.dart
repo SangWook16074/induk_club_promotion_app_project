@@ -18,6 +18,7 @@ class LoginController extends GetxController {
   final RxInt _index = 0.obs;
   final MemberRepository memberRepository;
   final FlutterSecureStorage storage = const FlutterSecureStorage();
+  static LoginController get to => Get.find();
   late final _user;
 
   LoginController({required this.memberRepository});
@@ -83,11 +84,15 @@ class LoginController extends GetxController {
   void signIn(Map<String, dynamic> data) async {
     /// 이메일 반드시 입력
 
-    final token = await memberRepository.signIn(data);
-    if (token != null) {
-      storeTokenInfo(token);
-      Get.back();
-    } else {
+    try {
+      final token = await memberRepository.signIn(data);
+      if (token != null) {
+        storeTokenInfo(token);
+        Get.back();
+      } else {
+        showLoginErrorDialog();
+      }
+    } on Exception {
       showLoginErrorDialog();
     }
   }

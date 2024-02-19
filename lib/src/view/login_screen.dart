@@ -154,57 +154,67 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _button() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: SignButton(
-            onPressed: () {
-              /// 로그인 정보
-              /// Validation
-              if (_emailController.value.text == '') {
-                Get.snackbar("로그인 정보 에러", "계정을 입력해주세요 !",
-                    snackPosition: SnackPosition.BOTTOM);
-                return;
-              }
+          onPressed: () {
+            /// 로그인 정보
+            /// Validation
+            if (_emailController.value.text == '') {
+              Get.snackbar("로그인 정보 에러", "계정을 입력해주세요 !",
+                  snackPosition: SnackPosition.BOTTOM);
+              return;
+            }
 
-              /// 비밀번호 반드시 입력
-              if (_passwordController.value.text == '') {
-                Get.snackbar("로그인 정보 에러", "비밀번호를 입력하세요",
-                    snackPosition: SnackPosition.BOTTOM);
-              }
+            /// 비밀번호 반드시 입력
+            if (_passwordController.value.text == '') {
+              Get.snackbar("로그인 정보 에러", "비밀번호를 입력하세요",
+                  snackPosition: SnackPosition.BOTTOM);
+            }
 
-              final data = {
-                "email": _emailController.text.toString(),
-                "password": _passwordController.text.toString(),
-              };
-              controller.signIn(data);
-            },
-            width: double.infinity,
-            height: 40,
-            child: const Text(
-              '로그인',
-              style: TextStyle(color: Colors.white, fontSize: 15),
-            )),
+            final data = {
+              "email": _emailController.text.toString(),
+              "password": _passwordController.text.toString(),
+            };
+            controller.signIn(data);
+          },
+          width: double.infinity,
+          height: 55,
+          child: const Text('로그인',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              )),
+        ),
       );
 
   Widget _options() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        GestureDetector(
-            onTap: controller.moveToFindAccount,
-            child: Text(
-              '아이디 찾기',
-              style: Get.theme.textTheme.bodySmall,
-            )),
-        GestureDetector(
-            onTap: controller.moveToFindPassword,
-            child: Text(
-              '비밀번호 찾기',
-              style: Get.theme.textTheme.bodySmall,
-            )),
-        InkWell(
-            onTap: controller.moveToResister,
-            child: Text(
-              '회원가입',
-              style: Get.theme.textTheme.bodySmall,
-            )),
+        Expanded(
+          child: InkWell(
+              onTap: controller.moveToFindPassword,
+              child: Center(
+                child: Text(
+                  '비밀번호 찾기',
+                  style: Get.theme.textTheme.bodySmall,
+                ),
+              )),
+        ),
+        Container(
+          width: 2,
+          height: 12,
+          color: Colors.grey,
+        ),
+        Expanded(
+          child: InkWell(
+              onTap: controller.moveToResister,
+              child: Center(
+                child: Text(
+                  '회원가입',
+                  style: Get.theme.textTheme.bodySmall,
+                ),
+              )),
+        ),
       ],
     );
   }

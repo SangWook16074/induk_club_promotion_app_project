@@ -26,6 +26,7 @@ dependencies:
   intl: any
   rive: ^0.11.17
   side_navigation: ^1.0.4
+  url_launcher: ^6.2.4
   url_strategy: ^0.2.0
   uuid: ^4.2.2
 

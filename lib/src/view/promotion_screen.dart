@@ -8,6 +8,7 @@ import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
 import 'package:induk_club_promotion_app_project/src/widget/date.dart';
 import 'package:induk_club_promotion_app_project/src/widget/sign_button.dart';
 import 'package:induk_club_promotion_app_project/src/widget/title_box.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../data/model/promotion.dart';
 
 class PromotionScreen extends StatefulWidget {
@@ -131,7 +132,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
                 children: [
                   TitleBox(
                     label: '모집마감',
-                    fontSize: 20,
+                    fontSize: 18,
                   )
                 ],
               ),
@@ -142,7 +143,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
                   children: [
                     DateFormatWidget(
                       promotion: widget.promotion,
-                      fontSize: 20,
+                      fontSize: 18,
                     )
                   ],
                 ),
@@ -160,7 +161,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
       child: Column(
         children: [
           const Row(
-            children: [TitleBox(label: '모집인원', fontSize: 20)],
+            children: [TitleBox(label: '모집인원', fontSize: 18)],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -184,7 +185,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
       child: Column(
         children: [
           const Row(
-            children: [TitleBox(label: '동아리소개', fontSize: 20)],
+            children: [TitleBox(label: '동아리소개', fontSize: 18)],
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -209,7 +210,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
       child: Column(
         children: [
           const Row(
-            children: [TitleBox(label: '활동내용', fontSize: 20)],
+            children: [TitleBox(label: '활동내용', fontSize: 18)],
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -234,7 +235,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
       child: Column(
         children: [
           const Row(
-            children: [TitleBox(label: '활동기간', fontSize: 20)],
+            children: [TitleBox(label: '활동기간', fontSize: 18)],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -243,7 +244,7 @@ class _PromotionScreenState extends State<PromotionScreen> {
                 DateFormatWidget(
                   promotion: widget.promotion,
                   type: DateType.DateBeginEnd,
-                  fontSize: 20,
+                  fontSize: 15,
                 ),
               ],
             ),
@@ -344,15 +345,16 @@ class _PromotionScreenState extends State<PromotionScreen> {
                   Expanded(
                     child: SignButton(
                       width: double.infinity,
-                      height: 45,
+                      height: 55,
                       child: Text(
                         '지원하기',
                         style: TextStyle(
-                            color: Color(0xffffffff),
-                            fontWeight: FontWeight.bold),
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
                       ),
                     ),
-                  ),
+                  )
                 ]),
               ],
             ),
@@ -376,17 +378,27 @@ class _PromotionScreenState extends State<PromotionScreen> {
             ...List.generate(10, (index) => Colors.white)
           ])),
       child: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff713eff)),
-              onPressed: () {},
-              child: const Text(
-                "지원하기",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-              ))),
+        width: double.infinity,
+        height: double.infinity,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xff713eff)),
+          onPressed: () async {
+            final url = Uri.parse(
+              widget.promotion.url,
+            );
+            if (await canLaunchUrl(url)) {
+              launchUrl(url, mode: LaunchMode.externalApplication);
+            } else {
+              print("Could not launch $url");
+            }
+          },
+          child: const Text(
+            "지원하기",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
     );
   }
 }

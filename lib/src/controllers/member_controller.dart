@@ -238,7 +238,6 @@ class MemberController extends GetxController {
   /// 알림창이 뜨면서 정보를 확인하게 해줌
   /// 확인을 누르면 저장됨
   /// 취소를 누르면 취소됨
-
   void validateClubInfo() {
     if (_name.value.text == "") {
       showToast("동아리 이름이 비었습니다.");
