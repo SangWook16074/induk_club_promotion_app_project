@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:induk_club_promotion_app_project/src/bindings/password_change_binding.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/promotion_write_binding.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/login_controller.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
@@ -101,8 +102,9 @@ class _MyPageState extends State<MyPage> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: InkWell(
-                                  onTap: () =>
-                                      Get.off(() => const ProfileEditScreen()),
+                                  onTap: () => Get.off(
+                                      () => const ProfileEditScreen(),
+                                      binding: PasswordChangeBinding()),
                                   child: Container(
                                     child: const Row(
                                       children: [
