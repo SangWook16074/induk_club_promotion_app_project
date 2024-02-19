@@ -193,7 +193,7 @@ class _MyPageState extends State<MyPage> {
                     children: [
                       TitleBox(
                         label: '동아리 소개',
-                        fontSize: 20,
+                        fontSize: 18,
                       ),
                     ],
                   ),
@@ -223,7 +223,7 @@ class _MyPageState extends State<MyPage> {
                             style: TextStyle(
                                 color: Color(0xff4d4d4d),
                                 fontWeight: FontWeight.w600,
-                                fontSize: 18),
+                                fontSize: 15),
                           )
                         ],
                       ),
@@ -248,7 +248,7 @@ class _MyPageState extends State<MyPage> {
                   children: [
                     const TitleBox(
                       label: '동아리 소개',
-                      fontSize: 20,
+                      fontSize: 18,
                     ),
                     GestureDetector(
                       onTap: Get.find<MemberController>().updateClubInfo,
@@ -283,7 +283,7 @@ class _MyPageState extends State<MyPage> {
                                 children: [
                                   Text(
                                     '동아리명',
-                                    style: Get.theme.textTheme.bodyMedium,
+                                    style: Get.theme.textTheme.bodySmall,
                                   ),
                                 ],
                               ),
@@ -295,7 +295,7 @@ class _MyPageState extends State<MyPage> {
                                   GetX<MemberController>(builder: (controller) {
                                     return Text(
                                       controller.member!.club!.clubName,
-                                      style: Get.theme.textTheme.bodyMedium,
+                                      style: Get.theme.textTheme.displayMedium,
                                     );
                                   })
                                 ],
@@ -315,7 +315,7 @@ class _MyPageState extends State<MyPage> {
                                 children: [
                                   Text(
                                     '동아리개설일',
-                                    style: Get.theme.textTheme.bodyMedium,
+                                    style: Get.theme.textTheme.bodySmall,
                                   ),
                                 ],
                               ),
@@ -328,7 +328,8 @@ class _MyPageState extends State<MyPage> {
                                     return Text(
                                         DateFormat.yMd().format(DateTime.parse(
                                             controller.member!.club!.createAt)),
-                                        style: Get.theme.textTheme.bodyMedium);
+                                        style:
+                                            Get.theme.textTheme.displayMedium);
                                   })
                                 ],
                               ),
@@ -347,7 +348,7 @@ class _MyPageState extends State<MyPage> {
                                 children: [
                                   Text(
                                     '동아리분류',
-                                    style: Get.theme.textTheme.bodyMedium,
+                                    style: Get.theme.textTheme.bodySmall,
                                   ),
                                 ],
                               ),
@@ -359,7 +360,7 @@ class _MyPageState extends State<MyPage> {
                                   GetX<MemberController>(builder: (controller) {
                                     return Text(
                                       controller.member!.club!.classify,
-                                      style: Get.theme.textTheme.bodyMedium,
+                                      style: Get.theme.textTheme.displayMedium,
                                     );
                                   }),
                                 ],
@@ -441,6 +442,12 @@ class _MyPageState extends State<MyPage> {
         alignment: Alignment.center,
         width: double.infinity,
         height: 100,
-        child: const Text("작성한 글이 없습니다"),
+        child: const Text(
+          "작성한 글이 없습니다",
+          style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Color(0xff4e4e4e)),
+        ),
       );
 }

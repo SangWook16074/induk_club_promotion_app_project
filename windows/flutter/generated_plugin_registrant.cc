@@ -11,6 +11,7 @@
 #include <firebase_storage/firebase_storage_plugin_c_api.h>
 #include <flutter_secure_storage_windows/flutter_secure_storage_windows_plugin.h>
 #include <rive_common/rive_plugin.h>
+#include <url_launcher_windows/url_launcher_windows.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   FileSelectorWindowsRegisterWithRegistrar(
@@ -23,4 +24,6 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("FlutterSecureStorageWindowsPlugin"));
   RivePluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("RivePlugin"));
+  UrlLauncherWindowsRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("UrlLauncherWindows"));
 }

@@ -28,11 +28,9 @@ class _ResisterState extends State<Resister> {
             ),
           ),
           title: Text(
-            "회원정보",
-            style: Theme.of(context).textTheme.displayMedium,
+            "회원가입",
+            style: Theme.of(context).textTheme.displayLarge,
           ),
-          titleTextStyle: const TextStyle(
-              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
           backgroundColor: Colors.white,
           elevation: 0.0,
         ),
@@ -130,7 +128,7 @@ class _ResisterState extends State<Resister> {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.all(4.0),
+            padding: EdgeInsets.all(5.0),
             child: Text(
               "비밀번호 확인",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
@@ -211,12 +209,14 @@ class _ResisterState extends State<Resister> {
         padding: const EdgeInsets.all(20.0),
         child: SignButton(
             width: double.infinity,
-            height: 60,
+            height: 55,
             onPressed: controller.signUp,
             child: const Text(
               "회원가입",
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600),
             )),
       );
 }

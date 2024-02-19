@@ -29,10 +29,7 @@ class MyPromotionView extends StatelessWidget {
               )
             : null,
         centerTitle: true,
-        title: const Text(
-          '내가쓴글',
-          style: TextStyle(fontWeight: FontWeight.w700),
-        ),
+        title: Text('내가쓴글', style: Get.textTheme.displayLarge),
       ),
       body: _body(),
     );
