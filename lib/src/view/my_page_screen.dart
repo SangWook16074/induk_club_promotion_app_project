@@ -6,6 +6,7 @@ import 'package:induk_club_promotion_app_project/src/controllers/member_controll
 import 'package:induk_club_promotion_app_project/src/controllers/promotion_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/model/promotion.dart';
 import 'package:induk_club_promotion_app_project/src/responsible_layout.dart';
+import 'package:induk_club_promotion_app_project/src/view/profile_edit_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_screen.dart';
 import 'package:induk_club_promotion_app_project/src/view/promotion_write.dart';
 import 'package:induk_club_promotion_app_project/src/widget/profile_image.dart';
@@ -57,29 +58,77 @@ class _MyPageState extends State<MyPage> {
           )),
       backgroundColor: const Color(0xff713eff),
       centerTitle: false,
-      title: Text('${Get.find<MemberController>().member?.name}님! 환영합니다.',
+      title: Text('${MemberController.to.member?.name}님! 환영합니다.',
           style: Get.textTheme.titleMedium),
       elevation: 0.0,
       actions: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: InkWell(
-            onTap: () {
-              Get.find<LoginController>().showSignOutDialog();
-            },
-            child: GestureDetector(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(
               onTap: () {
-                Get.find<LoginController>().showSignOutDialog();
+                showModalBottomSheet(
+                    showDragHandle: true,
+                    context: context,
+                    builder: (context) => SizedBox(
+                          height: 150,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: InkWell(
+                                  onTap: LoginController.to.showSignOutDialog,
+                                  child: Container(
+                                    child: const Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Icon(Icons.logout),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            "로그아웃",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: InkWell(
+                                  onTap: () =>
+                                      Get.off(() => const ProfileEditScreen()),
+                                  child: Container(
+                                    child: const Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Icon(Icons.lock_open),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            "비밀번호 변경",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ));
               },
-              child: const Text(
-                "로그아웃",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15),
-              ),
-            ),
-          ),
+              child: const Icon(Icons.more_vert)),
         )
       ],
     );
@@ -329,25 +378,6 @@ class _MyPageState extends State<MyPage> {
         ),
       );
 
-  Widget _items() => Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: 8.0,
-            horizontal: ResponsibleLayout.isMobile(context) ? 16 : 200),
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          width: double.infinity,
-          height: 100,
-          decoration: BoxDecoration(
-            color: const Color(0xffe0e0e0),
-            border: Border.all(color: const Color(0xffb5b5b5)),
-          ),
-          child: Text(
-            "A&I 신규 동아리원 모집합니다.",
-            style: Get.theme.textTheme.bodyMedium,
-          ),
-        ),
-      );
-
   Widget _myPromotions() => SliverToBoxAdapter(
         child: GetX<PromotionController>(builder: (controller) {
           final myPromotions = controller.promotions
@@ -356,39 +386,41 @@ class _MyPageState extends State<MyPage> {
                     promotion.userId == Get.find<MemberController>().member!.id,
               )
               .toList();
-          return Center(
-            child: Container(
-              color: Colors.white,
-              child: Column(children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: 8.0,
-                      horizontal:
-                          ResponsibleLayout.isMobile(context) ? 16 : 200),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const TitleBox(label: '내가 쓴 글', fontSize: 18),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(() => const PromotionWrite(),
-                              binding: PromotionWriteBinding());
-                        },
-                        child: Icon(
-                          Icons.add,
-                          color: Get.theme.primaryColor,
+          return (myPromotions.isNotEmpty)
+              ? Center(
+                  child: Container(
+                    color: Colors.white,
+                    child: Column(children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 8.0,
+                            horizontal:
+                                ResponsibleLayout.isMobile(context) ? 16 : 200),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const TitleBox(label: '내가 쓴 글', fontSize: 20),
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(() => const PromotionWrite(),
+                                    binding: PromotionWriteBinding());
+                              },
+                              child: Icon(
+                                Icons.add,
+                                color: Get.theme.primaryColor,
+                              ),
+                            )
+                          ],
                         ),
-                      )
-                    ],
+                      ),
+                      ...List.generate(myPromotions.length, (index) {
+                        final Promotion promotion = myPromotions[index];
+                        return _buildItem(promotion: promotion);
+                      })
+                    ]),
                   ),
-                ),
-                ...List.generate(myPromotions.length, (index) {
-                  final Promotion promotion = myPromotions[index];
-                  return _buildItem(promotion: promotion);
-                })
-              ]),
-            ),
-          );
+                )
+              : _noItem();
         }),
       );
 

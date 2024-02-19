@@ -17,21 +17,24 @@ class ProfileEditScreen extends StatefulWidget {
 class _ProfileEditScreenState extends State<ProfileEditScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _appBar(),
-      body: Center(
-        child: SingleChildScrollView(
-          child: SizedBox(
-            width: (!ResponsibleLayout.isMobile(context) ? 500 : null),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _header(),
-                _newpassword(),
-                _passwordcheck(),
-                _button(),
-              ],
+    return GestureDetector(
+      onTap: FocusScope.of(context).unfocus,
+      child: Scaffold(
+        appBar: _appBar(),
+        body: Center(
+          child: SingleChildScrollView(
+            child: SizedBox(
+              width: (!ResponsibleLayout.isMobile(context) ? 500 : null),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _header(),
+                  _newpassword(),
+                  _passwordcheck(),
+                  _button(),
+                ],
+              ),
             ),
           ),
         ),
@@ -90,6 +93,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               maxLines: 1,
               style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
+                  isDense: true,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xffA7A7A7))),
                   border: OutlineInputBorder(
@@ -97,12 +101,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             ),
             const Row(
               children: [
-                Text(
-                  "*8자 이상이면서 최소한 숫자와 글자 하나를 포함해야 합니다.",
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                Flexible(
+                  child: Text(
+                    "*8자 이상이면서 최소한 숫자와 글자 하나를 포함해야 합니다.",
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ],
@@ -133,6 +139,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               maxLines: 1,
               style: Theme.of(context).textTheme.displaySmall,
               decoration: const InputDecoration(
+                  isDense: true,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xffA7A7A7))),
                   border: OutlineInputBorder(
@@ -162,7 +169,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             height: 55,
             onPressed: () {},
             child: const Text(
-              "재 설정하기 ",
+              "재설정하기 ",
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
             )),
