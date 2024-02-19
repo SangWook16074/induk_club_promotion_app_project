@@ -76,7 +76,7 @@ class _MyPageState extends State<MyPage> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: InkWell(
-                                  // onTap: LoginController.to.showSignOutDialog,
+                                  onTap: LoginController.to.showSignOutDialog,
                                   child: Container(
                                     child: const Row(
                                       children: [
