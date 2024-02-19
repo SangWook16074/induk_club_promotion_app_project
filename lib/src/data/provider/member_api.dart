@@ -55,6 +55,7 @@ class MemberApi {
     }
   }
 
+  // 동아리 정보 기입 메소드
   Future<String?> saveClubInfo(Map<String, dynamic> data) async {
     final token = await storage.read(key: "login");
     final response = await dio.put(Url.saveClubInfoUrl,
@@ -68,6 +69,7 @@ class MemberApi {
     }
   }
 
+  // 비밀번호 초기화 메소드
   Future<String> resetPassword(Map<String, dynamic> data) async {
     final token = await storage.read(key: "login");
     final response = await dio.post(Url.resetPasswordUrl,
@@ -77,6 +79,17 @@ class MemberApi {
       return response.data["message"];
     } else {
       return response.data["message"];
+    }
+  }
+
+  /// 이메일 중복 확인 메소드
+  /// 에러가 발생한 경우 null 을 반환함.
+  Future<bool?> checkEmailAvailable(Map<String, dynamic> data) async {
+    final response = await dio.get(Url.checkDuplicateUrl);
+    if (response.statusCode == 200) {
+      return response.data["data"];
+    } else {
+      return null;
     }
   }
 }

@@ -16,4 +16,7 @@ class MemberRepository {
 
   Future<String> resetPassword(Map<String, dynamic> data) =>
       api.resetPassword(data);
+
+  Future<bool?> checkEmailAvailable(Map<String, dynamic> data) =>
+      api.checkEmailAvailable(data);
 }

@@ -13,6 +13,7 @@ class Resister extends StatefulWidget {
 }
 
 class _ResisterState extends State<Resister> {
+  int _step = 0;
   final controller = Get.find<ResisterController>();
   @override
   Widget build(BuildContext context) {
@@ -34,32 +35,132 @@ class _ResisterState extends State<Resister> {
           backgroundColor: Colors.white,
           elevation: 0.0,
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: SizedBox(
-                width: (!ResponsibleLayout.isMobile(context) ? 500 : null),
-                child: Column(
-                  children: [
-                    _eamil(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    _name(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    _password(),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    _header(),
-                    _terms(),
-                    _check(),
-                    _button(),
-                  ],
-                ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: SizedBox(
+              width: (!ResponsibleLayout.isMobile(context) ? 500 : null),
+              child: Stepper(
+                physics: const ClampingScrollPhysics(),
+                currentStep: _step,
+                controlsBuilder: (context, details) {
+                  if (details.currentStep == 0) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xff713eff)),
+                          onPressed: () {
+                            setState(() {
+                              _step++;
+                            });
+                          },
+                          child: const Text(
+                            "다음",
+                            style: TextStyle(fontSize: 15),
+                          )),
+                    );
+                  } else if (details.currentStep == 1) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff713eff)),
+                            onPressed: () {
+                              setState(() {
+                                _step++;
+                              });
+                            },
+                            child: const Text(
+                              "다음",
+                              style: TextStyle(fontSize: 15),
+                            )),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff713eff)),
+                            onPressed: () {
+                              setState(() {
+                                _step--;
+                              });
+                            },
+                            child: const Text(
+                              "취소",
+                              style: TextStyle(fontSize: 15),
+                            )),
+                      ],
+                    );
+                  } else {
+                    return _button();
+                  }
+                },
+                onStepTapped: (value) {
+                  setState(() {
+                    _step = value;
+                  });
+                },
+                onStepContinue: () {
+                  if (_step < 2) {
+                    setState(() {
+                      _step++;
+                    });
+                  } else {}
+                },
+                onStepCancel: () {
+                  if (_step == 1) {
+                    return;
+                  } else {
+                    setState(() {
+                      _step--;
+                    });
+                  }
+                },
+                steps: [
+                  Step(
+                      title: const Text(
+                        "이메일 인증",
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                      ),
+                      content: _email()),
+                  Step(
+                      title: const Text(
+                        "개인정보 등록",
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                      ),
+                      content: Column(
+                        children: [
+                          _name(),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          _password(),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      )),
+                  Step(
+                      title: const Text(
+                        "이용 약관 동의",
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                      ),
+                      content: Column(
+                        children: [
+                          _header(),
+                          _terms(),
+                          _check(),
+                        ],
+                      )),
+                ],
               ),
             ),
           ),
@@ -68,7 +169,7 @@ class _ResisterState extends State<Resister> {
     );
   }
 
-  Widget _eamil() => Column(
+  Widget _email() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
@@ -80,10 +181,16 @@ class _ResisterState extends State<Resister> {
           ),
           Padding(
             padding: const EdgeInsets.all(4.0),
-            child: LoginTextField(
-              type: TextInputType.emailAddress,
-              controller: controller.email,
-              hintText: "ex)example@example.com",
+            child: Row(
+              children: [
+                Expanded(
+                  child: LoginTextField(
+                    type: TextInputType.emailAddress,
+                    controller: controller.email,
+                    hintText: "ex)example@example.com",
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -170,7 +277,7 @@ class _ResisterState extends State<Resister> {
         children: [
           Text(
             '약관동의',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
           ),
         ],
       ),
@@ -189,7 +296,7 @@ class _ResisterState extends State<Resister> {
           ),
           const Text(
             '동의',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black, fontSize: 15),
           ),
           Checkbox(
             value: (controller.isAgree) ? false : true,
@@ -198,7 +305,7 @@ class _ResisterState extends State<Resister> {
           ),
           const Text(
             '동의하지 않음',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black, fontSize: 15),
           )
         ],
       );
