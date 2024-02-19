@@ -18,6 +18,7 @@ class LoginController extends GetxController {
   final RxInt _index = 0.obs;
   final MemberRepository memberRepository;
   final FlutterSecureStorage storage = const FlutterSecureStorage();
+  static LoginController get to => Get.find();
   late final _user;
 
   LoginController({required this.memberRepository});
