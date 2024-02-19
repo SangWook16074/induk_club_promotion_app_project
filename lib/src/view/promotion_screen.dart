@@ -385,12 +385,11 @@ class _PromotionScreenState extends State<PromotionScreen> {
               backgroundColor: const Color(0xff713eff)),
           onPressed: () async {
             final url = Uri.parse(
-              'https://pub.dev/',
+              'https://www.naver.com/',
             );
             if (await canLaunchUrl(url)) {
               launchUrl(url, mode: LaunchMode.externalApplication);
             } else {
-              // ignore: avoid_print
               print("Could not launch $url");
             }
           },
