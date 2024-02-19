@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:induk_club_promotion_app_project/src/controllers/member_controller.dart';
 import 'package:induk_club_promotion_app_project/src/data/repository/member_repository.dart';
@@ -17,12 +18,12 @@ class PasswordChangeController extends GetxController {
   void changePassword() async {
     // 빈칸은 존재할 수 없음
     if (password.value.text == "") {
-      /// 여기 토스트 메시지
+      showToast('새로운 비밀번호를 입력하세요');
       return;
     }
 
     if (passwordAgain.value.text == "") {
-      /// 여기 토스트 메시지
+      showToast('비밀번호를 한 번 더 입력하세요');
       return;
     }
 
@@ -32,10 +33,20 @@ class PasswordChangeController extends GetxController {
     };
     final response = await repository.changePassword(data);
     if (response == "비밀번호가 변경되었습니다 !") {
-      // 여기 토스트 메시지
+      showToast(response);
       Get.back();
     } else {
-      // 여기 토스트 메시지
+      showToast(response);
     }
   }
+
+  void showToast(String message) => Fluttertoast.showToast(
+        msg: message,
+        textColor: Colors.white,
+        backgroundColor: const Color(0xff8D63FF),
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 2,
+        fontSize: 16.0,
+        gravity: ToastGravity.TOP,
+      );
 }
