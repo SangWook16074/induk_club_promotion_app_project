@@ -15,30 +15,30 @@ class PasswordChangeController extends GetxController {
   /// 사용자가 비밀번호를 변경하는 로직
   /// 원하는 비밀번호를 입력한 후
   /// 버튼을 누르면 비밀번호가 변경됨
-  void changePassword() async {
-    // 빈칸은 존재할 수 없음
-    if (password.value.text == "") {
-      showToast('새로운 비밀번호를 입력하세요');
-      return;
-    }
+  // void changePassword() async {
+  //   // 빈칸은 존재할 수 없음
+  //   if (password.value.text == "") {
+  //     showToast('새로운 비밀번호를 입력하세요');
+  //     return;
+  //   }
 
-    if (passwordAgain.value.text == "") {
-      showToast('비밀번호를 한 번 더 입력하세요');
-      return;
-    }
+  //   if (passwordAgain.value.text == "") {
+  //     showToast('비밀번호를 한 번 더 입력하세요');
+  //     return;
+  //   }
 
-    final data = {
-      "email": MemberController.to.member?.id,
-      "password": password.value.text.toString()
-    };
-    final response = await repository.changePassword(data);
-    if (response == "비밀번호가 변경되었습니다 !") {
-      showToast(response);
-      Get.back();
-    } else {
-      showToast(response);
-    }
-  }
+  //   final data = {
+  //     "email": MemberController.to.member?.id,
+  //     "password": password.value.text.toString()
+  //   };
+  //   final response = await repository.changePassword(data);
+  //   if (response == "비밀번호가 변경되었습니다 !") {
+  //     showToast(response);
+  //     Get.back();
+  //   } else {
+  //     showToast(response);
+  //   }
+  // }
 
   void showToast(String message) => Fluttertoast.showToast(
         msg: message,

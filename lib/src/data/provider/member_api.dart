@@ -97,12 +97,12 @@ class MemberApi {
   ///사용자는 비밀번호를 잃어버린 경우
   ///이메일을 통해서 발급받은 임시 비밀번호를
   ///후에 변경해줘야됨.
-  Future<String> changePassword(Map<String, dynamic> data) async {
-    final response = await dio.post(Url.changePasswordUrl);
-    if (response.statusCode == 200) {
-      return response.data["message"];
-    } else {
-      return response.data["message"];
-    }
-  }
+  // Future<String> changePassword(Map<String, dynamic> data) async {
+  //   final response = await dio.post(Url.changePasswordUrl);
+  //   if (response.statusCode == 200) {
+  //     return response.data["message"];
+  //   } else {
+  //     return response.data["message"];
+  //   }
+  // }
 }
