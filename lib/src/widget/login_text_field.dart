@@ -6,6 +6,7 @@ class LoginTextField extends StatelessWidget {
   final bool? obscureText;
   final Icon? prefixIcon;
   final String? hintText;
+  final Widget? suffix;
   const LoginTextField({
     super.key,
     this.controller,
@@ -13,6 +14,7 @@ class LoginTextField extends StatelessWidget {
     this.prefixIcon,
     this.hintText,
     this.type,
+    this.suffix,
   });
 
   String? get hintLabel {
@@ -37,6 +39,7 @@ class LoginTextField extends StatelessWidget {
       decoration: InputDecoration(
           prefixIcon: prefixIcon,
           hintText: hintText,
+          suffix: suffix,
           isDense: true,
           hintStyle: const TextStyle(color: Color(0xffbdbdbd), fontSize: 16),
           focusedBorder: const OutlineInputBorder(

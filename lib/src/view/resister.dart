@@ -94,11 +94,6 @@ class _ResisterState extends State<Resister> {
                     return _button();
                   }
                 },
-                onStepTapped: (value) {
-                  setState(() {
-                    _step = value;
-                  });
-                },
                 onStepContinue: () {
                   if (_step < 2) {
                     setState(() {
@@ -188,6 +183,18 @@ class _ResisterState extends State<Resister> {
                     type: TextInputType.emailAddress,
                     controller: controller.email,
                     hintText: "ex)example@example.com",
+                    suffix: SizedBox(
+                      height: 30,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff713eff)),
+                        child: const Text(
+                          '중복확인',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
