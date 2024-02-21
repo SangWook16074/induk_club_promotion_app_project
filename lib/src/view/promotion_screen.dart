@@ -31,7 +31,6 @@ class _PromotionScreenState extends State<PromotionScreen> {
       appBar: AppBar(
         foregroundColor: const Color(0xff731eff),
         backgroundColor: Colors.white,
-        title: Text('LOGO', style: Get.textTheme.displayLarge),
         elevation: 0.0,
       ),
       body: Stack(
