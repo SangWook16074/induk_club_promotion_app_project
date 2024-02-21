@@ -45,20 +45,26 @@ class _ResisterState extends State<Resister> {
                 currentStep: _step,
                 controlsBuilder: (context, details) {
                   if (details.currentStep == 0) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff713eff)),
-                          onPressed: () {
-                            setState(() {
-                              _step++;
-                            });
-                          },
-                          child: const Text(
-                            "다음",
-                            style: TextStyle(fontSize: 15),
-                          )),
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xff713eff)),
+                              onPressed: () {
+                                setState(() {
+                                  _step++;
+                                });
+                              },
+                              child: const Text(
+                                "다음",
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.white),
+                              )),
+                        ),
+                      ],
                     );
                   } else if (details.currentStep == 1) {
                     return Row(
@@ -74,7 +80,8 @@ class _ResisterState extends State<Resister> {
                             },
                             child: const Text(
                               "다음",
-                              style: TextStyle(fontSize: 15),
+                              style:
+                                  TextStyle(fontSize: 15, color: Colors.white),
                             )),
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -86,7 +93,8 @@ class _ResisterState extends State<Resister> {
                             },
                             child: const Text(
                               "취소",
-                              style: TextStyle(fontSize: 15),
+                              style:
+                                  TextStyle(fontSize: 15, color: Colors.white),
                             )),
                       ],
                     );
@@ -193,6 +201,15 @@ class _ResisterState extends State<Resister> {
               ],
             ),
           ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xff713eff),
+              ),
+              onPressed: () {},
+              child: const Text(
+                '중복확인',
+                style: TextStyle(fontSize: 13, color: Colors.white),
+              )),
         ],
       );
 
