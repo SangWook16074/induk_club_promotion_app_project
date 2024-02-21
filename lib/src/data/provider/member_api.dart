@@ -85,7 +85,7 @@ class MemberApi {
   /// 이메일 중복 확인 메소드
   /// 에러가 발생한 경우 null 을 반환함.
   Future<bool?> checkEmailAvailable(Map<String, dynamic> data) async {
-    final response = await dio.get(Url.checkDuplicateUrl);
+    final response = await dio.post(Url.checkDuplicateUrl, data: data);
     if (response.statusCode == 200) {
       return response.data["data"];
     } else {
@@ -103,6 +103,18 @@ class MemberApi {
       return response.data["message"];
     } else {
       return response.data["message"];
+    }
+  }
+
+  /// 사용자가 이메일 인증을 시도하는 메소드
+  /// 인증을 시작하면 서버에서 인증 이메일을 보내주고
+  /// 인증코드를 반환받아 검사에 확인하게 됨.
+  Future<String?> emailVerify(Map<String, dynamic> data) async {
+    final response = await dio.post(Url.emailVerifyUrl, data: data);
+    if (response.statusCode == 200) {
+      return response.data["data"];
+    } else {
+      return null;
     }
   }
 }

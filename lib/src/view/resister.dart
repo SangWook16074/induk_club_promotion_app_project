@@ -13,8 +13,6 @@ class Resister extends StatefulWidget {
 }
 
 class _ResisterState extends State<Resister> {
-  int _step = 0;
-  final controller = Get.find<ResisterController>();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -40,123 +38,110 @@ class _ResisterState extends State<Resister> {
           child: Center(
             child: SizedBox(
               width: (!ResponsibleLayout.isMobile(context) ? 500 : null),
-              child: Stepper(
-                physics: const ClampingScrollPhysics(),
-                currentStep: _step,
-                controlsBuilder: (context, details) {
-                  if (details.currentStep == 0) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff713eff)),
-                          onPressed: () {
-                            setState(() {
-                              _step++;
-                            });
-                          },
-                          child: const Text(
-                            "다음",
-                            style: TextStyle(fontSize: 15),
-                          )),
-                    );
-                  } else if (details.currentStep == 1) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xff713eff)),
-                            onPressed: () {
-                              setState(() {
-                                _step++;
-                              });
-                            },
-                            child: const Text(
-                              "다음",
-                              style: TextStyle(fontSize: 15),
-                            )),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xff713eff)),
-                            onPressed: () {
-                              setState(() {
-                                _step--;
-                              });
-                            },
-                            child: const Text(
-                              "취소",
-                              style: TextStyle(fontSize: 15),
-                            )),
-                      ],
-                    );
-                  } else {
-                    return _button();
-                  }
-                },
-                onStepContinue: () {
-                  if (_step < 2) {
-                    setState(() {
-                      _step++;
-                    });
-                  } else {}
-                },
-                onStepCancel: () {
-                  if (_step == 1) {
-                    return;
-                  } else {
-                    setState(() {
-                      _step--;
-                    });
-                  }
-                },
-                steps: [
-                  Step(
-                      title: const Text(
-                        "이메일 인증",
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black),
-                      ),
-                      content: _email()),
-                  Step(
-                      title: const Text(
-                        "개인정보 등록",
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black),
-                      ),
-                      content: Column(
+              child: GetX<ResisterController>(builder: (controller) {
+                return Stepper(
+                  physics: const ClampingScrollPhysics(),
+                  currentStep: controller.step,
+                  controlsBuilder: (context, details) {
+                    if (details.currentStep == 0) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          _name(),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          _password(),
-                          const SizedBox(
-                            height: 10,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:
+                                GetX<ResisterController>(builder: (controller) {
+                              return ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xff713eff)),
+                                  onPressed: (!controller.isEmailVerify)
+                                      ? null
+                                      : controller.nextStep,
+                                  child: const Text(
+                                    "다음",
+                                    style: TextStyle(
+                                        fontSize: 15, color: Colors.white),
+                                  ));
+                            }),
                           ),
                         ],
-                      )),
-                  Step(
-                      title: const Text(
-                        "이용 약관 동의",
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black),
-                      ),
-                      content: Column(
+                      );
+                    } else if (details.currentStep == 1) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          _header(),
-                          _terms(),
-                          _check(),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xff713eff)),
+                              onPressed: controller.goToLast,
+                              child: const Text(
+                                "다음",
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.white),
+                              )),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xff713eff)),
+                              onPressed: ResisterController.to.showCancelDialog,
+                              child: const Text(
+                                "취소",
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.white),
+                              )),
                         ],
-                      )),
-                ],
-              ),
+                      );
+                    } else {
+                      return _button();
+                    }
+                  },
+                  steps: [
+                    Step(
+                        title: const Text(
+                          "이메일 인증",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black),
+                        ),
+                        content: _email()),
+                    Step(
+                        title: const Text(
+                          "개인정보 등록",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black),
+                        ),
+                        content: Column(
+                          children: [
+                            _name(),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            _password(),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        )),
+                    Step(
+                        title: const Text(
+                          "이용 약관 동의",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black),
+                        ),
+                        content: Column(
+                          children: [
+                            _header(),
+                            _terms(),
+                            _check(),
+                          ],
+                        )),
+                  ],
+                );
+              }),
             ),
           ),
         ),
@@ -181,7 +166,7 @@ class _ResisterState extends State<Resister> {
                 Expanded(
                   child: LoginTextField(
                     type: TextInputType.emailAddress,
-                    controller: controller.email,
+                    controller: ResisterController.to.email,
                     hintText: "ex)example@example.com",
                     suffix: SizedBox(
                       height: 30,
@@ -200,6 +185,38 @@ class _ResisterState extends State<Resister> {
               ],
             ),
           ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xff713eff),
+              ),
+              onPressed: ResisterController.to.checkEmailAvailable,
+              child: const Text(
+                '중복확인',
+                style: TextStyle(fontSize: 13, color: Colors.white),
+              )),
+          GetX<ResisterController>(builder: (controller) {
+            return (controller.duplicate == false)
+                ? Column(
+                    children: [
+                      TextField(
+                        controller: ResisterController.to.verifyCode,
+                        decoration: const InputDecoration(),
+                        style:
+                            const TextStyle(fontSize: 13, color: Colors.black),
+                      ),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff713eff),
+                          ),
+                          onPressed: ResisterController.to.checkVerifyCode,
+                          child: const Text(
+                            '인증하기',
+                            style: TextStyle(fontSize: 13, color: Colors.white),
+                          )),
+                    ],
+                  )
+                : Container();
+          })
         ],
       );
 
@@ -216,7 +233,7 @@ class _ResisterState extends State<Resister> {
           Padding(
             padding: const EdgeInsets.all(4.0),
             child: LoginTextField(
-              controller: controller.name,
+              controller: ResisterController.to.name,
               hintText: "ex)홍길동",
             ),
           ),
@@ -237,7 +254,7 @@ class _ResisterState extends State<Resister> {
             padding: const EdgeInsets.all(4.0),
             child: LoginTextField(
               obscureText: true,
-              controller: controller.password,
+              controller: ResisterController.to.password,
               hintText: "비밀번호를 입력해주세요.",
             ),
           ),
@@ -252,7 +269,7 @@ class _ResisterState extends State<Resister> {
             padding: const EdgeInsets.all(4.0),
             child: LoginTextField(
               obscureText: true,
-              controller: controller.passwordAgain,
+              controller: ResisterController.to.passwordAgain,
               hintText: "비밀번호를 다시 입력해주세요.",
             ),
           ),
@@ -321,16 +338,19 @@ class _ResisterState extends State<Resister> {
 
   Widget _button() => Padding(
         padding: const EdgeInsets.all(20.0),
-        child: SignButton(
-            width: double.infinity,
-            height: 55,
-            onPressed: controller.signUp,
-            child: const Text(
-              "회원가입",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600),
-            )),
+        child: GetX<ResisterController>(builder: (controller) {
+          return SignButton(
+              width: double.infinity,
+              height: 55,
+              onPressed:
+                  (controller.isAgree) ? ResisterController.to.signUp : null,
+              child: const Text(
+                "회원가입",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
+              ));
+        }),
       );
 }
