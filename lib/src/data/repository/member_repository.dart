@@ -22,4 +22,7 @@ class MemberRepository {
 
   Future<bool?> checkEmailAvailable(Map<String, dynamic> data) =>
       api.checkEmailAvailable(data);
+
+  Future<String?> emailVerify(Map<String, dynamic> data) =>
+      api.emailVerify(data);
 }

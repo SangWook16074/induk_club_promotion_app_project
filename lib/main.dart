@@ -5,6 +5,7 @@ import 'package:induk_club_promotion_app_project/firebase_options.dart';
 import 'package:induk_club_promotion_app_project/src/app.dart';
 import 'package:induk_club_promotion_app_project/src/bindings/resister_binding.dart';
 import 'package:induk_club_promotion_app_project/src/view/resister.dart';
+import 'package:induk_club_promotion_app_project/src/view/resister_complete.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'src/bindings/init_binding.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
